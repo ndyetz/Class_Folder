@@ -1,0 +1,121 @@
+---
+title: "R Notebook: Duncan"
+output: html_notebook
+---
+
+Id: Name of profession
+type: Type of occupation: prof, professional and managerial; wc, white-collar; bc, bluecollar. 
+income: Percent of males in occupation earning $3500 or more in 1950. 
+education: Percent of males in occupation in 1950 who were high-school graduates. 
+prestige: Percent of raters in NORC study rating occupation as excellent or good in prestige.
+-https://socialsciences.mcmaster.ca/jfox/Books/Applied-Regression-2E/datasets/Duncan.pdf
+
+#Libraries
+```{r}
+library(tidyverse)
+library(olsrr)
+library(GGally)
+library(psych)
+library(lmtest)
+library(car)
+library(broom)
+library(boot)
+library(modelr)
+library(car)
+```
+
+```{r}
+duncan <- read_csv("Duncan.csv ")
+```
+
+```{r, message = FALSE}
+describe(duncan)
+```
+
+```{r}
+scatterplot <- ggpairs(duncan, columns = c("education", "income", "prestige"),
+    upper = list(continuous = wrap("cor", size = 3)),
+    title = "Bivariate relationship of education, income & prestige" )
+print(scatterplot, progress = FALSE)
+```
+
+All correlations appear to relatively high. Additionally, They sems to be somwhat linear, however, I am a little concerned with the relatioship between prestige and education. I am also a little concerned with the education histigram. It seems sort of odd. Almost as if it is approaching 2 modes. 
+
+
+
+
+
+```{r}
+dun_lin <- lm(data = duncan, prestige ~ education + income)
+ols_regress(dun_lin)
+```
+
+
+Looking at this mode, we do a very good job of explaining the variance in prestige using education and income as our predictors.Using these predictors, we explain 93% of the variance in prestige. Additionally, both education and income are significantly related toprestige status. For every 1 unit increase in education, there is an estimated 0.55 increase in prestige status, while holding income constant.Every 1 unit increase in income is associated with a 0.60 increase in prestige while holding income constant.
+
+
+```{r}
+car::residualPlots(dun_lin, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue", layout = c(1,1))
+```
+
+Looking at these plots, my main concern is how our residuals are with the education residuals are correlating with unexplained y-hat in prestige. However, our fitted values appear fine. There is no correlation between the model residuals and the y-hat. However, because education is a variable of interest, I am concerned. Additionally, when we look at our significance test, there doesn't appear to be evidence of too much curvature among any of them. 
+
+
+##Component + residual plot
+```{r}
+crPlots(dun_lin, ask = FALSE, terms = "education")
+crPlots(dun_lin, ask = FALSE, terms = "income")
+```
+
+
+
+Looking at these plots, I can see the same trend I was seeing with education as before. Education does no seem to exactly have the most linear trend. However, it does not seem to deviate too much. Which makes me think, that for the most part, this may still fit as a linear trend.
+
+##Homoscedacity interpretation
+
+
+I think that education looks fine and there is not much scedacity because it is overall pretty evenly distributed as far how they are spread out. There doesn't seem to be much fanning out. However. I feel like there is a bit of fanning in income when I look at it. 
+
+
+```{r}
+car::ncvTest(dun_lin)
+```
+
+
+Looking at the p-value from the chi-square results, we can see that there is no evidence (statistically speaking) of violating the homoscedacity assumption in our model. 
+
+
+#Normality of errors
+
+```{r}
+
+fit_dun_lin <- broom::augment(dun_lin, data=duncan)
+
+ggplot(data = fit_dun_lin, aes(x = .std.resid)) +
+         geom_density()
+
+
+
+
+```
+
+
+The standardized residuals for our model seems relatively normal. I wouldn't have it cause me too much concern. The leftover residuals are spread relatively evenly. 
+
+
+```{r}
+qqPlot(dun_lin, ask = FALSE, id.n = 3, labels.id = names(id), id.cex = 1.25, id.col = "blue")
+```
+
+This plot is showing us how much our case residuals are fitting to a linear line. Currently we are testing the normality of errors assumotion. It seem as though some of our residuals are somewhat normal... howevr I have concerns about case 6 creating problems. Additonally, our line falls outside of our confidence intervals at one point. indicating evidence that our errors are not distributed normally.
+
+
+```{r}
+shapiro.test(fit_dun_lin$.resid)
+```
+
+
+
+
+This test uses a Wald test in orer to test the normality of our erros. a lower p-value indicates a higher probability that our model has cases that vilate our normality assumption. In our case, this doesn't seem to be the case.. However, looking at our qq-plot, I think we need to investigate further still.
+

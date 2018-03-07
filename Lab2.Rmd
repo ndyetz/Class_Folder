@@ -1,0 +1,110 @@
+---
+title: "Neil Yetz Lab 2"
+output: 
+  html_notebook:
+    toc: yes
+---
+
+#Load Packages
+```{r, message=FALSE}
+library(tidyverse)
+library(descriptr)
+library(psych)
+library(modelr)
+library(olsrr)
+library(GGally)
+
+```
+
+#Load data
+```{r, message = FALSE}
+lab2 <- read_csv("Lab2.csv")
+```
+
+#Describe dataset
+```{r}
+describe(lab2)
+
+```
+
+#Get Models
+##M1
+```{r}
+m1 <- lm(data = lab2, y1 ~ x1)
+ols_regress(m1)
+```
+###M1 description
+Overall, x1 explaines 66.7% of the variance in y1, overall this is a significant amount of variance explained F(1,9) = 17.99, p = 0.0022. When x1 is 0 we estimate y1 to be at 3.00. Additionally, for every 1 unit change in x1, we expecte to see a 0.5 change in y1.
+
+##M2
+```{r}
+m2 <- lm(data = lab2, y2 ~ x2)
+ols_regress(m2)
+```
+###M2 description
+Overall, x2 explaines 66.6% of the variance in y2, overall this is a significant amount of variance explained F(1,9) = 17.97, p = 0.0022. When x1 is 0 we estimate y1 to be at 3.001. Additionally, for every 1 unit change in x2, we expect to see a 0.5 change in y2.Please note, there is a marked difference between our R^2 value and predicted predicted R^2 value, so there may be a problem of model fit.
+
+##M3
+```{r}
+m3 <- lm(data = lab2, y3 ~ x3)
+ols_regress(m3)
+```
+
+###M3 description
+Overall, x3 explaines 66.6% of the variance in y3, overall this is a significant amount of variance explained F(1,9) = 17.97, p = 0.0022. When x1 is 0 we estimate y1 to be at 3.002. Additionally, for every 1 unit change in x3, we expect to see a 0.5 change in y3.Please note, there is a marked difference between our R^2 value and predicted predicted R^2 value, so there may be a problem of model fit.
+
+
+##M4
+```{r}
+m4 <- lm(data = lab2, y4 ~ x4)
+ols_regress(m4)
+```
+
+###M4 description
+Overall, x4 explaines 66.7% of the variance in y4, overall this is a significant amount of variance explained F(1,9) = 18.03, p = 0.0022. When x1 is 0 we estimate y1 to be at 3.002. Additionally, for every 1 unit change in x3, we expect to see a 0.5 change in y3.Please note, there is a marked difference between our R^2 value and predicted predicted R^2 value, so there may be a problem of model fit.
+
+
+#Scatterplot
+##m1
+```{r}
+ggplot(data=lab2, aes(x = x1, y = y1)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Y1 regressed on x1",
+x = "x1", y = "y1")
+```
+
+##m2
+```{r}
+ggplot(data=lab2, aes(x = x2, y = y2)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Y2 regressed on x2",
+x = "x2", y = "y2")
+```
+
+##m3
+```{r}
+ggplot(data=lab2, aes(x = x3, y = y3)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Y3 regressed on x3",
+x = "x3", y = "y3")
+```
+
+
+##m3
+```{r}
+ggplot(data=lab2, aes(x = x4, y = y4)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Y4 regressed on x4",
+x = "x4", y = "y4")
+```
+
+###Paragraph about plots
+
+Looking at these 4 plots It is easy to see that the you can see that these data are spread very differently. For plot one, it looks like it is a very linear line and the regression line does a pretty good job at explaining what is going on. However, plot two looks a little bit different, it as creating a negative quadratic effect. Or rather, curvilinear, and the regression line doesn't do a good job at fitting that line. Next, for plot 3, the almost does a good job of fitting the line, but it is being pulled by 1 outlier. thus, making the line deviate from the actual fitted line across nearly all values. I bet if we removed the outlier from model 3, we would get a much more fitted line. Lastly, for the last line, all of the data points, except for one, fall directly on 8 on the x axis. In reality, it should be an infinite line that fits across this (straight up and down) However, there is one outlier, causing a linear line to fit with a slope. In reality, my interpretation changed across all of the models except for model 1 when I viewed the data on a plot. None of these models are doing a very good job at predicting their associated y values.
+
+
+

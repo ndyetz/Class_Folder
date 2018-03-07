@@ -1,0 +1,213 @@
+---
+title: "Fandango Activity"
+subtitle: Neil Yetz
+output:
+  html_notebook:
+    theme: cerulean
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+#Description of Data
+
+This is the raw data behind the story "Be suspicious of online movie ratings, Especially Fandango's" (http://fivethirtyeight.com/features/fandango/fandango-movie-rating/) The data frame contains every film that has a Rotten Tomato rating, a RT User rating, a metacritic score, a Metacritic User Score, and IMDB score, and at least 30 fan reviews of Fandango.
+
+#Load packages for this session
+```{r, message=FALSE}
+
+#install.packages("tidyverse")
+library(tidyverse)
+
+```
+
+
+#Import the Data
+```{r, message=FALSE}
+fandango <- read_csv("fandango.csv")
+```
+
+```{r}
+glimpse(fandango)
+#Pual Blart Mall Cop 2 is the worst movie rating
+```
+
+#Create a Simple Graph
+```{r}
+ggplot(fandango, aes(x=rottentomatoes)) + geom_histogram(binwidth=5, fill="red")
+```
+
+Looking at the above graph, it seems that most movies are ranked in the 90-95% range using the rottent tomatoes score. However, the graph seems to have "hump" along the entire percentage range. 
+
+#A collection of graphs
+##A density plot of the IMDB ratings
+
+```{r}
+theme_update(plot.title = element_text(hjust = 0.5))
+ggplot(fandango, aes(x=imdb)) + geom_density(fill="cyan1") +
+  labs(title= "A density plot of the IMDB user ratings for movies, \ncompiled by fivethirtyeight in mid 2015", x= "IMDB User ratings")
+
+#\n = creating a line break (a new paragraph in your plot)
+
+
+```
+
+
+
+
+
+
+##Density Plot of the IMDB ratings by fil year
+```{r}
+
+theme_update(plot.title = element_text(hjust = 0.5))
+ggplot(fandango, aes(x=imdb, group = year, fill= factor(year))) + geom_density() +
+  labs(title= "A density plot of the IMDB user ratings for movies, \ncompiled by fivethirtyeight in mid 2015", x= "IMDB User ratings")
+
+
+
+
+```
+
+
+
+
+
+
+##A bar chart of Fandango star ratings
+```{r}
+
+ggplot(fandango, aes(x = fandango_stars)) + 
+    geom_histogram(show.legend = FALSE, binwidth=0.5, fill="blue") +
+  labs(title= "A Histogram of the count of stars films received", x= "Number of Fandango stars")
+
+
+
+```
+
+
+
+##A boxplot of IMDB ratings by fandango stars
+
+```{r}
+
+ggplot(fandango, aes(x = factor(fandango_stars), y = imdb)) +
+  geom_boxplot(show.legend = FALSE) + 
+  labs(title= "Boxplots of the imdb scores separated by Fandango star category", x= "Number of Fandango stars", y = "IMDB Score")
+
+```
+
+
+##A scatterplot of the relationship number of IMDB votes and the IMDB ratings
+
+```{r}
+
+ggplot(fandango, aes(x = imdb_user_vote_count, y = imdb)) +
+geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title= "Relationship of number of IMDB users and IMDB ratings", x= "IMDB user count", y = "IMDB Score")
+  
+
+
+```
+
+
+
+
+# extra credit lab assignment
+
+```{r}
+
+fandango2 <- fandango %>% 
+  mutate(di_star = ifelse(fandango_stars > 4, 1, 0)) %>% 
+  mutate(winsor_rotten = ifelse(rottentomatoes >= 89, 89, rottentomatoes)) %>%
+  arrange(desc(di_star), desc(winsor_rotten))
+
+```
+
+##Extra credit lab assignment histogram
+```{r}
+ggplot(fandango2, aes(x = winsor_rotten, fill = "red")) +
+  geom_histogram(show.legend = FALSE, binwidth=5) +
+  labs(title = "wins or rotten scores plotted", x = "wins or rotten score")
+```
+
+
+##extra examples (ifelse functions nested in ifelse statements)
+
+```
+win_y = ifelse (y>= 20, (ifelse(sex == 2, 20, y)), y)
+```
+
+###Using pipes to accomplish the same task
+
+```
+win_y %>% 
+  mutate(win_y =ifelse(y>=20, 20, y)) %>% 
+  mutate(win_y = ifelse(sex ==1, y, win_y))
+```
+```
+is.na(y)
+```
+
+#A collection of of wrangling techniques 
+##filter examples
+```{r}
+
+
+film_2014<- filter(fandango, year == 2014)
+#filter further
+film_2014<- filter(fandango, year == 2014 & rottentomatoes >= 80 & rottentomatoes_user >= 80)
+```
+
+##select examples
+```{r}
+normed <- select(fandango, film, rt_norm_round:imdb_norm_round, fandango_stars)
+```
+
+##mutate examples
+```{r}
+
+normed <- mutate(normed, one_to_see = ifelse(rt_norm_round  >=4 & rt_user_norm_round >=4 & metacritic_user_norm_round >=4 & metacritic_norm_round >=4 & imdb_norm_round >=4 & fandango_stars >=4, 1, 0))
+
+```
+
+##Arrange examples
+```{r}
+
+  arrange(normed, desc(one_to_see))
+
+```
+
+##summarize examples
+
+```{r}
+
+
+normed_stars <-  group_by(normed, fandango_stars) %>%
+         summarize(avgscore = mean(rt_norm_round)) 
+
+
+```
+
+
+##piped examples
+```{r}
+
+
+my_first_pipe <- fandango %>%
+  filter( year == 2015) %>%
+  select(film, rt_norm_round) %>%
+  mutate(best = ifelse(rt_norm_round ==5, 1, 0)) %>%
+  mutate(worst = ifelse(rt_norm_round ==0.5, 1, 0)) %>%
+  filter(best == 1 | worst == 1) %>%
+  arrange(worst)
+  
+
+```
+
+
+
+
+

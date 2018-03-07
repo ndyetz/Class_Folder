@@ -1,0 +1,624 @@
+---
+title: "R Notebook -- gapminder data exploration"
+subtitle: Neil Yetz
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+The 3 dashes above (In the code) indicate that we are woirking within the Header information of out R notebok 
+
+
+# Load Packages for this session
+```{r, message=FALSE}
+ library(tidyverse)
+```
+
+# Import data
+The gapminder dataset is provided by an organization called Gapminder.org. It contains data on 142 countries. For each country the dataset provides values for life expectancy, GDP per capita, and population - with these data available every five years from 1952 to 2007.
+
+
+```{r, message=FALSE}
+#notes work in code chunks like normal comments
+
+gm <- read_csv(file="gapminder.csv")
+```
+
+
+# Summarize the variables
+```{r}
+
+summary(gm)
+```
+
+
+# Explore a variety of plots
+## Exploration of Desnity Plots
+### A simple plot
+```{r}
+ggplot(gm, aes(x=lifeExp)) + geom_density() #the "+" sign indicates we are using a new function. this is a subfunction of ggplot.
+
+
+#general format of ggplot -> ggplot(dataset, aes(x=x-variable)) + geom_density(fill="color")
+#ggplot basically uses order of operations. Your parentheses need to match!!
+#just a note, if you create a paragrapph, it only works after "+" signs & "," Additionay, it will auto indent places where you have created a new paragraph correctly. 
+
+```
+
+
+### Change the color of the density plot
+```{r}
+
+ggplot(gm, aes(x = lifeExp)) +
+geom_density(fill = "yellow") 
+
+```
+
+### Add Axis labels  and a Title (Also, center the title.)
+
+```{r}
+
+theme_update(plot.title = element_text(hjust = 0.5)) #centering the title
+  ggplot(gm, aes(x = lifeExp)) +
+  geom_density(fill = "yellow") +
+  labs(title = "What is the density of life expectancy in the Gapminder dataset?",
+x = "Life expectancy in years", y = "Density")
+
+```
+
+# Group and fill by continent 
+```{r}
+#Here we are using groupign variables.
+
+theme_update(plot.title = element_text(hjust = 0.5)) #centering the title
+  ggplot(gm, aes(x = lifeExp, group = continent, fill=continent)) + #It is better to map all of your grouping variables within the aesthetic function.
+  geom_density(alpha=.2) +  #alpha regulates how bright the color is in the fill the lower the number (between 0-1), the more transparent it will be.
+  labs(title = "Does the distribution of life expectancy differ by continent?",
+  x = "Life expectancy in years", y = "Density")
+```
+
+### Seperating our groups using facet_wrap
+
+```{r}
+ggplot(gm, aes(x = lifeExp, group =continent, fill = continent)) + #group = continent is telling us to group by contininent.
+    geom_density(show.legend = FALSE) + #show.legend = FALSE removes the legend
+  facet_wrap(~ continent) + #this is separating it by the group. rememebr Facet = creating separate graphs for our Groups! NOTE: YOU MUST HAVE the ~ for the facet_wrap function
+  labs(title = "Does the distribution of life expectancy differ by continent?",
+  x = "Life expectancy in years", y = "Density")
+```
+
+
+
+##Exploration of histograms
+###A histogram similar to our last density plot.
+```{r}
+ggplot(gm, aes(x = lifeExp, group =continent, fill = continent)) + 
+    geom_histogram(show.legend = FALSE, binwidth=10) + # <- note, we are using "geom_histogram". Additionally, we need to create a binwidth. The default for this is to take your range and divide it by 30 (this happens if you don't specify it)
+  facet_wrap(~ continent) + 
+  labs(title = "Does the distribution of life expectancy differ by continent?",
+  x = "Life expectancy in years", y = "Count")
+
+```
+
+
+
+### Manually set the colors for each continent
+
+```{r}
+ggplot(gm, aes(x = lifeExp, group =continent, fill = continent)) + 
+    geom_histogram(show.legend = FALSE, binwidth=10) + # <- note, we are using "geom_histogram". Additionally, we need to create a binwidth. The default for this is to take your range and divide it by 30 (this happens if you don't specify it)
+  facet_wrap(~ continent) + 
+  labs(title = "Does the distribution of life expectancy differ by continent?",
+  x = "Life expectancy in years", y = "Count") +
+  scale_fill_manual(values = c("red", "green", "blue", "violet", "black")) #c() = concatenate. You use it anytime you need to create a list.
+
+```
+
+## Exploration of Boxplots
+### A simple boxplot
+```{r}
+
+ggplot(gm, aes(x = continent, y = lifeExp, group =continent, color = continent)) + #note we are using "color" instead of "fill" You can still use the fill function and it will fill the entire box.
+  geom_boxplot(show.legend = FALSE) +
+  labs(title = "Does the distribution of life expectancy differ by continent?",
+    x = "Continent", y = "Life expectancy in years")
+
+```
+
+
+###Boxplot faceted by year
+
+```{r}
+
+ggplot(gm, aes(x = continent, y = lifeExp, group =continent, color = continent)) +
+  geom_boxplot(show.legend = FALSE) +
+  facet_wrap(~ year) + #faceting by year don't forget you "~"!!!!
+labs(title = "Does the distribution of life expectancy differ by continent?",
+subtitle = "faceted by year", x = "Continent", y = "Life expectancy in years") + #we created a subtitle!!!
+theme(axis.text.x = element_text(angle=-90, vjust=.5)) #note the theme here has made it look a lot better. We have angled the labels so they are more readable (-90 degrees). "vjust" = verticle justification, it changes where your text aligns in correspondence to the graph it is representing. 
+```
+
+
+
+
+##Exploration of Line Plots
+### A line plot for each country, faceted by continent.
+
+```{r}
+
+ggplot(gm, aes(x = year, y = lifeExp, group = country)) +
+  geom_line(lwd = 1, show.legend = FALSE) + #gemo_line = we are indicating this as a line plot. lwd = 1 means "linewidth"
+  facet_wrap(~ continent) +
+  labs(title = "Does change in life expectancy differ by country and by continent?",
+  subtitle = "faceted by continent", x = "Year", y = "Life expectancy in years")
+
+```
+
+
+### Change the color of the lines from black to red
+```{r}
+
+ggplot(gm, aes(x = year, y = lifeExp, group = country)) +
+  geom_line(lwd = 1, show.legend = FALSE, colour = "red") + #note the british spelling of color here.... the american version works too...
+  facet_wrap(~ continent) +
+  labs(title = "Does change in life expectancy differ by country and by continent?",
+  subtitle = "faceted by continent", x = "Year", y = "Life expectancy in years")
+
+```
+
+
+###color by country within continent
+```{r}
+
+ggplot(gm, aes(x = year, y = lifeExp, group = country, colour = country)) +
+  geom_line(lwd = 1, show.legend = FALSE) + 
+  facet_wrap(~ continent) +
+  labs(title = "Does change in life expectancy differ by country and by continent?",
+  subtitle = "faceted by continent", x = "Year", y = "Life expectancy in years")
+
+```
+
+###Manually set the x axis range
+```{r}
+
+ggplot(gm, aes(x = year, y = lifeExp, group = country, colour = country)) +
+  geom_line(lwd = 1, show.legend = FALSE) + 
+  facet_wrap(~ continent) +
+  labs(title = "Does change in life expectancy differ by country and by continent?",
+  subtitle = "faceted by continent", x = "Year", y = "Life expectancy in years") +
+    scale_x_continuous(breaks= c(1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, 2002, 2007)) +
+  theme(axis.text.x = element_text(angle = -90, vjust = .5))
+
+
+```
+
+
+
+
+
+## Exploration of Scatterplots
+### A simple Scatterplot
+```{r}
+
+ggplot(gm, aes(x = gdpPercap, y = lifeExp, group = continent, color = continent)) +
+geom_point() +
+facet_wrap(~ year) +
+labs(title = "Is there a positive relationship between GDP and Life Expectancy?",
+subtitle = "faceted by year", x = "GDP", y = "Life expectancy in years")
+
+```
+
+
+### Apply a log10 transformation to the X-axis
+
+```{r}
+
+ggplot(gm, aes(x = gdpPercap, y = lifeExp, group = continent, color = continent)) +
+geom_point() +
+facet_wrap(~ year) +
+scale_x_log10() + #<- log transform your X-Axis
+labs(title = "Is there a positive relationship between log10(GDP) and Life Expectancy?",
+subtitle = "faceted by year", x = "GDP", y = "Life expectancy in years")
+
+```
+
+
+###Size the points by population
+Note: there are multiple ways to input aesthetic functions. If it only applies to one of the elements (as opposed to all elements) it's better to apply the aesthetic function into the geom point function.
+```{r}
+
+ggplot(gm, aes(x = gdpPercap, y = lifeExp, group = continent, color = continent)) +
+geom_point(aes(size = pop)) + # <- Here we are creating a new geom point (wrapped withing and aesthetic) sizing them by population
+facet_wrap(~ year) +
+scale_x_log10() + #<- log transform your X-Axis
+labs(title = "Is there a positive relationship between log10(GDP) and Life Expectancy?",
+subtitle = "faceted by year", x = "log10(GDP)", y = "Life expectancy in years")
+
+```
+
+
+### adding a regression line!
+```{r}
+
+ggplot(gm, aes(x = gdpPercap, y = lifeExp)) +#, group = continent, color = continent)) +
+geom_point() + 
+  geom_smooth(method = "lm", se=FALSE, color="green") +
+facet_wrap(~ year) +
+scale_x_log10() + #<- log transform your X-Axis
+labs(title = "Is there a positive relationship between log10(GDP) and Life Expectancy?",
+subtitle = "faceted by year", x = "log10(GDP)", y = "Life expectancy in years")
+
+```
+
+
+
+##Exploration on bar plots
+### A bar plot to display the number of data points for each contiinent
+
+```{r}
+
+ggplot(gm, aes(x = continent, fill = continent)) + geom_bar() +
+labs(title = "How many data points do we have for each continent?")
+
+```
+
+
+#Wrangle The data
+## Explore "filter()""
+
+### Legal comparison operators in the "filter()" function"
+
+**Legal comparison operators:**  
+
+
+• ****>, >=*** (greater than, greater than or equal to)  
+• ***<, <=*** (less than, less than or equal to)  
+• ***==*** (equal to)  
+• ***!=*** (not equal to)  
+• ***|*** (or)   
+• ***&*** (and)  
+• ***%in%*** (can be used to specify a list of values to choose. For example: x %in% c(1, 2, 3) would choose all values of x equal to 1, 2, or 3.  
+
+
+###Make a subset frame with data only from 2007
+
+```{r}
+
+gm2007 <- filter(gm, year == 2007) #filter is part of the dplyr package
+
+str(gm2007) 
+
+#Notice how the new dataset only has 142 observations
+#Additionally, all of the subsetted data only has year 2007
+
+```
+
+
+### Consider a set of additional filters
+
+```{r}
+
+filter1 <- filter(gm, year > 1970) #years above 1970 (1971- whatever)
+filter2 <- filter(gm, year == 2007 & continent == "Asia") #2007 AND Asia
+filter3 <- filter(gm, continent == "Americas" | continent == "Europe") #America or Europe values
+filter4 <- filter(gm, year %in% c(1952, 1957, 1962)) #if the years is 1952 1957 or 1962
+filter5 <- filter(gm, country %in% c("Panama","Costa Rica", "Indonesia", "Australia") & year != 1952) #If the country is Panama, Costa Rica, Indonesia, Australia & the year is NOT 1952
+
+
+```
+
+
+
+##Explore select()
+### Valid Helper functions within "select()"
+
+**Helper functions: ** 
+
+
+• ***starts_with***(“x1”) selects all vars that start with x1  
+• ***ends_with***(“w1”) selects all vars that end with w1  
+• ***contains***(“cog”) selects all vars that contain the phrase cog  
+• ***num_range***(“y”, 1:5) selects y1, y2, y3, y4, y5  
+
+
+
+###Select country, year, and Life expectancy
+
+```{r}
+
+le <- select(gm, country, year, lifeExp) #selecting the variables country, year, & lifeExp
+
+```
+
+
+
+### Consider a set of additional select() commands
+
+```{r}
+
+select1 <- select(gm, -lifeExp) # <- use this to DROP a variable
+select2 <- select(gm, continent:lifeExp) #<- include all of the variables BETWEEN continent & life expectancy
+select3 <- select(gm, country, continent, gdpPercap, everything()) #everything() this is used to help reorder variables. 
+
+
+```
+
+##Explore mutate()
+### Mutate and perforem a function on existing variables
+
+
+```{r}
+
+gm_add1 <- mutate(gm, gdp = gdpPercap*pop)
+
+
+```
+
+
+### Mutate and "ifelse"
+###ifelse explanation
+if else function supplies a test expression. Then the value to assign if the test expression is true is supplied, followed by the value to assign if the text expression is false is supplied.
+```{r}
+
+gm_add2 <- mutate(gm, live72 = ifelse(lifeExp >= 72, 1, 0)) #setting our test expression (if greateror = to 72 then create a 1. if less than then it'll = 0)
+```
+
+
+###mutate and ifelse, then define a factor
+```{r}
+
+gm_add2 <- mutate(gm, live72 = ifelse(lifeExp >= 72, 1, 0), #setting our test expression (if greateror = to 72 then create a 1. if less than then it'll = 0)
+  live72.f = factor(live72, levels = c(0,1), # <- Here were are turning it into a factor (telling it that there are levels to this. here we are creating levels for live72 of 0 and 1. Also, we are creating a new variable clled "live72.f")
+  labels = c("Life expectancy 72 years or more", "Life expectancy under 72 years"))) # <- Here we are labeling what our factors are)
+
+```
+
+
+
+### Perform all three mutate calls in one fuction
+<font color="FF0000">**NOTE: we are separating all of the commands by a comma (,)!**</font>
+```{r}
+
+gm_new <- mutate(gm,
+gdp = gdpPercap*pop,
+live72 = ifelse(lifeExp >= 72, 1, 0),
+live72.f = factor(live72, levels = c(0,1),
+labels = c("Life expectancy 72 years or less", "Life expectancy over 72 years")))
+```
+
+
+
+##Explore summarize()
+### Obtain overall mean of LifeExp
+<kbd>
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\summarize_ex.PNG)
+</center>
+</kbd>
+```{r}
+
+summarize(gm, avg_lifeExp = mean(lifeExp))
+
+
+```
+
+
+
+###Obtain overall mean of LifeExp by year
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\summarize_gr_exp.PNG)
+</center>
+```{r}
+
+gm_by_year <- group_by(gm, year)
+
+summarize(gm_by_year, avg_lifeExp = mean(lifeExp))
+
+
+
+```
+
+
+###Obtain overall mean of LifeExp by continent & year
+```{r}
+
+gm_by_year_continent <- group_by(gm, continent, year)
+
+summarize(gm_by_year_continent, avg_lifeExp = mean(lifeExp))
+
+```
+
+###Obtain overal mean and standard deviation of LifeExp by year
+sd(variable) = give the standard deviation
+ncount() = give the n
+```{r}
+
+gm_by_year <- group_by(gm, year)
+
+summarize(gm_by_year, avg_lifeExp = mean(lifeExp), sd_lifeExp = sd(lifeExp), ncount = n())
+
+
+
+```
+
+
+##Explore arrange()
+### Sort by one variable
+```{r}
+
+arrange(gm, year)
+
+```
+
+### Sort by two variables
+```{r}
+
+arrange(gm, year, lifeExp)
+
+```
+
+### sort by two variables, but in descending order for the second
+
+```{r}
+
+arrange(gm, year, desc(lifeExp))
+
+```
+
+
+### Save the sorted data as a new dataframe
+
+```{r}
+
+sorted_gm <- arrange(gm, year, desc(lifeExp))
+
+
+
+```
+
+#Learn to use pipes
+##magrittr and pipes
+So far, we’ve focused primarily on writing a series of separate functions to perform different tasks. However, we can link to-gether code by using pipes from the magrittr package. This is a package that automatically loads with the tidyverse. Pipes make your code more readable/understandable, and also can reduce the length of code (i.e., simplify code). The pipe oper-ator looks like this <font color="red">**%>%**</font>. As a short cut, when in RStudio you can hit **CTRL + SHIFT + M** on a PC or CMD + SHIFT + M on a MAC. Think of the pipe operator as saying: Take what’s on the left side of the operator and feed it to what’s on the right side of the operator.
+
+
+Let’s try a few examples. First, let’s request the life expectancy for Indonesia across years.
+
+### Life expectancy in Indonesia across years
+```{r}
+
+gm %>% #<- setting the gm data to be piped
+filter(country == "Indonesia") %>% #<- It really helps to replace " %>% " with "Then" when reading
+select(year, lifeExp)
+
+```
+
+
+
+
+```{r}
+indo <- gm %>%
+filter(country == "Indonesia") %>%
+select(year, lifeExp)
+```
+
+
+
+##Summary statistics of life expectancy across continent and year, excluding Oceania
+```{r}
+gm %>% #First, grab the dataset, THEN
+  filter(continent != "Oceania") %>% #Filter it by NOT Oceania
+  select(year, continent, country, lifeExp) %>% 
+  group_by(continent, year) %>%
+  summarize(avg_lifeExp = mean(lifeExp), sd_lifeExp = sd(lifeExp), ncount = n())
+
+
+ 
+```
+
+
+##summarize the the median variable
+```{r}
+median_gdp <- gm %>% 
+  group_by(year) %>% 
+  summarize(med_gdpPercap = median(gdpPercap))
+
+```
+
+
+
+##create a line chart of the median GDP by year
+```{r}
+ggplot(median_gdp, aes(x = year, y = med_gdpPercap)) +
+  geom_line(lwd = 1, show.legend = FALSE) +
+  labs(title = "Median of gdpPercap across all countries from 1952 to 2007")
+```
+#Explore spreading and gathering data
+spread() turns long variable into WIDE
+gather() flips from wide to LONG
+
+##Spread()
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\spread().PNG)
+
+```{r}
+gm_wide <- gm %>%
+select(country, year, lifeExp) %>%
+spread(key = year, value = lifeExp)
+
+#"key" = the variable we want to idex by (in this case it is year because country is separated by year)
+#"value" is the variable of interest
+#However, there is a problem, it's just using year as a the variable names. we want to add a prefix
+```
+
+###Adding a mutate function to rename the variables in spread()
+```{r}
+gm_wide <- gm %>%
+select(country, year, lifeExp) %>%
+  mutate(year = paste('lifeExp', year, sep = "_")) %>% #paste is renaming all of the variables so that they have "lifeExp_year"
+spread(key = year, value = lifeExp)
+```
+
+
+##gather()
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\gather().PNG)
+
+We are flipping the wide data frame we made before from wide to long
+```{r}
+gm_long <- gm_wide %>%
+gather(lifeExp_1952:lifeExp_2007, key = "lifeExp_year", value = "lifeExp")
+
+#Now the "key =" function is naming what the new index variable will be called
+```
+
+
+###making the data exactly the same as it was before
+```{r}
+gm_long <- gm_wide %>%
+gather(lifeExp_1952:lifeExp_2007, key = "lifeExp_year", value = "lifeExp") %>%
+separate(lifeExp_year, into = c("tempdelete", "year"))  %>%   #as a note, the "seperate()" auto finds common delimiters, so , in this case, an "_" was autodetected.So, if we had a variable named "life_exp_1972", you would need to use special code to seperate it correctly.
+select(-tempdelete) %>%
+arrange(country, year)
+```
+
+
+#Joining dataframes
+##inner vs outer: left & full join 
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\joins.PNG)
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\combine.PNG)
+
+
+###joining a & b example
+```{r, message=FALSE}
+
+a <-  read_csv("a.csv") #"a" contains rows A,B,C
+b <-  read_csv("b.csv") #"b" contains rows A,B,D
+
+##BONUS
+#x1 = c("A", "B", "C") 
+#x2 = c(1, 2, NA)
+#c <-  data.frame(x1, x2)
+
+left_join(a,b, by="x1") #notice how this joined and only included variables in dataframe a
+right_join(a,b, by="x1") #notice how this joined and only included variables in dataframe b
+inner_join(a,b, by="x1") #notice how this dropped variables that were not in both dataframes
+full_join(a,b, by="x1") #notice how this INCLUDED ALL variables regardless
+
+##BONUS!: YOU CAN MERGE MORE THAN 2 DATAFRAMES!!
+#
+#left_join(a,b,c, by="x1") #notice how this joined and only included variables in dataframe a
+#right_join(a,b,C, by="x1") #notice how this joined and only included variables in dataframe b
+#inner_join(a,b,C, by="x1") #notice how this dropped variables that were not in both dataframes
+#full_join(a,b,C, by="x1") #notice how this INCLUDED ALL variables regardless
+
+#There are 4 summarized dataframes in this set
+
+```
+
+
+
+
+
+

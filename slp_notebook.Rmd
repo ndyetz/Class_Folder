@@ -1,0 +1,882 @@
+---
+title: "R Notebook for slp data"
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+#clear all objects load libraries
+```{r, message = FALSE}
+rm(list=ls(all=TRUE)) 
+
+
+#install.packages("tidyverse")
+#install.packages("psych")
+#install.packages("descriptr")
+#install.packages("car")
+#install.packages("modelr")
+
+library(tidyverse)
+library(psych)
+library(descriptr)
+library(car)
+library(modelr)
+library("olsrr")
+library(GGally)
+
+
+```
+
+
+
+```{r, message = FALSE}
+slp <- read_csv("slpdata.csv")
+```
+
+```{r}
+describe(slp)
+```
+
+
+#dummy code sex and check
+```{r}
+
+#FEMALE VARIABLE
+#male = 0 
+#female = 1
+
+slp <- mutate(slp,
+              female = ifelse(sex==1,0,1),
+              female.f = factor(female, levels= c(0,1), labels = c("male", "female")))
+
+cross_table(slp$sex, slp$female)
+
+```
+
+
+
+##subset to keep only people in self help conditon
+```{r}
+slp_cond1 <- filter(slp, cond == 1)
+```
+
+
+##Request means of sleep hygeine by sex
+```{r}
+
+
+
+slp_cond1 %>% 
+  group_by (female.f) %>% 
+  summarize(hyg_mean = mean(hygiene)) %>% 
+  ungroup()
+
+
+```
+
+
+##create a scatterplot of sleep hygiene by sex
+```{r}
+ggplot(slp_cond1, aes(x = female.f, y = hygiene, group = female.f, color = female.f)) +
+  geom_point(show.legend = FALSE) +
+  stat_summary(fun.y=mean, geom="line", lwd = 1, colour = "black", aes(group=1)) +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Does sleep hygiene at the end of the self-help condition differ by sex?",
+  subtitle = "Overlay means for each group (X), and connect means across groups",
+  x = "sex", y = "Sleep Hygiene")
+```
+
+#Fit A SLR of the data
+```{r}
+
+m1 <- lm(data = slp_cond1, hygiene ~ female)
+ols_regress(m1)
+
+#FYI if you want the mean value of females... you can just add your intercept and beta together. Additionally, notice how the mean value for males is the same as our intercept. This is ONLY the case with SLR
+
+#Standardized estimates for categorical predictors doesn't make much sense.
+
+```
+
+##tcrit
+```{r}
+qt(c(.025, .975), 198)
+```
+
+
+#Explore the difference in sleep efficiency by condition for females
+##Create dummy coded for condition
+
+```{r}
+slp <- mutate(slp,
+              age30 = age - 30,
+              hygiene_m = hygiene -mean(hygiene),
+  cond2 = ifelse(cond == 2, 1, 0),
+  cond3 = ifelse(cond == 3, 1, 0),
+  cond.f = factor(cond, levels = c(1,2,3), labels = c("self help", "group-based", "group + partner")))
+
+cross_table(slp$cond, slp$cond2)
+cross_table(slp$cond, slp$cond3)
+```
+
+
+```{r}
+slp_females <- filter(slp, female == 1)
+```
+
+
+
+##Request mean od sleep efficiency by condition for females
+```{r}
+slp_females %>%
+  group_by(cond.f) %>%
+  summarize(sleep_mean = mean(sleep)) %>%
+  ungroup()
+
+
+
+```
+
+
+##Create a scatterplot of sleep efficiency by condition
+
+```{r}
+ggplot(slp_females, aes(x = cond.f, y = sleep, group = cond.f, color = cond.f)) +
+  geom_point(show.legend = FALSE) + #geom_jitter() +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Does sleep efficiency at the end of the self-help condition differ by \ntreatment condition for females?",
+  subtitle = "Overlay means for each group (X)",
+  x = "Condition", y = "Sleep Efficiency")
+```
+
+
+
+```{r}
+m2 <- lm(data = slp_females, sleep ~ cond2 + cond3)
+ols_regress(m2)
+
+
+#Equation: sleep_score = 68.34 + (8.36*cond2) + (13.021*cond3)
+```
+
+
+
+```{r}
+
+slp_females <- mutate(slp_females, cond1 = ifelse(cond == 1, 1, 0))
+
+#setting it so the reference group is condition 3
+
+m3 <- lm(data = slp_females, sleep ~ cond1 + cond2)
+
+ols_regress(m3)
+
+
+```
+
+
+
+###An alternative method for comparing condtions 2 & 3
+```{r}
+linearHypothesis(m2, "cond2 = cond3")
+```
+
+
+
+
+
+#Bonferroni correction
+
+```{r}
+# take alpha and divide by 3
+new_alpha <- .05/3
+
+
+# divide new alpha in half for two-tails
+new_alpha2 <- new_alpha/2
+
+
+# lower & upper quantile
+new_alpha2
+1-new_alpha2
+
+qt(c(.0083, .9917), df = 244)
+qf(.9833, df1 = 1, df2 = 244)
+
+```
+
+
+## Include Additional Predictors
+```{r}
+
+
+# center predictors
+slp_females <- slp_females %>%
+  mutate(age30 = age-30,
+    anxiety_m = anxiety - mean(anxiety))
+
+# fit model
+m4 <- lm(data = slp_females, sleep ~ cond2 + cond3 + prior + age30 + anxiety_m)
+
+ols_regress(m4)
+
+```
+
+
+## Obtain Model adjusted means and make a plot
+```{r}
+
+predgrid <- slp_females %>%
+  group_by(cond.f) %>%
+  data_grid(cond2, cond3,
+    prior = 1,
+    age30 = 0,
+    anxiety_m = 0) %>%
+  ungroup()
+
+predictions <- predict(m4, predgrid, interval = "confidence") %>%
+  as_data_frame()
+
+adjmeans <- cbind(predgrid, predictions)
+  
+ggplot(adjmeans, aes(x=cond.f, y=fit, ymin = lwr, ymax = upr)) +
+  geom_bar(stat = "identity", width = .5) +
+  geom_errorbar(color="black", width = .2) +
+  labs(title = "Model fitted sleep efficiency by condition",
+    subtitle = "Age is held contstant at 30, anxiety is held constant at mean, prior intervention is held constant at 1",
+    x = "Treatment Condition", y = "Sleep Efficiency",
+    caption = "Error bars represent 95% CI")
+
+
+
+```
+
+
+
+
+
+```{r}
+predgrid <- slp_females %>%
+  group_by(cond.f) %>%
+  data_grid(cond2, cond3, prior, #<- this is the one main difference between this chart and the previous. We are looking at prior at 0 & 1 (rather than just at 1)
+    age30 = 0,
+    anxiety_m = 0) %>%
+  ungroup()
+
+predictions <- predict(m4, predgrid, interval = "confidence") %>%
+  as_data_frame()
+
+adjmeans <- cbind(predgrid, predictions)
+
+ggplot(adjmeans, aes(x=cond.f, y=fit, ymin = lwr, ymax = upr, group = factor(prior), fill = factor(prior))) + #Also, the "factor(prior) is different too"
+  geom_bar(position="dodge", stat = "identity", width = .5) +
+  geom_errorbar( position = position_dodge(.5), colour="black", width = .2) +
+  guides(fill = guide_legend("Prior Involvement")) +
+  labs(title = "Model fitted sleep efficiency by condition and prior involvement",
+    subtitle = "Age is held contstant at 30, anxiety is held constant at mean",
+    x = "Treatment Condition", y = "Sleep Efficiency",
+    caption = "Error bars represent 95% CI")
+
+
+
+
+```
+
+
+#Explore Interactions
+
+####Import & prepare data for study of interactions
+
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\int_slp.PNG)
+
+```{r, message= FALSE}
+slp <- read_csv("slpdata.csv")
+
+# Create a dummy coded variable for sex and dummy coded set for condition
+slp <- mutate(slp,
+  female = ifelse(sex == 1, 0, 1),
+  female.f = factor(female, levels = c(0,1), labels = c("male", "female")),
+  cond2 = ifelse(cond == 2, 1, 0),
+  cond3 = ifelse(cond == 3, 1, 0),
+  cond.f = factor(cond, levels = c(1,2,3), labels = c("self help", "group-based", "group + partner")))
+
+
+```
+
+
+```{r}
+describe(slp)
+```
+
+##correlate relationship
+```{r}
+ggplot(slp, aes(x = sleep, y = lifesat)) +
+  geom_smooth(method = lm, se = TRUE) +
+  geom_point() +
+  labs(title = "Is there a relationship between sleep efficiency and life satisfaction?",
+  x = "Sleep Efficiency", y = "Life Satisfaction")
+```
+
+
+
+
+##Modify plot to consider a differential effect by sex
+```{r}
+ggplot(slp, aes(x = sleep, y = lifesat, group = female.f, color = female.f)) +
+  geom_smooth(method = lm, se = TRUE) +
+  geom_point() +
+  guides(color = guide_legend("Sex")) +
+  labs(title = "Does the effect of sleep efficiency on life satisfaction differ by sex?",
+    x = "Sleep Efficiency", y = "Life Satisfaction")
+```
+
+
+
+
+###Fit a linear regression model to the data - no intercation (Model 1)
+```{r}
+
+# center sleep at the mean
+slp_mix <- mutate(slp, sleep_m = sleep - mean(sleep))
+
+mix1 <- lm(data=slp_mix, lifesat ~ female + sleep_m)
+ols_regress(mix1)
+
+
+```
+
+
+
+####Plot the results of the fitted Model 1
+```{r}
+
+
+predgrid_mix1 <- slp_mix %>%
+  group_by(female.f) %>%
+  data_grid(sleep_m = seq_range(sleep_m, 10), #highest to lowest value with 10 incriments in between.
+    female) %>%
+  ungroup() %>%
+  add_predictions(mix1) %>%
+  mutate(sleep = sleep_m + mean(slp_mix$sleep)) #Adds back the mean so our scale is not set at 0 (but rather the actual scale)
+
+ggplot(predgrid_mix1, aes(x = sleep, y = pred, group = female.f, color = female.f)) +
+  geom_line(size = 1) +
+  guides(color = guide_legend("Sex")) +
+  labs(title = "Results of Model 1 - No interaction",
+    x = "Sleep Efficiency", y = "Life Satisfaction")
+
+
+```
+
+
+
+
+
+###Add an Interaction
+```{r}
+mix2 <- lm(data=slp_mix, lifesat ~ female + sleep_m + female*sleep_m)
+
+ols_regress(mix2) #DOn't interpret the standardized betas when there is an interaction!!
+```
+
+####Switch reference group of sex & refit model 2
+```{r}
+slp_mix <- mutate(slp_mix, male = ifelse(sex == 1, 1, 0))
+
+mix2_switch <- lm(data=slp_mix, lifesat ~ male + sleep_m + male*sleep_m)
+ols_regress(mix2_switch)
+```
+
+
+#### Reporducethe same results with a linear hypothesis test
+```{r}
+linearHypothesis(mix2, "sleep_m + female:sleep_m") #Note, to test the interaction you use a ":" rather than an asterisk here, because this is what the regression model has created.
+```
+
+
+
+
+
+```{r}
+predgrid_mix2 <- slp_mix %>%
+  group_by(female.f) %>%
+  data_grid(sleep_m = seq_range(sleep_m, 10),
+    female) %>%
+  ungroup()
+
+predictions_mix2 <- predict(mix2, predgrid_mix2, interval = "confidence") %>%
+  as_data_frame()
+
+adjeff_mix2 <- cbind(predgrid_mix2, predictions_mix2) %>%
+  mutate(sleep = sleep_m + mean(slp_mix$sleep))
+
+
+ggplot(adjeff_mix2, aes(x = sleep, y = fit, group = female.f, color = female.f)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .4, fill = "grey60") +
+  geom_line(size = 1) +
+  guides(color = guide_legend("Sex")) +
+  labs(title = "Does the effect of sleep efficiency on life satisfaction differ by sex?",
+    x = "Sleep Efficiency", y = "Life Satisfaction")
+```
+
+
+
+
+#### Probe the effect of sex at different levels of sleep efficiency
+```{r}
+
+slp_mix <- mutate(slp_mix,
+            sleep60 = sleep - 60,
+            sleep75 = sleep - 75,
+            sleep95 = sleep - 95,
+            sleep85 = sleep - 85)
+
+mix2_60 <- lm(data=slp_mix, lifesat ~ female + sleep60 + female*sleep60)
+ols_regress(mix2_60)
+
+mix2_75 <- lm(data=slp_mix, lifesat ~ female + sleep75 + female*sleep75)
+ols_regress(mix2_75)
+
+mix2_95 <- lm(data=slp_mix, lifesat ~ female + sleep95 + female*sleep95)
+ols_regress(mix2_95)
+
+
+#Neil Testing out at point where lines cross.
+mix2_85 <- lm(data=slp_mix, lifesat ~ female + sleep85 + female*sleep85)
+ols_regress(mix2_85)
+
+
+
+
+
+
+```
+
+#Practice activity
+####Probe the effect of sex at1 SD above and below the mean of sleep
+```{r}
+
+m <- mean(slp_mix$sleep)
+sd <- sd(slp_mix$sleep)
+
+
+
+m+sd
+m-sd
+
+
+
+
+```
+
+
+
+
+```{r}
+
+slp_mix <- mutate(slp_mix,
+                 slp_above =  sleep - (mean(sleep) + sd(sleep)),
+                 slp_below = sleep - (mean(sleep) - sd(sleep))) 
+
+
+mix2_a <- lm(data=slp_mix, lifesat ~ female + slp_above+ female*slp_above)
+ols_regress(mix2_a)
+                                       
+mix2_b <- lm(data=slp_mix, lifesat ~ female + slp_below+ female*slp_below)
+ols_regress(mix2_b)
+
+
+
+```
+
+
+#### PLOT THE RESULTS WITH SEX ON THE X-AXIS
+
+```{r}
+
+
+#predgrid_mix_switch <- slp_mix %>% 
+#  group_by(female.f) %>% 
+#  data_grid(sleep_m = c(-12.14, 0, 12.14),
+#            female) %>% 
+#  ungroup() %>% 
+#  mutate(sleep_m.f = factor(sleep_m, levels = c(-12.14, 0, 12.14),
+#                             labels = c("1 SD Below Mean", "Mean", "1 SD Above #Mean")))
+#
+#predictions_mix_switch <- cbind(predgrid_mix_switch, interval = "confidence") %>% 
+#  as_data_frame()
+#
+##Ask Thao and megan how to fix this code...
+###Error below 
+#
+#adjmeans_mix_switch <- cbind(predgrid_mix_switch, predictions_mix_switch) %>% 
+#  mutate(sleep = sleep_m + mean(slp_mix$sleep))
+#
+#####Error above
+#
+#ggplot(adjmeans_mix_switch, aes(x = female.f, y = fit, group = sleep_m.f, color = #sleep_m.f)) +
+#  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha =.4,  fill = #"grey60") + 
+#  geom_line(size = 1) + 
+#  guides(color = guide_legend("Sleep Efficiency")) + 
+#  labs(title = "Does the effect of sex on life satisfcation differ by sleep #efficiency?", x = "Sex", y = "Life Satisfaction")
+#
+
+
+```
+
+
+
+```{r}
+
+
+#Currently the latest version of "jtools" is not updated through CRAN, 
+
+#install.packages("devtools")
+library(devtools)
+
+#install_github("jabob-long/jtools")
+library(jtools)
+
+#install.packages("jtools")
+#library(jtools)
+
+mix2_jplot1 <- lm(data = slp_mix, lifesat ~ female + sleep + female*sleep)
+
+probe_interaction(mix2_jplot1, pred = female, modx = sleep, #sleep = moderator
+  jnplot = TRUE, 
+  x.label = "Sex",
+  y.label = "Life Satisfaction",
+  main.title = "Differential effect of sex on life satisfaction by sleep efficiency",
+  legend.main = "Sleep Efficiency")
+```
+
+
+
+
+### Add control Variables
+```{r}
+# center the predictors
+slp_mix <- mutate( slp_mix,
+                    age30 = age - 30,
+                    anxiety_m = anxiety - mean(anxiety))
+
+mix3 <- lm(data=slp_mix, lifesat ~ cond2 + cond3 + prior + age30 + anxiety_m + female + sleep_m + female*sleep_m)
+ols_regress(mix3)
+
+
+#to interpreet female:sleep_m it is the the expected difference in the slope when our moderator is not 0
+
+```
+
+
+
+
+
+```{r}
+
+
+predgrid_mix3 <- slp_mix %>%
+  group_by(female.f) %>%
+  data_grid(sleep_m = seq_range(sleep_m, 10),
+          female,
+          cond2 = 0,
+          cond3 = 1,
+          prior = 1,
+          age30 = 0,
+          anxiety_m = 0) %>%
+  ungroup()
+
+predictions_mix3 <- predict(mix3, predgrid_mix3, interval = "confidence") %>%
+  as_data_frame()
+
+adjmeans_mix3 <- cbind(predgrid_mix3, predictions_mix3) %>%
+  mutate(sleep = sleep_m + mean(slp_mix$sleep))
+
+ggplot(adjmeans_mix3, aes(x = sleep, y = fit, group = female.f, color = female.f)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .4, fill = "grey60") +
+  geom_line(size = 1) +
+  guides(color = guide_legend("Sex")) +
+  labs(title = "Does the effect of sleep efficiency on life satisfaction differ by sex?",
+    subtitle = "Condition is held constant at Condition 3,
+prior is held constant at prior involvement, age is held constant at 30,
+\nanxiety is held constant at the mean",
+    x = "Sleep Efficiency", y = "Life Satisfaction")
+
+
+```
+
+
+
+```{r}
+mix3_jplot <- lm(data = slp_mix, lifesat ~ cond2 + cond3 + prior + age + anxiety + female.f + sleep + female.f*sleep)
+
+probe_interaction(mix3_jplot, pred = sleep, modx = female.f,
+  jnplot = FALSE,
+  x.label = "Sleep Efficiency",
+  y.label = "Life Satisfaction",
+  main.title = "Differential effect of sleep efficiency on life satisfaction by sex",
+  legend.main = "Female")
+
+```
+
+
+#New research quetsion!
+Do the benefits of the group and group + partner conditions, as compared to the self-help condition, differ ad a function of participant sex
+```{r}
+
+
+
+
+slp_cat_means <-slp_mix %>% 
+  group_by(female.f,cond.f) %>% 
+  summarize(mean_hyg = mean(hygiene)) %>% 
+  ungroup()
+
+slp_cat_means
+
+```
+
+
+###plot the meand by condition and sex
+```{r}
+ggplot(slp_cat_means, aes(x = cond.f, y = mean_hyg, group = female.f, color = female.f)) +
+  geom_line(lwd = 1) +
+  geom_point(size = 2) +
+  guides(color=guide_legend("Sex")) +
+  labs(title = "Does sleep hygiene differ across sex and condition?", x = "Condition", y = "Average Hygiene")
+```
+
+### Fit a linear regression model to the data
+```{r}
+cat1 <- lm(data = slp, hygiene ~ female + cond2 + cond3 + female*cond2 + female*cond3)
+ols_regress(cat1)
+```
+
+
+
+```{r}
+slp_cat <- mutate(slp, male = ifelse(sex == 1, 1, 0))
+cat1_switch <- lm(data = slp_cat, hygiene ~ male + cond2 + cond3 + male*cond2 + male*cond3)
+ols_regress(cat1_switch)
+```
+
+
+
+####Add additionaly predictors
+```{r}
+# center predictors and fit model
+slp_cat <- mutate(slp_cat,
+  age30 = age-30,
+  anxiety_m = anxiety - mean(anxiety))
+
+cat2 <- lm(data = slp_cat, hygiene ~ female + cond2 + cond3 + female*cond2 + female*cond3 + age30 + prior + anxiety_m)
+
+ols_regress(cat2)
+```
+
+
+
+
+
+
+#######Plot the results
+```{r}
+# bar graph
+predgrid_cat <- slp %>%
+  group_by(cond.f, female.f) %>%
+  data_grid(cond2, cond3, female,
+            prior = 1,
+            age30 = 0,
+            anxiety_m = 0) %>%
+  ungroup()
+
+predictions_cat <- predict(cat2, predgrid_cat, interval = "confidence") %>%
+  as_data_frame()
+
+adjmeans_cat <- cbind(predgrid_cat, predictions_cat)
+
+ggplot(adjmeans_cat, aes(x = cond.f, y = fit, ymin = lwr, ymax = upr, group = female.f, fill = female.f)) +
+  geom_bar(position="dodge", stat = "identity", width = .5) +
+  geom_errorbar( position = position_dodge(.5), colour="black", width = .2) +   #position_dodge = offseting the bars so they aren't all next to eachother
+  guides(fill = guide_legend("Sex")) +
+  labs(title = "Model fitted sleep hygiene by condition and sex",
+      subtitle = "Age is held constant at 30, anxiety is held constant at mean, prior involvement is held constant at 1",
+      x = "Treatment Condition", y = "Sleep Hygiene",
+      caption = "Error bars represent 95% CI")
+
+# line graph
+
+ggplot(adjmeans_cat, aes(x = female.f, y = fit, ymin = lwr, ymax = upr, group = cond.f, color = cond.f)) +
+  geom_line() +
+  geom_errorbar(width = .05) +
+  geom_point() +
+  guides(color = guide_legend("Condition")) +
+  labs(title = "Does the sex difference in sleep hygiene differ by condition?",
+      subtitle = "Age is held constant at 30, anxiety is held constant at mean, prior involvement is held constant at 1",
+      x = "Sex", y = "Sleep Hygiene",
+      caption = "Error bars represent 95% CI")
+
+```
+
+
+
+##Explore interaction between 2 continuous variables
+###Subset and get descriptive stats
+```{r}
+slp_cont <-  filter(slp, female == 0)
+
+describe(slp_cont)
+```
+
+
+###Create a scatterplot matrix of the key variables
+```{r}
+scatterplot <- ggpairs(slp_cont, columns = c("sleep", "hygiene", "anxiety"),
+                      upper = list(continuous = wrap("cor", size=3)),
+title = "Bivariate Relationship of Key Variables")
+print(scatterplot, progress=FALSE )
+```
+
+
+
+### Fit a linear regression model to the data
+```{r}
+# center the predictors
+slp_cont <- mutate(slp_cont,
+                  age30 = age - 30,
+                  hygiene_m = hygiene - mean(hygiene),
+                  anxiety_m = anxiety - mean(anxiety))
+
+cont1 <- lm(data=slp_cont, sleep ~ age30 + prior + cond2 + cond3 + hygiene_m + anxiety_m + hygiene_m*anxiety_m)
+
+ols_regress(cont1)
+```
+
+
+#### Get predicted values at prototypical scores
+```{r}
+predgrid_cont <- slp_cont %>%
+  data_grid(hygiene_m = c(-1, 0, 1),
+            anxiety_m = c(-1, 0, 1),
+            age30 = 0,
+            prior = 0,
+            cond2 = 0,
+            cond3 = 0) %>%
+  add_predictions(cont1)
+```
+
+
+
+####Probe Interaction
+```{r}
+slp_cont <- slp %>% 
+  filter(female ==0) %>% 
+  mutate( anxiety_1above = anxiety - (mean(anxiety) + sd(anxiety)),
+                   anxiety_1below = anxiety - (mean(anxiety) - sd(anxiety)),
+                   age30 = age - 30,
+                   hygiene_m = hygiene - mean(hygiene))
+
+cont1_above <- lm(data=slp_cont, sleep ~ age30 + prior + cond2 + cond3 + hygiene_m + anxiety_1above + hygiene_m*anxiety_1above)
+
+ols_regress(cont1_above)
+
+cont1_below <- lm(data=slp_cont, sleep ~ age30 + prior + cond2 + cond3 + hygiene_m + anxiety_1below + hygiene_m*anxiety_1below)
+
+ols_regress(cont1_below)
+                    
+```
+
+####Plot the results
+```{r}
+predgrid_cont <- slp_cont %>%
+data_grid(hygiene_m = seq_range(hygiene_m, 10),
+age30 = 0,
+prior = 0,
+cond2 = 0,
+cond3 = 0,
+anxiety_m = c(-.89, 0, .89)) %>%
+add_predictions(cont1) %>%
+mutate(hygiene = hygiene_m + mean(slp_cont$hygiene),
+anxiety.f = factor(anxiety_m, levels = c(-.89, 0, .89), labels = c("1 SD Below Mean", "Mean", "1 SD Above Mean")))
+ggplot(predgrid_cont, aes(x = hygiene, y = pred, group = anxiety.f, color = anxiety.f)) +
+geom_line(size = 1) +
+guides(color = guide_legend("Level of Anxiety")) +
+labs(title = "Does the effect of sleep hygiene on sleep efficiency differ by anxiety?",
+x = "Sleep Hygiene", y = "Sleep Efficiency")
+```
+
+
+
+
+####Use jtools to obtain simple slopes and plot the results
+```{r}
+cont1.jn <- lm(data=slp_cont, sleep ~ age30 + prior + cond2 + cond3 + hygiene + anxiety + hygiene*anxiety)
+probe_interaction(cont1.jn, pred = hygiene, modx = anxiety,
+jnplot = TRUE,
+x.label = "Sleep Hygiene",
+y.label = "Sleep Efficiency",
+main.title = "Differential effect of hygiene on sleep efficiency by anxiety",
+legend.main = "Level of Anxiety")
+```
+
+
+
+
+
+###Explore the model for females
+No interaction between hygiene & anxiety among females.
+```{r}
+slp_females <- slp %>% 
+  filter(female == 1) %>% 
+  mutate(anxiety_m = anxiety - mean(anxiety),
+         hygiene_m = hygiene - mean(hygiene))
+
+cont1_female <- lm(data = slp_females, sleep ~ hygiene_m + anxiety_m + hygiene_m*anxiety_m)
+ols_regress(cont1_female)
+
+
+```
+
+
+####Fit a 3-way interaction to determine if the hygiene*anxiety effect is significantly different by sex.
+```{r}
+
+slp_3way <- slp %>%
+    mutate(anxiety_m = anxiety - mean(anxiety),
+           hygiene_m = hygiene - mean(hygiene))
+
+mod3way <- lm(data = slp_3way, sleep ~ hygiene_m + anxiety_m + female + hygiene_m*anxiety_m + hygiene_m*female + anxiety_m*female + hygiene_m*anxiety_m*female)
+
+ols_regress(mod3way)
+
+sd(slp_3way$anxiety_m)
+
+
+```
+
+
+####Plot the results of the 3-way Interaction
+```{r}
+#install.packages("cowplot")
+library(cowplot)
+
+threeway.jn <- lm(data=slp_3way, sleep ~ hygiene*anxiety*female.f)
+
+probe_interaction(threeway.jn, pred = hygiene, modx = anxiety, mod2 = female.f, 
+                  jnplot = TRUE,
+                  x.label = "Sleep Hygiene",
+                  y.label = "Sleep Efficiency",
+                  main.title = "Differential effect of hygiene on sleep efficiency by anxiety", 
+                  legend.main = "Level of Anxiety")
+
+
+
+```
+
+
+

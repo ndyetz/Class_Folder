@@ -1,0 +1,436 @@
+---
+title: "R Notebook for Unit 3"
+subtitle: "Exploration of the Principles of Statistical Inference"
+output: html_notebook
+---
+
+#Dataset description 
+
+research team is interested
+in assessing the relationship
+between caloric deficit and
+pounds lost over the course of
+a 1 month weight loss
+program designed for men
+age 40 to 50 in CO. 100
+obese men were randomly
+selected to participate. The
+team measured the following
+variables:
+
+#Variable description
+
+1. <u>OUTCOME</u>: **lbslost** = pounds lost
+after one month on the
+weight loss program
+2. **caldeff** = caloric deficit
+over the course of the
+program (expressed in
+1000 calories). A caloric
+deficit is a state in which
+you are burning more
+calories than you eat.
+3. **selfeff** = self efficacy for
+weight loss at the start of
+the program
+
+# Load libraries
+```{r, message = FALSE}
+
+rm(list=ls(all=TRUE)) 
+
+
+#install.packages("tidyverse")
+#install.packages("descriptr")
+#install.packages("mosaic")
+
+library(tidyverse)
+library(descriptr)
+library(mosaic)
+
+```
+
+# Import data
+```{r, message = FALSE}
+
+wtloss <- read_csv(file = "wtloss.csv")
+
+screener(wtloss)
+#"screener()" gives gives a quick look at your data
+
+```
+
+
+# Explore the sample data
+## Get descriptive statistics for lbslost (pounds lost)
+```{r}
+
+summary_stats(wtloss$lbslost)
+
+#NOTE: A NEGATIVE VALUE IN LBSLOST = THEY GAINED WEIGHT!!!!
+
+```
+
+## Make a histogram of lbslost
+### Start by marking +/- 2 SDs from mean
+```{r}
+
+mean(wtloss$lbslost) - 2*sd(wtloss$lbslost)
+mean(wtloss$lbslost) + 2*sd(wtloss$lbslost)
+
+
+ggplot(wtloss, aes(x = lbslost)) +
+  geom_histogram(binwidth = .5, color = "grey") +
+  geom_vline(xintercept = mean(wtloss$lbslost), lwd = 2, color="red") +
+  geom_vline(xintercept = mean(wtloss$lbslost) + 2*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  geom_vline(xintercept = mean(wtloss$lbslost) - 2*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  labs(title = "Distribution of pounds lost for the 100 men in the study",
+       subtitle = "red line represents sample mean, blue lines represents +/- 2 standard deviations from the mean",
+       x = "pounds lost") 
+  
+```
+
+### Repeat the histogram, but exchange 2 for 1.96, the more precise estimate of t-scores
+
+```{r}
+
+qnorm(c(.025, .975))
+
+```
+
+The below graph is a more precise version of the above graph
+
+```{r}
+
+ggplot(wtloss, aes(x = lbslost)) +
+  geom_histogram(binwidth = .5, color = "grey") +
+  geom_vline(xintercept = mean(wtloss$lbslost), lwd = 2, color="red") +
+  geom_vline(xintercept = mean(wtloss$lbslost) + 1.959964*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  geom_vline(xintercept = mean(wtloss$lbslost) - 1.959964*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  labs(title = "Distribution of pounds lost for the 100 men in the study",
+       subtitle = "red line represents sample mean, blue lines represents +/- 1.96 standard deviations from the mean",
+       x = "pounds lost") 
+  
+```
+
+### Repeat the histogram, but now make use of the Student's t-distribution instead of the z-distribution
+
+qt = the same name as qnorm, but it uses the t-distribution!!!
+```{r}
+
+qt(c(.025, .975), df = 99) #99 is our df because it's n-1! (our sample size = 100 in the weight loss study)
+
+```
+
+Instead of 1.96, we use "1.98" because we are working with the t-distribution!!
+```{r}
+
+ggplot(wtloss, aes(x = lbslost)) +
+  geom_histogram(binwidth = .5, color = "grey") +
+  geom_vline(xintercept = mean(wtloss$lbslost), lwd = 2, color="red") +
+  geom_vline(xintercept = mean(wtloss$lbslost) + 1.984217*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  geom_vline(xintercept = mean(wtloss$lbslost) - 1.984217*sd(wtloss$lbslost), lwd = 2, color="blue") +
+  labs(title = "Distribution of pounds lost for the 100 men in the study",
+       subtitle = "red line represents sample mean, blue lines represents +/- 1.98 standard deviations from the mean",
+       x = "pounds lost") 
+  
+```
+
+# Consider the hypothetical population
+## Simulate a population
+```{r}
+
+# generate some data
+set.seed(8642) #<- REMEMEBER the number (8642) is just a random number, it really doesn't matter what you put in here.... but you need something!
+p_lbslost <- rnorm(n=50000, m=3.00, sd=2.00) #set what parameters you want
+my_pop <- data.frame(p_lbslost) #Just put into a dataframe
+
+# plot the normal distribution
+ggplot(my_pop, aes(x = p_lbslost)) +
+  geom_histogram(binwidth = .25) +
+  labs(title = "Pounds lost following a weight loss program", subtitle = "simulation of a population", x = "pounds lost")
+
+```
+
+## Randomly select 3 samples of size 100 from the my_pop population
+```{r}
+
+set.seed(19657)
+s1 <- sample_n(my_pop, 100, replace = TRUE) #We are choosing a smaple of 100 people in the population dataframe we just created
+s2 <- sample_n(my_pop, 100, replace = TRUE) #replace = TRUE says if we rechoose someone, replace their value
+s3 <- sample_n(my_pop, 100, replace = TRUE)
+
+my_samples <- bind_rows(s1, s2, s3, .id='sample')  #.id = says create a column to name how we want these to designaated (it just creates a new variable and the value is a unique value associated with the vector it was taken from)
+
+my_samples %>% 
+  group_by(sample) %>% 
+  summarize(mean_in_sample = mean(p_lbslost)) 
+
+```
+
+## Plot the distribution of pounds lost in each of the samples
+```{r}
+
+ggplot(my_samples, aes(x = p_lbslost, group = sample, fill = sample)) +
+  geom_density(alpha = .5) +
+  labs(title = "Pounds lost following a weight loss program in the three samples", x = "pounds lost")
+
+```
+
+
+## Create a repeated sampling function
+```{r}
+
+#Kim created this function!!! It is creating the ability to sample in a population!
+
+rep_sample_n <- function(tbl, size, replace = FALSE, reps = 1)
+{
+    n <- nrow(tbl)
+    i <- unlist(replicate(reps, sample.int(n, size, replace = replace), simplify = FALSE))
+
+    rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i, , drop=FALSE])
+
+    dplyr::group_by(rep_tbl, replicate)
+}
+
+```
+
+
+## Draw 10000 random samples and obtain the mean and standard deviation in each one
+### Start with a sample size equal to the wtloss dataframe (100 men per sample)
+#### Generate the samples
+```{r}
+
+set.seed(47256)
+sample_means <- my_pop %>%
+  rep_sample_n(size = 100, reps = 10000, replace = TRUE) %>%
+  summarize(mean_lbslost = mean(p_lbslost), sd_lbslost = sd(p_lbslost))
+
+# print mean and standard deviation of average pounds lost
+mean(sample_means$mean_lbslost)
+sd(sample_means$mean_lbslost)
+  
+```
+
+
+#### Plot the average pounds lost in each of the 10000 random samples of size 100
+```{r}
+
+ggplot(sample_means, aes(x = mean_lbslost)) + 
+  geom_histogram(binwidth = .1) +
+  geom_vline(xintercept = mean(sample_means$mean_lbslost), lwd = 2, color="red") +
+  labs(title = "Average pounds lost across 10000 samples",
+       subtitle = "red line represents the mean of all sample means", x = "average pounds lost in the sample") +
+  scale_x_continuous(limits = c(1, 5))
+
+
+```
+
+#### Calculate the number of samples that have a mean outside +/- 1.98 standard deviations from the mean
+```{r}
+
+me <- 1.984217*0.2002739 # margin of error
+lower <- 2.985371 - (1.984217*0.2002739) # lower bound of confidence limit
+upper <- 2.985371 + (1.984217*0.2002739) # upper bound of confidence limit
+me 
+lower 
+upper
+
+sample_means <- sample_means %>% 
+  mutate(out_range = ifelse(mean_lbslost < lower | mean_lbslost > upper, 1, 0))
+
+mean(sample_means$out_range)
+
+# add 95% confidence band to our histogram
+ggplot(sample_means, aes(x = mean_lbslost)) + 
+  geom_histogram(binwidth = .1) +
+  geom_vline(xintercept = mean(sample_means$mean_lbslost), lwd = 2, color="red") +
+  geom_vline(xintercept = lower, lwd = 2, color="blue") +
+  geom_vline(xintercept = upper, lwd = 2, color="blue") +
+  labs(title = "Average pounds lost across 10000 samples",
+       subtitle = "red line represents the mean of all sample means, blue line represents +/- 1.98 SEs from this mean",
+       x = "average pounds lost in the sample") +
+  scale_x_continuous(limits = c(1, 5))
+
+# remove these temporary quantities
+rm(me, lower, upper)
+
+
+#[1] 0.3973869
+#[1] 2.587984
+#[1] 3.382758
+#[1] 0.0475 <- Proportion of samples outside of our +/1 1.98 SEs
+```
+
+### Explore what happens when we change the sample size
+```{r}
+
+samp.size <- 25
+
+explore <- my_pop %>%
+  rep_sample_n(size = samp.size, reps = 10000, replace = TRUE) %>%
+  summarize(mean_lbslost = mean(p_lbslost), sd_lbslost = sd(p_lbslost))
+
+# print mean and standard deviation of average pounds lost
+mean(explore$mean_lbslost)
+sd(explore$mean_lbslost)
+
+ggplot(explore, aes(x = mean_lbslost)) + 
+  geom_histogram(binwidth = .1) +
+  labs(title = "Average pounds lost across 10000 samples") +
+  scale_x_continuous(limits = c(1, 5))
+
+```
+
+
+## Return to our sample -- recreate the histogram but add the standard error of the mean
+### Calculate the t-scores of the t-distribution that corresponds with the 2.5 and 97.5 percentiles given our df
+```{r}
+
+qt(c(.025, .975), df = 99)
+
+```
+
+### Calculate the 95% confidence interval 
+```{r}
+
+# calculate a store relevant quantitees
+mean <- mean(wtloss$lbslost) # mean in the sample
+sd <- sd(wtloss$lbslost) # standard deviation in the sample
+n <- length(wtloss$lbslost) # n of the sample
+
+se <- sd/sqrt(n) # standard error
+se
+
+me <- 1.984217*se # 95% confidence interval
+me
+
+lower <- mean - me # calculate lower bound for confidence interval
+upper <- mean + me # calculate upper bound for confidence interval
+lower 
+upper
+
+```
+
+
+### Add the standard errors to the histogram
+```{r}
+
+ggplot(wtloss, aes(x = lbslost)) +
+  geom_histogram(binwidth = .5, color = "grey") +
+  geom_vline(xintercept = mean, lwd = 2, color="red") +
+  geom_vline(xintercept = lower, lwd = 2, color="green") +
+  geom_vline(xintercept = upper, lwd = 2, color="green") +
+  labs(title = "Distribution of pounds lost for the 100 men in the study",
+       subtitle = "red line represents sample mean \ngreen lines represent +/- 1.98 standard errors from the mean",
+       x = "pounds lost") 
+
+# remove these temporary quantities
+rm(me, lower, upper)
+  
+```
+
+### Synthesize by calculating 95% CI for all 10,000 samples
+```{r}
+
+
+sample_means <- sample_means %>% 
+  select(replicate, mean_lbslost, sd_lbslost) %>% 
+  mutate(se = sd_lbslost/sqrt(99),
+         me = 1.984217*se,
+         lower = mean_lbslost - me,
+         upper = mean_lbslost + me,
+         not_in_ci = ifelse(2.985371 < lower | 2.985371 > upper, 1, 0))
+
+mean(sample_means$not_in_ci) #mean of individuals not in our 95% CI. Hey look it's .046 that's about 5%!!!
+
+```
+
+
+### Explore t-scores given alpha
+```{r}
+
+# t-scores needed for a 95% CI
+# score for a two-tailed test with alpha = .05, df = 99 (equivalent ways to write)
+qt(1-.05/2, df = 99)
+qt(c(.025, .975), df = 99)
+
+# t-scores needed for a 99% CI
+# t-score for a two-tailed test with alpha = .01, df = 99 (equivalent ways to write)
+qt(1-.01/2, df = 99)
+qt(c(.005, .995), df = 99)
+
+
+```
+
+### Calculate a 99% CI
+```{r}
+
+me <- 2.626405*se # 99% confidence interval
+me
+
+lower <- mean - me # calculate lower bound for confidence interval
+upper <- mean + me # calculate upper bound for confidence interval
+lower 
+upper
+
+# remove these temporary quantities
+rm(me, lower, upper)
+
+```
+
+
+
+# Hypothesis testing -- is the average pounds lost significantly different than 0?
+## Simulate a population where the mean pounds lost is 0 (null hypothesis)
+```{r}
+
+set.seed(94965)
+p_lbslost0 <- rnorm(n=50000, m=0, sd=2.00)
+my_pop0 <- data.frame(p_lbslost0)
+
+sample_means0 <- my_pop0 %>%
+  rep_sample_n(size = 100, reps = 10000, replace = TRUE) %>%
+  summarize(mean_lbslost0 = mean(p_lbslost0), sd_lbslost0 = sd(p_lbslost0))
+
+ggplot(sample_means0, aes(x = mean_lbslost0)) + 
+  geom_histogram(binwidth = .1) +
+  geom_vline(xintercept = mean(sample_means0$mean_lbslost0), lwd = 2, color="red") +
+  geom_vline(xintercept = mean(sample_means0$mean_lbslost0) + 1.984*sd(sample_means0$mean_lbslost0), lwd = 2, color="blue") +
+  geom_vline(xintercept = mean(sample_means0$mean_lbslost0) - 1.984*sd(sample_means0$mean_lbslost0), lwd = 2, color="blue") +
+  geom_vline(xintercept = mean(wtloss$lbslost), lwd = 2, color = "green") +
+  labs(title = "Average pounds lost across 10000 samples under the null hypothesis",
+       subtitle = "red line represents the mean of all sample means \nblue line represents +/- 1.984 SEs from this mean \ngreen line represents the observed pounds lost in our sample",
+       x = "average pounds lost in the sample") 
+
+
+```
+
+## What is the probability of obtaining our sample mean if the null hypothesis is true?
+```{r}
+
+2*(pt(14.6, 99, lower.tail = FALSE)) #we have to multiply this value by two BECAUSE we are doing a two-tailed test!!!!
+
+#99 = degrees of freedome 
+
+```
+
+
+## Perform a one-sample t-test
+```{r}
+# Calculate the critical value of t given alpha and df
+qt(1-.05/2, df = 99)
+qt(c(.025, .975), df = 99)
+
+# Conduct t-test
+t.test (wtloss$lbslost, mu=0, conf.level = .95)
+
+# Calculate the p-value
+2*(pt(14.601, df = 99, lower.tail =FALSE))
+
+
+#t* always equals the critical t in Kim's class!
+
+```
+
+

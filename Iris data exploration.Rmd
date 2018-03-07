@@ -1,0 +1,38 @@
+---
+title: "Iris data exploration"
+subtitle: Neil Yetz
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+#Load Packages
+```{r, message=FALSE}
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+#Important Data
+```{r, message=FALSE}
+#I am going to import the data into R
+
+iris_data <- read_csv("iris.csv")
+
+```
+
+#Summarize The Variables
+```{r}
+summary(iris_data)
+```
+
+#Creation of a variety of plots
+##Exploration of density plots
+###A simple plot
+```{r}
+ggplot(iris_data, aes(x=Petal.Width)) + geom_density()
+```

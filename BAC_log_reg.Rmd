@@ -1,0 +1,343 @@
+---
+title: "BAC Logistic Regression"
+output: html_notebook
+---
+ 
+##Load Libraries
+```{r}
+library(modelr)
+library(tidyverse)
+library(descriptr)
+#install.packages("margins")
+library(margins)
+install.packages("gmodels")
+library(gmodels)
+```
+
+##Import Data
+```{r}
+obs <- read_csv("bac_obs.csv")
+```
+
+
+```{r}
+male <- 7/10
+no_male <- 3/10
+
+female <- 3/10
+no_female <- 7/10
+
+odd_male <- 7/3
+odd_female <- 3/7
+
+OR_male <- odd_male/odd_female
+OR_female <- odd_female/odd_male
+
+```
+
+
+
+
+
+
+##Dichotomize two of the variables for demonstration purposes
+```{r}
+# Create dichotomized versions of bac (>.08 vs. <= .08) and
+# typ_drks (> average of 2 per day vs. <= average of 2 per day).
+obs <- mutate(obs,
+bac_over = ifelse(bac > .08, 1, 0),
+typ_hvy = ifelse(typ_drks > 60, 1, 0))
+```
+
+##2x2 Crosstab
+```{r}
+#ds_cross_table(obs$typ_hvy, obs$bac_over)
+CrossTable(obs$typ_hvy, obs$bac_over)
+```
+
+##Calculate proportions for BAC categories by typical drinking categories
+```{r}
+# calculate proportion of light drinkers and heavy drinkers who had a BAC at or under .08
+prop_light_under <- 90/161
+prop_heavy_under <- 3/39
+# calculate proportion of light drinkers and heavy drinkers who had a BAC over .08
+prop_light_over <- 71/161
+prop_heavy_over <- 36/39
+```
+
+##Risk Ratio
+```{r}
+RR = prop_heavy_over/prop_light_over
+RR
+```
+
+##Probability to Odds
+```{r}
+# calculate the odds of BAC being over .08 for heavy drinkers
+odds_heavy <- prop_heavy_over/prop_heavy_under
+odds_heavy
+# calculate the odds of BAC being over .08 for light drinkers
+odds_light <- prop_light_over/prop_light_under
+odds_light
+```
+
+##Transofmration of Probability to Odds
+```{r}
+trans_probodds <- tibble(prob = seq(0, 1, by = .05)) %>%
+mutate(odds = prob/(1-prob))
+```
+
+##Calcuate the Odds Ratio to Compare the Odds Across Two Groups
+```{r}
+# calculate the odds ratio
+OR <- odds_heavy/odds_light
+OR
+# reverse the numerator and denominator
+OR_rev <- odds_light/odds_heavy
+OR_rev
+```
+
+
+##Calculate the proportion of people at each level of alc_gm who had a BAC over .08
+```{r}
+avg_over_bygrams <- obs %>%
+group_by(alc_gm) %>%
+summarize(proportion_over = mean(bac_over)) %>%
+ungroup()
+```
+
+##Plot the mean BAC across levels of alc_gm
+```{r}
+ggplot(avg_over_bygrams, aes(y = proportion_over, x = alc_gm)) +
+geom_point() +
+labs(title = "Proportion of women with BAC over .08 by alcohol consumed",
+x = "Grams of alcohol consumed", y = "Proportion of women with BAC over.08")
+```
+
+#The Logistic Regression Model
+##Logistic Regression for a Continuous Predictor
+```{r}
+# first center alc_gm at the mean
+obs <- mutate(obs, alc_gm_m = alc_gm - mean(alc_gm))
+# fit the logistic regression model
+logreg0 <- glm(bac_over ~ alc_gm_m, data = obs, family=binomial("logit"))
+summary(logreg0)
+
+##INTERPRET THIS IN THE LOG OG THE ODDS! PREDICTED Y = LOG OF ODDS!
+```
+
+
+##Significance Test
+```{r}
+confint(logreg0, level = .95)
+```
+
+
+##Transform Log Odds Coefficients Back to Odds
+###Odds Ratio
+```{r}
+exp(coef(logreg0))
+```
+
+
+###Transform log odds coef to percent change
+```{r}
+# function to interpret regression slope for ln transformed y, original x
+ln.y <- function(slope, x_chg) {
+new_slope <- 100 * (exp(slope * x_chg)-1)
+return(new_slope)
+}
+ln.y(slope = .44883, x_chg = 1)
+```
+
+
+
+###95% Confidence Intervals for Exponentiated Coefficients
+```{r}
+exp(cbind(OR = coef(logreg0), confint(logreg0)))
+```
+
+##Obtain Predicted Values Based on Model Estimates
+```{r}
+# predicted value when alc_gm is at the mean (alc_gm_m = 0)
+logodds <- 0.44099 + (0.44883*0)
+odds <- exp(logodds)
+prob <- odds/(1+odds)
+logodds
+odds
+prob
+```
+
+##Get predicted values using code
+```{r}
+pred_grid0 <- tibble(alc_gm_m = 0) %>%
+add_predictions(logreg0) %>%
+mutate(odds = exp(pred),
+predprob = (odds/(1+odds)))
+pred_grid0
+```
+
+##Plot of the Fitted Model
+```{r}
+pred_grid0 <- data_grid(obs, alc_gm_m = seq_range(alc_gm_m, 10)) %>%
+add_predictions(logreg0) %>%
+mutate(odds = exp(pred),
+predprob = (odds/(1+odds)),
+alc_gm = alc_gm_m + mean(obs$alc_gm))
+```
+
+##Plot in the metric of log odds
+```{r}
+ggplot(pred_grid0, aes(x = alc_gm, y = pred)) +
+geom_line(size = 1) +
+labs(title = "Model fitted log odds of BAC > .08 as function of grams of alcohol consumed",
+x = "Grams of Alcohol Consumed", y = "Log odds of BAC > .08")
+```
+
+
+##Plot in the mdetric of odds
+```{r}
+ggplot(pred_grid0, aes(x = alc_gm, y = odds)) +
+geom_line(size = 1) +
+labs(title = "Model fitted odds of BAC > .08 as function of grams of alcohol consumed",
+x = "Grams of Alcohol Consumed", y = "Odds of BAC > .08")
+```
+
+
+##Plot in Metric of Probability
+```{r}
+ggplot(pred_grid0, aes(x = alc_gm, y = predprob)) +
+geom_line(size = 1) +
+labs(title = "Model fitted probabilities of BAC > .08 as function of grams of alcohol consumed",
+x = "Grams of Alcohol Consumed", y = "Probability of BAC > .08")
+```
+
+##Fit a logistic regression model to 2x2 example
+```{r}
+logreg1 <- glm(bac_over ~ typ_hvy, data = obs, family=binomial("logit") )
+summary(logreg1)
+exp(cbind(OR = coef(logreg1), confint(logreg1)))
+```
+
+##Obtain log odds, odds, and probability
+```{r}
+pred_grid1 <- data_grid(obs, typ_hvy) %>%
+add_predictions(logreg1) %>%
+mutate(odds = exp(pred),
+predprob = (odds/(1+odds)))
+```
+
+
+##Add additional predictor to our 2x2 example
+```{r}
+# center alcexp at the mean
+obs <- mutate(obs, alcexp_m = alcexp - mean(alcexp))
+#fit the regression model
+logreg2 <- glm(bac_over ~ typ_hvy + alcexp_m, data = obs, family=binomial("logit"))
+summary(logreg2)
+exp(cbind(OR = coef(logreg2), confint(logreg2)))
+```
+
+
+##Predicted Scores and Plots
+```{r}
+pred_grid2 <- data_grid(obs, typ_hvy, alcexp_m = seq_range(alcexp_m, 10)) %>%
+add_predictions(logreg2) %>%
+mutate(odds = exp(pred),
+predprob = (odds/(1+odds)),
+typ_hvy = factor(typ_hvy, levels = c(0,1), labels = c("light drinker", "heavy drinker")),
+alcexp = alcexp_m + mean(obs$alcexp))
+```
+
+##Plot the Results
+```{r}
+ggplot(pred_grid2, aes(x = alcexp, y = pred, group = factor(typ_hvy), colour = typ_hvy)) +
+geom_line(size = 1) +
+guides(color=guide_legend("Type of Typical Drinking")) +
+labs(title = "Model fitted log odds as function of alcohol expectancies and typical drinking",
+x = "Alcohol Expectancies", y = "Log odds of BAC > .08")
+```
+
+##Make a Plot of th emodel results - odds
+```{r}
+ggplot(pred_grid2, aes(x = alcexp, y = odds, group = factor(typ_hvy), colour = typ_hvy)) +
+geom_line(size = 1) +
+guides(color=guide_legend("Type of Typical Drinking")) +
+labs(title = "Model fitted odds as function of alcohol expectancies and typical drinking",
+x = "Alcohol Expectancies", y = "Odds of BAC > .08")
+```
+
+##Make a plot of the results - the probability
+```{r}
+ggplot(pred_grid2, aes(x = alcexp, y = predprob, group = factor(typ_hvy), colour = typ_hvy)) +
+geom_line(size = 1) +
+guides(color=guide_legend("Type of Typical Drinking")) +
+labs(title = "Model fitted probabilities as function of alcohol expectancies and typical drinking",
+x = "Alcohol Expectancies", y = "Predicted probability of BAC > .08")
+```
+
+##Obtain the Marginal effect, choose values of x
+```{r}
+# make typ_hvy a factor
+obs <- mutate(obs, typ_hvy.f = factor(typ_hvy, levels = c(0,1), labels = c("light", "heavy")))
+# fit model to feed to margins (don’t center any variables)
+demo_margins <- glm(bac_over ~ typ_hvy.f + alcexp, data=obs, family=binomial("logit"))
+# marginal effects at chosen levels of the covariates
+pick <- margins(demo_margins, at = list(typ_hvy.f = c("light", "heavy"), alcexp = c(2:6)))
+summary(pick)
+```
+
+##Average marginal effects
+```{r}
+ame <- margins(demo_margins)
+summary(ame)
+```
+
+#Interactions in Logistic 
+##Fit logistic regression model with interaction
+```{r}
+# center the predictors
+obs <- mutate(obs,
+typ_drks_m = typ_drks - mean(typ_drks),
+pmood_m = pmood - mean(pmood),
+weight_m = weight - mean(weight),
+absorb_m = absorb - mean(absorb))
+# fit the model
+logint <- glm(bac_over ~ typ_drks_m + pmood_m + typ_drks_m*pmood_m + weight_m + absorb_m, data = obs,
+family = binomial("logit"))
+summary(logint)
+# get OR and CIs
+exp(cbind(OR = coef(logint), confint(logint)))
+```
+
+##Plot the Model Results
+```{r}
+sd(obs$pmood)
+pred_grid_int <- data_grid(obs,
+typ_drks_m = seq_range(typ_drks_m, 10),
+pmood_m = c(-1.396973, 0, 1.396973),
+weight_m = 0,
+absorb_m = 0) %>%
+add_predictions(logint) %>%
+mutate(odds = exp(pred),
+predprob = (odds/(1+odds)),
+typ_drks = typ_drks_m + mean(obs$typ_drks),
+pmood.f = factor(pmood_m, levels = c(-1.396973, 0, 1.396973),
+labels = c("low partying mood", "average partying mood", "high partying mood")))
+```
+
+##Plot the model in terms of log odds
+```{r}
+ggplot(pred_grid_int, aes(x = typ_drks, y = pred, group = pmood.f, colour = pmood.f)) +
+geom_line(size = 1) +
+guides(color=guide_legend("Degree of Partying Mood")) +
+labs(title = "Model fitted log odds as function of typical drinking and partying mood",
+subtitle = "Weight and absorption are held constant at the mean",
+x = "Typical Drinking", y = "Log odds of BAC > .08")
+```
+
+
+
+
+
+#Intro to Additive Interactions in Logistic Regression

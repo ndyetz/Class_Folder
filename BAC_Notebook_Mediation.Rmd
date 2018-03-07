@@ -1,0 +1,118 @@
+---
+title: "BAC_Notebook_Mediation"
+output: html_notebook
+---
+
+
+#Load Libraries
+```{r}
+#install.packages("tidyverse")
+#install.packages("olsrr")
+#install.packages("modelr")
+#install.packages("huxtable")
+#install.packages("GGally")
+#install.packages("car")
+#install.packages("RMediation")
+
+
+library(tidyverse)
+library(olsrr)
+library(modelr)
+library(huxtable)
+library(GGally)
+library(car)
+library(RMediation)
+library(boot)
+
+```
+
+#Read in dataset
+```{r}
+obs <- read_csv("bac_obs.csv")
+```
+
+#Pic depicting model
+
+
+#Test simple mediation model
+##Model 1: regress y on x
+```{r}
+model.xy <- lm(alc_gm ~ typ_drks, data=obs)
+ols_regress(model.xy)
+```
+
+##Model 2: regress m on x
+```{r}
+model.xm <- lm(alcexp ~ typ_drks , data=obs)
+ols_regress(model.xm)
+
+```
+##Model 3: regress y on x on m
+```{r}
+model.xmy <- lm(alc_gm ~ typ_drks + alcexp, data=obs)
+ols_regress(model.xmy)
+
+```
+
+
+```{r}
+path.a <- coefficients(model.xm)["typ_drks"]
+path.b <- coefficients(model.xmy)["alcexp"]
+se.path.a<-sqrt(vcov(model.xm)["typ_drks", "typ_drks"])
+se.path.b<-sqrt(vcov(model.xmy)["alcexp", "alcexp"])
+
+path.a
+se.path.a
+
+path.b
+se.path.b # this is equivalant to the parameter standerd erro for sleep in model.xmy. in other words... path b
+```
+
+
+##Use RMediation to calculate the CI for the indirect effect.
+```{r}
+medci(path.a, path.b, se.path.a, se.path.b, alpha = 0.05, plot = TRUE, plotCI = TRUE)
+```
+
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xm <- lm(alcexp ~ typ_drks , data=data)
+model.xmy <- lm(alc_gm ~ typ_drks + alcexp, data=data)
+
+path.a <- coefficients(model.xm)["typ_drks"] #the a-path coefficient
+path.b <- coefficients(model.xmy)["alcexp"] #the b-path coefficient
+ab <- path.a*path.b #returns the product of a*b
+return(ab)
+}
+
+medboot<-boot(data=obs, statistic = boot.med, R = 300)
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+plot(medboot)
+```
+
+
+
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xm <- lm(alcexp ~ typ_drks , data=data)
+model.xmy <- lm(alc_gm ~ typ_drks + alcexp, data=data)
+
+path.a <- coefficients(model.xm)["typ_drks"] #the a-path coefficient
+path.b <- coefficients(model.xmy)["alcexp"] #the b-path coefficient
+ab <- path.a*path.b #returns the product of a*b
+return(ab)
+}
+
+medboot<-boot(data=obs, statistic = boot.med, R = 15000)
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+plot(medboot)
+
+```
+
+
+
+

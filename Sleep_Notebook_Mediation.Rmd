@@ -1,0 +1,408 @@
+---
+title: "Sleep Notebook mediation Notebook"
+output: html_notebook
+---
+
+```{r}
+
+#install.packages("tidyverse")
+#install.packages("olsrr")
+#install.packages("modelr")
+#install.packages("huxtable")
+#install.packages("GGally")
+#install.packages("car")
+#install.packages("RMediation")
+
+
+library(tidyverse)
+library(olsrr)
+library(modelr)
+library(huxtable)
+library(GGally)
+library(car)
+library(RMediation)
+library(boot)
+
+
+```
+
+```{r}
+slp <- read_csv("slpdata.csv")
+```
+
+```{r}
+
+slp <- mutate(slp,
+female = ifelse(sex == 1, 0, 1),
+female.f = factor(female, levels = c(0,1), labels = c("male", "female")),
+cond2 = ifelse(cond == 2, 1, 0),
+cond3 = ifelse(cond == 3, 1, 0),
+cond.f = factor(cond, levels = c(1,2,3), labels = c("self help", "group-based", "group + partner")))
+
+# subset to keep males only
+slp_males <- filter(slp, female == 0)
+
+# subset to keep females only
+slp_females <- filter(slp, female == 1)
+
+```
+
+#Fit a simple mediation mdel
+##model.xy
+
+```{r}
+model.xy <- lm(lifesat ~ hygiene, data=slp_males)
+ols_regress(model.xy)
+```
+
+
+##model.xm
+
+```{r}
+model.xm <- lm(sleep ~ hygiene , data=slp_males)
+ols_regress(model.xm)
+```
+
+###x.m interpretation
+
+This is testing our "a" path. This needs to be significant in order for us to be able to imply mediation. 
+
+```{r}
+model.xmy <- lm(lifesat ~ sleep + hygiene, data=slp_males)
+ols_regress(model.xmy)
+```
+
+
+
+## Look at components of the lm object
+```{r}
+coefficients(model.xm)
+coefficients(model.xmy) #The print out the betas (and intercept) from our model that we specified
+vcov(model.xm) #prints out the covariance matrix. Remember th diagnols = variance!!
+vcov(model.xmy)
+```
+
+## Pull out and name certain componenst
+
+```{r}
+
+path.a <- coefficients(model.xm)["hygiene"]
+path.b <- coefficients(model.xmy)["sleep"]
+se.path.a<-sqrt(vcov(model.xm)["hygiene","hygiene"])
+se.path.b<-sqrt(vcov(model.xmy)["sleep","sleep"])
+
+path.b
+se.path.b # this is equivalant to the parameter standerd erro for sleep in model.xmy. in other words... path b
+
+```
+
+
+## Calculate Indirect effects
+
+```{r}
+ab <- path.a*path.b
+ab
+```
+
+
+
+## Calculate the confidence interval via PRODCLIN
+
+```{r}
+medci(path.a, path.b, se.path.a, se.path.b, alpha = 0.05, plot = TRUE, plotCI = TRUE)
+```
+
+##Calculate the confidence intyerval via bootstrap
+
+We bootstrap this because the sampling ditribution of a*b is NOT normal. Therefore. we bootstrap in order 
+
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xm <- lm(sleep ~ hygiene , data=data)
+model.xmy <- lm(lifesat ~ sleep + hygiene, data=data)
+
+path.a <- coefficients(model.xm)["hygiene"] #the a-path coefficient
+path.b <- coefficients(model.xmy)["sleep"] #the b-path coefficient
+ab <- path.a*path.b #returns the product of a*b
+return(ab)
+}
+
+medboot<-boot(data=slp_males, statistic = boot.med, R = 10000)
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+plot(medboot)
+
+```
+
+#Advanced example (dummy coded antecedent)
+
+##model.xy
+```{r}
+
+model.xy <- lm(sleep ~ cond2 + cond3 + anxiety, data=slp_females)
+ols_regress(model.xy)
+```
+
+
+##model.xm
+
+
+```{r}
+model.xm <- lm(hygiene ~ cond2 + cond3 + anxiety , data=slp_females)
+ols_regress(model.xm)
+```
+
+##model.xmy
+```{r}
+model.xmy <- lm(sleep ~ cond2 + cond3 + anxiety + hygiene, data=slp_females)
+ols_regress(model.xmy)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Calculate the indirect effects
+
+```{r}
+# Pull out coefficients and standard errors for a and b paths
+path.a_cond2 <- coefficients(model.xm)["cond2"]
+path.a_cond3 <- coefficients(model.xm)["cond3"]
+path.b <- coefficients(model.xmy)["hygiene"]
+se.path.a_cond2<-sqrt(vcov(model.xm)["cond2","cond2"])
+se.path.a_cond3<-sqrt(vcov(model.xm)["cond3","cond3"])
+se.path.b<-sqrt(vcov(model.xmy)["hygiene","hygiene"])
+# Compute indirect effects
+ab_cond2 <- path.a_cond2*path.b
+ab_cond3 <- path.a_cond3*path.b
+ab_cond2
+ab_cond3
+```
+
+
+
+
+
+
+##Bootstrap the CIs
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+
+model.xm <- lm(hygiene ~ cond2 + cond3 + anxiety , data=data)
+model.xmy <- lm(sleep ~ cond2 + cond3 + anxiety + hygiene, data=data)
+path.a_cond2 <- coefficients(model.xm)["cond2"]
+path.a_cond3 <- coefficients(model.xm)["cond3"]
+path.b <- coefficients(model.xmy)["hygiene"]
+ab_cond2 <- path.a_cond2*path.b
+ab_cond3 <- path.a_cond3*path.b
+return(c(ab_cond2, ab_cond3))
+}
+
+medboot<-boot(data=slp_females, statistic = boot.med, R=10000)
+medconfint1 <- boot.ci(medboot, index=1, conf=(.95), type=c("bca"))
+medconfint2 <- boot.ci(medboot, index=2, conf=(.95), type=c("bca"))
+print (medconfint1)
+print (medconfint2)
+```
+
+
+```{r}
+plot(medboot, index = 1)
+plot(medboot, index = 2)
+```
+
+
+
+
+
+
+
+
+#Advanced example 2: Mediation With Multiple Mediators
+##Subset the data
+```{r}
+slp_females_cond3 <- filter(slp_females, cond2 != 1)
+```
+
+
+##medel.xy
+```{r}
+model.xy <- lm(sleep ~ cond3, data = slp_females_cond3)
+ols_regress(model.xy)
+```
+
+
+
+##model.xm1-for social support
+```{r}
+model.xm1 <- lm(support ~ cond3, data = slp_females_cond3)
+ols_regress(model.xm1)
+```
+
+
+##model.xm2-for hygiene
+
+```{r}
+model.xm2 <- lm(hygiene ~ cond3, data = slp_females_cond3)
+ols_regress(model.xm2)
+```
+##model.xmy
+```{r}
+model.xmy <- lm(sleep ~ cond3 + support + hygiene, data = slp_females_cond3)
+ols_regress(model.xmy)
+```
+
+
+
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xy <- lm(sleep ~ cond3, data=data) #model.xy isn't really needed. accidently put in, but it doesn't really hurt.
+model.xm1 <- lm(support ~ cond3, data=data)
+model.xm2 <- lm(hygiene ~ cond3, data=data)
+model.xmy <- lm(sleep ~ cond3 + support + hygiene, data=data)
+
+path.a1 <- coefficients(model.xm1)["cond3"]
+path.b1 <- coefficients(model.xmy)["support"]
+path.a2 <- coefficients(model.xm2)["cond3"]
+path.b2 <- coefficients(model.xmy)["hygiene"]
+
+a1b1 <- path.a1*path.b1
+a2b2 <- path.a2*path.b2
+sumind <- a1b1+a2b2
+return(c(a1b1,a2b2,sumind))
+}
+
+medboot<-boot(data = slp_females_cond3, statistic = boot.med, R=10000)
+medconfint1 <- boot.ci(medboot, index=1, conf=(.95), type=c("bca"))
+medconfint2 <- boot.ci(medboot, index=2, conf=(.95), type=c("bca"))
+medconfint3 <- boot.ci(medboot, index=3, conf=(.95), type=c("bca"))
+
+print(medconfint1)
+print(medconfint2)
+print(medconfint3)
+```
+
+
+
+```{r}
+
+plot(medboot, index = 1)
+plot(medboot, index = 2)
+plot(medboot, index = 3)
+
+```
+
+
+##model.xy
+```{r}
+model.xy <- lm(lifesat ~ cond3, data = slp_females_cond3)
+ols_regress(model.xy)
+```
+
+```{r}
+model.xms1 <- lm(hygiene ~ cond3, data = slp_females_cond3)
+ols_regress(model.xms1)
+```
+
+```{r}
+model.xms2 <- lm(sleep ~ cond3 + hygiene, data = slp_females_cond3)
+ols_regress(model.xms2)
+```
+
+
+
+```{r}
+model.xmy <- lm(lifesat ~ cond3 + hygiene + sleep, data = slp_females_cond3)
+ols_regress(model.xmy)
+```
+
+##Calculate the indirect effects
+```{r}
+path.a1 <- coefficients(model.xms1)["cond3"]
+path.b1 <- coefficients(model.xmy)["hygiene"]
+path.a2 <- coefficients(model.xms2)["cond3"]
+path.b2 <- coefficients(model.xmy)["sleep"]
+path.s <- coefficients(model.xms2)["hygiene"]
+a1b1 <- path.a1*path.b1
+a2b2 <- path.a2*path.b2
+a1sb2 <- path.a1*path.s*path.b2
+sumind <- a1b1+a2b2+a1sb2
+a1b1
+a2b2
+a1sb2
+sumind
+
+```
+
+```{r}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xms1 <- lm(hygiene ~ cond3, data=data)
+model.xms2 <- lm(sleep ~ cond3 + hygiene, data=data)
+model.xmy <- lm(lifesat ~ cond3 + hygiene + sleep, data=data)
+path.a1 <- coefficients(model.xms1)["cond3"]
+path.b1 <- coefficients(model.xmy)["hygiene"]
+path.a2 <- coefficients(model.xms2)["cond3"]
+path.b2 <- coefficients(model.xmy)["sleep"]
+path.s <- coefficients(model.xms2)["hygiene"]
+# Calculate indirect effect
+a1b1 <- path.a1*path.b1
+a2b2 <- path.a2*path.b2
+a1sb2 <- path.a1*path.s*path.b2
+sumind <- a1b1+a2b2+a1sb2
+return(c(a1b1,a2b2,a1sb2,sumind))
+}
+medboot<-boot(data = slp_females_cond3, statistic = boot.med, R=10000)
+medconfint1 <- boot.ci(medboot, index=1, conf=(.95), type=c("bca"))
+medconfint2 <- boot.ci(medboot, index=2, conf=(.95), type=c("bca"))
+medconfint3 <- boot.ci(medboot, index=3, conf=(.95), type=c("bca"))
+medconfint4 <- boot.ci(medboot, index=4, conf=(.95), type=c("bca"))
+print(medconfint1)
+print(medconfint2)
+print(medconfint3)
+print(medconfint4)
+```
+
+#Advanced example 4 (moderated)
+```{r}
+slp_cond3 <- filter(slp, cond2 != 1)
+```
+
+
+```{r}
+model.xy <- lm(sleep ~ cond3 + female + cond3*female, data = slp_cond3)
+ols_regress(model.xy)
+linearHypothesis(model.xy, "cond3 + cond3:female")
+```
+
+```{r}
+model.xm <- lm(support ~ cond3 + female + cond3*female, data = slp_cond3)
+ols_regress(model.xm)
+linearHypothesis(model.xm, "cond3 + cond3:female")
+```
+
+```{r}
+model.xmy <- lm(sleep ~ cond3 + support + female + cond3*female + support*female, data = slp_cond3)
+ols_regress(model.xmy)
+linearHypothesis(model.xmy, "cond3 + cond3:female")
+linearHypothesis(model.xmy, "support + support:female")
+```
+
+
+
+
+
+

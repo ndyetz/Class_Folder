@@ -1,0 +1,367 @@
+---
+title: "R Notebook to Replicate Blaire et al. 2004 Psych Science"
+output: html_notebook
+---
+
+
+
+
+```{r}
+
+#
+#install.packages("tidyverse")
+#install.packages("olsrr")
+#install.packages("GGally")
+#install.packages("psych")
+#install.packages("lmtest")
+#install.packages("car")
+#install.packages("broom")
+#install.packages("boot")
+#install.packages("modelr")
+#install.packages("psych")
+#
+library(tidyverse)
+library(olsrr)
+library(GGally)
+library(psych)
+library(lmtest)
+library(car)
+library(broom)
+library(boot)
+library(modelr)
+library(car)
+
+```
+
+
+
+
+
+
+
+```{r}
+sentence <- read_csv("sentence.csv")
+```
+
+#Plot severity f crime and sentence length 
+```{r}
+scatterplot <- ggpairs(sentence, columns = c("primlev", "years"),
+    upper = list(continuous = wrap("cor", size = 3)),
+    title = "Bivariate relationship of sentence length and severity of crime" )
+print(scatterplot, progress = FALSE)
+ 
+```
+
+#Format the variables
+```{r}
+sentence <- mutate(sentence,
+                   lnyears = log(years),
+                   primlev0 = primlev - 1,
+                   primlev02 = primlev0^2)
+```
+
+#Plot severity of crime and lof of sentence length
+```{r}
+
+scatterplot <- ggpairs(sentence, columns = c("primlev", "lnyears"),
+    upper = list(continuous = wrap("cor", size = 3)),
+    title = "Bivariate relationship of lnyears and severity of crime" )
+print(scatterplot, progress = FALSE)
+
+```
+
+# Create a plot of primlev0 and lnyears with loess smooth
+```{r}
+ggplot(data = sentence, aes(x = primlev0, y = lnyears)) + 
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE) + 
+  labs(title = "Bivariate plot with loess smooth")
+```
+
+# Create a plot of primlev0 and lnyears with loess smooth
+```{r}
+ggplot(data = sentence, aes(x = primlev0, y = lnyears)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(title = "Bivariate plot with a straight line")
+```
+
+```{r}
+ggplot(data = sentence, aes(x = primlev0, y = lnyears)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ poly(x,2)) + 
+  labs(title = "Bivariate plot with a straight line")
+```
+
+#Explore models for primlev0 and lnyears
+## Estimate a linear model
+
+```{r}
+exp_lin <- lm(data = sentence, lnyears ~ primlev0)
+ols_regress(exp_lin)
+```
+
+
+```{r}
+exp_quad <- lm(data = sentence, lnyears ~ primlev0 + primlev02)
+ols_regress(exp_quad)
+```
+
+
+###Interpret Quadratic model 
+###Calculate the changing slope of primlev0
+```{r}
+
+slp_primlev0_3 <-  exp_quad$coefficients["primlev0"] + (2*exp_quad$coefficients["primlev02"]*3)
+slp_primlev0_6 <-  exp_quad$coefficients["primlev0"] + (2*exp_quad$coefficients["primlev02"]*6)
+slp_primlev0_9 <-  exp_quad$coefficients["primlev0"] + (2*exp_quad$coefficients["primlev02"]*9)
+
+
+
+slp_primlev0_3
+slp_primlev0_6
+slp_primlev0_9
+
+```
+
+
+####INterpret regression slopes in terms of percent change in years
+```{r}
+ln.y <- function(slope, x_chg) {
+  new_slope <- 100 * (exp(slope * x_chg) -1)
+  return(new_slope)
+}
+
+
+ln.y(slope = slp_primlev0_3, x_chg = 1)
+ln.y(slope = slp_primlev0_6, x_chg = 1)
+ln.y(slope = slp_primlev0_9, x_chg = 1)
+
+```
+
+
+#### Calculate the predicted lenght of sentence in lnyears and in years
+```{r}
+predgrid <- tibble(primlev0 = c(3,6,9), primlev02 = primlev0*primlev0) %>% 
+  add_predictions(exp_quad) %>% 
+  mutate(pred_years = exp(pred))
+
+predgrid
+
+
+
+```
+
+####Plot the model fitted  relationship
+
+```{r}
+
+```
+
+
+
+```{r}
+sentence <- mutate(sentence, black.f = factor(black, levels = c(0,1), labels = c("White", "Black")))
+```
+
+```{r}
+describe(sentence)
+scatterplot <- ggpairs(sentence, columns = c("years", "afro", "primlev", "nsecond", "seclev","nprior", "priorlev", "black.f"),
+mapping=ggplot2::aes(colour = black.f),
+upper = list(continuous = wrap("cor", size=3)),
+title = "Bivariate Relationship of Key Variables (original variables)")
+print(scatterplot, progress=FALSE )
+```
+
+```{r}
+
+sentence <- mutate(sentence,
+lnyears = log(years),
+primlev0 = primlev - 1,
+primlev02 = primlev0^2,
+seclev2 = seclev^2,
+priorlev2 = priorlev^2,
+afro_m = afro - mean(afro),
+babyface_m = babyface - mean(babyface),
+attract_m = attract - mean(attract))
+
+```
+
+
+```{r}
+mod1 <- lm(data=sentence, lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2)
+ols_regress(mod1)
+```
+
+
+```{r}
+mod2 <- lm(data=sentence, lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2 + black)
+ols_regress(mod2)
+```
+
+
+
+```{r}
+mod3 <- lm(data=sentence, lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2 + black + afro_m)
+ols_regress(mod3)
+```
+
+
+
+```{r}
+mod4 <- lm(data=sentence, lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2 + black + afro_m + babyface_m + attract_m)
+ols_regress(mod4)
+```
+
+```{r}
+fit_sentence <- augment(mod3, data=sentence)
+```
+##Check linearity and aditivity
+###Plot residuals against each predictor and Y-hat
+```{r}
+residualPlots(mod3, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue", layout = c(1,1)) #ask = false is required as long as you are in notebook. it works in a normal r-script though, labels.id = names(id) [id is the name of the id variable] this is pointing out offencing cases.. potential 
+```
+
+###Components plus residual plots
+
+```{r}
+#Note, yuo will get an error on the "nsecond" will give us some errors
+
+crPlots(mod3, ask = FALSE, terms = "primlev0")
+crPlots(mod3, ask = FALSE, span = 1, terms = "primlev02")
+crPlots(mod3, ask = FALSE, terms = "nsecond")
+crPlots(mod3, ask = FALSE, terms = "seclev")
+crPlots(mod3, ask = FALSE, span = 1, terms = "seclev2")
+crPlots(mod3, ask = FALSE, span = 1, terms = "nprior")
+crPlots(mod3, ask = FALSE, span = 1, terms = "priorlev")
+crPlots(mod3, ask = FALSE, span = 1, terms = "priorlev2")
+crPlots(mod3, ask = FALSE, terms = "afro_m")
+```
+
+
+###Check homoscedacity
+
+```{r}
+ncvTest(mod3)n
+
+#P<0.05 = you're likely violating the homegeneity of variance assumption. Your resiuduals are heteroscedatic
+```
+
+### Use a heteroskedacity consistent covariance matrix to compute standard errors
+```{r}
+mod3_hccm <- hccm(mod3)
+coeftest(mod3, vcov=mod3_hccm)
+```
+
+
+```{r}
+ggplot(data = fit_sentence, aes(x = .std.resid)) +
+geom_density() +
+stat_function(fun = dnorm,
+lwd = 2,
+col = "red") +
+labs (title = "Density plot of standardized residuals against standard normal distribution (red)")
+```
+```{r}
+qqPlot(mod3, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue")
+```
+
+
+```{r}
+shapiro.test(fit_sentence$.resid)
+#P<0.05 = problem
+```
+
+### Bootstrap Model 3
+
+```{r}
+bs <- function(formula, data, indices){
+d <- data[indices,]
+regmodel <- lm(formula, data = d)
+return(coef(regmodel))
+}
+
+results <- boot(data=sentence, statistic = bs,
+R = 5000, formula = lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2 + black + afro_m)
+
+# get bootstrap confidence intervals for each estimate
+boot.ci(results, type="bca", index=1) # intercept
+boot.ci(results, type="bca", index=2) # primlev0
+boot.ci(results, type="bca", index=3) # primlev02
+boot.ci(results, type="bca", index=4) # nsecond
+boot.ci(results, type="bca", index=5) # seclev
+boot.ci(results, type="bca", index=6) # seclev2
+boot.ci(results, type="bca", index=7) # nprior
+boot.ci(results, type="bca", index=8) # priorlev
+boot.ci(results, type="bca", index=9) # priorlev2
+boot.ci(results, type="bca", index=10) # black
+boot.ci(results, type="bca", index=11) # afro_m
+```
+
+
+
+## Unusual cases
+### qqplot - identify cases with large studentized residuals
+```{r}
+# qqplot -identify cases with large studentized residuals
+qqPlot(mod3, id.n=3, main="Distribution of Studentized Residuals")
+# outlier test
+outlierTest(mod3)
+```
+
+
+
+
+
+### index plot for high leverage
+
+```{r}
+infIndexPlot(mod3, ask = FALSE, vars=c("hat"), id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue")
+```
+
+
+###index plot for Cook's distance
+
+```{r}
+infIndexPlot(mod3, ask = FALSE, vars=c("Cook"), id.n = 2, labels.id = names(id), id.cex= 1.25, id.col = "blue")
+```
+
+##Dfbetas score
+```{r}
+dfbetasPlots(mod3, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue", layout = c(4,3))
+```
+
+
+```{r}
+avPlots(mod3, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue", layout = c(4,3))
+```
+
+```{r}
+influencePlot(mod3, ask = FALSE, labels.id = names(id), id.cex= 1.25, id.method = "noteworthy", id.col = "blue")
+```
+
+```{r}
+sentence_drop <- filter(sentence, id != 204)
+mod3_drop <- lm(data=sentence_drop, lnyears ~ primlev0 + primlev02 + nsecond + seclev + seclev2 + nprior + priorlev + priorlev2 + black + afro_m)
+ols_regress(mod3_drop)
+```
+##Assess multicollinearity
+### Calculate Variance inflation factors
+```{r}
+vif(mod3)
+```
+
+### Center polynomial terms at the mean and refit model 3
+```{r}
+sentence_cen <- mutate(sentence,
+primlevm = primlev - mean(primlev),
+primlevm2 = primlevm^2,
+seclevm = seclev - mean(seclev),
+seclevm2 = seclevm^2,
+priorlevm = priorlev - mean(priorlev),
+priorlevm2 = priorlevm^2)
+mod3_cen <- lm(data=sentence_cen, lnyears ~ primlevm + primlevm2 + nsecond + seclevm + seclevm2 + nprior + priorlevm + priorlevm2 + black + afro_m)
+ols_regress(mod3_cen)
+vif(mod3_cen)
+```
+

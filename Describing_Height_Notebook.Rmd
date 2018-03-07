@@ -1,0 +1,244 @@
+---
+title: "R Notebook for Heights of Men and Women in the US"
+output:
+  pdf_document:
+    toc: yes
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+---
+In this notebook we will learn aboput descriptive statistics and related topics using data from the National Health and Nutrition Examination Study collected during 2011-2012. These data are collected by the CDC. The 5,000 individuals in the dataframe used here are resampled from the larger NHANES study population to mimic a simple random sample, so it is representative of the total US
+
+#install and load libraries
+```{r, message=FALSE}
+
+rm(list=ls(all=TRUE))
+
+#install.packages("tidyverse")
+library(tidyverse)
+
+#install.packages("descriptr")
+library(descriptr)
+
+#install.packages("mosaic")
+library(mosaic)
+
+```
+
+#Import the data
+```{r, message=FALSE}
+nhanes <- read_csv("nhanes.csv")
+```
+
+```{r}
+
+height <- nhanes %>%
+  filter(Age >= 20) %>%
+  mutate(ht_inches = Height/2.54, 
+         sex = factor(Gender)) %>% #making sex a factor variable and making it a categorical factor variable
+  select(ht_inches, sex) %>%
+  na.omit()
+
+#na.omit = removes all rows with missing data 
+
+```
+
+
+#Make a desnity plot of height, group by sex
+```{r}
+
+ggplot(height, aes(x=ht_inches, group=sex, fill=sex)) +
+  geom_density(alpha=0.75) #"alpha=" changes the transparency
+
+```
+
+
+#Full numeric summary of ht_inches (descriptr package)
+```{r}
+summary_stats(height$ht_inches)
+```
+
+
+##Description of the numeric summaries
+###Central Tendancy 
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\cen_ten.PNG)
+
+
+###Dispersion
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\dispersion.PNG)
+
+
+###Normal distribution explanation
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\norm_dist.PNG)
+
+
+###Emperical Rule
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\emp_rule.PNG)
+
+
+#Full numeric summary of ht_inches by sex
+```{r}
+group_summary(height$ht_inches, fvar = height$sex)
+```
+
+
+#Generate and explore a normal distribution
+```{r}
+set.seed(12345) #you NEED this in order for us to create the same result everytime
+
+myvar <- rnorm(n=10000, m=0, sd=1) #rnorm = function will generate data under normal distribution n= generate 10000 cases, m=mean=0, sd=1, set standard deviation of 1
+example <- data.frame(myvar) #turning the 
+
+#Plot the distribution of the example dataframe we created
+ggplot(example, aes(x = myvar)) +
+  geom_histogram(binwidth = .1)
+
+example <- example %>%
+mutate(within1 = ifelse(myvar <= 1 & myvar >= -1, 1, 0), #we're creating a new variable that is testing if it was within +1 or -1 
+  within2 = ifelse(myvar <= 2 & myvar >= -2, 1, 0), #we're creating a new variable that is testing if it was within +2 or -2 
+  within3 = ifelse(myvar <= 3 & myvar >= -3, 1, 0)) #we're creating a new variable that is testing if it was within +3 or -3 
+
+summarize(example, prop_within1 = mean(within1), prop_within2 = mean(within2), prop_within3 = mean(within3)) #testing if our probabilities match the emperical rule *this is is the 2nd image of your notebook)
+```
+
+
+# Compare the height distributions to a perfect normal distribution
+This is a good tool to see if your data is normally distributed or not.
+```{r}
+
+# for males
+males <- filter(height, sex == "male")
+
+ggplot(males, aes(x = ht_inches)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1) + #here with the "y=..density.." we are indicating that we want the density rather than the count. "..___.." indicates that we are calling in a different statistcic than the default.
+  stat_function(fun = dnorm,  #stat_function() indicates that we want to add a stat function.... "dnorm" indicates we want a normal curve
+  args = list(mean = mean(males$ht_inches), sd = sd(males$ht_inches)), #this is indicatign what we want a curve to look, we are using the mean of male hight and standard deviation of height of males
+  lwd = 2, #linewidth
+  col = 'red') + #color
+  labs(title = "Distribution of Height of Males in the US", subtitle = "Normal density function overlaid") #title, and subtitle
+
+# for females
+females <- filter(height, sex == "female")
+
+ggplot(females, aes(x = ht_inches)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1) +
+  stat_function(fun = dnorm,
+  args = list(mean = mean(females$ht_inches), sd = sd(females$ht_inches)),
+  lwd = 2,
+  col = 'red') +
+  labs(title = "Distribution of Height of Females in the US", subtitle = "Normal density function overlaid")
+
+
+```
+
+
+
+# Add your own height to the graph geom_vline()
+
+```{r}
+
+# for males
+males <- filter(height, sex == "male")
+
+ggplot(males, aes(x = ht_inches)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1) + #here with the "y=..density.." we are indicating that we want the density rather than the count. "..___.." indicates that we are calling in a different statistcic than the default.
+  stat_function(fun = dnorm,  #stat_function() indicates that we want to add a stat function.... "dnorm" indicates we want a normal curve
+  args = list(mean = mean(males$ht_inches), sd = sd(males$ht_inches)), #this is indicatign what we want a curve to look, we are using the mean of male hight and standard deviation of height of males
+  lwd = 2, #linewidth
+  col = 'red') + #color
+  geom_vline(xintercept=72, colour="black", lwd=2) +
+  geom_text(aes(x=72, label="my height", y=.075), colour="black", angle=90, vjust = -1, text=element_text(size=11)) +
+  labs(title = "Distribution of Height of Males in the US", subtitle = "Normal density function overlaid") #title, and subtitle
+
+
+```
+
+#Store mean and standard deviation of height for males and females
+```{r}
+
+mean_m <- mean(males$ht_inches)
+sd_m <- sd(males$ht_inches)
+
+mean_f <- mean(females$ht_inches)
+sd_f <- sd(females$ht_inches)
+
+myzscore <- (72 - mean_m)/sd_m
+
+```
+
+
+
+#create z-scores of height variables
+```{r}
+zheight <- height %>%
+  group_by(sex) %>%
+  mutate(zht_inches = zscore(ht_inches)) %>%
+  ungroup()
+
+```
+
+
+#What is the probability that a randomly selected male is less than 65 inches? 
+We can determine this by using the pnorm function!
+```{r}
+pnorm(65, mean = mean_m, sd = sd_m, lower.tail=TRUE) 
+```
+
+
+```{r}
+male65 <- (65 - mean_m)/sd_m
+male65
+```
+
+##What is the probability that a randomly selected male is taller than 80 inches?
+```{r}
+
+pnorm(80, mean = mean_m, sd = sd_m, lower.tail=FALSE )
+
+```
+
+
+##What is the probability that a randomly selected male is between 70 and 75 inches?
+```{r}
+pnorm(75, mean = mean_m, sd = sd_m, lower.tail=TRUE) - pnorm(70, mean = mean_m, sd = sd_m, lower.tail=TRUE)
+```
+
+
+##qnorm (inverse of pnrom)
+```{r}
+qnorm(.10, mean = mean_m, sd = sd_m, lower.tail=FALSE )
+```
+
+
+#Let's Finish with your height and Z-scores
+
+##What is the probability that a randomly selected adult of your same sex will be shorter than you?
+```{r}
+pnorm(72, mean = mean_m, sd = sd_m, lower.tail=TRUE )
+
+#since we are looking at people SHORTER than me, we user the lower.tail = TRUE
+```
+
+##You can obtain the same answer using Z-Scores (notice the change to mean and sd)
+
+
+```{r}
+
+myzscore <- (72 - mean_m)/sd_m
+myzscore
+pnorm(myzscore, mean=0, sd=1, lower.tail = TRUE)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

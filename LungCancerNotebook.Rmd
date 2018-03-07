@@ -1,0 +1,63 @@
+---
+title: "Lung Cancer Notebook"
+output: html_notebook
+---
+
+#Load Libraries
+```{r}
+library(tidyverse)
+library(car)
+library(margins)
+library(gmodels)
+```
+
+#Import Data
+```{r}
+asbestos <- read_csv("asbestos.csv")
+```
+
+#Format_data
+```{r}
+asbestos <- asbestos %>% 
+  mutate(lung_cancer.f = factor(x = lung_cancer, levels = c(0,1), labels = c("no cancer", "cancer")),
+         asbestos.f = factor(x = asbestos, levels = c(0,1), labels = c("no asbestos", "asbestos")))
+
+
+```
+
+#Generate a cross table of asbestos and lung cancer
+```{r}
+CrossTable(asbestos$asbestos.f, asbestos$lung_cancer.f)
+```
+
+```{r}
+prob_w_asb <- 146/3879
+prob_w_asb
+prob_wo_asb <-124/17440
+prob_wo_asb
+RR <- prob_w_asb/prob_wo_asb
+RR
+
+
+odd_exp <- 146/3733
+odd_exp
+odd_no_exp <- 124/17316
+odd_no_exp
+
+OR <- odd_exp/odd_no_exp
+OR
+
+
+```
+
+#Fit A model
+```{r}
+
+# fit the logistic regression model
+logreg0 <- glm(lung_cancer ~ asbestos, data = asbestos, family=binomial("logit"))
+summary(logreg0)
+
+exp(coef(logreg0))
+exp(cbind(OR = coef(logreg0), confint(logreg0)))
+```
+

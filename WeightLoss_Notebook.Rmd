@@ -1,0 +1,296 @@
+---
+title: "Weight Loss Data frame"
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+
+
+#load libraries
+
+```{r, message = FALSE}
+
+#install.packages("olsrr")
+#install.packages("descriptr")
+#install.packages("psych")
+#install.packages("modelr")
+#install.packages("tidyverse")
+#install.packages("mosaic")
+
+
+
+library("olsrr")
+library("descriptr")
+#library("psych") #<- actually don't need this package for this session
+library("modelr")
+library("tidyverse")
+library("mosaic")
+
+```
+
+#Import data
+
+```{r, message = FALSE}
+
+wtloss <- read_csv("wtloss.csv")
+
+```
+
+
+```{r}
+
+wtloss <- select(wtloss, lbslost, caldef)
+
+wtloss
+
+
+```
+#Research Question
+
+**Is Caloric Defecit a reasonable predictor of weight loss?**
+
+
+#Data & Description of variables
+
+
+A research team is interested in assessing the relationship between caloric deficit and pounds lost over the course of a 1 month weight loss program designed for men age 40 to 50 in CO. 100 obese men were randomly selected to participate. She measured the following variables:
+
+1. lbslost = pounds lost after one program **REMEMBER** a negative # means that there were pounds GAINED by the participant
+
+2. caldeff = caloric deficit over the course of the program (expressed in 1000 calories). A caloric deficit is a state in which you are burning more calories than you eat.
+
+3. selfeff = self efficacy for weight loss at the start of the program DATASET: wtloss.csv
+
+
+#Get descriptive Statistics
+##Numeric summaries of key variables
+###Pounds Lost
+
+```{r}
+
+summary_stats(wtloss$lbslost)
+summary_stats(wtloss$caldef)
+
+```
+
+
+##Histograms of pounds lost and caloric defecit
+###Pounds lost
+Relatively normal 
+```{r}
+ggplot(wtloss, aes(x = lbslost)) +
+geom_histogram(binwidth = .5) +
+labs(title = "Histogram of Pounds Lost")
+```
+
+
+
+
+###Caloric defecit
+Relatively normal
+```{r}
+ggplot(wtloss, aes(x = caldef)) +
+geom_histogram(binwidth = 1) +
+labs(title = "Histogram of Caloric Deficit")
+```
+
+
+##Scatterplot of caloric defecit and pounds lost
+Postive, seems to have a trend, could fit a linear line to it.
+```{r}
+ggplot(wtloss, aes(x = caldef, y = lbslost)) +
+geom_point() +
+labs(title = "Scatterplot of Caloric Deficit and Pounds Lost", x = "Caloric Deficit", y = "Pounds Lost")
+```
+
+
+##Description of scatterplot
+
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\wtloss_trend.PNG)    
+
+
+
+
+
+#Fit linear regression model
+
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\lm_code.PNG) 
+
+```{r}
+mod1 <- lm(lbslost ~ caldef, data=wtloss)
+ols_regress(mod1)
+
+```
+
+##What to look for in your lm output:
+
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\lm_output.PNG) 
+</center>
+
+
+##Scatterplot of caloric deficit and pounds lost, add best fir line
+```{r}
+ggplot(wtloss, aes(x = caldef, y = lbslost)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+labs(title = "Scatterplot of Caloric Deficit and Pounds Lost", x = "Caloric Deficit", y = "Pounds Lost")
+```
+
+
+
+
+##Get predicted values and residuals
+
+```{r}
+#This code is adding your predicted (y-hat) values and the residuals (error) to our dataset... feel free not to add it to your original dataset if you want too. 
+
+wtloss <- wtloss %>%
+add_predictions(mod1) %>%
+add_residuals(mod1)
+
+```
+
+##Use data_grid to get predictions for new y
+
+```{r}
+predgrid <- data_grid(wtloss, caldef = c(-2, 0, 10.8, 20)) %>%
+add_predictions(mod1)
+
+#10.8 = the mean value of pounds lost FYI
+```
+
+
+## Recenter caldef at the mean
+
+Notice how everything inour results are the same EXCEPT for our intercept. It may be more meaningful.
+
+This becomes critically important when we begin to look at interactions/moderators (get used to this neil, they mean the same thing!)
+
+```{r}
+
+wtloss <- wtloss %>%
+mutate(caldef_m = caldef - mean(caldef)) #taking the cal def score of each invidual  and subtracting it from its mean
+mod2 <- lm(lbslost ~ caldef_m, data = wtloss) #This model incorporates our centered mean
+ols_regress(mod2)
+
+```
+
+##finding our standard errors and t & p-values
+
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\lm_t.PNG) 
+</center>
+
+##How to calculate your standaed errors (for bo and b1)
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\lm_se.PNG) 
+</center>
+
+
+
+
+##How to calculate the confidence intervals
+
+
+<center>
+![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\lm_ci.PNG) 
+</center>
+
+
+
+```{r}
+#asking for the 99% confidence interval of model 1
+confint(mod1, level=.99)
+
+#asking for the 95% confidence interval of model 1. Note, that the 95% confidence interval is default.
+confint(mod1)
+
+```
+
+
+```{r}
+
+predgrid <- data_grid(wtloss, caldef = c(-2, 0, 7, 10.8, 20))
+predict(mod1, predgrid, interval = "confidence", level = .95)
+predict(mod1, predgrid, interval = "prediction", level = .95)
+
+```
+
+
+
+
+```{r}
+temp_var <- predict(mod1, wtloss, interval="prediction") #<- this is created our "CI's"
+
+wtloss_new <- cbind(temp_var, wtloss)
+
+ggplot(wtloss_new, aes(x = caldef, y = lbslost)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_line(aes(y=lwr), color = "red", linetype = "dashed") +  #putting in the lower predicted CI 
+  geom_line(aes(y=upr), color = "red", linetype = "dashed") +   # putting in the higher predicted CI's (lwr and upr come from the "temp_var" dataset)
+  labs(title = "Scatterplot of Caloric Deficit and Pounds Lost with Best Fit Line",
+  subtitle = "Confidence Interval in Gray Shaded Area, Prediction Interval in Red",
+  x = "Caloric Deficit", y = "Pounds Lost")
+
+```
+
+
+
+#Critical F
+```{r}
+qf(.95, df1=1, df2=98)
+```
+
+```{r}
+cor.test(wtloss$caldef, wtloss$lbslost)
+```
+
+
+
+##Get correlation from correlation between y-hat and y.
+```{r}
+
+cor.test(wtloss$pred, wtloss$lbslost)
+
+
+```
+
+##Get correlation through a SLR on z-scores
+
+```{r}
+
+wtloss <- wtloss %>% 
+  mutate(caldef.z = zscore(caldef), lbslost.z = zscore(lbslost))
+
+mod1_z <- lm(lbslost.z ~ caldef.z, data=wtloss)
+
+ols_regress(mod1_z)
+
+
+```
+
+
+
+
+```{r}
+
+r <- (sd(wtloss$caldef)/sd(wtloss$lbslost))*0.295
+
+```
+
+
+
+
+
+
+
+
+

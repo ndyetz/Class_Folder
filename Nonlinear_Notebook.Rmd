@@ -1,0 +1,406 @@
+---
+title: "R Notebook for Nonlinear OLS Regression"
+output: html_notebook
+---
+
+
+#Part 1: Nonlinear OLS Modesl via variable transformation
+##Load Libraries
+```{r, message = FALSE}
+
+library(tidyverse)
+library(olsrr)
+library(modelr)
+library(psych)
+library(GGally)
+```
+##Transforming inches to cenitmeters (and graph)
+```{r}
+trans1 <- tibble(inches = 1:10, centimeters = inches*2.54)
+
+ggplot(trans1, aes(x = inches, y = centimeters)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks = c(1:10)) +
+labs (title = "A Linear Transformation Example")
+```
+
+##Non-Linear Tranfromation:
+###Base 2 log transformation
+<center>![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\base2log.PNG)</center>
+
+```{r}
+trans2 <- tibble(x = c(2,4,8,16,32), log2x = log2(x))
+
+ggplot(trans2, aes(x = x, y = log2x)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks = c(2,4,8,16,32)) +
+labs (title = "A Nonlinear Transformation Example - base 2 logarithm")
+```
+
+###Base 10 logarithm transformation
+
+<center>![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\base10log.PNG)</center>
+
+```{r}
+options(scipen = 999) # disable scientific notation
+trans3 <- tibble(x = c(1,10,100,1000,10000,100000), log10x = log10(x))
+ggplot(trans3, aes(x = x, y = log10x)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks = c(1,10000,100000)) +
+labs (title = "A Nonlinear Transformation Example - base 10 logarithm")
+```
+
+###Natural logarithm transformation (most used)
+
+<center>![](C:\Users\Neil\Desktop\Class folder\Fall 2017\RM\Analyses\MyClassActivities\basenatlog.PNG)</center>
+
+```{r}
+trans4 <- tibble(x = seq(10,100, by = 10), lnx = log(x))
+ggplot(trans4, aes(x = x, y = lnx)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks = seq(10,100, by = 10)) +
+labs (title = "A Nonlinear Transformation Example - natural logarithm")
+```
+
+#Scatter plot matrix
+
+Notice how GDP and Footp are positively skewed... it's evidence of needing a transformation
+```{r, message = FALSE}
+# read in data
+hp <- read_csv("happyplanet.csv")
+
+# create a scatterplot matrix
+
+scatterplot <- ggpairs(hp, columns = c("wellbe", "gdp", "footp"),
+upper = list(continuous = wrap("cor", size=3)),
+title = "Bivariate Relationship of Variables")
+print(scatterplot, progress=FALSE )
+```
+
+
+##Example of ln(x), orginal y
+### Create a scatterplot of GDP of GDP & well-being - overlay linear model
+```{r}
+ggplot(hp, aes(x = gdp, y = wellbe)) +
+geom_smooth(method = lm, se = FALSE) +
+geom_point() +
+labs(title = "Is there a linear relationship between gdp and well-being?",
+subtitle = "Fit linear model",
+x = "GDP", y = "Well-being")
+```
+###Create a scatterplot of GDP and well-being - apply loess smoother
+```{r}
+ggplot(hp, aes(x = gdp, y = wellbe)) +
+geom_smooth(method = "loess", se = FALSE) + #<- Notice the "loess" smoother, this is the newest thing to this.
+geom_point() +
+labs(title = "Is there a linear relationship between gdp and well-being?",
+subtitle = "Apply loess smoother",
+x = "GDP", y = "Well-being")
+```
+
+
+
+
+### Create a scatterplot of ln(GDP) and wellbeing
+```{r}
+ggplot(hp, aes(x = gdp, y = wellbe)) +
+geom_smooth(method = lm, se = FALSE) +
+geom_point() +
+scale_x_continuous(trans = "log") + #<- this is transforming the variable within GGplot
+labs(title = "Is there a linear relationship between ln(gdp) and well-being?",
+subtitle = "Fit linear model to log transformed x-axis",
+x = "ln(GDP)", y = "Well-being")
+```
+
+
+### Log transform GDP and fit linear regression model
+```{r}
+# take the natural log transformation of gdp
+hp <- mutate(hp, lngdp = log(gdp))
+
+# fit the simple linear regression
+logx <- lm(data = hp, wellbe ~ lngdp)
+ols_regress(logx)
+```
+
+
+
+
+
+
+###Function to interprety regression sloipe for ln transformed x, original y
+```{r}
+ln.x <- function(slope, x_chg) {
+new_slope <- slope * (log(1 + (x_chg/100)))
+return(new_slope)
+}
+```
+
+
+###Use function.x to interpret parameters
+
+```{r}
+ln.x(slope = .651, x_chg = 1) #slope = whatever your slope is. x_change = whatever percet change you want increase you want to look at it in.
+ln.x(slope = logx$coefficients["lngdp"], x_chg = 1) #here is the same thing, but you are actually referring to the coefficient table from you regression table.
+```
+A 1% increase is in GDP is associated with a 0.006 unit increase in the average well-being score of resident s in the country.
+
+```{r}
+ln.x(slope = logx$coefficients["lngdp"], x_chg = 100) #100 = a doubling of GDP
+```
+
+### Visualize the nonlinear relationship
+
+```{r}
+# create a scatterplot of GDP and wellbeing - represent the underlying nonlinear curve
+ggplot(hp, aes(x = gdp, y = wellbe)) +
+geom_smooth(method = lm, se = FALSE, formula = y ~ 1 + log(x)) +
+geom_point() +
+labs(title = "Is there a nonlinear relationship between gdp and well-being?",
+subtitle = "Display underlying nonlinear relationship",
+x = "GDP", y = "Well-being")
+```
+
+
+
+## Example of ln(y), original x
+### Fit regression model
+
+The predicted lngdp for every unit increase in well being is associated with ___ lngdp increase
+```{r}
+logy <- lm(data = hp, lngdp ~ wellbe)
+ols_regress(logy)
+
+```
+
+
+####Getting the original metric
+```{r}
+#to get the slope we can exponentiate the intercept and log to see where they fit in the original metric
+
+
+
+exp(4.383)
+
+
+```
+
+
+#####Fubnction for the slope
+
+```{r}
+ln.y <- function(slope, x_chg) {
+new_slope <- 100 * (exp(slope * x_chg) - 1)
+return(new_slope)
+}
+ln.y(slope = .833, x_chg = 1)
+ln.y(slope = logy$coefficients["wellbe"], x_chg = 1)
+
+```
+A 1 unit increase in wellbe is associated with a 130% increase in GDP.
+
+
+```{r}
+#find predicted gdp at well being of unit of 4 and 5
+pre4 <- predict(logy, data.frame(wellbe = 4))
+pre5 <- predict(logy, data.frame(wellbe = 5))
+
+#exponentiate it so it is at normal units
+exp(pre4)
+exp(pre5)
+
+#Get the percent difference between the two.
+(5150.917-2239.617)/2239.617
+
+#Notice how this number is exactly the same as our ln.y function above. 
+
+```
+
+
+## example of ln(y), ln(x)
+### Transform footp and create a scatterplot matrix of the raw and transformed variables
+
+```{r}
+hp <- mutate(hp, lnfootp = log(footp))
+scatterplot <- ggpairs(hp, columns = c("gdp", "footp", "lngdp", "lnfootp"),
+upper = list(continuous = wrap("cor", size=3)),
+title = "Bivariate Relationship of Raw and Transformed Scores")
+print(scatterplot, progress=FALSE )
+```
+
+
+
+###Fit regression model
+
+
+
+
+
+```{r}
+logxy <- lm(data = hp, lnfootp ~ lngdp)
+ols_regress(logxy)
+```
+
+
+
+
+#Function for log tranformed x & y 
+```{r}
+
+ln.xy <- function(slope, x_chg) {
+new_slope <- 100 * (exp(slope * (log(1 + (x_chg/100))))-1)
+return(new_slope)
+}
+
+ln.xy(slope = .462, x_chg = 100)
+ln.xy(slope = logxy$coefficients["lngdp"], x_chg = 100)
+
+```
+A 100% increase in GDP is associated with a 38% increase in the ecological footprint.
+
+
+
+```{r}
+# get log of 50,000
+log(50000)
+# get y-hat when gdp = 50,000
+predict (logxy, data.frame(lngdp=10.81978))
+# back transform
+exp(1.781842)
+```
+
+```{r}
+# create a scatterplot of ln(GDP) and ln(footp)
+ggplot(hp, aes(x = lngdp, y = lnfootp)) +
+geom_point() +
+geom_smooth(method = lm, se = FALSE) +
+annotate("point", x = 10.82, y = 1.78, colour = "red", size = 5, shape = 18) +
+labs(title = "The linear relationship between ln(GDP) and ln(Ecological Footprint)", x = "ln(GDP)", y = "ln(Ecological Footprint)")
+
+# create a scatterplot of GDP and footp
+ggplot(hp, aes(x = gdp, y = footp)) +
+geom_point() +
+scale_x_continuous(trans = "log") +
+scale_y_continuous(trans = "log") +
+geom_smooth(method = lm, se = FALSE) +
+coord_trans(x = "exp", y = "exp") +
+annotate("point", x = 50000, y = 5.94, colour = "red", size = 5, shape = 18) +
+labs(title = "The curvilinear relationship between GDP and Ecological Footprint", x = "GDP", y = "Ecological Footprint")
+```
+#Part 2: Nonlinear OLS models via polynomialss
+## Import Data: Cogtest file
+Suppose that we are interested in the effect of time spent in practice on the performance of a visual discrimination task. Subjects are randomly assigned to different levels of practice, following which a test of visual discrimination is administered, and the number of correct responses is recorded for each subject. 40 subjects were randomly assigned to practice 0 minutes, 2 minutes, 4 minutes, 6 minutes, 8 minutes, 10 minutes, 12 minutes, or 14 minutes.
+There are two variables:
+
+1. practice - minutes spent practicing, this was assigned by the experimenter
+2. score - the number of correct answers on the test
+```{r, message = FALSE}
+cogtest <- read_csv("cogtest.csv")
+```
+
+##Overlay a linear function
+```{r}
+# plot data with best fit straight line
+ggplot(cogtest, aes(x = practice, y = score)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point() +
+  scale_x_continuous(limits=c(0,14), breaks = seq(0, 14, by = 2)) +
+  labs(title = "Does more practice equal better score?",
+  subtitle = "Overlay best fit straight line",
+  x = "Minutes Spent Practicing", y = "Score")
+```
+
+
+
+
+##Overlay a Quadratic function
+```{r}
+# plot data with quadratic function
+ggplot(cogtest, aes(x = practice, y = score)) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE) + #<- this is where the change happens! we are getting the polynomial of x
+  geom_point() +
+  scale_x_continuous(limits=c(0,14), breaks = seq(0, 14, by = 2)) +
+  labs(title = "Does more practice equal better score?",
+  subtitle = "Overlay quadratic curve",
+  x = "Minutes Spent Practicing", y = "Score")
+```
+
+##Prepare polynomial terms
+```{r}
+cogtest <- mutate(cogtest,
+  practice2 = practice^2,
+  practice3 = practice^3)
+
+```
+
+##Fit a linear Model
+```{r}
+lm_lin <- lm(data = cogtest, score ~ practice)
+ols_regress(lm_lin)
+```
+##Fit a quadractic model
+```{r}
+lm_quad <- lm(data = cogtest, score ~ practice + practice2)
+ols_regress(lm_quad)
+```
+
+##Fit a cubic Model
+```{r}
+lm_cubic <- lm(data = cogtest, score ~ practice + practice2 + practice3)
+ols_regress(lm_cubic)
+```
+
+
+##Johnson-Neyman Graph
+```{r}
+tcrit = qt(c(.025, .975), df = 38)
+
+varmat <- as.matrix(vcov(lm_quad))
+vbx <- varmat["practice","practice"]
+vbx2 <- varmat["practice2","practice2"]
+vbxx2 <- varmat["practice","practice2"]
+
+slopes <- cogtest %>%
+  data_grid(practice)
+
+slopes <- mutate(slopes, tangent_slope = lm_quad$coefficients["practice"] + 2*lm_quad$coefficients["practice2"]*practice,
+se = sqrt(vbx+(4*practice*vbxx2)+((4*practice^2)*vbx2)),
+lwr = tangent_slope - tcrit*se,
+upr = tangent_slope + tcrit*se,
+tstar = tangent_slope/se)
+
+slopes_plot <- cogtest %>%
+data_grid(practice = seq_range(practice, 1000))
+
+slopes_plot <- mutate(slopes_plot, tangent_slope = lm_quad$coefficients["practice"] + 2*lm_quad$coefficients["practice2"]*practice,
+  se = sqrt(vbx+(4*practice*vbxx2)+((4*practice^2)*vbx2)),
+  lwr = tangent_slope - tcrit*se,
+  upr = tangent_slope + tcrit*se,
+  tstar = tangent_slope/se)
+
+ggplot(slopes_plot, aes(x = practice, y = tangent_slope)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .8, fill = "grey60") +
+  geom_line(size = 1) +
+  geom_hline(yintercept=0, linetype=2) +
+  scale_x_continuous(limits=c(0,14), breaks = seq(0, 14, by = 2)) +
+  labs(title = "The changing effect of minutes spent practicing on score",
+    x = "Minutes Spent Practicing", y = "Score")
+
+# Calculate vertex
+vertex = -lm_quad$coefficients["practice"]/(2*lm_quad$coefficients["practice2"])
+print(vertex)
+```
+
+
+
+
+
+
+
+
+
