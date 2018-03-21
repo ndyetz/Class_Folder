@@ -1,0 +1,167 @@
+# Appendix B: Homework
+
+The following are six homework assignments for the course. 
+
+## Homework #1
+
+**Due date: Sept. 13**
+
+For your first homework assignment, you'll be working through a few [swirl](http://swirlstats.com/) lessons that are relevant to the material we've covered so far. Swirl is a platform that helps you learn R **in** R - you can complete the lessons right in your R console. 
+
+Depending on your familiarity with R, you can either work through seven lessons of your choice in the `R Programming: The basics of programming in R` course (suggested lessons are listed further below) (**Option #1**), or you can work through seven lessons of your choice taken from any number of swirl's available courses  (**Option #2**) . 
+
+For each lesson completed, please write a few sentences that cover: 1. A summary of the topic(s) covered in that lesson, and 2. The most interesting thing that you learned from that lesson. Turn in a hardcopy of this (with your first and last name at the top) during class on the due date.
+
+To begin, you'll first need to install the swirl package: 
+
+```{r eval=FALSE}
+install.packages("swirl")
+```
+
+Load the swirl package, then call the `swirl()` function to enter the interactive platform in RStudio. The console will take you through a few prompts: you'll give swirl a name to call you, and take a look at some commands that are useful in the swirl environment. Those commands are listed further below. 
+
+```{r eval = FALSE}
+library(swirl)
+swirl()
+```
+
+```{block, type = 'rmdnote'}
+After calling `swirl()`, you may be prompted to clear your workspace variables by running `rm=(list=ls())`. Running this code will clear any variables you already have saved in your global environment. While swirl recommends that you do this, it's not necessary. 
+```
+
+### Option 1
+
+If you've never run `swirl()` before, you will be prompted to install a course. Type `1` to install `R Programming: The basics of programming in R`. Now, every time you enter the swirl environment with `swirl()`, `R Progamming` should show up as a course option to select. You can enter `R Programming` to start lessons in that course by typing `1` again. 
+
+For **option 1** of this homework, you will need to work through seven of the 15 available lessons in the `R Programming` course. Here are some suggestions for particularly uesful lessons that you could choose (the lesson number is in parentheses): 
+
+- Basic Building Blocks (1)
+- Vectors (4)
+- Missing Values (5)
+- Subsetting Vectors (6)
+- Logic (8)
+- Looking at Data (12)
+- Dates and Times (14)
+
+Each lesson should take about 10-15 minutes, but some are much shorter. You can complete the lessons in any order you want, but you may find it easiest to start with the lowest-numbered lessons and work your way up, in the order we've listed the lessons here. 
+
+You'll be able to get started on some of these lessons after your first day in class (Basic Building Blocks, for example), but others cover topics that we'll get to in weeks 2 and 3. Whether or not we've covered a swirl topic in class, you should be able to successfully work through the lesson. At the end of each lesson, you may be asked if you would like to receive credit for completing this course on Coursera.org. Type `2` for no. 
+
+Again, you'll need to compose and turn in a few sentences for each lesson. Make sure to include a summary of what each lesson was about, and the most interesting thing about that lesson. 
+
+### Option 2
+
+If you're already somewhat familiar with R, you might want to choose your seven lessons from other swirl courses instead of or in addition to those available in the `R Programming` course. To install a course other than `R Programming`, you can use the following steps: 
+
+```{r eval = FALSE}
+library(swirl)
+install_course("Course Name Here")
+swirl()
+```
+
+Check out the [list of available Swirl Courses](http://swirlstats.com/scn/title.html) to see which ones you would like to install and check out available lessons for. For example, to choose a lesson in the `Getting and Cleaning Data` course, you would run: 
+
+```{r eval = FALSE}
+library(swirl)
+install_course("Getting and Cleaning Data")
+swirl()
+```
+
+After entering the `Getting and Cleaning Data` course, you could choose from any one of its four available lessons. 
+
+In your written summary for each lesson (again, a few sentences that cover a summary of the lesson and the most interesting thing you learned), make sure to specify which course each lesson you completed was from. 
+
+### Special swirl commands 
+
+In the swirl environment, knowing about the following commands will be helpful:
+
+- Within each lesson, the prompt `...` indicates that you should hit Enter to move on to the next section. 
+- `skip()`: skip the current question. 
+- `play()`: temporarily exit swirl. It can be useful during a swirl lesson to play around in the R console to try things out. 
+- `nxt()`: regain swirl's attention after `play()`ing around in the console. 
+- `main()`: return to swirl's main menu. 
+- `bye()`: exit swirl. Swirl will save your progress if you exit in the middle of a lesson. You can also hit the Esc. key to exit. (To re-enter swirl, run `swirl()`. In a new R session you will have to first load the swirl library: `library(swirl)`.)
+
+#### For fun 
+
+While they aren't required for class, you should consider trying out some other swirl lessons later in the course. In `R Programming`, the `Functions` lesson, as well as `lapply and sapply` and `vapply and tapply` could be particularly useful. You can also look through the [course directory](http://swirlstats.com/scn/title.html) to see what other courses and lessons are available.  
+
+## Homework #2
+
+**Due date: Sept. 27**
+
+For Homework 2, recreate the R Markdown document that you can download from [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/Homework_2.docx). 
+
+Here are some initial instructions and tips: 
+
+- Your goal is to create an R Markdown document that you can compile to create a Word document that looks just like the example document we've linked above. 
+- You will turn in (by email) both the compiled Word document and the .Rmd original file.
+- Add your name as "Author" and the due date of the assignment as "Date". You should add these within the R Markdown document, rather than changing them in the final, compiled Word document.
+- If you want to get started before you know how to use R Markdown, you can go ahead and write all of the necessary code to replicate the output and figures in the document in an R script. 
+- The code chunks here have been hidden with the option `echo = FALSE`, but you should include your code in your final document. 
+- Set the chunk options `warning = FALSE` and `message = FALSE` to prevent warnings and messages from being printed out. You will get some messages and warnings in the code from things like missing values and from loading packages, but you want to hide all of those messages in your final document.
+- For things like templates, colors, level of transparency, and point size, you will receive full credit if you create figures that are visually similar to the ones shown in the example document. In other words, if the example document shows some transparency in points, you will get full credit if you also include some transparency in the points in your plot, but you do not have to include the exact same value of `alpha`. 
+- Pay close attention to the typeface used in text of the original document. If something is shown in boldface or "typewriter" fontface in the original, make sure you've written your Rmarkdown code to have the same type.
+- In R, there are often many different ways to achieve something. As long as your code *works*, it's fine if you haven't coded it exactly like we have in our version. However, your output should look identical to ours (or, in the case of color, transparency, point size, and themes, visually similar).
+- You will not lose points if you cannot recreate the table in the document (although you should try to!).
+- The last section, under the heading "Extra challenge-- not graded", is not graded. However, if you'd like an extra challenge, you're welcome to try it out and include it in your final submission!
+
+If you need them, here are some further tips: 
+
+- You will learn Rmarkdown in Week 5 of the course. However, if you want to get started on this exercise before you learn how to use Rmarkdown, you can start by working on the regular R code to read in the data and create the figures shown in the document.
+- Functions from the tidyverse (especially from `dplyr`, `readr`, and `ggplot` packages) will make your life much easier for this exercise. You can now install and load the `tidyverse` package to load them all at once. 
+- To rename column names with "special" characters in them, wrap the whole old column name in backticks. For example, to change a column name that has a dollar sign in it, you would use something like "``rename(new_col_name = `old_col_name$` ``)". 
+- To change the size of a figure in a report, use the "fig.width" and "fig.height" chunk options. 
+- You will want to use `scale_fill_brewer` in several of the figures.
+- Don't forget that, within functions like `scale_x_continuous`, you can use the argument `breaks` to set where the axis has breaks, and then `labels` to set what will actually be shown at each break. 
+- The string "\\n" can be included in legends and labels to include a carriage return.
+- Coordinates can be flipped in a graph with the `coord_flip` geom. So, if you can figure out a way to make a graph with the coordinates flipped, use that code and just add `coord_flip` at the end.
+
+## Homework #3
+
+**Due date: Oct. 11**
+
+For Homework 3, recreate the R Markdown document that you can download from [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/Homework_3.docx). 
+
+Here are some initial tips: 
+
+- Your goal is to create an R Markdown document that you can compile to create a Word document that looks just like the target document we've linked above. The only difference is that you will use `echo = TRUE` to show your code within the rendered Word document. All formating within the text should be similar or identical to the target document.  
+- You will turn in (by email) both the compiled Word document and the .Rmd original file.
+- Add your name as "Author" and the due date of the assignment as "Date". You should add these within the R Markdown document, rather than changing them in the final, compiled Word document.
+- Set the chunk options `warning = FALSE` and `message = FALSE` to prevent warnings and messages from being printed out. You will get some messages and warnings in the code from things like missing values and from loading packages, but you want to hide all of those messages in your final document.
+- For things like templates, colors, level of transparency, and point size, you will receive full credit if you create figures that are visually similar to the ones shown in the example document. In other words, if the example document shows some transparency in points, you will get full credit if you also include some transparency in the points in your plot, but you do not have to include the exact same value of `alpha`. 
+- In R, there are often many different ways to achieve something. As long as your code *works*, it's fine if you haven't coded it exactly like we have in our version. However, your output should look identical to ours (or, in the case of color, transparency, point size, and themes, visually similar).
+- There is one formated table in the target document. Be sure that you render this as a formated table, not as raw R output.
+- You will be graded on whether the size of each figure is similar to that in the example file. There is a tip in the "Further tips" section below about how to change figure size in the output.
+
+If you need them, here are some further tips: 
+
+- Functions from the tidyverse (especially from `dplyr`, `readr`, and `ggplot` packages) will make your life much easier for this exercise. 
+- To reference column names with "special" characters in them, like dollar signs or spaces, wrap the whole old column name in backticks. For example, to change a column name that has a dollar sign in it, you would use something like "rename(new_col_name = \`old_col_name$\`)". 
+- To change the size of a figure in a report, use the "fig.width" and "fig.height" chunk options. 
+
+## Homework #4
+
+**Optional due date: Oct. 25**
+
+All instructions for this homework can be downloaded [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/Homework4and5.pdf). The example "fars_analysis.pdf" document you will try to recreate is [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/fars_analysis.pdf).
+
+You have the option to turn in parts of this homework (up through creating a clean dataset) by Oct. 28. If you do so, I will email you the code I used to clean the data, so you can check your own code and be sure you have a reasonable version of the clean data as you do the final parts of the assignment.
+
+## Homework #5
+
+**Due date: Nov. 8**
+
+All instructions for this homework can be downloaded [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/Homework4and5.pdf). The example "fars_analysis.pdf" document you will try to recreate is [here](https://github.com/geanders/RProgrammingForResearch/raw/master/Homework/fars_analysis.pdf).
+
+You will submit this homework by posting a repo with your project directory on GitHub. We will work on setting that up during an in-course exercise. 
+
+## Homework #6
+
+**Due date: Nov. 29**
+
+1. Read the article *Good Enough Practices in Scientific Computing* by Wilson et al. (available [here](https://arxiv.org/abs/1609.00037)). In a half page, describe which of these "pretty good practices" your last homework incorporated. Also list one or two practices that you did not follow in your last homework but that would have made sense and how you could have followed them. 
+
+2. Read the article [*Science Isn't Broken*](http://fivethirtyeight.com/features/science-isnt-broken/) on FiveThirtyEight. This article includes an interactive graphic. In a half page, give your opinion on whether this interactive graphic helps convey the main message of the article. Also, describe in general details how you might be able to create a graphic like this in R.  
+
+3. Find an article in *The R Journal* that describes an R package that you could use in your own research or otherwise find interesting. Describe why the package was created and what you think it's most interesting features are. In an R Markdown document, run one or two of the R examples included in the article. 

@@ -1,0 +1,810 @@
+---
+title: 'Exploring data #1'
+output:
+  ioslides_presentation: default
+  beamer_presentation:
+    theme: metropolis
+  slidy_presentation: default
+fontsize: 10pt
+---
+
+```{r echo = FALSE}
+options(width = 50)
+```
+
+# Data from R packages
+
+## Data from R packages
+
+So far we've covered three ways to get data into R:
+
+1. From flat files (either on your computer or online)
+2. From files like SAS and Excel
+3. From R objects (i.e., using `load()`)
+
+Many R packages come with their own data, which is very easy to load and use.
+
+## Data from R packages
+
+For example, the `faraway` package has a dataset called `worldcup` that you'll use today. To load it, use the `data()` function once you've loaded the package with the name of the dataset as its argument:
+
+```{r}
+library(faraway)
+data("worldcup")
+```
+
+## Data from R packages
+
+Unlike most data objects you'll work with, the data that comes with an R package will often have its own help file. You can access this using the `?` operator:
+
+```{r, eval = FALSE}
+?worldcup
+```
+
+## Data from R packages
+
+To find out all the datasets that are available in the packages you currently have loaded, run `data()` without an option inside the parentheses:
+
+```{r, eval = FALSE}
+data()
+```
+
+To find out all of the datasets available within a certain package, run `data` with the argument `package`:
+
+```{r}
+data(package = "faraway")
+```
+
+
+As a note, you can similarly use `library()`, without the name of a package, to list all of the packages you have installed that you could call with `library()`:
+
+```{r, eval = FALSE}
+library()
+```
+
+## `nepali` example data
+
+For the example plots, I'll use a dataset in the `faraway` package called `nepali`. This gives data from a study of the health of a group of Nepalese children. 
+
+```{r}
+library(faraway)
+data(nepali)
+```
+
+I'll be using functions from `dplyr` and `ggplot2` during the course, so I'll load those:
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+## `nepali` example data
+
+For the `nepali` dataset, each observation is a single measurement for a child; there can be multiple observations per child. \medskip 
+
+I'll limit it to the columns with the child's id, sex, weight, height, and age, and I'll limit to each child's first measurement. 
+
+```{r message = FALSE}
+nepali <- nepali %>%
+  # Limit to certain columns
+  select(id, sex, wt, ht, age) %>%
+  # Convert id and sex to factors
+  mutate(id = factor(id),
+         sex = factor(sex, levels = c(1, 2),
+                      labels = c("Male", "Female"))) %>%
+  # Limit to first obs. per child
+  distinct(id, .keep_all = TRUE)
+```
+
+## `nepali` example data
+
+The first few rows of the data now looks like:
+
+```{r}
+nepali %>% 
+  slice(1:4)
+```
+
+# Logical vectors
+
+## Logical statements
+
+Last week, you learned some about logical statements and how to use them with the `filter` function. \medskip
+
+You can use *logical vectors*, created with these statements, for a lot of things. We'll review them and add some more details this week.
+
+## Logical vectors
+
+A logical statement outputs a *logical vector*. This logical vector will be the same length as the original vector tested by the logical statement:
+
+```{r}
+is_male <- nepali$sex == "Male"
+length(nepali$sex)
+length(is_male)
+```
+
+## Logical vectors
+
+Each element of the logical vector can only have one of three values (`TRUE`, `FALSE`, `NA`). The logical vector will have the value `TRUE` at any position where the original vector met the logical condition you tested, and `FALSE` anywhere else:
+
+```{r}
+head(nepali$sex)
+head(is_male)
+```
+
+## Logical vectors
+
+Because the logical vector is the same length as the vector it's testing, you can add logical vectors to dataframes with `mutate`:
+
+```{r}
+nepali <- nepali %>% 
+  mutate(is_male = sex == "Male") # Add column. Is obs. male?
+nepali %>% 
+  slice(1:3)
+```
+
+## Logical vectors
+
+As another example, you could add a column that is a logical vector of whether each child's first-measured height is over 100 centimeters:
+
+```{r}
+nepali %>% 
+  mutate(very_tall = ht > 100) %>% # Is height over 100 cm?
+  select(id, ht, very_tall) %>% 
+  slice(1:3)
+```
+
+## Logical vectors
+
+You can "flip" a logical vector (i.e., change every `TRUE` to `FALSE` and vice-versa) using the bang operator (`!`):
+
+```{r}
+nepali %>% 
+  mutate(very_tall = ht > 100,
+         not_tall = !very_tall) %>% 
+  select(id, ht, very_tall, not_tall) %>% 
+  slice(1:3)
+```
+
+## Logical vectors
+
+You can do a few cool things now with this vector. For example, you can use it with the `filter` function to pull out just the rows where `is_male` is `TRUE`:
+
+```{r}
+nepali %>% 
+  filter(is_male) %>% 
+  select(id, ht, wt, sex) %>% 
+  slice(1:5)
+```
+
+## Logical vectors
+
+Or, with `!`, just the rows where `is_male` is `FALSE`:
+
+```{r}
+nepali %>% 
+  filter(!is_male) %>% 
+  select(id, ht, wt, sex) %>% 
+  slice(1:5)
+```
+
+## Logical vectors
+
+All of the values in a logical vector are saved with a number underneath. Values of `TRUE` are saved as 1 and values of `FALSE` are saved as 0. 
+
+You can use `sum()` to get the sum of all values in a vector. Because logical vector values are linked with numerical values of 0 or 1, you can use `sum()` to find out how many males and females are in the dataset:
+
+```{r}
+sum(nepali$is_male)
+sum(!nepali$is_male)
+```
+
+## In-course exercise
+
+We'll take a break now to start the in-course exercise for this week (Sections 3.6.1 and 3.6.2).
+
+# Simple statistics
+
+## Simple statistics functions
+
+We've looked at how to subset, arrange, and add to a dataframe. Next we'll look at how to summarizes a dataframe. 
+
+We'll start by looking at some simple statistics functions from base R, and then we'll look at how some of those functions can be used with the `summarize` function from the `dplyr` package to quickly get interesting summaries of data.
+
+## Simple statistics functions
+
+Here are some simple statistics functions you will likely use often:
+
+Function  | Description
+--------- | -----------------
+`range()` | Range (minimum and maximum) of vector 
+`min()`, `max()` | Minimum or maximum of vector
+`mean()`, `median()` | Mean or median of vector
+`table()` | Number of observations per level for a factor vector
+`cor()` | Determine correlation(s) between two or more vectors
+`summary()` | Summary statistics, depends on class
+
+## Simple statistic examples
+
+All of these take, as the main argument, the vector(s) for which you want the statistic. If there are missing values in the vector, you'll need to add an option to say what to do when them (e.g., `na.rm` or `use="complete.obs"`-- see help files).
+
+```{r}
+mean(nepali$wt, na.rm = TRUE)
+range(nepali$ht, na.rm = TRUE)
+table(nepali$sex)
+```
+
+## Simple statistic examples
+
+The `cor` function can take two or more vectors. If you give it multiple values, it will give the correlation matrix for all the vectors.
+
+```{r}
+cor(nepali$wt, nepali$ht, use = "complete.obs")
+cor(nepali[ , c("wt", "ht", "age")], use = "complete.obs")
+```
+
+## `summary()`: A bit of OOP
+
+R supports object-oriented programming. This shows up with `summary()`. R looks to see what type of object it's dealing with, and then uses a method specific to that object type. 
+
+```{r}
+summary(nepali$wt)
+summary(nepali$sex)
+```
+
+## The `summarize` function
+
+Within a "tidy" workflow, you can use the `summarize` function from the `dplyr` package to create summary statistics for a dataframe. This function inputs a dataframe and outputs a dataframe with the specified summary measures. 
+
+## The `summarize` function
+
+The basic format for using `summarize` is:
+
+```{r eval = FALSE}
+## Generic code
+summarize(dataframe, 
+          summary_column_1 = function(existing_columns),
+          summary_column_2 = function(existing_columns))
+```
+
+The output from `summarize` will be a dataframe with: 
+
+- One row (later we will look at using `summarize` within groups of data, and that will result in more rows)
+- As many columns as you have defined summaries in the `summarize` function (the generic code above would result in two columns)
+
+## The `summarize` function
+
+As an example, to summarize the `nepali` dataset to get the mean weight, median height, and minimum and maximum ages of children, you could run: 
+
+```{r}
+summarize(nepali,
+          mean_wt = mean(wt, na.rm = TRUE),
+          median_ht = median(ht, na.rm = TRUE),
+          youngest = min(age, na.rm = TRUE),
+          oldest = max(age, na.rm = TRUE))
+```
+
+Notice that the output is one row (since the summary was on ungrouped data), with four columns (since we defined four summaries in the `summarize` function).
+
+## The `summarize` function
+
+Because the first input to the `summarize` function is a dataframe, you can "pipe into" a `summarize` call. For example, we could have written the code on the previous slide as: 
+
+```{r eval = FALSE}
+nepali %>% 
+  summarize(mean_wt = mean(wt, na.rm = TRUE),
+            median_ht = median(ht, na.rm = TRUE),
+            youngest = min(age, na.rm = TRUE),
+            oldest = max(age, na.rm = TRUE))
+```
+
+As another note, because the output from `summarize` is also a dataframe, we could also "pipe into" another tidyverse function after running `summarize`. 
+
+## The `summarize` function
+
+There are some special functions that you can use with `summarize`: 
+
+Function | Description
+---------------|-------------
+`n()`          | Number of elements in a vector
+`n_distinct()` | Number of unique elements in a vector
+`first()`      | First value in a vector
+`last()`       | Last value in a vector
+
+## The `summarize` function
+
+For example, the following call would give you the total number of observations in the dataset, the number of distinct values of age measured across all children, the ID of the first child included in the dataset, and the weight of the last child included in the dataset:  
+
+```{r}
+nepali %>%
+  summarize(n_children = n(), 
+            n_distinct_ages = n_distinct(age),
+            first_id = first(id),
+            last_weight = last(wt))
+```
+
+## Grouping and summarizing
+
+Often, you'll want to get summaries of the data stratified by groups within the data. For example, in the Nepali dataset, you may want to get summaries by sex or by whether the child was short or tall. 
+
+To get grouped summaries of a dataframe, you can first use the `group_by` function from the `dplyr` package to "group" the dataset, and then when you run "summarize", it will be applied **by group** to the data. 
+
+Your final output from summarize will be a dataframe with: 
+
+- As many rows as there were unique groups in the grouping factor(s)
+- As many columns as you have defined summaries in the `summarize` function (the generic code above would result in two columns), plus columns for each of the grouping factors
+
+## Grouping and summarizing
+
+Without piping, the use of `group_by` and `summarize` looks like this:
+
+```{r eval = FALSE}
+# Generic code
+summarize(group_by(dataframe,
+                   grouping_factor_1, grouping_factor_2), 
+          summary_column_1 = function(existing_columns),
+          summary_column_2 = function(existing_columns)) 
+          
+```
+
+You can see that `group_by` is nested within the `summarize` call, because `group_by` must be applied to the dataframe before `summarize` is run if you want to get summaries by group. 
+
+## Grouping and summarizing
+
+This call tends to look much cleaner if you use piping. With piping, the generic call looks like: 
+
+```{r eval = FALSE}
+# Generic code
+dataframe %>% 
+  group_by(grouping_factor_1, grouping_factor_2) %>% 
+  summarize(summary_column_1 = function(existing_columns),
+            summary_column_2 = function(existing_columns))
+```
+
+## Grouping and summarizing
+
+For example, in the Nepali dataset, say you want to get summaries by sex. You want to get the total number of children in each group, the mean weight, and the ID of the first child.
+
+You can run:
+
+```{r}
+nepali %>%
+  group_by(sex) %>%
+  summarize(n_children = n(), 
+            mean_wt = mean(wt, na.rm = TRUE),
+            first_id = first(id))
+```
+
+## Grouping and summarizing
+
+```{r}
+nepali %>%
+  group_by(sex) %>%
+  summarize(n_children = n(), 
+            mean_wt = mean(wt, na.rm = TRUE),
+            first_id = first(id))
+```
+
+Notice that the output is a dataframe with two rows (since there were two groups in the grouping factor) and four columns (one for the grouping factor, plus one for each of the summaries defined in the `summarize` function).
+
+## Grouping and summarizing
+
+You can group by more than one variable. For example, to get summaries within groups divided by both sex and whether the child is tall (> 100 cm) or not, you could run:
+
+\small
+
+```{r}
+nepali %>%
+  mutate(tall = ht > 100) %>%
+  filter(!is.na(tall)) %>% 
+  group_by(sex, tall) %>%
+  summarize(n_children = n(),
+            mean_wt = mean(wt, na.rm = TRUE))
+```
+
+## In-course exercise
+
+We'll take a break now to continue the in-course exercise for this week (Section 3.6.3).
+
+## More reading / practice
+
+If you would like more reading and practice on what we've covered so far on transforming data, see chapter 5 of the "R for Data Science" book suggested at the start of the course. 
+
+As a reminder, that is available at: 
+
+http://r4ds.had.co.nz
+
+# Plots 
+
+## Plots to explore data
+
+Plots can be invaluable in exploring your data. \medskip
+
+Today, we will focus on **useful**, rather than **attractive** graphs, since we are focusing on exploring rather than presenting data. \medskip
+
+Next lecture, we will talk more about customization, to help you make more attractive plots that would go into final reports. \medskip
+
+## `ggplot` conventions
+
+Here, we'll be using functions from the `ggplot2` library, so you'll need to install that package:
+
+```{r}
+library(ggplot2)
+```
+
+The basic steps behind creating a plot with `ggplot2` are:
+
+1. Create an object of the `ggplot` class, typically specifying the **data** to be shown in the plot; 
+2. Add on (using `+`) one or more **geoms**, specifying the **aesthetics** for each; and 
+3. Add on (using `+`) other elements to create and customize the plot (e.g., add layers to customize scales or themes or to add facets).
+
+*Note*: To avoid errors, end lines with `+`, don't start lines with it. 
+
+## Plot data
+
+The `ggplot` function requires you to input a dataframe with the data you will plot. All the columns in that dataframe can be mapped to specific aesthetics within the plot. 
+
+```{r}
+nepali %>% 
+  slice(1:3)
+```
+
+For example, if we input the `nepali` dataframe, we would be able to create a scatterplot that shows each child's initial height on the x-axis, weight on the y-axis, and sex by the color of the point.
+
+## Plot aesthetics
+
+**Aesthetics** are plotting elements that can show certain elements of the data. \medskip
+
+For example, you may want to create a scatterplot where color shows gender, x-position shows height, and y-position shows weight. \medskip
+
+```{r echo = FALSE, warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+nepali %>%
+  ggplot(aes(x = ht, y = wt, color = sex)) + 
+  geom_point() + 
+  xlab("Height (cm)") + ylab("Weight (kg)")
+```
+
+## Plot aesthetics
+
+In the previous graph, the mapped aesthetics are color, x, and y. In the `ggplot` code, all of these aesthetic mappings will be specified within an `aes` call, which will be nested in another call in the `ggplot` pipeline. \medskip
+
+Aesthetic       | `ggplot` abbreviation  | `nepali` column
+----------------|------------------------|-----------------
+x-axis position | `x = `                 | `ht`
+y-axis position | `y = `                 | `wt`
+color           | `color = `             | `sex`
+
+This is how these mappings will be specified in an `aes` call:
+
+```{r eval = FALSE}
+# Note: This code should not be run by itself. 
+# It will eventually be nested in a ggplot call.
+aes(x = ht, y = wt, color = sex)
+```
+
+
+## Plot aesthetics
+
+Here are some common plot aesthetics you might want to specify: 
+
+```{r echo = FALSE}
+aes_vals <- data.frame(aes = c("`x`", "`y`", "`shape`",
+                               "`color`", "`fill`", "`size`",
+                               "`alpha`", "`linetype`"),
+                       desc = c("Position on x-axis", 
+                                "Position on y-axis", 
+                                "Shape",
+                                "Color of border of elements", 
+                                "Color of inside of elements",
+                                "Size", 
+                                "Transparency (1: opaque; 0: transparent)",
+                                "Type of line (e.g., solid, dashed)"))
+knitr::kable(aes_vals, col.names = c("Code", "Description"))
+```
+
+## Geoms
+
+You will add **geoms** that create the actual geometric objects on the plot. For example, a scatterplot has "points" geoms, since each observation is displayed as a point. 
+
+There are `geom_*` functions that can be used to add a variety of geoms. The function to add a "points" geom is `geom_point`. 
+
+We just covered three plotting elements: 
+
+- Data
+- Aesthetics
+- Geoms
+
+These are three elements that you will almost always specify when using `ggplot`, and they are sufficient to create a number of basic plots. 
+
+## Creating a ggplot object
+
+You can create a scatterplot using `ggplot` using the following code format:
+
+```{r, eval = FALSE}
+## Generic code
+ggplot(data = dataframe) + 
+  geom_point(mapping = aes(x = column_1, y = column_2, 
+                           color = column_3))
+```
+
+\small 
+Notice that: 
+
+1. The `ggplot` call specifies the **dataframe** with the data you want to plot 
+2. A **geom** is added using the appropriate `geom_*` function for a scatterplot (`geom_point`). 
+3. The mappings between columns in the dataframe and **aesthetics** of the geom is specified within an `aes` call in the `mapping` argument of the `geom_*` function call.
+4. The `aes` call includes mappings to two aesthetics that are required from the `geom_point` geom (`x` and `y`) and one that is optional (`color`).
+
+## Creating a ggplot object
+
+Let's put these ideas together to write the code to create a scatterplot for our example data: 
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+  ggplot(data = nepali) + 
+  geom_point(mapping = aes(x = ht, y = wt, color = sex)) 
+```
+
+## Adding geoms
+
+There are a number of different `geom_*` functions you can use to add geoms to a plot. They are divided between geoms that directly map the data to an aesthetic and those that show some summary or statistic of the data. \medskip 
+
+Some of the most common direct-mapping geoms are:
+
+Geom(s)                     | Description
+----------------------------|--------------
+`geom_point`                | Points in 2-D (e.g. scatterplot)
+`geom_line`, `geom_path`    | Connect observations with a line
+`geom_abline`               | A line with a certain intercept and slope
+`geom_hline`, `geom_vline`  | A horizontal or vertical line
+`geom_rug`                  | A rug plot
+`geom_label`, `geom_text`   | Text labels
+
+## Creating a ggplot object
+
+You can add several geoms to the same plot as layers:
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+  ggplot(data = nepali) + 
+  geom_point(mapping = aes(x = ht, y = wt, color = sex)) + 
+  geom_line(mapping = aes(x = ht, y = wt, color = sex)) + 
+  geom_rug(mapping = aes(x = ht, y = wt, color = sex)) 
+```
+
+## Creating a ggplot object
+
+You may have noticed that all of these geoms use the same aesthetic mappings (height to x-axis position, weight to y-axis position, and sex to color). To save time, you can specify the aesthetic mappings in the first `ggplot` call. These mappings will then be the default for any of the added geoms. 
+
+```{r eval = FALSE}
+ggplot(data = nepali,
+       mapping = aes(x = ht, y = wt, color = sex)) + 
+  geom_point() + 
+  geom_line() + 
+  geom_rug() 
+```
+
+## Creating a ggplot object
+
+Because the first argument of the `ggplot` call is a dataframe, you can also "pipe into" a `ggplot` call:
+
+```{r eval = FALSE}
+nepali %>% 
+  ggplot(aes(x = ht, y = wt, color = sex)) + 
+  geom_point() + 
+  geom_line() + 
+  geom_rug() 
+```
+
+## In-course exercise
+
+We'll take a break now to continue the in-course exercise for this week (Section 3.6.4).
+
+## Plot aesthetics
+
+Which aesthetics you must specify in the `aes` call depend on which geom you are adding to the plot. \medskip 
+
+You can find out the aesthetics you can use for a geom in the "Aesthetics" section of the geom's help file (e.g., `?geom_point`). \medskip 
+
+Required aesthetics are in bold in this section of the help file and optional ones are not. 
+
+## Constant aesthetics
+
+Instead of mapping an aesthetic to an element of your data, you can use a constant value for the aesthetic. For example, you may want to make all the points blue, rather than having color map to gender: 
+
+```{r echo = FALSE, warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+nepali %>%
+  ggplot(aes(x = ht, y = wt)) + 
+  geom_point(color = "blue")
+```
+
+In this case, you can define that aesthetic as a constant for the geom, outside of an `aes` statement.
+
+## Constant aesthetics
+
+For example, you may want to change the shape of the points in a scatterplot from their default shape, but not map them to a particular element of the data. \medskip
+
+In R, you can specify point shape with a number. Here are the shapes that correspond to the numbers 1 to 25:
+
+```{r echo = FALSE, out.width = "0.6\\textwidth", fig.width = 5, fig.height = 3, fig.align = "center"}
+x <- rep(1:5, 5)
+y <- rep(1:5, each = 5)
+shape <- 1:25
+to_plot <- data_frame(x = x, y = y, shape = shape)
+ggplot(to_plot, aes(x = x, y = y)) + 
+  geom_point(shape = shape, size = 4, color = "black", fill = "red") + 
+  geom_text(label = shape, nudge_x = -0.25) +
+  xlim(c(0.5, 5.5)) + 
+  theme_void() + 
+  scale_y_reverse()
+```
+
+## Constant aesthetics
+
+Here is an example of mapping point shape to a constant value other than the default:
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(data = nepali) + 
+  geom_point(mapping = aes(x = ht, y = wt, color = sex),
+             shape = 9)
+```
+
+## Constant aesthetics
+
+R has character names for different colors. For example: 
+
+```{r echo = FALSE, out.width = "0.18\\textwidth", fig.width = 5, fig.height = 3, fig.align = "center"}
+x <- rep(0, 6)
+y <- 1:6
+color <- c("blue", "blue4", "darkorchid", "deepskyblue2", 
+           "steelblue1", "dodgerblue3")
+to_plot <- data_frame(x = x, y = y, color = color)
+ggplot(to_plot, aes(x = x, y = y)) + 
+  geom_point(color = color, size = 2) + 
+  geom_text(label = color, hjust = 0, nudge_x = 0.05) + 
+  theme_void() + 
+  xlim(c(-1, 1.5)) +
+  scale_y_reverse()
+```
+
+Google "R colors" and search the images to find links to listings of different R colors.
+
+## Constant aesthetics
+
+Here is an example of mapping point shape and color to constant values other than the defaults:
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(data = nepali) + 
+  geom_point(mapping = aes(x = ht, y = wt),
+             shape = 9, 
+             color = "darkorchid")
+```
+
+## Useful plot additions
+
+There are also a number of elements that you can add onto a `ggplot` object using `+`. A few very frequently used ones are: 
+
+```{r echo = FALSE}
+plot_adds <- data.frame(add = c("`ggtitle`",
+                                "`xlab`, `ylab`, `labs`",
+                                "`xlim`, `ylim`",
+                                "`expand_limits`"),
+                        descrip = c("Plot title",
+                                    "x- and y-axis labels",
+                                    "Limits of x- and y-axis",
+                                    "Include a value in a range"))
+knitr::kable(plot_adds, col.names = c("Element", "Description"))
+```
+
+## Useful plot additions
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(data = nepali) + 
+  geom_point(mapping = aes(x = ht, y = wt)) + 
+  labs(x = "Height", y = "Weight") + 
+  ggtitle("Height vs. weight for Nepali children",
+          subtitle = "Based on data from West et al. (1997)") + 
+  expand_limits(x = 0, y = 0)
+```
+
+## In-course exercise
+
+We’ll take a break now to continue the in-course exercise for this week (Section 3.6.5).
+
+## Adding geoms
+
+There are a number of different `geom_*` functions you can use to add geoms to a plot. They are divided between geoms that directly map the data to an aesthetic and those that show some summary or statistic of the data. \medskip 
+
+Some of the most common "statistical" geoms are:
+
+Geom(s)                        | Description
+-------------------------------|--------------
+`geom_histogram`               | Show distribution in 1-D
+`geom_hex`, `geom_density`     | Show distribution in 2-D
+`geom_col`, `geom_bar`         | Create bar charts
+`geom_boxplot`, `geom_dotplot` | Create boxplots and related plots
+`geom_smooth`                  | Add a fitted line to a scatterplot
+
+## Adding geoms
+
+These "statistical" geoms all input the original data and perform some calculations on that data to determine how to plot the final geom. Often, this calculation involves some kind of summarization. 
+
+For example, the geom for a hexagonal 2-D heatmap (`geom_hex`) divides the data into an evenly-sized set of hexagons and then calculates the number of points in each hexagon to provide a 2-D visualization of how the data is distributed. 
+
+## Adding geoms
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(data = nepali) + 
+  geom_hex(aes(x = ht, y = wt))
+```
+
+## Adding geoms
+
+A histogram geom is a similar idea, but only gives the distribution across one variable: 
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(data = nepali) + 
+  geom_histogram(aes(x = ht))
+```
+
+
+## Histogram example
+
+You can add some elements to the histogram, like `ggtitle`, `labs`, and `xlim`:
+
+```{r, fig.width = 4, fig.height = 2.5, out.width="0.6\\textwidth", fig.align = "center", message = FALSE, warning = FALSE}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram(fill = "lightblue", color = "black") + 
+  ggtitle("Height of children") + 
+  labs(x = "Height (cm)", y = "Weight (kg)") + 
+  xlim(c(0, 120))
+```
+
+## Histogram example
+
+`geom_histogram` also has its own special argument, `bins`. You can use this to change the number of bins that are used to make the histogram:
+
+```{r, fig.width = 2.5, fig.height = 2, fig.align = "center", warning = FALSE, message = FALSE}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram(bins = 40) 
+```
+
+## Bar chart
+
+You can use the `geom_bar` geom to create a barchart:
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(nepali, aes(x = sex, fill = ht > 100)) + 
+  geom_bar()
+```
+
+## Bar chart
+
+With the `geom_bar` geom, you can use the `position` argument to change how the bars for different groups are shown (`"stack"`, `"dodge"`, `"fill"`):
+
+```{r warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+ggplot(nepali, aes(x = sex, fill = ht > 100)) + 
+  geom_bar(position = "dodge")
+```
+
+## Boxplot example
+
+To create a boxplot, you can use `geom_boxplot`: 
+
+```{r, fig.height = 2, fig.width = 2, warning = FALSE, fig.align="center"}
+ggplot(nepali, aes(x = 1, y = ht)) + 
+  geom_boxplot() + 
+  labs(x = "", y = "Height (cm)")
+```
+
+## Boxplot example
+
+You can also do separate boxplots by a factor. In this case, you'll need to include two aesthetics (`x` and `y`) when you initialize the ggplot object. 
+
+```{r, fig.height = 2, fig.width = 2.5, fig.align = "center", warning = FALSE}
+ggplot(nepali, aes(x = sex, y = ht, group = sex)) + 
+  geom_boxplot() + 
+  labs(x = "Sex", y = "Height (cm)")
+```
+
+## In-course exercise
+
+We'll take a break now to finish the in-course exercise for this week (Section 3.6.6).

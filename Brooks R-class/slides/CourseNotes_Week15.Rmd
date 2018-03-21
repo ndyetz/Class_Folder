@@ -1,0 +1,479 @@
+---
+title: "Next steps in R"
+output: 
+  beamer_presentation:
+    theme: "metropolis"
+fontsize: 10pt
+---
+
+```{r setup, include=FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(knitr)
+library(tidyr)
+library(ggplot2)
+library(gridExtra)
+library(pander)
+```
+
+## Final presentations 
+
+- Thursday, Dec. 14, 2:00-4:00 pm
+- Mayor of Old Town after? (My treat for first 1/2 pint or non-alcoholic drink of your choice)
+- Course surveys online this year-- details to come
+
+## Final presentations / reports
+
+- *Rationale:* Explain what you were hoping to achieve in writing the functions / app framework that your group created. 
+- *Idea development:* Describe the different ideas your group explored. What were the biggest challenges in this stage? For any ideas that didn't pan out, what were the key constraints? Also describe how you would tackle this problem if you were starting over.
+
+## Final presentations / reports
+
+- *Key functions:* Describe the final functions / app framework you decided on. Explain why you picked these. For functions, include documentation for the functions:
+    + Write a brief title for the function (< 8 words) and a brief description (3--4 sentences).
+    + Define all parameters. For example, if you have a `df` parameter, explain that this is the dataframe that will be modeled / visualized. If it must have certain column with certain names, specify that. 
+    + Define what the functions will output (e.g., "A ggplot object showing ..." or "The model output object from running a ..."). 
+    + If you have a reference (e.g., for a model you're fitting in the function), you can include that
+    + If you want an extra challenge, try to use the Roxygen2 syntax in writing these descriptions. Otherwise, you can write them in code comments.
+
+## Final presentations/ reports
+
+- *Room for errors:* So far, we have focused on getting working prototypes, without making sure they're error-proof and robust to a user doing something non-standard. Identify three things a user could do that could make your functions "break" (i.e., either return an error message or return something other than what you hope they will).
+
+## Final presentations / reports
+
+- *Next steps:* Include a section where you describe what you think are interesting next steps, i.e., what you would pursue next if you were continuing work on this project. Lay out explicitly a few ideas (2--3) that you think would be helpful. Be sure, when relevant, to describe how feedback from the project researchers helped in forming these ideas for next steps.
+
+## Final presentations / reports
+
+- The presentation should be 15--18 minutes per group.
+- For functions, you should show both some of the code and an example of output during the presentation.
+- For the final report, the functions and their documentation should be in ".R" files.
+- For the final report, everything else will be in a Word report. You may reference the functions you created by name in this report. The report should be no longer than 5 pages (using default font size, line spacing, etc. for RMarkdown documents; if you include figures or tables that show output from your functions, these do not need to count towards that page limit).
+- Be sure to show examples of using your functions in your Word report. 
+
+## Unsupervised learning
+
+Example applications:
+
+- Look for subgroups among samples of breast cancer patients
+- ID shoppers with similar browsing and purchase histories (recommendation system)
+
+Challenges: 
+
+- No well-defined goal
+- Hard to assess if a technique did well
+- Hard to determine if clusters just result from noise
+- Choices like number of clusters, dissimilarity measure, and type of linkage can have a big influence on results
+
+## NCI-60 panel of cancer cells
+
+This example is from James et al., Ch. 10 (*An Introduction to Statistical Learning*).
+
+There is an R package called `ISLR` that includes datasets to go along with the James textbook. 
+
+```{r echo = TRUE, warning = FALSE, eval = 1}
+library(ISLR)
+?NCI60
+```
+
+The `NCI60` dataset is microarray data from the National Cancer Institute, with expression levels on 6,830 genes from 64 cancer cells. 
+
+## NCI-60 panel of cancer cells
+
+```{r}
+names(NCI60)
+str(NCI60)
+```
+
+The dataset has two parts: 
+
+- `labs`: Labels with the cancer type for each cell line. Vector, length 64. 
+- `data`: Dataframe, 64 rows, 6,830 columns.
+
+## NCI-60 panel of cancer cells
+
+```{r echo = TRUE}
+nci_labs <- NCI60$labs
+nci_data <- NCI60$data
+
+
+nci_labs[1:4]
+```
+
+## NCI-60 panel of cancer cells
+
+```{r echo = TRUE}
+data_frame(cancer = nci_labs) %>% group_by(cancer) %>% 
+  summarize(n = n()) %>% arrange(desc(n)) %>% kable()
+```
+
+## NCI-60 panel of cancer cells
+
+```{r echo = TRUE, eval = FALSE, fig.width = 5, fig.height = 4}
+library(forcats)
+data_frame(cancer = nci_labs) %>% 
+  mutate(cancer = fct_lump(cancer, n = 8, 
+                           other_level = "OTHER")) %>% 
+  group_by(cancer) %>% 
+  summarize(n = n()) %>% 
+  ggplot(aes(x = fct_reorder(cancer, n), y = n)) + 
+  geom_col() + 
+  coord_flip() + 
+  labs(x = "", y = "# of observations")
+```
+
+## NCI-60 panel of cancer cells
+
+```{r echo = FALSE, fig.align = "center", fig.width = 5, fig.height = 4}
+library(forcats)
+data_frame(cancer = nci_labs) %>% 
+  mutate(cancer = fct_lump(cancer, n = 8, other_level = "OTHER")) %>% 
+  group_by(cancer) %>% 
+  summarize(n = n()) %>% 
+  ggplot(aes(x = fct_reorder(cancer, n), y = n)) + 
+  geom_col() + 
+  coord_flip() + 
+  labs(x = "", y = "# of observations")
+```
+
+## NCI-60 panel of cancer cells
+
+For the `nci_data` part of the dataset, each row is one of the cell lines and each column gives a measure of gene expression. 
+
+```{r echo = TRUE}
+nci_data[1:5, 1:5]
+```
+
+## Distributions of gene expressions
+
+```{r echo = TRUE, eval = FALSE}
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:20) %>% 
+  gather(key = "gene", value = "expression") %>% 
+  ggplot(aes(x = expression)) + 
+  geom_histogram() + 
+  facet_wrap(~ gene)
+```
+
+## Distributions of gene expressions
+
+```{r echo = FALSE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 5, warning = FALSE, fig.align = "center"}
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:15) %>% 
+  gather(key = "gene", value = "expression") %>% 
+  ggplot(aes(x = expression)) + 
+  geom_histogram() + 
+  facet_wrap(~ gene, ncol = 5)
+```
+
+## Correlation between gene expressions
+
+```{r}
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:5) %>% 
+  cor()
+```
+
+## Correlations between gene expressions
+
+```{r echo = TRUE, warning = FALSE, message = FALSE, fig.height = 6, fig.width = 8, fig.align = "center", eval = FALSE}
+library(ggcorrplot)
+library(viridis)
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:50) %>% 
+  cor() %>% 
+  ggcorrplot() + 
+  scale_fill_viridis()
+```
+
+## Correlations between gene expressions
+
+```{r echo = FALSE, warning = FALSE, message = FALSE, fig.height = 6, fig.width = 8, fig.align = "center"}
+library(ggcorrplot)
+library(viridis)
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:50) %>% 
+  cor() %>% 
+  ggcorrplot() + 
+  scale_fill_viridis()
+```
+
+## Heatmap
+
+```{r echo = TRUE, eval = FALSE}
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:15) %>% 
+  sample_n(20) %>% 
+  mutate(n = 1:n()) %>% 
+  gather(key = "gene", value = "expression", -n) %>% 
+  ggplot(aes(x = gene, y = n, fill = expression)) + 
+  geom_tile() + 
+  scale_fill_viridis()
+```
+
+## Heatmap
+
+```{r echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 5, fig.align = "center"}
+nci_data %>% 
+  as_tibble() %>% 
+  select(1:15) %>% 
+  sample_n(20) %>% 
+  mutate(n = 1:n()) %>% 
+  gather(key = "gene", value = "expression", -n) %>% 
+  ggplot(aes(x = gene, y = n, fill = expression)) + 
+  geom_tile() + 
+  scale_fill_viridis()
+```
+
+
+## Heatmap
+
+```{r echo = TRUE, fig.align = "center", fig.width = 7, fig.height = 5}
+heatmap(nci_data[, 1:30])
+```
+
+## Heatmap
+
+```{r echo = TRUE, fig.width = 10, fig.height = 5, fig.align = "center"}
+library(pheatmap)
+pheatmap(nci_data[, 1:30], cutree_rows = 5)
+```
+
+## Heatmap
+
+R has some other packages for making heatmaps, including:
+
+- `d3heatmap`: Create interactive heatmaps
+- `ComplexHeatmap`: Create very complex heatmaps (on Bioconductor)
+
+## PCA
+
+Principal components analysis (PCA) can help with exploratory data analysis. If you did pairwise scatterplots of all `r ncol(nci_data)` gene expressions, you would need loads of plots: 
+
+```{r}
+p <- ncol(nci_data)
+num_graphs <- p * (p - 1) / 2
+```
+
+
+$$
+\frac{p(p-1)}{2} = \frac{`r p`(`r p`-1)}{2} = `r num_graphs`
+$$
+
+## PCA
+
+Instead, you can plot pairwise scatterplots of the first few principal components loadings. Based on James et al., 
+
+> PCA helps create a "low-dimensional representation of the data that captures as much of the information as possible".
+
+## PCA
+
+You can use the `prcomp` function to perform a principal components analysis on a data matrix:
+
+```{r echo = TRUE}
+pr_out <- prcomp(nci_data, scale = TRUE)
+class(pr_out)
+```
+
+The output from this function has the class `prcomp`. 
+
+## PCA 
+
+As a reminder, since the output is a special class, it will have special methods of things like `print` and `summary`: 
+
+```{r}
+names(summary(pr_out))
+```
+
+## PCA 
+
+The `ggfortify` package has an `autoplot` method for `prcomp` class objects. This plots each observation on its values for the first two principal components.
+
+```{r echo = TRUE, fig.width = 4, fig.height = 2.5, out.height = "0.6\\textheight", fig.align = "center"}
+library(ggfortify)
+autoplot(pr_out)
+```
+
+## PCA 
+
+You can add labels that show the loadings for each variable. However, this is usually only legible if you have a lower number of variables you're considering.
+
+```{r echo = TRUE, fig.width = 4, fig.height = 2.5, out.height = "0.6\\textheight", fig.align = "center"}
+autoplot(prcomp(nci_data[ , 1:5]), loadings = TRUE, 
+         loadings.label = TRUE)
+```
+
+## PCA 
+
+The `$x` element of the output of `prcomp` are the value of the rotated data (i.e., the centered and scaled data multiplied by the rotation matrix):
+
+```{r echo = TRUE}
+dim(pr_out$x)
+pr_out$x[1:4, 1:4]
+```
+
+## PCA
+
+You can pull out the PC values for each observation and plot those, adding the cell type labels with color:
+
+```{r eval = FALSE, echo = TRUE, fig.width = 4, fig.height = 3, fig.align = "center"}
+library(tibble)
+pr_out$x %>% 
+  as.data.frame() %>% 
+  select(PC1:PC2) %>% 
+  rownames_to_column() %>% 
+  mutate(label = nci_labs) %>% 
+  ggplot(aes(x = PC1, y = PC2, 
+             color = fct_lump(label, n = 5))) + 
+  geom_point() 
+```
+
+## PCA
+
+```{r eval = TRUE, echo = FALSE, fig.width = 7, fig.height = 4, fig.align = "center"}
+library(tibble)
+pr_out$x %>% 
+  as.data.frame() %>% 
+  select(PC1:PC2) %>% 
+  rownames_to_column() %>% 
+  mutate(label = nci_labs) %>% 
+  ggplot(aes(x = PC1, y = PC2, 
+             color = fct_lump(label, n = 5))) + 
+  geom_point() 
+```
+
+## PCA
+
+To see the standard deviation explained by the first five components, you can pull out the `sdev` component:
+
+```{r echo = TRUE}
+pr_out$sdev[1:5]
+```
+
+## PCA
+
+To create a scree plot: 
+
+```{r echo = TRUE, fig.width = 4, fig.height = 2}
+to_plot <- data.frame(PC = 1:nrow(pr_out$x),
+                      PVE = 100 * pr_out$sdev ^ 2 / 
+                        sum(pr_out$sdev ^ 2))
+ggplot(to_plot, aes(x = PC, y = PVE)) + geom_line() + 
+  theme_bw()
+```
+
+## PCA
+
+From James et al.:
+
+> "Unfortunately, there is no well-accepted objective way to decide how many principal components are enough. In Fact, the question of how many principal components are enough is inherently ill-defined, and will depend on the specific area of application and the specific data set."
+
+## Clustering methods
+
+Goal: Create clusters so that the within-cluster variation among observations is as low as possible.
+
+- **Hierarchical clustering**: Create a dendrogram that could be used to pick out clusters of any size.
+- **K-means clustering**: Split the observations into a certain number of clusters.
+
+You can cluster observations by features or features by observations.
+
+## Hierarchical clustering
+
+Start by standardizing the data: 
+
+```{r echo = TRUE}
+sd_data <- scale(nci_data)
+```
+
+Then use the `dist` function to measure Euclidean distance: 
+
+```{r echo = TRUE}
+data_dist <- dist(sd_data, method = "euclidean")
+class(data_dist)
+```
+
+Other `method` options: "maximum", "manhattan", "canberra", "binary", "minkowski".
+
+## Hierarchical clustering
+
+`hclust` can be applied to a `dist` object to identify clusters: 
+
+```{r echo = TRUE}
+nci_clusters <- hclust(data_dist)
+names(nci_clusters)
+class(nci_clusters)
+```
+
+The default is to cluster using complete linkage. 
+
+## Hierarchical clustering
+
+```{r echo = TRUE, fig.width = 8.5, fig.height = 4.5}
+plot(nci_clusters)
+```
+
+## Hierarchical clustering
+
+Use the cancer type for labels: 
+
+```{r echo = TRUE, fig.width = 10, fig.height = 4.5}
+plot(nci_clusters, labels = nci_labs, xlab = "",
+     ylab = "", sub = "")
+```
+
+## Hierarchical clustering
+
+**Linkage**: The dissimilarity between two groups of observations (see Table 10.2 in James et al.). 
+
+- Complete: Largest of all pairwise distances between observations in cluster A and cluster B
+- Average: Average of all pairwise distances between observations in cluster A and cluster B
+- Single: Smallest of all pairwise distances between observations in cluster A and cluster B
+- Centroid: The distance between the centroids of each cluster  
+
+## Hierarchical clustering
+
+By change the `hclust` arguments, you can use average linkage instead:
+
+```{r echo = TRUE, fig.width = 10, fig.height = 4.5}
+plot(hclust(data_dist, method = "average"),
+     labels = nci_labs, xlab = "",
+     ylab = "", sub = "")
+```
+
+## Hierarchical clustering
+
+Or single linkage:
+
+```{r echo = TRUE, fig.width = 10, fig.height = 4.5}
+plot(hclust(data_dist, method = "single"),
+     labels = nci_labs, xlab = "",
+     ylab = "", sub = "")
+```
+
+## Cutting down to fewer clusters
+
+You can use the `cutree` function to cut the cluster dendrogram at a certain height to only get a certain number of clusters. For example, to get four clusters:
+
+```{r echo = TRUE}
+hc_clusters <- cutree(nci_clusters, 4)
+hc_clusters
+```
+
+## Cutting down to fewer clusters
+
+```{r echo = TRUE}
+data.frame(cancer = nci_labs, cluster = hc_clusters) %>%
+  group_by(cluster) %>% 
+  summarize(cancers = paste(unique(cancer), collapse = ", ")) %>%
+  pander(split.cell = 50)
+```
+
+
+

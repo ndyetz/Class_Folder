@@ -1,0 +1,1096 @@
+# Exploring data #1
+
+[Download](https://github.com/geanders/RProgrammingForResearch/raw/master/slides/CourseNotes_Week3.pdf) a pdf of the lecture slides covering this topic.
+
+## Data from a package
+
+So far we've covered three ways to get data into R:
+
+1. From flat files (either on your computer or online)
+2. From files like SAS and Excel
+3. From R objects (i.e., using `load()`)
+
+Many R packages come with their own data, which is very easy to load and use. For example, the `faraway` package, which complements Julian Faraway's book *Linear Models with R* (available as an ebook from the CSU library), has a dataset called `worldcup` that I'll use for some examples and that you'll use for part of this week's in-course exercise. To load this dataset, first load the package with the data (`faraway`) and then use the `data()` function with the dataset name ("worldcup") as the argument to the `data` function:
+
+```{r}
+library(faraway)
+data("worldcup")
+```
+
+Unlike most data objects you'll work with, datasets that are part of an R package will often have their own help files. You can access this help file for a dataset using the `?` operator with the dataset's name:
+
+```{r, eval = FALSE}
+?worldcup
+```
+
+This helpful will usually include information about the size of the dataset, as well as definitions for each of the columns.
+
+To get a list of all of the datasets that are available in the packages you currently have loaded, run `data()` without an option inside the parentheses:
+
+```{r, eval = FALSE}
+data()
+```
+
+```{block, type = "rmdnote"}
+If you run the `library` function without any arguments (`library()`), it works in a similar way-- R will open a list of all the R packages that you have installed on your computer and can open with a `library` call. 
+```
+
+## Plots to explore data
+
+Exploratory data analysis is a key step in data analysis, and plotting your data in different ways is an important part of this process. In this section, I will focus on the basics of `ggplot2` plotting, to get you started creating some plots to explore your data. 
+This section will focus on making **useful**, rather than **attractive** graphs, since at this stage we are focusing on exploring data for yourself rather than presenting results  to others. Next week, I will explain more about how you can customize ggplot objects, to help you make plots to communicate with others.  
+
+
+All of the plots we'll make today will use the `ggplot2` package (another member of the tidyverse!). If you don't already have that installed, you'll need to install it. You then need to load the package in your current session of R:
+
+```{r}
+# install.packages("ggplot2")  ## Uncomment and run if you don't have `ggplot2` installed
+library(ggplot2)
+```
+
+The process of creating a plot using `ggplot2` follows conventions that are a bit different than most of the code you've seen so far in R (although it is somewhat similar to the idea of piping I introduced in the last chapter). The basic steps behind creating a plot with `ggplot2` are:
+
+1. Create an object of the `ggplot` class, typically specifying the **data** and some or all of the **aesthetics**; 
+2. Add on **geoms** and other elements to create and customize the plot, using `+`.
+
+You can add on one or many geoms and other elements to create plots that range from very simple to very customized. This week, we'll focus on simple geoms and added elements, and then explore more detailed customization next week. 
+
+```{block type = "rmdwarning"}
+If R gets to the end of a line and there is not some indication that the call is not over (e.g., `%>%` for piping or `+` for `ggplot2` plots), R interprets that as a message to run the call without reading in further code. A common error when writing `ggplot2` code is to put the `+` to add a geom or element at the beginning of a line rather than the end of a previous line-- in this case, R will try to execute the call too soon. To avoid errors, be sure to end lines with `+`, don't start lines with it. 
+```
+
+### Initializing a ggplot object
+
+The first step in creating a plot using `ggplot2` is to create a ggplot object. This object will not, by itself, create a plot with anything in it. Instead, it typically specifies the data frame you want to use and which aesthetics will be mapped to certain columns of that data frame (aesthetics are explained more in the next subsection). 
+
+Use the following conventions to initialize a ggplot object:
+
+```{r, eval = FALSE}
+## Generic code
+object <- ggplot(dataframe, aes(x = column_1, y = column_2))
+```
+
+The data frame is the first parameter in a `ggplot` call and, if you like, you can use the parameter definition with that call (e.g., `data = dataframe`). Aesthetics are defined within an `aes` function call that typically is used within the `ggplot` call. 
+
+```{block type = "rmdnote"}
+While the `ggplot` call is the place where you will most often see an `aes` call, `aes` can also be used within the calls to add specific geoms. This can be particularly useful if you want to map aesthetics differently for different geoms in your plot. We'll see some examples of this use of `aes` more in later sections, when we talk about customizing plots. The `data` parameter can also be used in geom calls, to use a different data frame from the one defined when creating the original ggplot object, although this tends to be less common. 
+```
+
+### Plot aesthetics
+
+**Aesthetics** are properties of the plot that can show certain elements of the data. For example, in Figure \@ref(fig:aesmapex), color shows (is mapped to) gender, x-position shows height, and y-position shows weight in a sample data set of measurements of children in Nepal. 
+
+```{r aesmapex, echo = FALSE, warning = FALSE, fig.width = 6, fig.height = 4, fig.align = "center", message = FALSE, fig.cap = "Example of how different properties of a plot can show different elements to the data. Here, color indicates gender, position along the x-axis shows height, and position along the y-axis shows weight. This example is a subset of data from the `nepali` dataset in the `faraway` package."}
+library(dplyr)
+data("nepali") 
+nepali %>%
+  tbl_df() %>% 
+  distinct(id, .keep_all = TRUE) %>%
+  mutate(sex = factor(sex, levels = c(1, 2), labels = c("Male", "Female"))) %>%
+  ggplot(aes(x = ht, y = wt, color = sex)) + 
+  geom_point() + 
+  xlab("Height (cm)") + ylab("Weight (kg)")
+```
+
+```{block type = "rmdnote"}
+Any of these aesthetics could also be given a constant value, instead of being mapped to an element of the data. For example, all the points could be red, instead of showing gender.
+```
+
+Which aesthetics are required for a plot depend on which geoms (more on those in a second) you're adding to the plot. You can find out the aesthetics you can use for a geom in the "Aesthetics" section of the geom's help file (e.g., `?geom_point`). Required aesthetics are in bold in this section of the help file and optional ones are not. Common plot aesthetics you might want to specify include: 
+
+```{r echo = FALSE}
+aes_vals <- data.frame(aes = c("`x`", "`y`", "`shape`",
+                               "`color`", "`fill`", "`size`",
+                               "`alpha`", "`linetype`"),
+                       desc = c("Position on x-axis", 
+                                "Position on y-axis", 
+                                "Shape",
+                                "Color of border of elements", 
+                                "Color of inside of elements",
+                                "Size", 
+                                "Transparency (1: opaque; 0: transparent)",
+                                "Type of line (e.g., solid, dashed)"))
+knitr::kable(aes_vals, col.names = c("Code", "Description"))
+```
+
+### Adding geoms
+
+Next, you'll want to add one or more `geoms` to create the plot. You can add these with `+` after the `ggplot` statement to initialize the ggplot object. Some of the most common geoms are:
+
+```{r echo = FALSE}
+plot_funcs <- data.frame(type = c("Histogram (1 numeric variable)",
+                                  "Scatterplot (2 numeric variables)",
+                                  "Boxplot (1 numeric variable, possibly 1 factor variable)",
+                                  "Line graph (2 numeric variables)"), 
+                         ggplot2_func = c("`geom_histogram`",
+                                          "`geom_point`",
+                                          "`geom_boxplot`",
+                                          "`geom_line`"))
+knitr::kable(plot_funcs, col.names = c("Plot type",
+                                       "ggplot2 function"))
+```
+
+### Constant aesthetics
+
+Instead of mapping an aesthetic to an element of your data, you can use a constant value for it. For example, you may want to make all the points green, rather than having color map to gender: 
+
+```{r echo = FALSE, warning = FALSE, fig.align = "center", out.width = "0.6\\textwidth", message = FALSE, fig.width = 5, fig.height = 3}
+nepali %>%
+  tbl_df() %>% 
+  distinct(id, .keep_all = TRUE) %>%
+  mutate(sex = factor(sex, levels = c(1, 2), labels = c("Male", "Female"))) %>%
+  ggplot(aes(x = ht, y = wt)) + 
+  geom_point(color = "darkgreen") + 
+  xlab("Height (cm)") + ylab("Weight (kg)")
+```
+
+In this case, you'll define that aesthetic when you add the geom, outside of an `aes` statement. In R, you can specify the shape of points with a number. Figure \@ref(fig:shapeexamples) shows the shapes that correspond to the numbers 1 to 25 in the `shape` aesthetic. This figure also provides an example of the difference between color (black for all these example points) and fill (red for these examples). You can see that some point shapes include a fill (21 for example), while some are either empty (1) or solid (19).
+
+```{r shapeexamples, echo = FALSE, fig.width = 5, fig.height = 3, fig.align = "center", fig.cap = "Examples of the shapes corresponding to different numeric choices for the `shape` aesthetic. For all examples, `color` is set to black and `fill` to red."}
+x <- rep(1:5, 5)
+y <- rep(1:5, each = 5)
+shape <- 1:25
+to_plot <- data_frame(x = x, y = y, shape = shape)
+ggplot(to_plot, aes(x = x, y = y)) + 
+  geom_point(shape = shape, size = 4, color = "black", fill = "red") + 
+  geom_text(label = shape, nudge_x = -0.25) +
+  xlim(c(0.5, 5.5)) + 
+  theme_void() + 
+  scale_y_reverse()
+```
+
+If you want to set color to be a constant value, you can do that in R using character strings for different colors. Figure \@ref(fig:colorexamples) gives an example of some of the different blues available in R. To find links to listings of different R colors, google "R colors" and search by "Images".
+
+```{r colorexamples, echo = FALSE, fig.width = 5, fig.height = 3, fig.align = "center", fig.cap = "Example of available shades of blue in R."}
+x <- rep(0, 6)
+y <- 1:6
+color <- c("blue", "blue4", "darkorchid", "deepskyblue2", 
+           "steelblue1", "dodgerblue3")
+to_plot <- data_frame(x = x, y = y, color = color)
+ggplot(to_plot, aes(x = x, y = y)) + 
+  geom_point(color = color, size = 2) + 
+  geom_text(label = color, hjust = 0, nudge_x = 0.05) + 
+  theme_void() + 
+  xlim(c(-1, 1.5)) +
+  scale_y_reverse()
+```
+
+### Useful plot additions
+
+There are also a number of elements that you can add onto a `ggplot` object using `+`. A few that are used very frequently are: 
+
+```{r echo = FALSE}
+plot_adds <- data.frame(add = c("`ggtitle`",
+                                "`xlab`, `ylab`",
+                                "`xlim`, `ylim`"),
+                        descrip = c("Plot title",
+                                    "x- and y-axis labels",
+                                    "Limits of x- and y-axis"))
+knitr::kable(plot_adds, col.names = c("Element", "Description"))
+```
+
+### Example dataset
+
+For the example plots, I'll use a dataset in the `faraway` package called `nepali`. This gives data from a study of the health of a group of Nepalese children. 
+
+```{r}
+library(faraway)
+data(nepali)
+```
+
+I'll be using functions from `dplyr` and `ggplot2`, so those need to be loaded:
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+Each observation is a single measurement for a child; there can be multiple observations per child. I used the following code to select only the columns for child id, sex, weight, height, and age. I also used `distinct` to limit the dataset to only include one measurement for each chile, the child's first measurement in the dataset. 
+
+```{r message = FALSE}
+nepali <- nepali %>%
+  select(id, sex, wt, ht, age) %>%
+  mutate(id = factor(id),
+         sex = factor(sex, levels = c(1, 2),
+                      labels = c("Male", "Female"))) %>%
+  distinct(id, .keep_all = TRUE)
+```
+
+After this cleaning, the data looks like this:
+
+```{r}
+head(nepali)
+```
+
+### Histograms
+
+Histograms show the distribution of a single variable. Therefore, `geom_histogram()` requires only one main aesthetic, `x`, the (numeric) vector for which you want to create a histogram. For example, to create a histogram of children's heights for the Nepali dataset (Figure \@ref(fig:nepalihist1)), run: 
+
+```{r, nepalihist1, fig.width = 4, fig.height = 3, message = FALSE, warning = FALSE, fig.align = "center", fig.cap = "Basic example of plotting a histogram with `ggplot2`. This histogram shows the distribution of heights for the first recorded measurements of each child in the `nepali` dataset."}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram()
+```
+
+```{block type = "rmdnote"}
+If you run the code with no arguments for `binwidth` or `bins` in `geom_histogram`, you will get a message saying "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.". This message is just saying that a default number of bins was used to create the histogram. You can use arguments to change the number of bins used, but often this default is fine. You may also get a message that observations with missing values were removed. 
+```
+
+You can add some elements to the histogram now to customize it a bit. For example (Figure \@ref()), you can add a figure title (`ggtitle`) and clearer labels for the x-axis (`xlab`). You can also change the range of values shown by the x-axis (`xlim`).
+
+```{r, nepalihist2, fig.width = 4, fig.height = 3, fig.align = "center", message = FALSE, warning = FALSE, fig.cap = "Example of adding ggplot elements to customize a histogram."}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram(fill = "lightblue", color = "black") + 
+  ggtitle("Height of children") + 
+  xlab("Height (cm)") + xlim(c(0, 120))
+```
+
+The geom `geom_histogram` also has special argument for setting the number of width of the bins used in the histogram. Figure \@ref(fig) shows an example of how you can use the `bins` argument to change the number of bins that are used to make the histogram of height for the `nepali` dataset.  
+
+```{r, nepalihist3, fig.width = 4, fig.height = 3, fig.align = "center", warning = FALSE, message = FALSE, fig.cap = "Example of using the `bins` argument to change the number of bins used in a histogram."}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram(fill = "lightblue", color = "black",
+                 bins = 40) 
+```
+
+Similarly, the `binwidth` argument can be used to set the width of bins. Figure \@ref(fig:nepalihist4) shows an example of using this function to create a histogram of the Nepali children's heights with binwidths of 10 centimeters (note that this argument is set in the same units as the x variable).
+
+```{r, nepalihist4, fig.width = 4, fig.height = 3, fig.align = "center", warning = FALSE, message = FALSE, fig.cap = "Example of using the `binwidth` argument to set the width of each bin used in a histogram."}
+ggplot(nepali, aes(x = ht)) + 
+  geom_histogram(fill = "lightblue", color = "black",
+                 binwidth = 10) 
+```
+
+### Scatterplots
+
+A scatterplot shows how one variable changes as another changes. You can use the `geom_point` geom to create a scatterplot. For example, to create a scatterplot of height versus age for the Nepali data (Figure \@ref(fig:nepaliscatter1)), you can run the following code: 
+
+```{r nepaliscatter1, fig.width = 5, fig.height = 4, warning = FALSE, fig.align = "center", fig.cap = "Example of creating a scatterplot. This scatterplot shows the relationship between children's heights and weights within the nepali dataset."}
+ggplot(nepali, aes(x = ht, y = wt)) + 
+  geom_point()
+```
+
+Again, you can use some of the options and additions to change the plot appearance. For example, to add a title, change the x- and y-axis labels, and change the color and size of the points on the scatterplot (Figure \@ref(fig:nepaliscatter2)), you can run:
+
+```{r nepaliscatter2, fig.width = 5, fig.height = 4, fig.align = "center", message = FALSE, warning = FALSE, fig.cap = "Example of adding ggplot elements to customize a scatterplot."}
+ggplot(nepali, aes(x = ht, y = wt)) + 
+  geom_point(color = "blue", size = 0.5) + 
+  ggtitle("Weight versus Height") + 
+  xlab("Height (cm)") + ylab("Weight (kg)")
+```
+
+You can also try mapping another variable in the dataset to the `color` aesthetic. For example, to use color to show the sex of each child in the scatterplot (Figure \@ref(fig:nepaliscatter3)), you can run:
+
+```{r nepaliscatter3, fig.width = 5, fig.height = 4, fig.align = "center", message = FALSE, warning = FALSE, fig.cap = "Example of mapping color to an element of the data in a scatterplot."}
+ggplot(nepali, aes(x = ht, y = wt, color = sex)) + 
+  geom_point(size = 0.5) + 
+  ggtitle("Weight versus Height") + 
+  xlab("Height (cm)") + ylab("Weight (kg)")
+```
+
+### Boxplots 
+
+Boxplots can be used to show the distribution of a continuous variable. To create a boxplot, you can use the `geom_boxplot` geom. To plot a boxplot for a single, continuous variable, you can map that variable to `y` in the `aes` call, and map `x` to the constant `1`. For example, to create a boxplot of the heights of children in the Nepali dataset (Figure \@ref(fig:nepaliboxplot1)), you can run:
+
+```{r nepaliboxplot1, fig.height = 4, fig.width = 4, warning = FALSE, fig.align="center", fig.cap = "Example of creating a boxplot. The example shows the distribution of height data for children in the nepali dataset."}
+ggplot(nepali, aes(x = 1, y = ht)) + 
+  geom_boxplot() + 
+  xlab("")+ ylab("Height (cm)")
+```
+
+You can also create separate boxplots, one for each level of a factor (Figure \@ref(fig:nepaliboxplot2)). In this case, you'll need to include two aesthetics (`x` and `y`) when you initialize the ggplot object The `y` variable is the variable for which the distribution will be shown, and the `x` variable should be a discrete (categorical or TRUE/FALSE) variable, and will be used to group the variable. This `x` variable should also be specified as the grouping variable, using `group` within the aesthetic call.
+
+```{r nepaliboxplot2, fig.height = 4, fig.width = 5, fig.align = "center", warning = FALSE, fig.cap = "Example of creating separate boxplots, divided by a categorical grouping variable in the data."}
+ggplot(nepali, aes(x = sex, y = ht, group = sex)) + 
+  geom_boxplot() + 
+  xlab("Sex")+ ylab("Height (cm)") 
+```
+
+### Extensions of `ggplot2`
+
+There are lots of R extensions for creating other interesting plots. For example, you can use the `ggpairs` function from the `GGally` package to plot all pairs of scatterplots for several variables (Figure \@ref(fig:ggallyexample)). 
+
+```{r ggallyexample, out.width = "\\textwidth", fig.align = "center", message = FALSE, warning = FALSE, fig.cap = "Example of using ggpairs from the GGally package for exploratory data analysis.", eval = FALSE}
+library(GGally)
+ggpairs(nepali %>% select(sex, wt, ht, age))
+```
+
+Notice how this output shows continuous and binary variables differently. For example, the center diagonal shows density plots for continuous variables, but a bar chart for the categorical variable. 
+
+See https://www.ggplot2-exts.org to find more `ggplot2` extensions.
+
+## Simple statistics functions
+
+### Summary statistics
+
+To explore your data, you'll need to be able to calculate some simple statistics for vectors, including calculating the mean and range of continuous variables and counting the number of values in each category of a factor or logical vector. 
+
+Here are some simple statistics functions you will likely use often:
+
+Function  | Description
+--------- | -----------------
+`range()` | Range (minimum and maximum) of vector 
+`min()`, `max()` | Minimum or maximum of vector
+`mean()`, `median()` | Mean or median of vector
+`sd()` | Standard deviation of vector
+`table()` | Number of observations per level for a factor vector
+`cor()` | Determine correlation(s) between two or more vectors
+`summary()` | Summary statistics, depends on class
+
+All of these functions take, as the main argument, the vector or vectors for which you want the statistic. If there are missing values in the vector, you'll typically need to add an argument to say what to do with the missing values. The parameter name for this varies by function, but for many of these functions it's `na.rm = TRUE` or `use="complete.obs"`.
+
+```{r}
+mean(nepali$wt, na.rm = TRUE)
+range(nepali$ht, na.rm = TRUE)
+sd(nepali$ht, na.rm = TRUE)
+table(nepali$sex)
+```
+
+Most of these functions take a single vector as the input. The `cor` function, however, calculates the correlation between vectors and so takes two or more vectors. If you give it multiple values, it will give the correlation matrix for all the vectors.
+
+```{r}
+cor(nepali$wt, nepali$ht, use = "complete.obs")
+cor((nepali %>% select(wt, ht, age)), use = "complete.obs")
+```
+
+R supports object-oriented programming. Your first taste of this shows up with the `summary` function. For the `summary` function, R does not run the same code every time. Instead, R first checks what type of object was input to `summary`, and then it runs a function (*method*) specific to that type of object. For example, if you input a continuous vector, like the `ht` column in `nepali`, to `summary`, the function will return the mean, median, range, and 25th and 75th percentile values: 
+
+```{r}
+summary(nepali$wt)
+```
+
+However, if you submit a factor vector, like the `sex` column in `nepali`, the `summary` function will return a count of how many elements of the vector are in each factor level (as a note, you could do the same thing with the `table` function):
+
+```{r}
+summary(nepali$sex)
+```
+
+The `summary` function can also input other data structures, including dataframes, lists, and special object types, like regression model objects. In each case, it performs different actions specific to the object type. Later in this section, we'll cover regression models, and see what the `summary` function returns when it is used with regression model objects.
+
+### `summarize` function
+
+You will often want to use these functions in conjunction with the `summarize` function in `dplyr`. For example, to create a new dataframe with the mean weight of children in the `nepali` dataset, you can use `mean` inside a `summarize` function: 
+
+```{r}
+nepali %>%
+  summarize(mean_wt = mean(wt, na.rm = TRUE))
+```
+
+There are also some special functions that you can use with `summarize`. For example, the `n` function will calculate the number of observations and the `first` function will return the first value of a column: 
+
+```{r}
+nepali %>%
+  summarize(n_children =n(), 
+            first_id = first(id))
+```
+
+See the "summary function" section of the [the RStudio Data Wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) for more examples of these special functions. 
+
+Often, you will be more interested in summaries within certain groupings of your data, rather than overall summaries. For example, you may be interested in mean height and weight by sex, rather than across all children, for the `nepali` data. It is very easy to calculate these grouped summaries using `dplyr`-- you just need to group data using the `group_by` function (also a `dplyr` function) before you run the `summarize` function:
+
+```{r}
+nepali %>%
+  group_by(sex) %>%
+  summarize(mean_wt = mean(wt, na.rm = TRUE),
+            n_children =n(), 
+            first_id = first(id))
+```
+
+```{block, type = "rmdnote"}
+Don't forget that you need to save the output to a new object if you want to use it later. The above code, which creates a dataframe with summaries for Nepali children by sex, will only be printed out to your console if run as-is. If you'd like to save this output as an object to use later (for example, for a plot or table), you need to assign it to an R object. 
+```
+
+## Logical vectors
+
+Last week, you learned a lot about logical statements and how to use them with the `filter` function. You can also use logical vectors, created with these logical statements, for a lot of other things. For example, you can use them directly in the square bracket indexing (`[..., ...]`) to pull out just the rows of a dataframe that meet a certain condition.
+
+When you run a logical statement on a vector, you create a logical vector the same length as the original vector:
+
+```{r}
+is_male <- nepali$sex == "Male"
+length(nepali$sex)
+length(is_male)
+```
+
+The logical vector (`is_male` in this example) will have the value `TRUE` at any position where the original vector (`nepali$sex` in this example) met the logical condition you tested, and `FALSE` anywhere else:
+
+```{r}
+head(nepali$sex)
+head(is_male)
+```
+
+You can "flip" this logical vector (i.e., change every `TRUE` to `FALSE` and vice-versa) using the *bang operator*, `!`:
+
+```{r}
+head(is_male)
+head(!is_male)
+```
+
+The bang operator turns out to be very useful. You will often find cases where it's difficult to write a logical vector to get what you want, but fairly easy to write the inverse (find everything you don't want). One example is filtering down to non-missing values-- the `is.na` function will return `TRUE` for any value that is `NA`, so you can use `!is.na()` to identify any non-missing values. 
+
+You can do a few cool things with a logical vector. For example, you can use it with indexing to pull out just the rows of a dataframe where `is_male` is `TRUE`:
+
+```{r}
+head(nepali[is_male, ])
+```
+
+Or, with `!`, just the rows where `is_male` is `FALSE`:
+
+```{r}
+head(nepali[!is_male, ])
+```
+
+For these cases, the length of the logical vector and the number of rows in the dataframe will match. 
+
+You can also use `sum()` and `table()` with a logical vector to find out how many of the values in the vector are `TRUE` AND `FALSE`. In the example, you can use these functions to find out how many males and females are in the dataset:
+
+```{r}
+sum(is_male)
+sum(!is_male)
+table(is_male)
+```
+
+Note that you could also achieve the same thing with `dplyr` functions. For example, you could use `mutate` with a logical statement to create an `is_male` column in the `nepali` dataframe, then group by the new `is_male` column and summarize, using the `n` function to count the number of observations in each group:
+
+```{r}
+nepali %>%
+  mutate(is_male = sex == "Male") %>%
+  group_by(is_male) %>%
+  summarize(n_children = n())
+```
+
+## Regression models 
+
+### Formula structure
+
+*Regression models* can be used to estimate how the expected value of a *dependent variable* changes as *independent variables* change. \medskip
+
+In R, regression formulas take this structure:
+
+```{r eval = FALSE}
+## Generic code
+[response variable] ~ [indep. var. 1] +  [indep. var. 2] + ...
+```
+
+Notice that a tilde, `~`, is used to separate the independent and dependent variables and that a plus sign, `+`, is used to join independent variables. This format mimics the statistical notation:
+
+$$
+Y_i \sim X_1 + X_2 + X_3
+$$
+
+You will use this type of structure in R fo a lot of different function calls, including those for linear models (fit with the `lm` function) and generalized linear models (fit with the `glm` function).
+
+There are some conventions that can be used in R formulas. Common ones include: 
+
+```{r echo = FALSE}
+for_convs <- data.frame(Convention = c("`I()`", "`:`", "`*`", "`.`",
+                                       "`1`", "`-`"),
+                        Meaning = c("evaluate the formula inside `I()` before fitting (e.g., `I(x1 + x2)`)",
+                                    "fit the interaction between `x1` and `x2` variables",
+                                    "fit the main effects and interaction for both variables (e.g., `x1*x2` equals `x1 + x2 + x1:x2`)",
+                                    "include as independent variables all variables other than the response (e.g., `y ~ .`)",
+                                    "intercept (e.g., `y ~ 1` for an intercept-only model)",
+                                    "do not include a variable in the dataframe as an independent variables (e.g., `y ~ . - x1`); usually used in conjunction with `.` or `1`"))
+pander::pander(for_convs, split.cells = c(1,1,58),
+               justify = c("center", "left"))
+```
+
+### Linear models
+
+To fit a linear model, you can use the function `lm()`. This function is part of the `stats` package, which comes installed with base R. In this function, you can use the `data` option to specify the dataframe from which to get the vectors. 
+
+```{r}
+mod_a <- lm(wt ~ ht, data = nepali)
+```
+
+This previous call fits the model:
+
+$$ Y_{i} = \beta_{0} + \beta_{1}X_{1,i} + \epsilon_{i} $$
+
+where: 
+
+- $Y_{i}$ : weight of child $i$
+- $X_{1,i}$ : height of child $i$
+
+
+If you run the `lm` function without saving it as an object, R will fit the regression and print out the function call and the estimated model coefficients: 
+
+```{r}
+lm(wt ~ ht, data = nepali)
+```
+
+However, to be able to use the model later for things like predictions and model assessments, you should save the output of the function as an R object: 
+
+```{r}
+mod_a <- lm(wt ~ ht, data = nepali)
+```
+
+This object has a special class, `lm`: 
+
+```{r}
+class(mod_a)
+```
+
+This class is a special type of list object. If you use `is.list` to check, you can confirm that this object is a list: 
+
+```{r}
+is.list(mod_a)
+```
+
+There are a number of functions that you can apply to an `lm` object. These include:
+
+```{r echo = FALSE}
+mod_objects <- data.frame(Function = c("`summary`", "`coefficients`", 
+                                   "`fitted`",
+                                   "`plot`", "`residuals`"),
+                          Description = c("Get a variety of information on the model, including coefficients and p-values for the coefficients",
+                                   "Pull out just the coefficients for a model",
+                                   "Get the fitted values from the model (for the data used to fit the model)",
+                                   "Create plots to help assess model assumptions",
+                                   "Get the model residuals"))
+pander::pander(mod_objects, split.cells = c(1,1,58),
+               justify = c("center", "left"))
+```
+
+For example, you can get the coefficients from the model by running:
+
+```{r}
+coefficients(mod_a)
+```
+
+The estimated coefficient for the intercept is always given under the name "(Intercept)". Estimated coefficients for independent variables are given based on their column names in the original data ("ht" here, for $\beta_1$, or the estimated increase in expected weight for a one unit increase in height).
+
+You can use the output from a `coefficients` call to plot a regression line based on the model fit on top of points showing the original data (Figure \@ref(fig:modelcoefplot)). 
+
+```{r modelcoefplot, fig.height = 3.5, fig.width = 5, warning = FALSE, fig.align = "center", fig.cap = "Example of using the output from a coefficients call to add a regression line to a scatterplot."}
+mod_coef <- coefficients(mod_a)
+ggplot(nepali, aes(x = ht, y = wt)) + 
+  geom_point(size = 0.2) + 
+  xlab("Height (cm)") + ylab("Weight (kg)") + 
+  geom_abline(aes(intercept = mod_coef[1],
+                  slope = mod_coef[2]), col = "blue")
+```
+
+```{block, type = "rmdnote"}
+You can also add a linear regression line to a scatterplot by adding the geom `geom_smooth` using the argument `method = "lm"`.
+```
+
+You can use the function `residuals` on an `lm` object to pull out the residuals from the model fit:
+
+```{r}
+head(residuals(mod_a))
+```
+
+The result of a `residuals` call is a vector with one element for each of the non-missing observations (rows) in the dataframe you used to fit the model. Each value gives the different between the model fitted value and the observed value for each of these observations, in the same order the observations show up in the dataframe. The residuals are in the same order as the observations in the original dataframe. 
+
+```{block, type = "rmdtip"}
+You can also use the shorter function `coef` as an alternative to `coefficients` and the shorter function `resid` as an alternative to `residuals`.
+```
+
+As noted in the subsection on simple statistics functions, the `summary` function returns different output depending on the type of object that is input to the function. If you input a regression model object to `summary`, the function gives you a lot of information about the model. For example, here is the output returned by running `summary` for the linear regression model object we just created: 
+
+```{r}
+summary(mod_a)
+```
+
+This output includes a lot of useful elements, including (1) basic summary statistics for the residuals (to meet model assumptions, the median should be around zero and the absolute values fairly similar for the first and third quantiles), (2) coefficient estimates, standard errors, and p-values, and (3) some model summary statistics, including residual standard error, degrees of freedom, number of missing observations, and F-statistic.
+
+The object returned by the `summary()` function when it is applied to an `lm` object is a list, which you can confirm using the `is.list` function: 
+
+```{r}
+is.list(summary(mod_a))
+```
+
+With any list, you can use the `names` function to get the names of all of the different elements of the object: 
+
+```{r}
+names(summary(mod_a))
+```
+
+You can use the `$` operator to pull out any element of the list. For example, to pull out the table with information on the estimated model coefficients, you can run:
+
+```{r}
+summary(mod_a)$coefficients
+```
+
+The `plot` function, like the `summary` function, will give different output depending on the class of the object that you input. For an `lm` object, you can use the `plot` function to get a number of useful diagnostic plots that will help you check regression assumptions (Figure \@ref(fig:plotlmexample)):
+
+```{r eval = FALSE}
+plot(mod_a)
+```
+
+```{r plotlmexample, echo = FALSE, out.width = '\\textwidth', fig.align = "center", fig.cap = "Example output from running the plot function with an lm object as the input."}
+oldpar <- par(mfrow = c(2, 2))
+plot(mod_a)
+par(oldpar)
+```
+
+You can also use binary variables or factors as independent variables in regression models. For example, in the `nepali` dataset, `sex` is a factor variable with the levels "Male" and "Female". You can fit a linear model of weight regressed on sex for this data with the call: 
+
+```{r}
+mod_b <- lm(wt ~ sex, data = nepali)
+```
+
+This call fits the model:
+
+$$ Y_{i} = \beta_{0} + \beta_{1}X_{1,i} + \epsilon_{i} $$
+
+where $X_{1,i}$ : sex of child $i$, where 0 = male and 1 = female. 
+
+Here are the estimated coefficients from fitting this model:
+
+```{r}
+summary(mod_b)$coefficients
+```
+
+You'll notice that, in addition to an estimated intercept (`(Intercept)`), the other estimated coefficient is `sexFemale` rather than just `sex`, although the column name in the dataframe input to `lm` for this variable is `sex`. 
+
+This is because, when a factor or binary variable is input as an independent variable in a linear regression model, R will fit an estimated coefficient for all levels of factors *except* the first factor level. By default, this first factor level is used as the baseline level, and so its estimated mean is given by the estimated intercept, while the other model coefficients give the estimated *difference* from this baseline. 
+
+For example, the model fit above tells us that the estimated mean weight of males is `r round(coef(mod_b)[1], 1)`, while the estimated mean weight of females is `r round(coef(mod_b)[1], 1)` + `r round(coef(mod_b)[2], 1)` = `r round(coef(mod_b)[1], 1) + round(coef(mod_b)[2], 1)`.
+
+If you would prefer that a different level of the factor be the baseline (for example, "Female" rather than "Male" for the previous regression), you can do that by using the `levels` argument in the `factor` function to reset factor levels. For example: 
+
+```{r}
+nepali_reset <- nepali %>%
+  mutate(sex = factor(sex, levels = c("Female", "Male")))
+mod_b_reset <- lm(wt ~ sex, data = nepali_reset)
+summary(mod_b_reset)$coef
+```
+
+Now, `(Intercept)` gives the estimated mean weight for females, while the second estimated coefficient gives the estimated mean difference for males compared to the expected value for females.
+
+### Generalized linear models (GLMs)
+
+You can fit a variety of models, including linear models, logistic models, and Poisson models, using generalized linear models (GLMs). \medskip
+
+For linear models, the only difference between `lm` and `glm` are the mechanics of how they estimate the model coefficients (`lm` uses least squares while `glm` uses maximum likelihood). You will (almost always) get exactly the same estimated coefficients regardless of whether you use `glm` or `lm` to fit a linear regression. 
+
+For example, here is the code to fit a linear regression model for weight regressed on height from the `nepali` dataset:
+
+```{r}
+mod_c <- glm(wt ~ ht, data = nepali)
+```
+
+This call fits the same regression model I fit earlier with the `lm` function and saved as `mod_a`. You can see that the two methods give exactly the same coefficient estimates: 
+
+```{r}
+coef(mod_c)
+coef(mod_a)
+```
+
+Unlike the `lm` function, however, the `glm` function also allows you to fit other model types, including logistic and Poisson models. You can specify the model type using the `family` argument to the `glm` call:
+
+```{r echo = FALSE}
+glm_types <- data.frame(type = c("Linear", "Logistic", "Poisson"),
+                        opt = c("`family = gaussian(link = 'identity')`",
+                                "`family = binomial(link = 'logit')`", 
+                                "`family = poisson(link = 'log')`"))
+knitr::kable(glm_types, col.names = c("Model type", "`family` argument"))
+```
+
+For example, say we wanted to fit a logistic regression for the `nepali` data of whether the probability of a child weighing more than 13 kg is associated with the child's sex. 
+
+First, create a binary variable in the `nepali` dataset, `wt_over_13`, that is `TRUE` if a child weighed more than 13 kilograms and FALSE otherwise. You can use the `mutate` function from `dplyr` to add this new column (which, as a note, is a logical vector):
+
+```{r}
+nepali <- nepali %>% 
+  mutate(wt_over_13 = wt > 13)
+head(nepali)
+```
+
+Now you can fit a logistic regression of `wt_over_13` regressed on sex, using a logistic model:
+
+```{r}
+mod_d <- glm(wt_over_13 ~ sex, data = nepali,
+             family = binomial(link = "logit"))
+```
+
+Elements of a GLM can be pulled out in the same way that we looked at elements from the linear model fit with `lm`. For example, to see a table of estimated model coefficients, you can run: 
+
+```{r}
+summary(mod_d)$coef
+```
+
+Because this model was a logistic model, fit with a log link, here the model coefficient estimate for `sexFemale` gives an estimate of the **log odds** of weight higher than 13 kg associated with females versus males. The p-value for this estimate (`Pr(>|z|)` = `r round(summary(mod_d)$coef[2, 4], 2)`) isn't very small, suggesting that the difference between male and female children in the odds of weighing more than 13 kg is not statistically significant. 
+
+### References-- statistics in R
+
+One great (and free online for CSU students through our library) book to find out more about using R for basic statistics is:
+
+- [Introductory Statistics with R](http://discovery.library.colostate.edu/Record/.b44705323)
+
+If you want all the details about fitting linear models and GLMs in R, Julian Faraway's books are fantastic. He has one on linear models and one on extensions including logistic and Poisson models:
+
+- [Linear Models with R](http://discovery.library.colostate.edu/Record/.b41119691) (also free online through the CSU library)
+- [Extending the Linear Model with R](http://www.amazon.com/Extending-Linear-Model-Generalized-Nonparametric/dp/158488424X/ref=sr_1_1?ie=UTF8&qid=1442252668&sr=8-1&keywords=extending+linear+model+r)
+
+## In-course exercise
+
+### Loading data from an R package
+
+The data we'll be using today is from a dataset called `worldcup` in the package `faraway`. Load that data so you can use it on your computer (note: you will need to load and install the `faraway` package to do this). Use the help file for the data to find out more about the dataset. Use some basic functions, like `head`, `tail`, `colnames`, `str`, and `summary` to check out the data a bit. See if you can figure out:
+
+- What variables are included in this dataset? (Check the column names.)
+- What class is each column currently? In particular, which are numbers and which are factors?
+
+#### Example R code:
+
+Load the `faraway` package using `load()` and then load the data using `data()`:
+
+```{r}
+## Uncomment the next line if you need to install the package
+# install.packages("faraway")
+library(faraway)
+data("worldcup")
+```
+
+Check out the help file for the `worldcup` dataset to find out more about the data. (Note: Only datasets that are parts of packages will have help files.)
+
+```{r, eval = FALSE}
+?worldcup
+```
+
+Check out the data a bit:
+
+```{r}
+str(worldcup)
+head(worldcup)
+tail(worldcup)
+colnames(worldcup)
+summary(worldcup)
+```
+
+### Exploring the data using logical statements
+
+Next, try checking out the data using logical statements and some of the `dplyr` code we covered last week, to help you answer the following questions:
+
+- What is the range of time that players spent in the game? 
+- Which player or players played the most time in this World Cup? 
+- How many players are goalies in this dataset?
+- Create a new R object named `brazil_players` that is limited to the players in this dataset that are (1) on the Brazil team and (2) not goalies. 
+
+If you have additional time, look over the "Data Manipulation" cheatsheet available in RStudio's Help section. Make a list of questions you would like to figure out from this example data, and start to plan out how you might be able to answer those questions using functions from `dplyr`. Write the related code and see if it works. 
+
+#### Example R code:
+
+Use `range()` to find out the range of time these players played in the World Cup (remember that you can use the `dataframe$column_name` notation to pull a column from a dataframe). 
+
+```{r}
+range(worldcup$Time)
+```
+
+To figure out who played the most time, there are a few approaches you can take. Here I'm showing two: (1) using `filter` from the `dplyr` package to filter down to rows where where the `Time` for that row equals `max(Time)` for the whole dataset; (2) using the `top_n` function from `dplyr` to pick out the rows with the maximum value (`n = 1`) of the `Time` column (see the help file for `top_n` if you are unfamiliar with this function). 
+
+```{r}
+worldcup %>%
+  filter(Time == max(Time))
+
+worldcup %>% 
+  top_n(n = 1, wt = Time)
+```
+
+*Note*: You may have noticed that you lost the players names when you did this using the `dplyr` pipechain. That's because `dplyr` functions convert the data to a dataframe format that does not include rownames. If you want to keep players' names, you can use a function from the `tibble` package called `rownames_to_column` to move those names from the rownames of the data into a column in the dataframe. Use the `var` parameter of this function to specify what you want the new column to be named. For example:
+
+```{r}
+library(tibble)
+worldcup %>%
+  rownames_to_column(var = "Name") %>% 
+  filter(Time == max(Time))
+```
+
+There are a few ways to figure out how many players are goalies in this dataset. One way is to use `filter` from `dplyr`, along with a logical statement, to filter the data to only players with the position of "Goalkeeper", and then pipe that filtered subset into the `nrow` function to count the number of rows in the filtered dataframe.
+
+```{r}
+worldcup %>% 
+  filter(Position == "Goalkeeper") %>% 
+  nrow()
+```
+
+Next, create a new R object named `brazil_players` that is limited to the players in this dataset that are (1) on the Brazil team and (2) not goalies. You can use a logical statement to filter to rows that meet both these conditions by joing two logical statements in the `filter` function with an `&`:
+
+```{r}
+brazil_players <- worldcup %>% 
+  filter(Team == "Brazil" & Position != "Goalkeeper") 
+head(brazil_players)
+```
+
+### Exploring the data using simple statistics and `summarize`
+
+Next, try checking out the data using some basic commands for simple statistics, like `mean()`, `range()`, `max()`, and `min()`, as well as the `summarize` and `group_by` functions from the `dplyr` package. Try to answer the following questions:
+
+- What is the mean number of saves that players made? 
+- What is the mean number of saves just among the goalkeepers? 
+- Did players from any position other than goalkeeper make a save?
+- How many players were there in each position? 
+- How many forwards were there on each team? Which team had the most shots in total among all its forwards?
+- Which team(s) had the defender with the most tackles?
+
+If you have extra time, continuing using the "Data Wrangling" cheatsheet to come up with some other ideas for how you can explore this data, and write up and test code to do that. 
+
+####  Example R code:
+
+To calculate the mean number of saves among all the players, use the `mean` function, either by itself or within a `summarize` call:
+
+```{r}
+mean(worldcup$Saves)
+
+worldcup %>%
+  summarize(mean_saves = mean(Saves))
+```
+
+There are a few ways to figure out the mean number of saves just among the goalkeepers. One way is to filter the dataset to only goalies and then use `summarize` to calculate the mean number of saves in this filtered subset of the data: 
+
+```{r}
+worldcup %>%
+  filter(Position == "Goalkeeper") %>% 
+  summarize(mean_saves = mean(Saves))
+```
+
+The next question is if players from any position other than goalkeeper made a save. One way to figure this out is to group the data by position and then summarize the maximum number of saves. Based on this, it looks like there were not saves from players in any position except goalie:
+
+```{r}
+worldcup %>%
+  group_by(Position) %>% 
+  summarize(max_saves = max(Saves))
+```
+
+To figure out how many players were there in each position, you can can group the data by position and then use the `n` function from `dplyr` to count the number of observations in each group: 
+
+```{r}
+worldcup %>%
+  group_by(Position) %>% 
+  summarize(n_players = n())
+```
+
+For the next set of questions, you can filter the data to only forwards, then group by team to use `summarize` to count up the number of forwards on each team. You can also use the same `summarize` call to figure out the total number of shots by all forwards on each team. To figure out which team had the most shots in total among all its forwards, you can use the `arrange` function to re-order the data from the team with the most total shots to the least. It turns out that Uruguay had the most shots by forwards on its team, with a total of 46 shots.
+
+```{r}
+worldcup %>% 
+  filter(Position == "Forward") %>% 
+  group_by(Team) %>% 
+  summarize(n_forwards = n(),
+            total_forward_shots = sum(Shots)) %>% 
+  arrange(desc(total_forward_shots))
+```
+
+To figure out which team(s) had the defender with the most tackles, you can filter to only defenders and then use the `top_n` function to identify the players with the top number of tackles. It turns out these players were on the England, Germany, and Chile teams.
+
+```{r}
+worldcup %>% 
+  filter(Position == "Defender") %>% 
+  top_n(n = 1, wt = Tackles)
+```
+
+### Exploring the data using basic plots #1
+
+Use some basic plots to check out this data. Try the following:
+
+- Create a scatterplot of the `worldcup` data, where each point is a player, the x-axis shows the amount of time the player played in the World Cup, and the y-axis shows the number of passes the player had. Try writing the code both with and withing "piping in" the data you want to plot into the `ggplot` function.
+- Create the same scatterplot, but have each point in the scatterplot show that player's position. Add "rug plots" to the margins.
+- Create a scatterplot of number of shots (x-axis) versus number of tackles (y-axis) for **just** players on one of the four teams that made the semi-finals (Spain, Netherlands, Germany, Uruguay). Use color to show player's position and shape to show player's team. (Hint: you will want to use some `dplyr` code to clean the data before plotting to do this.)
+- Create a scatterplot of player time versus passes. Use color to show whether the player was on one of the top 4 teams or not. (Hint: Again, you'll want to use some `dplyr` code before plotting to do this.) For an extra challenge, also try adding each player's name on top of each point.
+- Did you notice any interesting features of the data when you did any of the graphs in this section?
+
+#### Example R code:
+
+Create a scatterplot of `Time` versus `Passes`. 
+
+```{r, fig.align = "center", fig.width = 5, fig.height = 3}
+# Without piping
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes))
+
+# With piping
+worldcup %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = Time, y = Passes)) 
+```
+
+Create the same scatterplot, but have each point in the scatterplot show that player's position. 
+
+```{r}
+ggplot(worldcup,
+       mapping = aes(x = Time, y = Passes, color = Position)) + 
+  geom_point() + 
+  geom_rug()
+```
+
+Create a scatterplot of number of shots (x-axis) versus number of tackles (y-axis) for **just** players on one of the four teams that made the semi-finals (Spain, Netherlands, Germany, Uruguay). Use color to show player's position and shape to show player's team. For an extra challenge, also try adding each player's name on top of each point.
+
+```{r}
+worldcup %>% 
+  tibble::rownames_to_column(var = "Name") %>% 
+  filter(Team %in% c("Spain", "Netherlands", "Germany", "Uruguay")) %>% 
+  ggplot() + 
+  geom_point(aes(x = Shots, y = Tackles, color = Position, shape = Team)) + 
+  geom_text(mapping = aes(x = Shots, y = Tackles, 
+                          color = Position, label = Name), 
+            size = 2.5)
+```
+
+Create a scatterplot of player time versus passes. Use color to show whether the player was on one of the top 4 teams or not.
+
+```{r}
+worldcup %>% 
+  mutate(top_4 = Team %in% c("Spain", "Netherlands", "Germany", "Uruguay")) %>% 
+  ggplot() + 
+  geom_point(aes(x = Time, y = Passes, color = top_4))
+```
+
+
+### Exploring the data using basic plots #2
+
+Go back to the code you used in the previous section to create a scatterplot of the `worldcup` data, where each point is a player, the x-axis shows the amount of time the player played in the World Cup, and the y-axis shows the number of passes the player had. Try the following modifications: 
+
+- Make all the points blue. 
+- Google "R colors" to find a list of color names in R. Pick your favorite and make all the points in the scatterplot that color.
+- Change the size of the points to make them smaller (hint: check out the `size` aesthetic).
+- Make it so the color of the points shows the player's position and all the points are slightly transparent.
+- Change the title of the x-axis to "Time (minutes)" and the y-axis to "Number of passes".
+- Add the title "World Cup statistics" and the subtitle "2010 World Cup".
+
+#### Example R code:
+
+Make all the points blue.
+
+```{r}
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes),
+             color = "blue")
+```
+
+Google "R colors" to find a list of color names in R. Pick your favorite and make all the points in the scatterplot that color.
+
+```{r}
+# Make the points "darkseagreen4"
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes),
+             color = "darkseagreen4")
+```
+
+Change the size of the points to make them smaller (hint: check out the `size` aesthetic).
+
+```{r}
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes),
+             size = 0.8)
+```
+Make it so the color of the points shows the player's position and all the points are slightly transparent.
+
+```{r}
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes),
+             alpha = 0.3)
+```
+
+Change the title of the x-axis to "Time (minutes)" and the y-axis to "Number of passes".
+
+```{r}
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes)) + 
+  labs(x = "Time (minutes)", y = "Number of passes")
+```
+
+Add the title "World Cup statistics" and the subtitle "2010 World Cup".
+
+```{r}
+ggplot(worldcup) + 
+  geom_point(mapping = aes(x = Time, y = Passes)) + 
+  ggtitle("World Cup statistics",
+          subtitle = "2010 World Cup")
+```
+
+
+### Exploring the data using basic plots #3
+
+Try out creating some plots using the "statistical" geoms to check out this data. Try the following:
+
+- Plot histograms of all the numeric variables (`Time`, `Shot`, `Passes`, `Tackles`, `Saves`) in the dataset. 
+- Try customizing the number of bins used for one of the histograms plotted in the previous step.
+- Try using constant values for some of the aesthetics (e.g., customize the color and the fill) of the histogram created in the previous step.
+- Create a boxplot of `Shots` by position.
+- Create a `top_teams` subset with just the four teams that made the semi-finals in the 2010 World Cup (Spain, the Netherlands, Germany, and Uruguay). Plot boxplots of `Shots` and `Saves` by team for just these teams.
+- Create a histogram using data only from the four top teams for the amount of time each player played. Use the color aesthetic of the histogram to show team. 
+
+#### Example R code
+
+Use histograms to explore the distribution of different variables. If you want to change the number of bins in the histogram, try playing around with the `bins` and `binwidth` arguments. You can use the `bins` argument to say how many bins you want (e.g., `bins = 50`). You can use the `binwidth` argument to say how wide you want the bins to be (e.g., `binwidth = 10` if you wanted bins to be 10 units wide, in the units of the variable mapped to the `x` aesthetic. Try using `fill` and `color` to change the appearance of the plot. Google "R colors" and search the images to find links to listings of different R colors.
+
+```{r, message = FALSE, fig.align = "center", fig.width = 5, fig.height = 3}
+ggplot(worldcup, aes(x = Time)) + 
+  geom_histogram()
+
+ggplot(worldcup, aes(x = Time)) + 
+  geom_histogram(bins = 50)
+
+ggplot(worldcup, aes(x = Time)) + 
+  geom_histogram(binwidth = 100)
+
+ggplot(worldcup, aes(x = Time)) + 
+  geom_histogram(binwidth = 50, color = "white", fill = "cyan4")
+```
+
+
+To create a boxplot of `Shots` by `Position`, you can use `geom_boxplot`:
+
+```{r, fig.width=5, fig.height=3, fig.align = "center"}
+ggplot(worldcup, aes(x = Position, y = Shots)) + 
+  geom_boxplot()
+```
+
+The top four teams in this World Cup were Spain, the Netherlands, Germany, and Uruguay. Create a subset with just the data for these four teams:
+
+```{r}
+top_teams <- worldcup %>%
+  filter(Team %in% c("Spain", "Netherlands", "Germany", "Uruguay")) 
+```
+
+Now, you can plot the boxplots, mapping `Team` to the `x` aesthetic and `Shots` to the `y` aesthetic:
+
+```{r, fig.width = 6, fig.height = 3, fig.align = "center"}
+ggplot(top_teams, aes(x = Team, y = Shots)) + 
+  geom_boxplot() + 
+  ggtitle("Shots per player in World Cup 2010")
+
+```
+
+Create a histogram using data only from the four top teams for the amount of time each player played. Use the color aesthetic of the histogram to show team. 
+
+```{r}
+ggplot(data = top_teams) + 
+  geom_histogram(aes(x = Time, fill = Team))
+```
+
+Note that you can also explore other values for `geom_histogram` arguments. For example, you could change the binwidths to be 90 minutes (since games are 90 minutes). 
+
+```{r}
+ggplot(data = top_teams) + 
+  geom_histogram(aes(x = Time, fill = Team), binwidth = 90)
+```
+
+#### If you have extra time:
+
+If you wanted to do the same plot for several different variables, you could loop through your code (we'll be covering more about loops in a few weeks). For example, you could create histograms for all of the numeric variables (if you do this in RStudio, you'll need to use the arrows on the plot window to move through and see all the different plots once you've created them):
+
+```{r, fig.width = 3, fig.height = 2.5}
+## Create an object with the column names for all of the numeric variables
+my_vars <- colnames(worldcup)[3:7]
+
+## Loop through all of those variables. Print out a histogram with the 
+## variable, and have it print on the plot, as the main title, the 
+## column name for that variable
+for(var in my_vars){
+  worldcup$to_plot <- worldcup[ , var]
+  a <- ggplot(worldcup, aes(x = to_plot)) + 
+    geom_histogram(bins = 20, color = "white", fill = "navy") + 
+    xlab(var) + 
+    ggtitle(paste("Histogram of", var))
+  plot(a)
+}
+```
+
+A few things to note in this example: 
+
+- To map an element of the data to an aesthetic, it's easiest if that element is saved in a column in the dataframe. Within this loop, I'm making an extra column called `to_plot`, where I'm copying the column of the variable I want to plot each time the loop runs. That way, I can always use `x = to_plot` in the aesthetic mapping for the ggplot object. 
+- If you run code to create a ggplot object within a loop, it won't automatically print. Instead, you need to use `print` to get the object to print out. One way to do that is to save the final ggplot object as an R object (here I'm saving it to `a`) and then use the `print` function to print that object. 
+- Next week, we'll talk some about faceting, which can create multiple plots by variable like this in a lot less code. However, it's useful at this point to start thinking about how to extend code to use in loops, to save yourself time when you need to repeat something similar many times.
