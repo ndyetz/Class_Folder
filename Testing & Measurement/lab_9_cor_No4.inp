@@ -1,0 +1,18 @@
+TITLE: 		Outputting Discrepancy Matrix; 
+DATA: 	FILE IS lab_9_cor.txt; 
+		TYPE IS CORRELATION; 
+		NOBSERVATIONS IS 250; 
+VARIABLE: NAMES ARE item1-item6;
+            USEVARIABLES ARE item1 item2 item3 item5 item6;
+MODEL:  	factor1 BY item1* (L1) !Don't use analysis statement in when runnign CFA
+       		item2 item3 item5 item6 (L2 L3 L5 L6); !item1* is saying, fix the first item at the factor 1.
+        	item1 item2 item3 item5 item6 (U1 U2 U3 U5 U6); !(UI-U6) = label. You can refer to them later. 
+       		factor1@1;    !@1 fixes the factor variance at 1. if you want to fix it at the mean do [mean]
+MODEL CONSTRAINT: !MODEL CONSTRAINT = create equations in R
+ 			NEW(OMEGA); !Create new variable
+        			OMEGA = (L1+L2+L3+L5+L6)**2/ !Omega = sum of loadings^2 / sum of loadings plus sum of uniquenesses
+        			((L1+L2+L3+L5+L6)**2+U1+U2+U3+U5+U6); !Equation for new variable.
+
+OUTPUT:     STANDARDIZED RESIDUAL; !Standardize factors, give me the confidence interval.
+
+!"BY" indicates a "bidirectional relationship.

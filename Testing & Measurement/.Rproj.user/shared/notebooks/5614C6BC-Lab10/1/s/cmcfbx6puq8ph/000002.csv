@@ -1,0 +1,19 @@
+"0","install.packages(""semTools"")
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/semTools_0.4-14.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1533326 bytes (1.5 MB)
+"
+"2","downloaded 1.5 MB
+
+"
+"1","package ‘semTools’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1","The downloaded binary packages are in
+	C:\Users\Neil\AppData\Local\Temp\RtmpuWdh69\downloaded_packages"
+"1","
+"
+"0","library(semTools)"

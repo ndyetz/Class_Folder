@@ -1,0 +1,260 @@
+---
+title: "R Notebook: for Lab 8"
+subtitle: Neil Yetz
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+#Clear Environment
+```{r}
+rm(list = ls(all.names = TRUE))
+```
+
+#Load Libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(psych)
+library(GPArotation)
+library(GGally)
+```
+
+#Load & Format Data
+```{r,message = FALSE, warning = FALSE}
+
+#Original Items (ID removed)
+items <- read_csv("Lab 8 Data.csv") %>% 
+  select(-X1)
+#ID's = X1
+#Items with item 2 removed
+new <- items %>% 
+  select(-V2)
+
+#Items with item 6 removed
+new2 <- items %>% 
+  select(-V6)
+
+
+
+```
+
+#Analyses with All Items
+##Scree Plot
+```{r}
+set.seed(123)
+parallel = fa.parallel(items,
+ fm = 'ml',
+ fa = 'fa',
+ n.iter = 50,
+ main = "Scree plot of scale",
+ SMC = TRUE)
+```
+
+##Scatterplot + Correlations  {#ref}
+```{r}
+scatterplot <- ggpairs(items, columns = c("V1","V2","V3","V4","V5","V6"), 
+upper = list(continuous = wrap("cor")),
+title = "Scatter plot of items")
+print(scatterplot, progress=FALSE) 
+
+#Easy to read Quick Correlations
+cor(items)
+
+```
+
+
+
+##oblique rotation
+###1 factor
+```{r, echo = FALSE}
+loads <- fa(items, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+
+```{r}
+
+fa(items, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+###2 factor 
+```{r}
+fa(items, nfactors = 2, fm = "ml", rotate = "geominQ")
+```
+
+##orthoganol rotation
+###1 factor
+```{r}
+fa(items, nfactors = 1, fm = "ml", rotate = "geominT")
+```
+
+###2 factor
+```{r}
+fa(items, nfactors = 2, fm = "ml", rotate = "geominT")
+```
+
+##varimax rotation
+###1 factor
+```{r}
+fa(items, nfactors = 1, fm = "ml", rotate = "varimax")
+```
+###2 factor
+```{r}
+fa(items, nfactors = 2, fm = "ml", rotate = "varimax")
+```
+
+#Analyses with Item 2 Removed {#ref2}
+Based on the original Correlation Matrix, I decided to also try and run analyses with the removal of Item 2.
+**Conclusion:** Remove Item 2
+
+##Scree Plot
+```{r}
+set.seed(123)
+parallel = fa.parallel(new,
+ fm = 'ml',
+ fa = 'fa',
+ n.iter = 50,
+ main = "Scree plot of scale",
+ SMC = TRUE)
+```
+
+##Scatterplot + Correlations
+```{r}
+scatterplot <- ggpairs(new, columns = c("V1","V3","V4","V5","V6"), 
+upper = list(continuous = wrap("cor")),
+title = "Scatter plot of items")
+print(scatterplot, progress=FALSE) 
+
+#Easy to read Quick Correlations
+cor(new)
+
+```
+
+##oblique rotation
+
+```{r, echo = FALSE}
+loads_new <- fa(new, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+###1 factor
+```{r}
+
+fa(new, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+###2 factor {#ref3}
+```{r}
+fa(new, nfactors = 2, fm = "ml", rotate = "geominQ")
+```
+
+##orthoganol rotation
+###1 factor
+```{r}
+fa(new, nfactors = 1, fm = "ml", rotate = "geominT")
+```
+
+###2 factor
+```{r}
+fa(new, nfactors = 2, fm = "ml", rotate = "geominT")
+```
+
+##varimax rotation
+###1 factor
+```{r}
+fa(new, nfactors = 1, fm = "ml", rotate = "varimax")
+```
+###2 factor
+```{r}
+fa(new, nfactors = 2, fm = "ml", rotate = "varimax")
+```
+
+#Analyses with Item 6 Removed
+Based on the original Correlation Matrix, I decided to also try and run analyses with the removal of Item 6. 
+**Main Conclusion**: We should keep item 6
+
+##Scree Plot
+```{r}
+set.seed(123)
+parallel = fa.parallel(new2,
+ fm = 'ml',
+ fa = 'fa',
+ n.iter = 50,
+ main = "Scree plot of scale",
+ SMC = TRUE)
+```
+
+##Scatterplot + Correlations
+```{r}
+scatterplot <- ggpairs(new2, columns = c("V1","V2","V3","V4","V5"), 
+upper = list(continuous = wrap("cor")),
+title = "Scatter plot of items")
+print(scatterplot, progress=FALSE) 
+
+#Easy to read Quick Correlations
+cor(new2)
+
+```
+
+##oblique rotation
+
+```{r, echo = FALSE}
+loads_new2 <- fa(new2, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+###1 factor
+```{r}
+
+fa(new2, nfactors = 1, fm = "ml", rotate = "geominQ")
+
+```
+
+###2 factor
+```{r}
+fa(new2, nfactors = 2, fm = "ml", rotate = "geominQ")
+```
+
+##orthoganol rotation
+###1 factor
+```{r}
+fa(new2, nfactors = 1, fm = "ml", rotate = "geominT")
+```
+
+###2 factor
+```{r}
+fa(new2, nfactors = 2, fm = "ml", rotate = "geominT")
+```
+
+##varimax rotation
+###1 factor
+```{r}
+fa(new2, nfactors = 1, fm = "ml", rotate = "varimax")
+```
+###2 factor
+```{r}
+fa(new2, nfactors = 2, fm = "ml", rotate = "varimax")
+```
+
+#Question Answers
+##Question 1: 	How many factors there are in these items. 
+
+**1 factor**. Additionally, removing Item 2 (V2). Reasons are explained in Question #3.
+
+##2. Which items load on which factors (report the factor loadings). 
+
+We only had one factor. Therefore, they all loaded onto 1. We removed Item #2, Which left us with items, V1, V3, V4, V5, & V6. Their Oblique rotated (Alhough, it makes no difference in a 1 factor model what rotation you use) factor loadings are respectively **`r loads_new$loadings`**.
+
+##3.	What process and decision rules you used to reach that conclusion. 
+
+I have decided that the best solution for this is a 1 factor model. Additionally, I made the decision to remove Item 2. Based on the correlations, and factor loadings. Item 2 did not seem to fit with the other items. You could ustify keeping it in, but I made the decision to leave it out based on certain Criteria. To start, Viewing the correlations from [correlation with all items](#ref), item 2 did not correlate as well as the other items (Neither, did items 6, so I check onthat one too). Therefore, I investigated the [EFA without item 2](#ref2). Our factor loadings for V1-V6 were respectively `r loads$loadings`. Without item 2, items V1, V3, V4, V5, & V6 loadings were: `r loads_new$loadings` respectively. Although there was a drop in the factor loadings, I felt that the improvement in model fit made it worth it (Explained in the next paragraph).
+
+
+Additionally, I compared the TLI & RMSEAs. The TLI did make a slight jump from our original items (TLI = `r loads$TLI`) to the new, item 2 removed items (TLI = `r loads_new$TLI`). Although I hate to play with thresholds, this did surpass our 0.90 threshold for the TLI, thus helping me  amke a decision. Additionally, the model fit improved slightly from the original items (RMSEA = `r loads$RMSEA[1]` (95%CI = [`r loads$RMSEA[2]`, `r loads$RMSEA[3]`]) when compared to our new items (RMSEA = `r loads_new$RMSEA[1]` (95%CI = [`r loads_new$RMSEA[2]`, `r loads_new$RMSEA[3]`]). Therefore, based on this criteria, I decided to go with the items with the removal of item 2. It should be noted, that unfortunately the Psych package does not report CFI. Although not reported here, I ran the analyses on Mplus, and found similar conclusions while viewing the CFI as well. 
+
+Finally, with the removal of item 2, I decided to stick with a 1 factor model. I decided on this by first viewing the scree plot Visually, I could tell that the eigen value for 1 factor was sufficiently higher than if we added another factor into the model. Additionally I generated a factor analysis on a random dataset and compared it with the eigen values I generated from a scree plot with 1 factor and 2 factors. Viewing this, it was possible to see that an EFA on a set of random values explains more than if there were 2 factor. Therefore, evidence supporting a 1 factor model. Next, I compared the factor loadings on the [2-factor model](#ref3) (keeping it to the obliquely rotated model) and found it hard to map 2 factors. V1 & V3 seemed to map pretty clear onto separate factors, but the rest didn't. Additionally, The fit values were a bit odd. an RMSEA of 0 and TLI of 1.016 for the 2-factor model did not sit well with me. Additionally, I prefer the idea of parsimony in my models, and a 1 factor model seemed to be sufficiently explaining the construct.
+
+
+

@@ -1,0 +1,53 @@
+---
+title: "R Notebook: For Lab 10"
+output: html_notebook
+---
+
+
+
+```{r, message = FALSE}
+library(tidyverse)
+library(lavaan)
+#install.packages("semTools")
+library(semTools)
+```
+
+
+```{r}
+items <- read_csv("Lab 10 Example Data.csv")
+
+items <- items %>% 
+  select(-X1)
+```
+
+#Models
+```{r}
+
+model <- "lv =~ NA*V1 + V2 + V3 + V4 + V5 + V6
+lv ~~ 1*lv"
+
+model.2f <-'f1 =~ NA*V1 + V2 + V5 + V6 + V8 + V9 + V12
+  f2 =~ NA*V3 + V4 + V7 + V10 + V11
+  f1 ~~ 1*f1
+  f2 ~~ 1*f2'
+
+```
+
+#CFA1
+```{r}
+cfa_1 <- cfa(model = model, data = items)
+summary(cfa_1, fit.measures=TRUE, standardized = TRUE)
+
+```
+
+```{r}
+resid(cfa_1, type = "cor")
+```
+#CFA2
+```{r}
+cfa_2 <- cfa(model = model.2f, data = items)
+summary(cfa_2, fit.measures=TRUE, standardized = TRUE)
+```
+```{r}
+resid(cfa_2, type = "cor")
+```

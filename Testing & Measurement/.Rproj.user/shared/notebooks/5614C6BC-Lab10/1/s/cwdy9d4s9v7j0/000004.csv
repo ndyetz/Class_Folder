@@ -1,0 +1,13 @@
+"0","items <- read_csv(""Lab 10 Example Data.csv"")"
+"2","Missing column names filled in: 'X1' [1]"
+"2","Parsed with column specification:
+cols(
+  X1 = col_integer(),
+  V1 = col_integer(),
+  V2 = col_integer(),
+  V3 = col_integer(),
+  V4 = col_integer(),
+  V5 = col_integer(),
+  V6 = col_integer()
+)
+"

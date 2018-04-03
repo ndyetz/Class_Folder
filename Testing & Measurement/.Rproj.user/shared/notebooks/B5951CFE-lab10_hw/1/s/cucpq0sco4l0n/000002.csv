@@ -1,0 +1,4 @@
+"0","items <- read_csv(""Spring Fever Raw Data.csv"")"
+"2","Missing column names filled in: 'X1' [1]"
+"0","items <- items %>% "
+"0","  select(-X1)"

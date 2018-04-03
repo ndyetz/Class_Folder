@@ -1,0 +1,118 @@
+VERSION 1.0.0
+INPUT
+TITLE:
+   CFA of Lab 9 Example Data;
+DATA:
+   FILE IS Lab 9 Data_M.csv;
+VARIABLE:
+  NAMES ARE item1-item6;
+            USEVARIABLES ARE item1 item2 item3 item5 item6;
+OUTPUT:
+     STANDARDIZED; CINTERVAL;
+MODEL:
+   factor1 BY item1* (L1)
+         item2 item3 item5 item6 (L2 L3 L5 L6);
+         item1 item2 item3 item5 item6 (U1 U2 U3 U5 U6);
+         factor1@1;
+INPUT_END
+3
+3
+3
+3
+1
+GENERAL
+0
+5
+1
+0
+item1 item2 item3 item5 item6 factor1
+1
+-1 -1 -1 -1 -1 0
+0
+1
+factor1
+item1 item2 item3 item5 item6
+1 1 factor1 item1    0.687    0.061    0.568    0.807
+91 1 factor1 item1 l1
+1 1 factor1 item2    0.850    0.062    0.728    0.972
+91 1 factor1 item2 l2
+1 1 factor1 item3    0.826    0.065    0.698    0.954
+91 1 factor1 item3 l3
+1 1 factor1 item5    0.801    0.065    0.674    0.927
+91 1 factor1 item5 l5
+1 1 factor1 item6    0.792    0.064    0.666    0.918
+91 1 factor1 item6 l6
+4 1 item1    0.565    0.060    0.448    0.682
+94 1 item1 u1
+4 1 item2    0.463    0.058    0.349    0.577
+94 1 item2 u2
+4 1 item3    0.547    0.065    0.419    0.675
+94 1 item3 u3
+4 1 item5    0.557    0.064    0.431    0.683
+94 1 item5 u5
+4 1 item6    0.571    0.064    0.445    0.697
+94 1 item6 u6
+5 1 factor1    1.000    0.000    1.000    1.000
+11 1 factor1 item1    0.675    0.041    0.594    0.756
+91 1 factor1 item1 l1
+11 1 factor1 item2    0.781    0.033    0.716    0.846
+91 1 factor1 item2 l2
+11 1 factor1 item3    0.745    0.037    0.673    0.817
+91 1 factor1 item3 l3
+11 1 factor1 item5    0.732    0.038    0.658    0.805
+91 1 factor1 item5 l5
+11 1 factor1 item6    0.724    0.038    0.650    0.798
+91 1 factor1 item6 l6
+14 1 item1    0.544    0.056    0.435    0.653
+94 1 item1 u1
+14 1 item2    0.391    0.052    0.289    0.492
+94 1 item2 u2
+14 1 item3    0.445    0.055    0.338    0.553
+94 1 item3 u3
+14 1 item5    0.465    0.055    0.357    0.572
+94 1 item5 u5
+14 1 item6    0.476    0.055    0.369    0.584
+94 1 item6 u6
+15 1 factor1    1.000    0.000    1.000    1.000
+21 1 factor1 item1    0.675    0.041    0.594    0.756
+91 1 factor1 item1 l1
+21 1 factor1 item2    0.781    0.033    0.716    0.846
+91 1 factor1 item2 l2
+21 1 factor1 item3    0.745    0.037    0.673    0.817
+91 1 factor1 item3 l3
+21 1 factor1 item5    0.732    0.038    0.658    0.805
+91 1 factor1 item5 l5
+21 1 factor1 item6    0.724    0.038    0.650    0.798
+91 1 factor1 item6 l6
+24 1 item1    0.544    0.056    0.435    0.653
+94 1 item1 u1
+24 1 item2    0.391    0.052    0.289    0.492
+94 1 item2 u2
+24 1 item3    0.445    0.055    0.338    0.553
+94 1 item3 u3
+24 1 item5    0.465    0.055    0.357    0.572
+94 1 item5 u5
+24 1 item6    0.476    0.055    0.369    0.584
+94 1 item6 u6
+25 1 factor1    1.000    0.000    1.000    1.000
+31 1 factor1 item1    0.687    0.061    0.568    0.807
+91 1 factor1 item1 l1
+31 1 factor1 item2    0.850    0.062    0.728    0.972
+91 1 factor1 item2 l2
+31 1 factor1 item3    0.826    0.065    0.698    0.954
+91 1 factor1 item3 l3
+31 1 factor1 item5    0.801    0.065    0.674    0.927
+91 1 factor1 item5 l5
+31 1 factor1 item6    0.792    0.064    0.666    0.918
+91 1 factor1 item6 l6
+34 1 item1    0.565    0.060    0.448    0.682
+94 1 item1 u1
+34 1 item2    0.463    0.058    0.349    0.577
+94 1 item2 u2
+34 1 item3    0.547    0.065    0.419    0.675
+94 1 item3 u3
+34 1 item5    0.557    0.064    0.431    0.683
+94 1 item5 u5
+34 1 item6    0.571    0.064    0.445    0.697
+94 1 item6 u6
+35 1 factor1    1.000    0.000    1.000    1.000

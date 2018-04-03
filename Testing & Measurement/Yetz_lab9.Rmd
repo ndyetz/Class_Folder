@@ -1,0 +1,76 @@
+---
+title: "R Notebook: for Lab 9"
+subtitle: Neil Yetz
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+#Clear Environment
+```{r}
+rm(list = ls(all.names = TRUE))
+```
+
+#Load Libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(lavaan)
+library(semTools)
+```
+
+Load Data
+```{r, message = FALSE}
+
+#items  <- read_csv("Lab 9 Example Data.csv")
+items <- read_csv("Lab 9 Data.csv")
+
+
+```
+
+#Set Model
+```{r}
+model.1f <- 'f1 =~ item_1 + item_2 + item_3 + item_4 + item_5 + item_6'
+```
+
+
+#Fit model
+**Minimum Function Test Statistic** =  Chi Square test
+Make sure you do *not* look at the baseline model.
+
+**st.all** = Standardized estimates. these standardized loadings are in between 0 & 1. <.3 is really bad. So these standardized items look prety good.
+
+**Variances:** You mostly just want to make sure that There are no real difference. 
+```{r}
+fit.model.1f <- cfa(model.1f, items)
+summary(fit.model.1f, fit.measures = TRUE, standardized = TRUE)
+```
+
+#Fix Factor variance
+<i> f1 ~~ 1*f1 </i> = fixes the variance at 1  
+<i> NA*item_1 </i> = allowing item 1 to vary freely. 
+```{r}
+model.1f <- 'f1 =~ NA*item_1 + item_2 + item_3 + item_4 + item_5 + item_6
+            	         f1 ~~ 1*f1' #fixing item to 
+
+fit.model.1f <- cfa(model.1f, items)
+summary(fit.model.1f, fit.measures = TRUE, standardized = TRUE)
+```
+
+#Calculate Omega (from semTools package)
+It will input 3 omega values. 
+```{r}
+	reliability(fit.model.1f)
+```
+
+
+#Discrepancy matrix (From Lavaan package)
+```{r}
+resid(fit.model.1f, type = "cor")
+```
+
+
+#Write matrix to csv
+```{r}
+write.csv(resid(fit.model.1f, type = "cor")$cor, "lab_9_matrix.csv")
+```
+
