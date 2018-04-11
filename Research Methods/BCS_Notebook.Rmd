@@ -1,0 +1,60 @@
+---
+title: "March 26 Lab Activity"
+output: html_notebook
+---
+
+#Libraries
+```{r}
+library(modelr)
+library(tidyverse)
+library(descriptr)
+library(margins)
+```
+
+#Import Data
+```{r}
+bcs <- read_csv("bcs.csv")
+```
+
+#Log Reg Model
+```{r}
+logregmodel <- glm(comply ~ physrec + knowledge + benefits + barriers, data = bcs, family=binomial("logit"))
+summary(logregmodel)
+```
+
+Getting a physician reccommendation is associated with a higher log odds of getting a mammogram. 
+Benefits and barriers are also significant predictors, such that perceiving that there are more benefits to getting a mammograph is significantly associated with higher log odds of getting a mammogram. 
+Perceiving that there are more barriers to getting a mammogram is significantly associated with lower log odds of getting a mammogram.
+Knowledge is not a significant predictor. 
+
+#Odds Ratios
+```{r}
+exp(cbind(OR = coef(logregmodel), confint(logregmodel)))
+```
+Again, we see that physrec, benefits, and barriers do not contain 1 in the odds ratio. Thus, these predictors are significant. Knowledge contains 1 ain the CI's and is insignificant. 
+
+#Confusion Matrix
+```{r}
+bcs_pred <- bcs %>%
+add_predictions(logregmodel) %>%
+mutate(predprob = exp(pred) / (1 + exp(pred)),
+classify = ifelse(predprob > .5, 1, 0))
+conf_matrix <- ds_cross_table(bcs_pred$classify, bcs_pred$comply)
+conf_matrix
+```
+
+There are 28 false positives, 53 true positives, 23 false negatives, and 60 true negatives. 
+
+#Specificity 
+The specificity is 60/(60+28) = .68, 68%. 
+This means that when people get mammogram, our model accurately predicts that they will 68% of the time. 
+
+#Sensitivity
+The sensitivity is 53/(53+23) = .70, 70%. 
+This means that when people do not get a mammogram, we can accurately predict it 70% of the time. 
+
+
+
+
+
+

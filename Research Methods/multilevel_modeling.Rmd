@@ -1,0 +1,409 @@
+---
+title: "R Notebook: Multilevel Modeling"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: true
+---
+
+#Load libraries
+```{r}
+
+#install.packages("lme4")
+library(tidyverse)
+library(broom)
+library(modelr)
+library(lme4)
+#install.packages("lmerTest")
+
+
+```
+
+#Imprt data
+```{r}
+teams <- read_csv("mlm_teams.csv")
+```
+
+#Format data and create subsets by treatment condition
+```{r}
+teams <- teams %>%
+mutate(txcond.f = factor(txcond, levels = c(0,1), labels = c("control", "treatment")),
+team_id.f = factor(team_id))
+c <- filter(teams, txcond == 0) #control condition
+t <- filter(teams, txcond == 1) #Treatment condition
+```
+
+#Create a plot of scores by team
+```{r, fig.width = 12, fig.height = 6}
+ggplot(data = teams, aes(x = team_id.f, y = score)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+  labs(title = "Mean and variability of final scores across teams", x = "Team ID", y = "Final Score") +
+  theme(axis.text.x = element_text(colour="grey20", size=8, angle=90, hjust=.5))
+```
+
+
+#Calculate a mean for each team, and calculate the mean of all team means
+```{r}
+team_means <- teams %>%
+group_by(team_id) %>%
+summarize(mean_score = mean(score))
+team_means
+meanofmeans <- team_means %>%
+summarize(meanofmeans = mean(mean_score))
+meanofmeans
+```
+
+
+
+#Enhance prior plot with the teams means and the mean of means
+```{r, fig.width= 12, fig.height=6}
+ggplot(data = teams, aes(x = team_id.f, y = score)) +
+  geom_boxplot() +
+  stat_summary(aes(y = score, group = team_id.f), fun.y = mean, color = "red", geom = "point", pch = 17, size = 1.5) +
+  geom_hline(yintercept = meanofmeans$meanofmeans, linetype="dashed", color = "black", size = 1) +
+  scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+  labs(title = "Mean and variability of final scores across teams",
+   subtitle = "dashed line = mean of team means, red triangle = team mean",
+    x = "Team ID", y = "Final Score") +
+  theme(axis.text.x = element_text(colour="grey20", size=8, angle=90, hjust=.5))
+```
+
+
+
+```{r, fig.width= 12, fig.height=6}
+ggplot(data = subset(teams, team_id >= 80 & team_id < 90), aes(x = team_id.f, y = score)) +
+  geom_point() +
+  stat_summary(aes(y = score, group = team_id.f), fun.y = mean, color = "red", geom = "point", pch = 17, size = 1.5) +
+  geom_hline(yintercept = meanofmeans$meanofmeans, linetype="dashed", color = "black", size = 1) +
+  scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+  labs(title = "Mean and variability of final scores across teams (subset of 10 teams)",
+    subtitle = "dashed line = mean of team means, red triangle = team mean", x = "Team ID", y = "Final Score") +
+  theme(axis.text.x = element_text(colour="grey20", size=8, angle=90, hjust=.5))
+```
+
+
+#Model Results
+
+```{r}
+mod1 = lmer(score ~ 1 + (1|team_id), REML = TRUE, data = teams)
+summary(mod1)
+```
+
+#Calculate ICC
+```{r}
+icc.lmer <- function(modl) {
+vars <- as.data.frame(VarCorr(modl))[4]
+total <- sum(vars)
+tau00 <- vars[1,1]
+icc <- tau00/total
+return(icc)
+}
+icc.lmer(mod1)
+```
+
+#Add level 1 predictor
+##Explore the Risk Variable
+```{r}
+ggplot(data = teams, aes(x = factor(risk), y = score)) +
+  geom_boxplot() +
+  stat_summary(aes(y = score, group = factor(risk)), fun.y = mean, color = "orange", geom = "point", size = 3) +
+  guides(color = FALSE) +
+  scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+  labs(title = "Do final scores vary across risk index?", subtitle= "Orange dot represents mean",
+       x = "Risk Quintile", y = "Final Score")
+```
+
+##Plot the relationship between risk & score across teams
+```{r, fig.width= 12, fig.height=6}
+ggplot(data = teams, aes(x = risk, y = score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~team_id.f) +
+  labs(title = "Does the effect of risk index on final score vary across teams", x = "Risk Index", y = "Final Score")
+```
+
+##Fit lm to each team
+###Group dataset by team
+```{r}
+by_team <- teams %>%
+group_by(txcond.f, team_id.f)
+```
+###Fit the slr
+```{r}
+estimates <- do(by_team,
+tidy(lm(score ~ risk, data = .), conf.int = TRUE, conf.level = .95))
+arrange(estimates, team_id.f)
+```
+
+
+#Plot the intercept slopwe for each tem
+```{r, fig.width= 6, fig.height=12}
+ggplot(data = estimates, aes(x = estimate, y = team_id.f)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  facet_wrap(~ term, scales = "free_x") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 7)) +
+  labs(title = "How much do the intercepts and slopes vary by team?", x = "Parameter Estimate", y = "Team ID")
+```
+
+###Calculate the average intercept and slope across teams
+```{r}
+avg_estimates <- estimates %>%
+group_by(term) %>%
+summarize(avg_estimate = mean(estimate))
+avg_estimates
+```
+
+##Fit a multilevel model with a fixed and random effects
+```{r}
+library(lmerTest) # <- NOte that if you fit an UNCONDITIONAL model this package will warn you it is reverting to a normal p-vlaue estimated model... but don't let that worry you.
+mod2_a = lmer(score ~ 1 + risk + (1 + risk|team_id), REML = TRUE, data = teams)
+summary(mod2_a)
+```
+
+###Confindence intervals via bootstrap
+```{r}
+#confint(mod2_a, method = "boot", nsim = 5000) # <- Takes a while to run. so unhashtag when you want it to run. 
+```
+
+
+###Fit a model that excludes the random slope for risk
+```{r}
+mod2_b = lmer(score ~ 1 + risk + (1|team_id), REML = TRUE, data = teams)
+summary(mod2_b)
+```
+
+
+
+###Conduct the likelihood ratio test to compare the model with and without the random slope
+```{r}
+anova(mod2_a, mod2_b, refit = FALSE)
+```
+
+###Plot the Fitted Models
+
+```{r, fig.width= 12, fig.height=6}
+
+#par(mfrow=c(1,2)) # <- Not working
+
+# Model with random slope
+mod2_a.plot <- add_predictions(data = teams, model = mod2_a)
+ggplot(data = mod2_a.plot, aes(x = risk, y = pred, group = team_id.f)) +
+geom_line() +
+geom_abline(intercept = 77.868, slope = -2.326, color="red", size=3) +
+labs(title = "Do students with a higher risk index perform worse on the final test?", x = "Risk Quintile", y = "Predicted Final Score")
+
+# Model without random slope
+mod2_b.plot <- add_predictions(data = teams, model = mod2_b)
+ggplot(data = mod2_b.plot, aes(x = risk, y = pred, group = team_id.f)) +
+geom_line() +
+geom_abline(intercept = 77.868, slope = -2.326, color="red", size=3) +
+labs(title = "Do students with a higher risk index perform worse on the final test?", x = "Risk Quintile", y = "Predicted Final Score")
+```
+
+
+
+#Add a level 2 predictor - txcond
+#Plot variability in scores across teams, color boxes by condition
+```{r, fig.width= 12, fig.height=6}
+ggplot(data = teams, aes(x = team_id.f, y = score, fill = txcond.f)) +
+geom_boxplot() +
+stat_summary(aes(y = score, group = team_id.f), fun.y = mean, color = "red", geom = "point", pch = 17, size = 1.5) +
+geom_hline(yintercept = meanofmeans$meanofmeans, linetype="dashed", color = "black", size = 1) +
+scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+scale_fill_manual(values=c("turquoise1", "chartreuse1")) +
+labs(title = "Mean and variability of final scores across teams",
+subtitle = "dashed line = mean of team means, red triangle = team mean",
+x = "Team ID", y = "Final Score", fill = "Treatment Condition") +
+theme(axis.text.x = element_text(color="grey20", size=8, angle=90, hjust=.5), legend.position = "bottom")
+```
+
+##Calculate the mean of means across condition
+```{r}
+team_means_bycond <- teams %>%
+group_by(team_id, txcond.f) %>%
+summarize(mean_score = mean(score)) %>%
+group_by(txcond.f) %>%
+summarize(mean_score_bycond = mean(mean_score))
+team_means_bycond
+```
+
+
+
+##Add a level 2 predictor - txcond
+```{r}
+mod3 = lmer(score ~ 1 + txcond + (1|team_id), REML = TRUE, data = teams) #Notice how we don't add a random effect
+summary(mod3)
+```
+
+###Recreate the random intercept and slope plot, but now color effects by treatment condition
+```{r, fig.width= 6, fig.height=12}
+ggplot(data = estimates, aes(x = estimate, y = team_id.f, group = txcond.f, color = txcond.f)) +
+geom_point() +
+geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+facet_wrap(~ term, scales = "free_x") +
+scale_color_manual(values=c("turquoise1", "chartreuse1")) +
+theme_bw() +
+theme(axis.text.y = element_text(size = 7)) +
+labs(title = "Are there condition differences in the intercepts and slopes across teams?",
+x = "Parameter Estimate", y = "Team ID", color = "Treatment Condition")
+```
+
+
+
+###Boxplot of score by risk quintile across conditions
+```{r}
+ggplot(data = teams, aes(x = factor(risk), y = score)) +
+geom_boxplot() +
+stat_summary(aes(y = score, group = factor(risk)), fun.y = mean, color = "orange", geom = "point", size = 3) +
+facet_wrap(~ txcond.f) +
+guides(color = FALSE) +
+scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+labs(title = "Do final scores vary across risk index by treatment condition?",
+subtitle= "Orange dot represents mean",
+x = "Risk Quintile", y = "Final Score")
+```
+
+###Compute average of intercepts and slopes by condition
+```{r}
+txcond_avg_estimates <- estimates %>%
+group_by(term, txcond.f) %>%
+summarize(avg_estimate = mean(estimate))
+txcond_avg_estimates
+```
+
+
+###Estimate the model with a cross level interaction for risk and condition
+```{r}
+mod4 = lmer(score ~ 1 + risk + txcond + risk*txcond + (1 + risk|team_id), REML = TRUE, data = teams)
+summary(mod4)
+```
+
+###Plot Fitted Model
+```{r, fig.width= 12, fig.height=6}
+# Get predicted values
+mod4.plot <- add_predictions(data = teams, model = mod4)
+ggplot(data = mod4.plot, aes(x = risk, y = pred, group = team_id.f, color = txcond.f)) +
+geom_line(alpha = .4) +
+geom_abline(intercept = 79.648, slope = -3.98, color="turquoise1", size=3) +
+geom_abline(intercept = (79.648 + (-3.56)), slope = (-3.98 + 3.308), color="chartreuse1", size=3) +
+theme_bw() +
+scale_color_manual(values=c("turquoise1", "chartreuse1")) +
+labs(title = "Do students with a higher risk index perform worse on the final test?",
+x = "Risk Quintile", y = "Predicted Final Score", color = "Treatment Condition")
+```
+
+
+
+
+
+#Lab activity
+
+```{r}
+lab_mod1 = lmer(score ~ 1 + comafrd  + (1|team_id), REML = TRUE, data = teams)
+summary(lab_mod1)
+```
+
+
+
+```{r}
+lab_mod2 = lmer(score ~ 1 + comafrd  + (1 + comafrd|team_id), REML = TRUE, data = teams)
+summary(lab_mod2)
+```
+
+
+
+
+
+
+
+
+#Log likelihood test
+```{r}
+anova(lab_mod1, lab_mod2, refit = FALSE)
+```
+
+#Lab 9 response
+In reality, we are not justified in using the communal affordance variable as a random effect. Which in reality, is telling us that it does not seem to vary across teams. When we compare the models between eachother, we see that there is no difference in seen effects between the 2 models. Therefore, we are NOT justified in incorporating it in the random effect.
+
+
+```{r}
+t <- t %>%
+mutate (grndmc_comafrd = comafrd - mean(comafrd)) %>% #SUbtracting the entire grand mean
+group_by(team_id.f) %>%
+mutate(team_comafrd = mean(grndmc_comafrd), #This is subtracting by each groups mean.
+grpmc_comafrd = grndmc_comafrd - team_comafrd) %>%
+ungroup()
+```
+
+## Initial assessment of the effect of communal affordance on score
+```{r}
+mod5_a = lmer(score ~ 1 + comafrd + (1 |team_id), REML = TRUE, data = t)
+summary(mod5_a)
+```
+
+
+## Takje a look at the mean and variability of communal affordances within and between teams
+```{r, fig.width= 12, fig.height=6}
+# Create team means
+tx_mean <- t %>%
+  group_by(team_id.f) %>%
+  mutate(mean_comafrd = mean(comafrd)) %>%
+  ungroup () %>%
+  summarize(meanofmeans = mean(mean_comafrd))
+
+ggplot(data = t, aes(x = team_id.f, y = comafrd)) +
+  geom_boxplot() +
+  stat_summary(aes(y = comafrd, group = team_id.f), fun.y = mean, color = "red", geom = "point", pch = 17, size = 1.5) +
+  scale_y_continuous(limits = c(1,9)) +
+  geom_hline(yintercept = tx_mean$meanofmeans, linetype="dashed", color = "black", size = 1) +
+  labs(title = "Mean and variability of belief in communal affordances of STEM careers across TREATMENT teams",
+    subtitle = "dashed line = mean of team means, red triangle = team mean",
+                x = "Team ID", y = "Communal Affordances")
+```
+
+
+
+```{r, fig.width= 12, fig.height=6}
+ggplot(data = t, aes(x = comafrd, y = score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~team_id.f) +
+  labs(title = "Does the effect of communal affordances on final score vary across teams", x = "Communal Affordances", y = "Final Score")
+```
+
+##Scatterplot of team means for comafrd & score
+```{r, fig.width= 12, fig.height=6}
+# create an aggreated dataset - one row per team
+team_avg <- t %>%
+  group_by(team_id.f) %>%
+  summarize(mean_score = mean(score), mean_comafrd = mean(comafrd)) %>%
+  ungroup()
+
+ggplot(data = team_avg, aes(x = mean_comafrd, y = mean_score)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+labs(title = "Do teams with higher communal affordances have higher final scores?",
+x = "Average Communal Affordances Score of Team Members", y = "Average Final Score of Team Members")
+
+```
+
+## MLM, group mean center comafrd at Level 1
+```{r}
+mod5_b = lmer(score ~ 1 + grpmc_comafrd + team_comafrd + (1|team_id), REML = TRUE, data = t)
+summary(mod5_b)
+```
+
+
+
+##MLM, grand mean center comafrfd (This gives us sig value for contextual effects.)
+```{r}
+mod5_c = lmer(score ~ 1 + grndmc_comafrd + team_comafrd + (1|team_id), REML = TRUE, data = t)
+summary(mod5_c)
+```
+
+
+
+

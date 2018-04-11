@@ -1,0 +1,48 @@
+---
+title: "R Notebook: Multilevel Models: Growth Models"
+output: html_notebook
+---
+
+#Load Libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(broom)
+library(modelr)
+library(lme4)
+library(lmerTest)
+```
+
+#Import Data
+```{r, message = FALSE}
+wide <- read_csv("mlm_grow.csv")
+```
+
+#Transpose data from wide to long
+```{r}
+long_perf <- wide %>%
+  select(kid_id, txcond, perf_0:perf_6) %>%
+  gather(key = measure, value = perform, perf_0:perf_6) %>%
+  separate(measure, c("temp", "week")) %>%
+  select(-temp) %>%
+  mutate(week = as.numeric(week))
+
+long_inter <- wide %>%
+  select(kid_id, inter_0:inter_6) %>%
+  gather(key = measure, value = interest, inter_0:inter_6) %>%
+  separate(measure, c("temp", "week")) %>%
+  select(-temp) %>%
+  mutate(week = as.numeric(week))
+
+grow <- full_join(long_perf, long_inter, by = c("kid_id", "week"))
+```
+
+#Format data and subset by condition
+```{r}
+grow <- grow %>%
+  mutate(txcond.f = factor(txcond, levels = c(0,1), labels = c("control", "treatment")),
+         kid_id.f = factor(kid_id))
+
+c <- filter(grow, txcond == 0)
+t <- filter(grow, txcond == 1)
+```
+

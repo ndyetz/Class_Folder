@@ -1,0 +1,198 @@
+---
+title: "R Notebook: Self- Enhance"
+output: html_notebook
+---
+
+#Load Libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(broom)
+library(modelr)
+library(lme4)
+library("olsrr")
+library(lmerTest)
+```
+
+#Import Data
+```{r, message = FALSE}
+selfe <- read_csv("self_enhance.csv")
+```
+
+#Format Data
+```{r}
+selfe <- selfe %>% 
+  mutate(id.f = factor(id),
+         depress.f = factor(depress))
+```
+
+#Explore variability of self enhancement
+```{r, fig.height=6, fig.width=12}
+ggplot(data = selfe, aes(x = id.f, y = enhance)) +
+  geom_boxplot()
+
+#+
+#  scale_y_continuous(limits = c(20,100), breaks = seq(20, 100, 10)) +
+#  labs(title = "Mean and variability of final scores across teams", x = #"Team ID", y = "Final Score") +
+#  theme(axis.text.x = element_text(colour="grey20", size=8, angle=90, #hjust=.5))
+```
+
+
+
+#Fit Random intercept model for self enhancement
+```{r}
+mod_enh = lmer(enhance ~ 1 + (1|id.f), REML = TRUE, data = selfe)
+summary(mod_enh) #"1" is saying we want an estimate of the intercept
+```
+##ICC
+```{r}
+icc.lmer <- function(modl) {
+vars <- as.data.frame(VarCorr(modl))[4]
+total <- sum(vars)
+tau00 <- vars[1,1]
+icc <- tau00/total
+return(icc)
+}
+icc.lmer(mod_enh)
+#13.9% of the difference in due to individual differences.
+```
+
+#Explore Variability of Importance
+```{r, fig.height=6, fig.width=12}
+
+
+ggplot(data = selfe, aes(x = id.f, y = import)) +
+  geom_boxplot()
+
+
+```
+
+#Fit a random intercept model for importance
+```{r}
+mod_imp = lmer(import ~ 1 + (1|id.f), REML = TRUE, data = selfe)
+summary(mod_imp)
+```
+##ICC
+```{r}
+icc.lmer(mod_imp)
+```
+
+#Explore covariance of self-enhancement and importance across students
+```{r, fig.height=6, fig.width=12}
+ggplot(data = selfe, aes(x = import, y = enhance)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~id.f)
+
+```
+
+
+#Group dataset by person
+```{r}
+
+by_id <- selfe %>% 
+  group_by(id.f)
+
+```
+
+# Fit SLR for each student and get parameter estimates.  
+```{r}
+
+#mod.slm <- lm(enhance ~ import, data = selfe)
+#ols_regress(mod.slm)
+
+estimates <-do(by_id,
+               tidy(lm(enhance ~import, data = .), conf.int = TRUE, conf.level = .95))
+
+```
+
+#Plot the intercept and slope across students
+
+```{r}
+
+ggplot(data = estimates, aes(x = estimate, y = id.f)) +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  facet_wrap( ~ term, scales = "free_x") +
+  theme_bw() + 
+  theme(axis.text.y = element_text(size = 7)) + 
+  labs(title = "How much do intercepts and slopes vary by person?", 
+       x = "Parameter Estimate", y = "Student ID")
+
+
+```
+
+#Create centered versions of import
+```{r}
+selfe <- selfe %>% 
+  mutate(grndmc_import = import - mean(import)) %>% 
+  group_by(id.f) %>% 
+  mutate(person_import = mean(grndmc_import),
+          grpmc_import = grndmc_import - person_import) %>% 
+  ungroup()
+```
+
+# Fit model with group mean centered import as a predictor
+```{r}
+
+mod_enhance = lmer(enhance ~ 1 + grpmc_import + (1  + grpmc_import |id.f), REML = TRUE, data = selfe)
+summary(mod_enhance)
+
+
+```
+
+
+```{r}
+confint(mod_enhance, method = "boot", nsim = 5000) # <- Takes a while to run. so unhashtag when you want it to run. 
+```
+
+
+##Plot the fitted model 
+```{r}
+
+se3.plot <- add_predictions( data = selfe, model = mod_enhance)
+
+
+ggplot(data = se3.plot, aes(x = grpmc_import, y = pred, group = id.f)) + 
+  geom_line(alpha = 0.4) +
+  geom_abline(intercept = 3.14167, slope = 0.39159, color = "orange", size = 3) +
+  theme_bw() + 
+  labs( title = "DO students self enhance more for traits the find important?", 
+        x = "Importance (person mean centered", y = "Predicted self-enhancement")
+
+```
+
+*FYI The fixed effect intercept is picked up where the mean centered is 0 (so 0 on the x-axis.)*
+
+
+# Fit model with group mean centered import as a predictor
+```{r}
+
+se4= lmer(enhance ~ 1 + grpmc_import + depress + grpmc_import*depress + (1  + grpmc_import |id.f), REML = TRUE, data = selfe)
+summary(se4)
+
+
+```
+
+```{r}
+confint(se4, method = "boot", nsim = 5000) # <- Takes a while to run. so unhashtag when you want it to run. 
+```
+
+
+```{r}
+
+se4.plot <- add_predictions( data = selfe, model = se4)
+
+
+ggplot(data = se4.plot, aes(x = grpmc_import, y = pred, group = id.f, color = depress.f)) + 
+  geom_line(alpha = 0.4) +
+  geom_abline(intercept = 3.24885, slope = 0.49768, color = "purple", size = 3) +
+  geom_abline(intercept = (3.24885 - -0.22175), slope = (0.49768 -0.21493), color = "green", size = 3) +
+  theme_bw() + 
+  scale_color_manual(values=c("purple", "green")) +
+  labs( title = "DO students self enhance more for traits the find important?", 
+        subtitle = "Is there a difference by depression status?",
+        x = "Importance (person mean centered", y = "Predicted self-enhancement",
+        color = "Depression Status")
+
+```
+

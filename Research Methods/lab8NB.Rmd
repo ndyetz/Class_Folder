@@ -1,0 +1,73 @@
+---
+title: "R Notebook: For lab activity 8"
+output: html_notebook
+---
+
+#Load libraries
+```{r, message = FALSE}
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("descriptr")
+library(descriptr)
+#install.packages("modelr")
+library(modelr)
+#install.packages("caret")
+#library(caret) # <- used this for the confusion matrix. -Neil
+
+
+```
+
+#Read in data
+```{r, message = FALSE}
+
+bcs <- read_csv("bcs.csv ")
+
+```
+
+```{r}
+# fit the logistic regression model
+logreg_com <- glm(comply ~ physrec + knowledge + benefits + barriers, data = bcs, family=binomial("logit"))
+summary(logreg_com)
+```
+
+#Calculate OR & 95% CI's
+```{r}
+exp(coef(logreg_com))
+exp(cbind(OR = coef(logreg_com), confint(logreg_com)))
+```
+
+All of the predictors are significant except for knowledge.
+
+#Confusion Matrix
+```{r}
+
+bcs_pred <- bcs %>%
+add_predictions(logreg_com) %>%
+mutate(predprob = exp(pred) / (1 + exp(pred)),
+      classify = ifelse(predprob > .5, 1, 0))
+
+##Couldn't get confusion matrix to work
+conf_matrix <- ds_cross_table(bcs_pred$classify, bcs_pred$comply)
+conf_matrix
+
+#My alternative (it's better anyways! It gives me all of the sensitivity and specificity without calculating!!)
+#conf_matrix <- confusionMatrix(bcs_pred$classify, bcs_pred$comply, dnn = c("classify", "comply"))
+#conf_matrix
+
+
+```
+
+**False Positives** = 28  
+**True Negatives**  = 60  
+**False Negatives** = 23  
+**True Negatives**  = 53  
+
+**Sensitivity** = `r conf_matrix$byClass[1]`  
+  - This Means that when people do comply, our model predicts this 68.1% of the time.
+ 
+ **Specificity** = `r conf_matrix$byClass[2]`  
+  - This means that when people do NOT comply, we are able to accurately predict this 69.7% of the time
+
+
+
+
