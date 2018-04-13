@@ -1,0 +1,177 @@
+Item,Scale,Source,Dimension,Item Text
+id,--,--,--,Participant ID
+desc_self_1,Normative Competitiveness,class,, The people around me are constantly striving to be the best.
+desc_self_2,Normative Competitiveness,class,, Everyone I know is highly competitive.
+desc_self_3,Normative Competitiveness,class,, The people around me are always competing with others.
+desc_self_4,Normative Competitiveness,class,, The people around me compete with each other regularly.
+desc_self_5,Normative Competitiveness,class,, The people around me think about competition regularly.
+desc_self_6,Normative Competitiveness,class,, People who are highly competitive are often rewarded.
+desc_self_7,Normative Competitiveness,class,, The people around me who are highly competitive seem to be more successful.
+desc_self_8,Normative Competitiveness,class,, People who do not compete have a hard time achieving what they want.
+desc_oth_1,Normative Competitiveness,class,, The people around me are constantly striving to be the best.
+desc_oth_2,Normative Competitiveness,class,, Everyone I know is highly competitive.
+desc_oth_3,Normative Competitiveness,class,, The people around me are always competing with others.
+desc_oth_4,Normative Competitiveness,class,, The people around me compete with each other regularly.
+desc_oth_5,Normative Competitiveness,class,, The people around me think about competition regularly.
+desc_oth_6,Normative Competitiveness,class,, People who are highly competitive are often rewarded.
+desc_oth_7,Normative Competitiveness,class,, The people around me who are highly competitive seem to be more successful.
+desc_oth_8,Normative Competitiveness,class,, People who do not compete have a hard time achieving what they want.
+inj_self_1,Normative Competitiveness,class,, I should seek out situations that are highly competitive.
+inj_self_2,Normative Competitiveness,class,, Competition is an important aspect of life.
+inj_self_3,Normative Competitiveness,class,," If I do not compete to the best of my ability, the people around me will not approve."
+inj_self_4,Normative Competitiveness,class,," If I am not striving to be the best, I will be seen as a weak person."
+inj_self_5,Normative Competitiveness,class,, The people around me believe that morally strong people are highly competitive.
+inj_self_6,Normative Competitiveness,class,," If I am not competing at the highest level, I will let down the people around me."
+inj_self_7,Normative Competitiveness,class,, I believe that I should be more competitive than I am now.
+inj_self_8,Normative Competitiveness,class,," I should prove that I am just as good, or better, than the people around me."
+inj_self_9,Normative Competitiveness,class,, People should think about competition more than they do.
+inj_self_10,Normative Competitiveness,class,, It is acceptable for me to be competitive.
+inj_oth_1,Normative Competitiveness,class,, I should seek out situations that are highly competitive.
+inj_oth_2,Normative Competitiveness,class,, Competition is an important aspect of life.
+inj_oth_3,Normative Competitiveness,class,," If I do not compete to the best of my ability, the people around me will not approve."
+inj_oth_4,Normative Competitiveness,class,," If I am not striving to be the best, I will be seen as a weak person."
+inj_oth_5,Normative Competitiveness,class,, The people around me believe that morally strong people are highly competitive.
+inj_oth_6,Normative Competitiveness,class,," If I am not competing at the highest level, I will let down the people around me."
+inj_oth_7,Normative Competitiveness,class,, I believe that I should be more competitive than I am now.
+inj_oth_8,Normative Competitiveness,class,," I should prove that I am just as good, or better, than the people around me."
+inj_oth_9,Normative Competitiveness,class,, People should think about competition more than they do.
+inj_oth_10,Normative Competitiveness,class,, It is acceptable for me to be competitive.
+comp_orient_1,Competitiveness Orientation,Newby & Klein (2014),, I get a lot of enjoyment out of competition.
+comp_orient_2,Competitiveness Orientation,Newby & Klein (2014),, I enjoy setting and beating goals through competition.
+comp_orient_3,Competitiveness Orientation,Newby & Klein (2014),, I am a competitive person.
+comp_orient_4,Competitiveness Orientation,Newby & Klein (2014),, I enjoy competing against others.
+comp_orient_5,Competitiveness Orientation,Newby & Klein (2014),, I do not find competition self
+comp_orient_6,Competitiveness Orientation,Newby & Klein (2014),, I love the thrill of competition.
+comp_orient_7,Competitiveness Orientation,Newby & Klein (2014),, Competing doesn't really matter to me.
+comp_orient_8,Competitiveness Orientation,Newby & Klein (2014),, I perform better when I compete against others.
+comp_orient_9,Competitiveness Orientation,Newby & Klein (2014),, Competition motivates me.
+comp_orient_10,Competitiveness Orientation,Newby & Klein (2014),, I like to challenge others.
+comp_orient_11,Competitiveness Orientation,Newby & Klein (2014),, I would rather not compete.
+comp_orient_12,Competitiveness Orientation,Newby & Klein (2014),, I love to compete.
+purp_1,Living a Purpose,class,, I could easily name five things I have done in the last two weeks that were driven by my life's purpose.
+purp_2,Living a Purpose,class,, I am working toward a purpose.
+purp_3,Living a Purpose,class,, I see a connection between what I do daily and my purpose.
+purp_4,Living a Purpose,class,, My daily activities contribute to my purpose.
+purp_5,Living a Purpose,class,, There are steps between my life now and ultimately living my purpose.
+purp_6,Living a Purpose,class,, The things that I do align with my life's purpose.
+purp_7,Living a Purpose,class,, I am living my life's purpose.
+purp_8,Living a Purpose,class,, My activities help me discover my purpose.
+purp_9,Living a Purpose,class,, I am currently unable to work toward my purpose.
+purp_10,Living a Purpose,class,, The things that I do align with my life's purpose.
+purp_11,Living a Purpose,class,, My activities help me discover my purpose.
+purp_12,Living a Purpose,class,, I am meant to be doing something else with my life.
+purp_13,Living a Purpose,class,, My purpose guides my actions day-to-day.
+purp_14,Living a Purpose,class,, My life currently aligns with my purpose.
+purp_15,Living a Purpose,class,, I am taking steps to realize my purpose.
+purp_16,Living a Purpose,class,, My life is filled with opportunities to fulfill my purpose.
+purp_17,Living a Purpose,class,, The activities that I engage in are in harmony with my purpose.
+purp_18,Living a Purpose,class,, The conditions of my life allow me to fulfill my life's purpose.
+purp_19,Living a Purpose,class,, I am actualizing my purpose in my everyday life.
+purp_20,Living a Purpose,class,, I spend most of my time working towards my purpose.
+purp_21,Living a Purpose,class,, I know what I have to do to achieve my purpose.
+purp_22,Living a Purpose,class,, My purpose fills each of my days.
+purp_23,Living a Purpose,class,, My life is shaped by my purpose.
+purp_24,Living a Purpose,class,, My purpose is central to how I make decisions.
+purp_25,Living a Purpose,class,," Right now, it is impossible for me to live my purpose."
+mean_1,Meaning in Life Questionnaire,Steger et al. (2006),, I understand my life's meaning.
+mean_2,Meaning in Life Questionnaire,Steger et al. (2006),, I am looking for something that makes my life feel meaningful.
+mean_3,Meaning in Life Questionnaire,Steger et al. (2006),, I am always looking to find my life's purpose.
+mean_4,Meaning in Life Questionnaire,Steger et al. (2006),, My life has a clear sense of purpose.
+mean_5,Meaning in Life Questionnaire,Steger et al. (2006),, I have a good sense of what makes my life meaningful.
+mean_6,Meaning in Life Questionnaire,Steger et al. (2006),, I have discovered a satisfying life purpose.
+mean_7,Meaning in Life Questionnaire,Steger et al. (2006),, I am always searching for something that makes my life feel significant.
+mean_8,Meaning in Life Questionnaire,Steger et al. (2006),, I am seeking a purpose or mission for my life.
+mean_9,Meaning in Life Questionnaire,Steger et al. (2006),, My life has no clear purpose.
+mean_10,Meaning in Life Questionnaire,Steger et al. (2006),, I am searching for meaning in my life.
+change1_1,Belief in Community-Level Social Change ,class,,I believe positive change is possible in my community.
+change1_2,Belief in Community-Level Social Change ,class,,Positive community change is impossible.
+change1_3,Belief in Community-Level Social Change ,class,,It is possible for my community to improve.
+change1_4,Belief in Community-Level Social Change ,class,,My community is unlikely to change for the better.
+change1_5,Belief in Community-Level Social Change ,class,,My community can progress over time.
+change1_6,Belief in Community-Level Social Change ,class,,I think positive change in my community is unrealistic.
+change1_7,Belief in Community-Level Social Change ,class,,My community has the potential to change for the better.
+change1_8,Belief in Community-Level Social Change ,class,,I am optimistic that my community can make progress.
+change1_9,Belief in Community-Level Social Change ,class,,I doubt that positive change can happen in my community.
+change2_1,Belief in Community-Level Social Change ,class,,I have the power to contribute to positive change in my community.
+change2_2,Belief in Community-Level Social Change ,class,,What happens in my community is out of my control.
+change2_3,Belief in Community-Level Social Change ,class,,My actions can positively impact my community.
+change2_4,Belief in Community-Level Social Change ,class,,There are ways that I can change my community for the better.
+change2_5,Belief in Community-Level Social Change ,class,,"No matter what I do, my community will remain the same."
+change2_6,Belief in Community-Level Social Change ,class,,Advocating for change can help influence my community.
+change2_7,Belief in Community-Level Social Change ,class,,I am powerless to improve my community.
+change2_8,Belief in Community-Level Social Change ,class,,I am confident that I can change my community for the better.
+change2_9,Belief in Community-Level Social Change ,class,,I doubt my ability to improve my community.
+change2_10,Belief in Community-Level Social Change ,class,,I believe that I have influence over the conditions in my community.
+pc_comm_1,Perceived Control at the Community Level,Israel et al. (1994),, My community has influence over decisions that affect my life.
+pc_comm_2,Perceived Control at the Community Level,Israel et al. (1994),, I can influence decisions that affect my community.
+pc_comm_3,Perceived Control at the Community Level,Israel et al. (1994),," By working together, people in my community can influence decisions that affect the community."
+pc_comm_4,Perceived Control at the Community Level,Israel et al. (1994),, People in my community work together to influence decisions on the state or national level.
+pc_comm_5,Perceived Control at the Community Level,Israel et al. (1994),, I am satisfied with the amount of influence I have over decisions that affect my community.
+lo_1,Life Orientation Test,"Scheier, Carver & Bridges (1994)",," In uncertain times, I usually expect the best."
+lo_2,Life Orientation Test,"Scheier, Carver & Bridges (1994)",," If something can go wrong for me, it will."
+lo_3,Life Orientation Test,"Scheier, Carver & Bridges (1994)",, I'm always optimistic about my future.
+lo_4,Life Orientation Test,"Scheier, Carver & Bridges (1994)",, I hardly ever expect things to go my way.
+lo_5,Life Orientation Test,"Scheier, Carver & Bridges (1994)",, I rarely count on good things happening to me.
+lo_6,Life Orientation Test,"Scheier, Carver & Bridges (1994)",," Overall, I expect more good things to happen to me than bad."
+lc_1,Locus of Control,Lumpkin (1985),," When I make plans, I am almost certain that I can make them work."
+lc_2,Locus of Control,Lumpkin (1985),, Many of the unhappy things in people's lives are partly due to bad luck.
+lc_3,Locus of Control,Lumpkin (1985),, Getting people to do the right things depends upon ability; luck has nothing to do with it.
+lc_4,Locus of Control,Lumpkin (1985),, Getting a good job depends mainly on being in the right place at the right time.
+lc_5,Locus of Control,Lumpkin (1985),, What happens to me is my own doing.
+lc_6,Locus of Control,Lumpkin (1985),, Many times I feel that I have little influence over the things that happen to me.
+BF1_1,Big Five Factor Markers,Goldberg (1992),ext, Am the life of the party.
+BF1_2,Big Five Factor Markers,Goldberg (1992),agr, Am interested in people.
+BF1_3,Big Five Factor Markers,Goldberg (1992),con, Am always prepared.
+BF1_4,Big Five Factor Markers,Goldberg (1992),sta, Am relaxed most of the time.
+BF1_5,Big Five Factor Markers,Goldberg (1992),opn, Have a rich vocabulary.
+BF1_6,Big Five Factor Markers,Goldberg (1992),ext, Feel comfortable around people.
+BF1_7,Big Five Factor Markers,Goldberg (1992),agr, Sympathize with others' feelings.
+BF1_8,Big Five Factor Markers,Goldberg (1992),con, Pay attention to details.
+BF1_9,Big Five Factor Markers,Goldberg (1992),sta, Seldom feel blue.
+BF1_10,Big Five Factor Markers,Goldberg (1992),opn, Have a vivid imagination.
+BF1_11,Big Five Factor Markers,Goldberg (1992),agr, Have a soft heart.
+BF1_12,Big Five Factor Markers,Goldberg (1992),agr, Take time out for others.
+BF1_13,Big Five Factor Markers,Goldberg (1992),con, Get chores done right away.
+BF1_14,Big Five Factor Markers,Goldberg (1992),con, Like order.
+BF1_15,Big Five Factor Markers,Goldberg (1992),ext, Start conversations.
+BF1_16,Big Five Factor Markers,Goldberg (1992),ext, Talk to a lot of different people at parties.
+BF1_17,Big Five Factor Markers,Goldberg (1992),sta, Get stressed out easily.
+BF1_18,Big Five Factor Markers,Goldberg (1992),sta, Worry about things.
+BF1_19,Big Five Factor Markers,Goldberg (1992),opn, Have excellent ideas.
+BF1_20,Big Five Factor Markers,Goldberg (1992),opn, Am quick to understand things.
+BF1_21,Big Five Factor Markers,Goldberg (1992),ext, Don't mind being the center of attention.
+BF1_22,Big Five Factor Markers,Goldberg (1992),ext, Don't talk a lot.
+BF1_23,Big Five Factor Markers,Goldberg (1992),agr, Feel others' emotions
+BF1_24,Big Five Factor Markers,Goldberg (1992),agr, Make people feel at ease.
+BF1_25,Big Five Factor Markers,Goldberg (1992),con, Follow a schedule.
+BF2_1,Big Five Factor Markers,Goldberg (1992),con, Shirk my duties.
+BF2_2,Big Five Factor Markers,Goldberg (1992),opn, Do not have a good imagination.
+BF2_3,Big Five Factor Markers,Goldberg (1992),sta, Get irritated easily.
+BF2_4,Big Five Factor Markers,Goldberg (1992),con, Am exacting in my work.
+BF2_5,Big Five Factor Markers,Goldberg (1992),sta, Am easily disturbed.
+BF2_6,Big Five Factor Markers,Goldberg (1992),sta, Get upset easily.
+BF2_7,Big Five Factor Markers,Goldberg (1992),opn, Use difficult words.
+BF2_8,Big Five Factor Markers,Goldberg (1992),opn, Spend time reflecting on things.
+BF2_9,Big Five Factor Markers,Goldberg (1992),ext, Keep in the background.
+BF2_10,Big Five Factor Markers,Goldberg (1992),agr, Am not really interested in others.
+BF2_11,Big Five Factor Markers,Goldberg (1992),con, Leave my belongings around.
+BF2_12,Big Five Factor Markers,Goldberg (1992),sta, Change my mood a lot.
+BF2_13,Big Five Factor Markers,Goldberg (1992),con, Often forget to put things back in their proper place.
+BF2_14,Big Five Factor Markers,Goldberg (1992),ext, Have little to say.
+BF2_15,Big Five Factor Markers,Goldberg (1992),agr, Insult people.
+BF2_16,Big Five Factor Markers,Goldberg (1992),con, Make a mess of things.
+BF2_17,Big Five Factor Markers,Goldberg (1992),opn, Am full of ideas.
+BF2_18,Big Five Factor Markers,Goldberg (1992),agr, Am not interested in other people's problems.
+BF2_19,Big Five Factor Markers,Goldberg (1992),ext, Don't like to draw attention to myself.
+BF2_20,Big Five Factor Markers,Goldberg (1992),sta, Often feel blue.
+BF2_21,Big Five Factor Markers,Goldberg (1992),sta, Have frequent mood swings.
+BF2_22,Big Five Factor Markers,Goldberg (1992),opn, Am not interested in abstract ideas.
+BF2_23,Big Five Factor Markers,Goldberg (1992),opn, Have difficulty understanding abstract ideas.
+BF2_24,Big Five Factor Markers,Goldberg (1992),agr, Feel little concern for others.
+BF2_25,Big Five Factor Markers,Goldberg (1992),ext, Am quiet around strangers.
+Age,Demographics,--,--,What is your age? (in years)
+Sex,Demographics,--,--,What is your sex? 
+Sex_3_TEXT,Demographics,--,--,What is your sex? Other
+Race,Demographics,--,--,"What race do you identify with? If more than one, please indicate which ones in the ""Other"" category. "
+Race_6_TEXT,Demographics,--,--,"What race do you identify with? If more than one, please indicate which ones in the ""Other"" category. - Other"
+Hispanic,Demographics,--,--,Do you identify as Hispanic?

@@ -1,10 +1,15 @@
 ---
 title: "R Notebook for Psy 600K & 601 Project"
-output: 
+output:
+  pdf_document:
+    toc: yes
   html_notebook:
-    toc: true
-    toc_float: true
-    
+    toc: yes
+    toc_float: yes
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
 ---
 
 # Load libraries 
@@ -45,8 +50,15 @@ data2 <- data %>%
          Hispanic)
 ```
 
-#Item tex & Desciption
-```{r}
+#Item text & Desciption
+```{r, message = FALSE}
+key <- read_csv("key.csv")
+
+key <- key %>% 
+  filter(Scale %in% c("Belief in Community-Level Social Change", "Perceived Control at the Community Level", "Life Orientation Test","Big Five Factor Markers")) %>% 
+  select(-Source, -Dimension)
+
+key
 
 ```
 
