@@ -1,0 +1,193 @@
+---
+title: "R Notebook for Psy 600K & 601 Project"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+    
+---
+
+# Load libraries 
+```{r, message = FALSE, warning = FALSE}
+library(psych)
+library(GPArotation)
+library(lavaan)
+library(semTools)
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+
+#Clear Environment
+```{r}
+rm(list=ls())
+```
+
+
+# Import data
+```{r}
+data <- read.csv("Class Survey Data.csv", header = TRUE, stringsAsFactors = FALSE)
+```
+
+# Subset the data
+```{r}
+data2 <- data %>%
+  select(starts_with("change"), 
+         starts_with("pc_comm"), 
+         starts_with("lo"), 
+         starts_with("lc"), 
+         starts_with("bf"), 
+         Age, Sex, 
+         Sex_3_TEXT, 
+         Race, 
+         Race_6_TEXT, 
+         Hispanic)
+```
+
+#Item tex & Desciption
+```{r}
+
+```
+
+# Reverse-coding
+```{r}
+data2 <- data2 %>%
+  mutate(
+        #Change Scale
+         change1_2R = 6-change1_2, 
+         change1_4R = 6-change1_4, 
+         change1_6R = 6-change1_6, 
+         change1_9R = 6-change1_9, 
+         change2_2R = 6-change2_2, 
+         change2_5R = 6-change2_5, 
+         change2_7R = 6-change2_7, 
+         change2_9R = 6-change2_9, 
+         
+        #Life Orientation
+         lo_2R = 6-lo_2, 
+         lo_4R = 6-lo_4, 
+         lo_5R = 6-lo_5, 
+        
+        #Locus of Control 
+         lc_2R = 6-lc_2, 
+         lc_4R = 6-lc_4, 
+         lc_6R = 6-lc_6)
+```
+
+# Subset the data (just our scale)
+```{r}
+change <- data2 %>%
+  select(change1_1, change1_2R, change1_3, change1_4R, change1_5, change1_6R, change1_7, change1_8, change1_9R, change2_1, change2_2R, change2_3, change2_4, change2_5R, change2_6, change2_7R, change2_8, change2_9R, change2_10)
+```
+
+# Descriptive stats
+```{r}
+describe(change)
+```
+
+# Inter-item correlations
+```{r}
+cortable <- cor(change, use = "pairwise.complete.obs")
+write.csv(cortable, "Correlations.csv")
+```
+
+# CFA - two factor no items removed
+```{r}
+model.2f <- 'f1 =~ change1_1 + change1_2R + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_3 + change2_4 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
+
+fit.model.2f <- cfa(model.2f, change)
+summary(fit.model.2f, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f, type = "cor")
+
+reliability(fit.model.2f)
+```
+
+# CFA - one factor
+```{r}
+model.1f <- 'f1 =~ change1_1 + change1_2R + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R + change2_1 + change2_2R + change2_3 + change2_4 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
+
+fit.model.1f <- cfa(model.1f, change)
+summary(fit.model.1f, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.1f, type = "cor")
+```
+
+# CFA -two factor without items 1_2R and 2_4
+```{r}
+model.2f2 <- 'f1 =~ change1_1 + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_3 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
+
+fit.model.2f2 <- cfa(model.2f2, change)
+summary(fit.model.2f2, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f2, type = "cor")
+
+reliability(fit.model.2f2)
+```
+
+# CFA -two factor without items 1_2R, 1_3, and 2_4 
+```{r}
+model.2f3 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_3 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
+
+fit.model.2f3 <- cfa(model.2f3, change)
+summary(fit.model.2f3, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f3, type = "cor")
+
+reliability(fit.model.2f3)
+```
+
+# CFA -two factor without items 1_2R, 1_3, 1_7, 2_4, 2_6
+```{r}
+model.2f4 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_3 + change2_5R + change2_7R + change2_8 + change2_9R + change2_10'
+
+fit.model.2f4 <- cfa(model.2f4, change)
+summary(fit.model.2f4, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f4, type = "cor")
+
+reliability(fit.model.2f4)
+```
+
+# CFA -two factor without items 1_2R, 1_3, 1_7, 2_3, 2_4, 2_6, 2_8
+```{r}
+model.2f5 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_5R + change2_7R + change2_9R + change2_10'
+
+fit.model.2f5 <- cfa(model.2f5, change)
+summary(fit.model.2f5, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f5, type = "cor")
+
+reliability(fit.model.2f5)
+```
+
+# CFA -two factor without items 1_2R, 1_3, 1_7, 2_3, 2_4, 2_6, 2_8, 2_9R
+```{r}
+model.2f6 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R
+            f2 =~ change2_1 + change2_2R + change2_5R + change2_7R + change2_10'
+
+fit.model.2f6 <- cfa(model.2f6, change)
+summary(fit.model.2f6, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.2f6, type = "cor")
+
+reliability(fit.model.2f6)
+```
+
+# CFA -one factor without items 1_2R, 1_3, 1_7, 2_3, 2_4, 2_6, 2_8, 2_9R
+```{r}
+model.1f6 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R + change2_1 + change2_2R + change2_5R + change2_7R + change2_10'
+
+fit.model.1f6 <- cfa(model.1f6, change)
+summary(fit.model.1f6, fit.measures = TRUE, standardized = TRUE)
+
+resid(fit.model.1f6, type = "cor")
+
+reliability(fit.model.1f6)
+```
