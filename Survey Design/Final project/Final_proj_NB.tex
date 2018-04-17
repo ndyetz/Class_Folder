@@ -1,0 +1,1576 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Psy 792F Project},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Psy 792F Project}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{HI DELLA, READ ME!!!}\label{hi-della-read-me}
+
+Hey Della, Neil here. Okay this document contains a bunch of descriptive
+statistics of our data. From reading over the group project, I realized
+we really don't need to get to into deep analysis. However, I have
+created charts for all of our demographic variables and done some
+anlalyses. I also sent a complimentary word document into the email and
+am hoping the answers on that are helpful as well.
+
+Insert an ``r-chunk'' by clicking ``insert'' then ``R'' This is a space
+for R-coding an is runnable To run this notebook, click ``Run'' (Upper
+right) The ``Restart R and run all Chuncks. Chunk = exceutable R-code.
+
+\section{First set up our packages}\label{first-set-up-our-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("tydyverse")}
+\CommentTok{#install.packages("psych")}
+\CommentTok{#install.packages("apaTables")}
+\CommentTok{#install.packages("olsrr")}
+
+\KeywordTok{library}\NormalTok{(tidyverse) }\CommentTok{#the best package for reading & cleaning data}
+\KeywordTok{library}\NormalTok{(psych) }\CommentTok{#we use this for relibaility}
+\KeywordTok{library}\NormalTok{(apaTables) }\CommentTok{#Creates really cool tables (and APA formatted!)}
+\KeywordTok{library}\NormalTok{(olsrr) }\CommentTok{#<- regression analysis package}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Load in the data}\label{load-in-the-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"Psy_792F.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Research Question /
+Hypothesis}\label{research-question-hypothesis}
+
+Is there an association between learning orientation and perceived
+stress?
+
+\textbf{Answer}: There seems to be an associatin between affective
+learning orientation and perceived stress. However, this is not the case
+for the behavioral and cognitive subscales
+
+Ho = No difference Ha = There is a difference
+
+All t-tests = two sided.
+
+\section{Clean the data}\label{clean-the-data}
+
+Here I am removing any particpants that did not consent or is over
+18.(We ahd 1 underage particpant attept to take the survey\ldots{} They
+were exited out immediately)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(consent }\OperatorTok{==}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{over_}\DecValTok{18} \OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{#selecting only individuals over 18 & consented}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{(StartDate}\OperatorTok{:}\NormalTok{over_}\DecValTok{18}\NormalTok{)) }\CommentTok{#Remove uneccessary variables (start date - Over_18)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Recode \& Factor variables}\label{recode-factor-variables}
+
+Here I am recoding and labeling our demographic variables for the charts
+I am about to create
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{male =} \KeywordTok{ifelse}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, gender), }\CommentTok{#recoding gende to male variable. Male = 1, female = 0}
+         \DataTypeTok{age =}\NormalTok{ (}\DecValTok{2017} \OperatorTok{-}\StringTok{ }\NormalTok{yrborn), }\CommentTok{#creating age variable}
+         
+         \DataTypeTok{male.f =} \KeywordTok{factor}\NormalTok{(male, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)), }\CommentTok{#factoring and labeling "male"}
+         
+        
+        \DataTypeTok{sexor =}\NormalTok{ (}\KeywordTok{ifelse}\NormalTok{(sexor }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, sexor)), }\CommentTok{# combining Gay/lesbian... category = homosexual}
+        \DataTypeTok{sexor.f =} \KeywordTok{factor}\NormalTok{(sexor, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Heterosexual"}\NormalTok{, }\StringTok{"Homosexual"}\NormalTok{, }\StringTok{"Bisexual"}\NormalTok{, }\StringTok{"Other"}\NormalTok{)), }\CommentTok{#factoring and labeling sexual orientation}
+        
+        \DataTypeTok{income.f =} \KeywordTok{factor}\NormalTok{(income, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"< $20k"}\NormalTok{, }\StringTok{"$20k to $39k"}\NormalTok{, }\StringTok{"$40k - $59k"}\NormalTok{, }\StringTok{"$60k - $79k"}\NormalTok{, }\StringTok{"$80k - $99k"}\NormalTok{, }\StringTok{"$100k +"}\NormalTok{)), }\CommentTok{#factoring and labeling income}
+        \DataTypeTok{educ.f =} \KeywordTok{factor}\NormalTok{(educ, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Grade school"}\NormalTok{, }\StringTok{"High school diploma"}\NormalTok{, }\StringTok{"Some college"}\NormalTok{, }\StringTok{"Associates Degree"}\NormalTok{, }\StringTok{"Bacholer's Degree"}\NormalTok{, }\StringTok{"Post Bachelors degree"}\NormalTok{)), }\CommentTok{#labeling and factoring udcation level}
+        \DataTypeTok{edu_di =} \KeywordTok{ifelse}\NormalTok{(educ }\OperatorTok{>=}\StringTok{ }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{),}
+        \DataTypeTok{edu_di.f =} \KeywordTok{factor}\NormalTok{(edu_di, }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"obtained a 4-year college degree"}\NormalTok{, }\StringTok{"No college"}\NormalTok{)), }\CommentTok{#Dichotomizing education}
+        
+        \DataTypeTok{marstat.f =} \KeywordTok{factor}\NormalTok{(marstat, }\DataTypeTok{levels =}\NormalTok{ (}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Single"}\NormalTok{, }\StringTok{"Married"}\NormalTok{, }\StringTok{"Not married,living w/ partner"}\NormalTok{, }\StringTok{"Seperated"}\NormalTok{, }\StringTok{"Divorced"}\NormalTok{, }\StringTok{"Widowed"}\NormalTok{)), }\CommentTok{#factroing and leveling marriage status}
+        \DataTypeTok{marstat_di =} \KeywordTok{ifelse}\NormalTok{(marstat }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{), }\CommentTok{#dichotomizing marstatus, 1 = married 0 = single}
+        \DataTypeTok{marstat_di.f =} \KeywordTok{factor}\NormalTok{(marstat_di, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Single"}\NormalTok{, }\StringTok{"Married"}\NormalTok{)))  }\CommentTok{#factoring and labeling dichotomized marriage status}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Recode and factor race}\label{recode-and-factor-race}
+
+Race was a little it more difficult to recode\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{####Special recode for race 0 = No response, , 1 = "Amer Indian" 2 = "Asian", "3" = "Black", 4 = "Hispanic", 5 = "Hawian/PI",, 6 = "White", 7 = "Other", 8 = "Mixed Race"}
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_1 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{1}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_2 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{2}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_3 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{3}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_4 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{4}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_5 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{5}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_6 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{6}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_7 =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(race_}\DecValTok{7}\NormalTok{), }\DecValTok{0}\NormalTok{, }\DecValTok{7}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{race_temp =} \KeywordTok{sum}\NormalTok{(race_}\DecValTok{1}\NormalTok{, race_}\DecValTok{2}\NormalTok{, race_}\DecValTok{3}\NormalTok{, race_}\DecValTok{4}\NormalTok{, race_}\DecValTok{5}\NormalTok{, race_}\DecValTok{6}\NormalTok{, race_}\DecValTok{7}\NormalTok{),}
+         \DataTypeTok{race =} \KeywordTok{ifelse}\NormalTok{(race_temp }\OperatorTok{>}\StringTok{ }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, race_temp),}
+        \DataTypeTok{race.f =} \KeywordTok{factor}\NormalTok{(race, }\DataTypeTok{levels=} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No response"}\NormalTok{,}\StringTok{"Mixed Race"}\NormalTok{, }\StringTok{"American Indian or Alaska Native"}\NormalTok{, }\StringTok{"Native Hawaiian Other Pacific Islander"}\NormalTok{,}\StringTok{"Asian"}\NormalTok{,}\StringTok{"Black/African American"}\NormalTok{, }\StringTok{"Hispanic/Latino"}\NormalTok{, }\StringTok{"White"}\NormalTok{, }\StringTok{"Other"}\NormalTok{))) }\CommentTok{#Reorder so it looked better on the bar chart (semi-descending order with mixed and no response on bottom.)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Tables for demograhic
+variables}\label{tables-for-demograhic-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Age summary}
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   20.00   25.00   26.00   27.83   28.00   53.00       2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# race frequencies}
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{race.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                            No response 
+##                                      1 
+##                             Mixed Race 
+##                                      9 
+##       American Indian or Alaska Native 
+##                                      0 
+## Native Hawaiian Other Pacific Islander 
+##                                      1 
+##                                  Asian 
+##                                      3 
+##                 Black/African American 
+##                                      4 
+##                        Hispanic/Latino 
+##                                     17 
+##                                  White 
+##                                     43 
+##                                  Other 
+##                                      0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#sex frequencies}
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{male.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Female   Male 
+##     56     21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#marital status frequencies}
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{marstat.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                        Single                       Married 
+##                            42                            14 
+## Not married,living w/ partner                     Seperated 
+##                            21                             0 
+##                      Divorced                       Widowed 
+##                             0                             0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Sexual orientation table}
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{sexor.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Heterosexual   Homosexual     Bisexual        Other 
+##           66            5            6            0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#education frequencies}
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{educ.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##          Grade school   High school diploma          Some college 
+##                     0                    11                    13 
+##     Associates Degree     Bacholer's Degree Post Bachelors degree 
+##                     1                    22                    30
+\end{verbatim}
+
+\section{Charts and graphs!}\label{charts-and-graphs}
+
+\subsection{AGE}\label{age}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ age)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ (..density..)}\OperatorTok{*}\DecValTok{100}\NormalTok{), }\DataTypeTok{binwidth =} \DecValTok{3}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Distribution of age"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"percent"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Age"}\NormalTok{)  }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\subsection{race plot}\label{race-plot}
+
+\subsubsection{Percentage}\label{percentage}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(race.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ race.f, }\DataTypeTok{y =}\NormalTok{ (..count..)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(..count..)}\OperatorTok{*}\DecValTok{100}\NormalTok{) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Percentage of respondents by race"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\subsubsection{Count}\label{count}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(race.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ race.f) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Respondents by race"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\subsection{Gender}\label{gender}
+
+\subsubsection{Count}\label{count-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(male.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ male.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{title =} \StringTok{"Respondents by Gender"}\NormalTok{, }\DataTypeTok{x =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\subsubsection{Percentag}\label{percentag}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(male.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ male.f, }\DataTypeTok{y =}\NormalTok{ (..count..)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(..count..)}\OperatorTok{*}\DecValTok{100}\NormalTok{))  }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Percentage of respondents by gender"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\subsection{Sexual Orientation}\label{sexual-orientation}
+
+\subsubsection{Count}\label{count-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(sexor.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ sexor.f) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Respondents by sexual orientation"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\subsubsection{Percentage}\label{percentage-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(sexor.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ sexor.f, }\DataTypeTok{y =}\NormalTok{ (..count..)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(..count..)}\OperatorTok{*}\DecValTok{100}\NormalTok{) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Percentage of respondents by sexual orientation"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\subsection{Marital Status}\label{marital-status}
+
+\subsubsection{Count}\label{count-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(marstat.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ marstat.f) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Respondents by marital status"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\subsubsection{Percent}\label{percent}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(marstat.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ marstat.f, }\DataTypeTok{y =}\NormalTok{ (..count..)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(..count..)}\OperatorTok{*}\DecValTok{100}\NormalTok{) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Percentage of respondents by marital status"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\subsection{Education}\label{education}
+
+\subsubsection{Count}\label{count-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(educ.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ educ.f) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Respondents by education level"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\subsubsection{Percent}\label{percent-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(survey, }\KeywordTok{aes}\NormalTok{(educ.f)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{( }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ educ.f, }\DataTypeTok{y =}\NormalTok{ (..count..)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(..count..)}\OperatorTok{*}\DecValTok{100}\NormalTok{) , }\DataTypeTok{position =} \KeywordTok{position_stack}\NormalTok{(}\DataTypeTok{reverse =}\OtherTok{TRUE}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Percentage of respondents by education level"}\NormalTok{, }\DataTypeTok{x=}\StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =} \ControlFlowTok{function}\NormalTok{(x)\{ }\KeywordTok{paste0}\NormalTok{(x, }\StringTok{"%"}\NormalTok{) \})}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final_proj_NB_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\section{Working with
+measures/Scales}\label{working-with-measuresscales}
+
+\textbf{Pss Scale scoring Instructions}
+
+Figuring Your PSS Score
+
+You can determine your PSS score by following these directions:
+
+â¢ First, reverse your scores for questions 4, 5, 7, and 8. On these 4
+questions, change the scores like this: 0 = 4, 1 = 3, 2 = 2, 3 = 1, 4 =
+0. â¢ Now add up your scores for each item to get a total. My total
+score is \_\_\_\_\_\_\_\_\_\_\_. â¢ Individual scores on the PSS can
+range from 0 to 40 with higher scores indicating higher perceived
+stress.
+
+âº Scores ranging from 0-13 would be considered low stress. âº Scores
+ranging from 14-26 would be considered moderate stress. âº Scores
+ranging from 27-40 would be considered high perceived stress.
+
+\textbf{\^{}Note from Neil: We can create these categories and factor
+them\^{}}
+
+\section{create scales}\label{create-scales}
+
+\subsection{PSS}\label{pss}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }\CommentTok{#Reverse code items 4,5, 7, 8}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pss_4R =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{(pss_}\DecValTok{4}\NormalTok{), }\CommentTok{#Normally reverse scaling = scalemax +1, but our scale runs 0 - 4... 0 has a meaningful value}
+         \DataTypeTok{pss_5R =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{(pss_}\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{pss_7R =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{(pss_}\DecValTok{7}\NormalTok{),}
+         \DataTypeTok{pss_8R =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{(pss_}\DecValTok{8}\NormalTok{))}
+
+\CommentTok{#Check backward scoring worked}
+
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_4R, survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      0  1  2  3  4
+##   0  0  0  0  0 15
+##   1  0  0  0 33  0
+##   2  0  0 24  0  0
+##   3  0  4  0  0  0
+##   4  2  0  0  0  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_5R, survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      0  1  2  3  4
+##   0  0  0  0  0  8
+##   1  0  0  0 29  0
+##   2  0  0 35  0  0
+##   3  0  5  0  0  0
+##   4  1  0  0  0  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_7R, survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      0  1  2  3  4
+##   0  0  0  0  0  5
+##   1  0  0  0 40  0
+##   2  0  0 27  0  0
+##   3  0  5  0  0  0
+##   4  1  0  0  0  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_7R, survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      0  1  2  3  4
+##   0  0  0  0  0  5
+##   1  0  0  0 40  0
+##   2  0  0 27  0  0
+##   3  0  5  0  0  0
+##   4  1  0  0  0  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Check Reliabilty:}
+
+\NormalTok{pss <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(pss_}\DecValTok{1}\OperatorTok{:}\NormalTok{pss_}\DecValTok{3}\NormalTok{, pss_4R, pss_5R, pss_}\DecValTok{6}\NormalTok{, pss_7R, pss_8R, pss_}\DecValTok{9}\NormalTok{, pss_}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{alpha}\NormalTok{(}\DataTypeTok{check.keys =}\OtherTok{TRUE}\NormalTok{) }
+
+\NormalTok{pss }\CommentTok{#<- reliability = 0.85 Dropping any item woudl decrease the reliabilty THIS IS GOOD!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Reliability analysis   
+## Call: alpha(x = ., check.keys = TRUE)
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd
+##       0.83      0.83    0.86      0.33   5 0.027  1.9 0.58
+## 
+##  lower alpha upper     95% confidence boundaries
+## 0.78 0.83 0.89 
+## 
+##  Reliability if an item is dropped:
+##        raw_alpha std.alpha G6(smc) average_r S/N alpha se
+## pss_1       0.81      0.81    0.84      0.33 4.3    0.031
+## pss_2       0.84      0.83    0.86      0.36 5.0    0.027
+## pss_3       0.82      0.82    0.84      0.33 4.4    0.030
+## pss_4R      0.82      0.82    0.84      0.33 4.5    0.030
+## pss_5R      0.82      0.81    0.84      0.33 4.4    0.030
+## pss_6       0.80      0.80    0.83      0.31 4.1    0.033
+## pss_7R      0.84      0.84    0.86      0.36 5.1    0.028
+## pss_8R      0.82      0.82    0.84      0.33 4.5    0.030
+## pss_9       0.83      0.83    0.85      0.35 4.9    0.028
+## pss_10      0.79      0.79    0.81      0.30 3.8    0.035
+## 
+##  Item statistics 
+##         n raw.r std.r r.cor r.drop mean   sd
+## pss_1  78  0.69  0.68  0.63   0.58  2.1 0.94
+## pss_2  77  0.50  0.49  0.40   0.35  2.1 0.98
+## pss_3  78  0.64  0.65  0.61   0.55  2.8 0.83
+## pss_4R 78  0.64  0.64  0.60   0.53  1.3 0.93
+## pss_5R 78  0.65  0.66  0.60   0.55  1.5 0.82
+## pss_6  78  0.76  0.75  0.73   0.66  2.0 1.07
+## pss_7R 78  0.45  0.48  0.38   0.34  1.4 0.77
+## pss_8R 78  0.63  0.64  0.60   0.53  1.7 0.84
+## pss_9  78  0.53  0.52  0.46   0.40  1.9 0.95
+## pss_10 78  0.84  0.83  0.84   0.77  1.8 0.99
+## 
+## Non missing response frequency for each item
+##           0    1    2    3    4 miss
+## pss_1  0.04 0.21 0.46 0.22 0.08 0.00
+## pss_2  0.04 0.23 0.35 0.31 0.06 0.01
+## pss_3  0.00 0.04 0.32 0.41 0.23 0.00
+## pss_4R 0.19 0.42 0.31 0.05 0.03 0.00
+## pss_5R 0.10 0.37 0.45 0.06 0.01 0.00
+## pss_6  0.06 0.29 0.33 0.22 0.09 0.00
+## pss_7R 0.06 0.51 0.35 0.06 0.01 0.00
+## pss_8R 0.05 0.38 0.40 0.15 0.01 0.00
+## pss_9  0.04 0.35 0.40 0.15 0.06 0.00
+## pss_10 0.04 0.42 0.29 0.18 0.06 0.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Works! -Neil 11/15/17}
+
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pss =} \KeywordTok{mean}\NormalTok{(pss_}\DecValTok{1}\OperatorTok{:}\NormalTok{pss_}\DecValTok{3}\NormalTok{, pss_4R, pss_5R, pss_}\DecValTok{6}\NormalTok{, pss_7R, pss_8R, pss_}\DecValTok{9}\NormalTok{, pss_}\DecValTok{10}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{PSS item level
+statistics}\label{pss-item-level-statistics}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00    2.00    2.00    2.09    3.00    4.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    0.00    1.00    2.00    2.13    3.00    4.00       1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   2.000   3.000   2.833   3.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_4R)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   1.000   1.295   2.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_5R)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   2.000   1.513   2.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   2.000   1.974   3.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   2.000   3.000   2.551   3.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_8R)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   2.000   1.692   2.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   2.000   1.859   2.000   4.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{pss_}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   1.000   2.000   1.808   2.000   4.000
+\end{verbatim}
+
+\subsection{Learning Orientation
+Scale}\label{learning-orientation-scale}
+
+\subsubsection{Cognitive subscale
+(lo\_cog\_1-6)}\label{cognitive-subscale-lo_cog_1-6}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#No need for backwards scroing? confirm with perla.}
+
+
+\CommentTok{#Check Reliabilty:}
+
+\NormalTok{cog <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(lo_cog_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_cog_}\DecValTok{6}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{alpha}\NormalTok{(}\DataTypeTok{check.keys =}\OtherTok{TRUE}\NormalTok{) }
+
+\NormalTok{cog }\CommentTok{#<- reliability = 0.82 Dropping any item woudl decrease the reliabilty THIS IS GOOD!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Reliability analysis   
+## Call: alpha(x = ., check.keys = TRUE)
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd
+##       0.84      0.84    0.84      0.47 5.4 0.029    5 0.69
+## 
+##  lower alpha upper     95% confidence boundaries
+## 0.78 0.84 0.89 
+## 
+##  Reliability if an item is dropped:
+##          raw_alpha std.alpha G6(smc) average_r S/N alpha se
+## lo_cog_1      0.81      0.82    0.80      0.48 4.6    0.033
+## lo_cog_2      0.80      0.81    0.79      0.46 4.2    0.035
+## lo_cog_3      0.84      0.84    0.82      0.51 5.3    0.030
+## lo_cog_4      0.81      0.81    0.79      0.47 4.4    0.035
+## lo_cog_5      0.80      0.80    0.79      0.45 4.1    0.036
+## lo_cog_6      0.82      0.82    0.80      0.48 4.6    0.033
+## 
+##  Item statistics 
+##           n raw.r std.r r.cor r.drop mean   sd
+## lo_cog_1 78  0.73  0.74  0.67   0.60  5.0 0.88
+## lo_cog_2 78  0.77  0.79  0.74   0.67  5.2 0.82
+## lo_cog_3 78  0.68  0.66  0.56   0.51  4.8 1.01
+## lo_cog_4 78  0.77  0.76  0.70   0.64  4.9 1.00
+## lo_cog_5 78  0.79  0.80  0.76   0.70  5.2 0.84
+## lo_cog_6 78  0.74  0.74  0.67   0.60  5.0 1.00
+## 
+## Non missing response frequency for each item
+##             2    3    4    5    6 miss
+## lo_cog_1 0.01 0.01 0.27 0.37 0.33    0
+## lo_cog_2 0.00 0.04 0.14 0.42 0.40    0
+## lo_cog_3 0.03 0.08 0.23 0.40 0.27    0
+## lo_cog_4 0.01 0.09 0.23 0.36 0.31    0
+## lo_cog_5 0.00 0.03 0.19 0.33 0.45    0
+## lo_cog_6 0.03 0.06 0.17 0.41 0.33    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Works! -Neil 11/15/17}
+
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{#<- without this our code would sum the columns}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{cog =} \KeywordTok{mean}\NormalTok{(lo_cog_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_cog_}\DecValTok{6}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Item level statistics}\label{item-level-statistics}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       2       4       5       5       6       6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.000   5.000   5.000   5.179   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.000   5.000   4.808   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.000   5.000   4.859   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.000   5.000   5.000   5.205   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_cog_}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.250   5.000   4.962   6.000   6.000
+\end{verbatim}
+
+\subsubsection{Behavior subscale
+(lo\_beh\_1-5)}\label{behavior-subscale-lo_beh_1-5}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#backwards code item 4,}
+
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{lo_beh_4R =} \DecValTok{7} \OperatorTok{-}\StringTok{ }\NormalTok{(lo_beh_}\DecValTok{4}\NormalTok{))}
+
+\KeywordTok{table}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_}\DecValTok{4}\NormalTok{, survey}\OperatorTok{$}\NormalTok{lo_beh_4R)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      1  2  3  4  5  6
+##   1  0  0  0  0  0 21
+##   2  0  0  0  0 37  0
+##   3  0  0  0 10  0  0
+##   4  0  0  5  0  0  0
+##   5  0  3  0  0  0  0
+##   6  2  0  0  0  0  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Check Reliabilty:}
+
+\NormalTok{beh <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(lo_beh_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_beh_}\DecValTok{3}\NormalTok{, lo_beh_4R, lo_beh_}\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{alpha}\NormalTok{(}\DataTypeTok{check.keys =}\OtherTok{TRUE}\NormalTok{) }
+
+\NormalTok{beh }\CommentTok{#<- reliability = 0.66 Dropping 4R would increase reliability to 0.73... was I right in backwards coding this? #Yes, confirmed he reverse coding is correct on 11/16/17}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Reliability analysis   
+## Call: alpha(x = ., check.keys = TRUE)
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd
+##       0.64      0.67    0.68      0.28   2 0.065  4.5 0.75
+## 
+##  lower alpha upper     95% confidence boundaries
+## 0.52 0.64 0.77 
+## 
+##  Reliability if an item is dropped:
+##           raw_alpha std.alpha G6(smc) average_r  S/N alpha se
+## lo_beh_1       0.44      0.47    0.46      0.18 0.89    0.105
+## lo_beh_2       0.66      0.67    0.63      0.34 2.04    0.064
+## lo_beh_3       0.57      0.58    0.61      0.26 1.40    0.081
+## lo_beh_4R      0.70      0.71    0.68      0.38 2.48    0.056
+## lo_beh_5       0.56      0.59    0.62      0.26 1.43    0.084
+## 
+##  Item statistics 
+##            n raw.r std.r r.cor r.drop mean   sd
+## lo_beh_1  78  0.84  0.84  0.84   0.71  4.5 1.08
+## lo_beh_2  78  0.61  0.56  0.43   0.29  4.1 1.39
+## lo_beh_3  78  0.66  0.70  0.58   0.47  5.0 0.95
+## lo_beh_4R 78  0.46  0.48  0.29   0.16  4.8 1.18
+## lo_beh_5  78  0.70  0.69  0.57   0.47  4.3 1.19
+## 
+## Non missing response frequency for each item
+##              1    2    3    4    5    6 miss
+## lo_beh_1  0.00 0.06 0.09 0.26 0.42 0.17    0
+## lo_beh_2  0.04 0.10 0.19 0.23 0.26 0.18    0
+## lo_beh_3  0.00 0.01 0.06 0.19 0.40 0.33    0
+## lo_beh_4R 0.03 0.04 0.06 0.13 0.47 0.27    0
+## lo_beh_5  0.03 0.03 0.17 0.36 0.23 0.19    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Works! -Neil 11/15/17}
+
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\CommentTok{#<- without this our code would sum the columns}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{beh =} \KeywordTok{mean}\NormalTok{(lo_beh_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_beh_}\DecValTok{3}\NormalTok{, lo_beh_4R, lo_beh_}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{behavior single items}\label{behavior-single-items}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.000   5.000   4.538   5.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   3.000   4.000   4.103   5.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.000   5.000   4.974   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_4R)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   4.250   5.000   4.795   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_beh_}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   4.000   4.000   4.321   5.000   6.000
+\end{verbatim}
+
+\subsection{Affective subscale
+(lo\_aff\_1-4)}\label{affective-subscale-lo_aff_1-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#No backwards scoring confirm with Perla}
+
+\CommentTok{#Check Reliabilty:}
+
+\NormalTok{aff <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(lo_aff_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_aff_}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{alpha}\NormalTok{(}\DataTypeTok{check.keys =}\OtherTok{TRUE}\NormalTok{) }
+
+\NormalTok{aff }\CommentTok{#<- reliability = 0.81 dropping any item would reduce the reliability. This is Good!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Reliability analysis   
+## Call: alpha(x = ., check.keys = TRUE)
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd
+##       0.79      0.81    0.78      0.52 4.3 0.037  4.7 0.85
+## 
+##  lower alpha upper     95% confidence boundaries
+## 0.72 0.79 0.87 
+## 
+##  Reliability if an item is dropped:
+##          raw_alpha std.alpha G6(smc) average_r S/N alpha se
+## lo_aff_1      0.72      0.75    0.67      0.50 2.9    0.049
+## lo_aff_2      0.78      0.79    0.72      0.55 3.7    0.040
+## lo_aff_3      0.69      0.72    0.63      0.46 2.6    0.057
+## lo_aff_4      0.77      0.79    0.74      0.56 3.9    0.045
+## 
+##  Item statistics 
+##           n raw.r std.r r.cor r.drop mean   sd
+## lo_aff_1 78  0.82  0.82  0.75   0.64  4.9 1.13
+## lo_aff_2 78  0.81  0.77  0.65   0.57  4.0 1.35
+## lo_aff_3 78  0.85  0.85  0.81   0.73  4.7 0.95
+## lo_aff_4 78  0.71  0.76  0.62   0.56  5.3 0.80
+## 
+## Non missing response frequency for each item
+##             1    2    3    4    5    6 miss
+## lo_aff_1 0.03 0.01 0.08 0.10 0.45 0.33    0
+## lo_aff_2 0.04 0.12 0.18 0.27 0.26 0.14    0
+## lo_aff_3 0.00 0.01 0.10 0.28 0.41 0.19    0
+## lo_aff_4 0.00 0.00 0.03 0.14 0.38 0.45    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{  }\CommentTok{#<- without this our code would sum the columns}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{aff =} \KeywordTok{mean}\NormalTok{(lo_aff_}\DecValTok{1}\OperatorTok{:}\NormalTok{lo_aff_}\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{affect scale single item
+stats}\label{affect-scale-single-item-stats}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_aff_}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   5.000   5.000   4.936   6.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_aff_}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   3.000   4.000   4.013   5.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_aff_}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   4.000   5.000   4.667   5.000   6.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(survey}\OperatorTok{$}\NormalTok{lo_aff_}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.000   5.000   5.000   5.256   6.000   6.000
+\end{verbatim}
+
+\section{scale descriptives}\label{scale-descriptives}
+
+\textbf{cog} = Learning orientation: Cognitive subscale \textbf{beh} =
+Learning Orientation: Behavior Subscale \textbf{aff} = Learning
+orientation: Affect subscale
+
+\textbf{pss} = Perceived stress scale
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scales <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(cog, beh, aff, pss, male)}
+
+\KeywordTok{describe}\NormalTok{(scales)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vars  n mean   sd median trimmed  mad min max range  skew kurtosis
+## cog     1 78 4.98 0.80    5.0    5.04 0.74   2   6     4 -0.70     0.89
+## beh     2 78 4.76 0.87    5.0    4.81 0.74   2   6     4 -0.61     0.11
+## aff     3 78 5.10 0.84    5.0    5.20 0.74   2   6     4 -1.03     1.29
+## pss     4 78 2.46 0.74    2.5    2.46 0.74   1   4     3  0.04    -0.59
+## male    5 77 0.27 0.45    0.0    0.22 0.00   0   1     1  1.00    -1.01
+##        se
+## cog  0.09
+## beh  0.10
+## aff  0.10
+## pss  0.08
+## male 0.05
+\end{verbatim}
+
+\subsection{Correlations}\label{correlations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apa.cor.table}\NormalTok{(scales, }\DataTypeTok{filename=} \StringTok{"scales.doc"}\NormalTok{,}
+              \DataTypeTok{table.number =} \DecValTok{1}\NormalTok{, }\DataTypeTok{show.conf.interval =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table 1 
+## 
+## Means, standard deviations, and correlations with confidence intervals
+##  
+## 
+##   Variable M    SD   1           2           3            4          
+##   1. cog   4.98 0.80                                                 
+##                                                                      
+##   2. beh   4.76 0.87 .58**                                           
+##                      [.41, .71]                                      
+##                                                                      
+##   3. aff   5.10 0.84 .59**       .57**                               
+##                      [.43, .72]  [.40, .71]                          
+##                                                                      
+##   4. pss   2.46 0.74 -.20        -.22        -.40**                  
+##                      [-.41, .02] [-.42, .01] [-.58, -.20]            
+##                                                                      
+##   5. male  0.27 0.45 .06         -.22        .13          -.17       
+##                      [-.17, .28] [-.42, .01] [-.09, .35]  [-.38, .05]
+##                                                                      
+## 
+## Note. M and SD are used to represent mean and standard deviation, respectively.
+## Values in square brackets indicate the 95% confidence interval.
+## The confidence interval is a plausible range of population correlations 
+## that could have caused the sample correlation (Cumming, 2014).
+## * indicates p < .05. ** indicates p < .01.
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#affective subscale & pss are significantle correlated (r = 0.26)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Regression Analysis}\label{regression-analysis}
+
+In summary, while controlling for sex (which is also predictive of
+stress fyi) and the other scale items, We see that that affect is
+related to stress. Individuals more willing to take on more tasks are
+morel likely to experience more stress. The other scales are not too
+predictive of this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ survey, pss }\OperatorTok{~}\StringTok{ }\NormalTok{aff }\OperatorTok{+}\StringTok{ }\NormalTok{beh }\OperatorTok{+}\StringTok{ }\NormalTok{cog }\OperatorTok{+}\StringTok{ }\NormalTok{male)}
+\KeywordTok{ols_regress}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                         Model Summary                          
+## --------------------------------------------------------------
+## R                       0.418       RMSE                0.677 
+## R-Squared               0.175       Coef. Var          27.730 
+## Adj. R-Squared          0.129       MSE                 0.458 
+## Pred R-Squared          0.039       MAE                 0.526 
+## --------------------------------------------------------------
+##  RMSE: Root Mean Square Error 
+##  MSE: Mean Square Error 
+##  MAE: Mean Absolute Error 
+## 
+##                               ANOVA                                
+## ------------------------------------------------------------------
+##                Sum of                                             
+##               Squares        DF    Mean Square      F        Sig. 
+## ------------------------------------------------------------------
+## Regression      6.984         4          1.746    3.809    0.0073 
+## Residual       33.004        72          0.458                    
+## Total          39.987        76                                   
+## ------------------------------------------------------------------
+## 
+##                                   Parameter Estimates                                    
+## ----------------------------------------------------------------------------------------
+##       model      Beta    Std. Error    Std. Beta      t        Sig      lower     upper 
+## ----------------------------------------------------------------------------------------
+## (Intercept)     4.179         0.547                  7.645    0.000     3.090     5.269 
+##         aff    -0.319         0.127       -0.371    -2.515    0.014    -0.572    -0.066 
+##         beh    -0.042         0.125       -0.050    -0.333    0.740    -0.291     0.208 
+##         cog     0.030         0.130        0.033     0.230    0.818    -0.230     0.290 
+##        male    -0.221         0.189       -0.136    -1.170    0.246    -0.597     0.155 
+## ----------------------------------------------------------------------------------------
+\end{verbatim}
+
+\subsubsection{Creating LO total score}\label{creating-lo-total-score}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{total =}\NormalTok{ (aff }\OperatorTok{+}\StringTok{ }\NormalTok{beh }\OperatorTok{+}\StringTok{ }\NormalTok{cog)}\OperatorTok{/}\DecValTok{15}\NormalTok{,}
+          \DataTypeTok{total_sum =}\NormalTok{ (aff }\OperatorTok{+}\StringTok{ }\NormalTok{beh }\OperatorTok{+}\StringTok{ }\NormalTok{cog))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Simple Linear Rregression of
+total}\label{simple-linear-rregression-of-total}
+
+Personally not a fan of regressing the whole scale. No significant
+findings
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ survey, pss }\OperatorTok{~}\StringTok{ }\NormalTok{total_sum)}
+\KeywordTok{ols_regress}\NormalTok{(m2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                         Model Summary                          
+## --------------------------------------------------------------
+## R                       0.324       RMSE                0.707 
+## R-Squared               0.105       Coef. Var          28.705 
+## Adj. R-Squared          0.093       MSE                 0.499 
+## Pred R-Squared          0.048       MAE                 0.557 
+## --------------------------------------------------------------
+##  RMSE: Root Mean Square Error 
+##  MSE: Mean Square Error 
+##  MAE: Mean Absolute Error 
+## 
+##                               ANOVA                                
+## ------------------------------------------------------------------
+##                Sum of                                             
+##               Squares        DF    Mean Square      F        Sig. 
+## ------------------------------------------------------------------
+## Regression      4.441         1          4.441    8.895    0.0038 
+## Residual       37.944        76          0.499                    
+## Total          42.385        77                                   
+## ------------------------------------------------------------------
+## 
+##                                   Parameter Estimates                                    
+## ----------------------------------------------------------------------------------------
+##       model      Beta    Std. Error    Std. Beta      t        Sig      lower     upper 
+## ----------------------------------------------------------------------------------------
+## (Intercept)     4.129         0.565                  7.310    0.000     3.004     5.254 
+##   total_sum    -0.112         0.038       -0.324    -2.982    0.004    -0.188    -0.037 
+## ----------------------------------------------------------------------------------------
+\end{verbatim}
+
+\section{Seperating results by
+groups}\label{seperating-results-by-groups}
+
+\subsection{education level}\label{education-level}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var_by_edu <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(survey, edu_di.f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Grouping rowwise data frame strips rowwise nature
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summarize}\NormalTok{(var_by_edu, }\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(), }\DataTypeTok{avg_age =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }\DataTypeTok{mean_pss =} \KeywordTok{mean}\NormalTok{(pss), }\DataTypeTok{mean_cog =} \KeywordTok{mean}\NormalTok{(cog), }\DataTypeTok{mean_beh =} \KeywordTok{mean}\NormalTok{(beh), }\DataTypeTok{mean_aff =} \KeywordTok{mean}\NormalTok{(aff)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 7
+##   edu_di.f                   n avg_age mean_pss mean_cog mean_beh mean_aff
+##   <fct>                  <int>   <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+## 1 obtained a 4-year col~    52    26.5     2.42     4.88     4.75     5.10
+## 2 No college                25    30.9     2.48     5.18     4.78     5.12
+## 3 <NA>                       1    25.0     4.00     5.50     4.50     4.50
+\end{verbatim}
+
+\subsection{sexual orientation}\label{sexual-orientation-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var_by_ori <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(survey, sexor.f) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{( )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Grouping rowwise data frame strips rowwise nature
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summarize}\NormalTok{(var_by_ori, }\DataTypeTok{ncount =} \KeywordTok{n}\NormalTok{(), }\DataTypeTok{avg_age =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }\DataTypeTok{mean_pss =} \KeywordTok{mean}\NormalTok{(pss), }\DataTypeTok{mean_cog =} \KeywordTok{mean}\NormalTok{(cog), }\DataTypeTok{mean_beh =} \KeywordTok{mean}\NormalTok{(beh), }\DataTypeTok{mean_aff =} \KeywordTok{mean}\NormalTok{(aff))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 7
+##   sexor.f      ncount avg_age mean_pss mean_cog mean_beh mean_aff
+##   <fct>         <int>   <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+## 1 Heterosexual     66    28.4     2.40     4.99     4.83     5.11
+## 2 Homosexual        5    26.4     2.40     4.60     4.30     5.20
+## 3 Bisexual          6    23.5     2.92     5.08     4.42     4.92
+## 4 <NA>              1    25.0     4.00     5.50     4.50     4.50
+\end{verbatim}
+
+\subsection{Sex}\label{sex}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#var_by_sex <- group_by(survey, male.f)}
+\CommentTok{#}
+\CommentTok{#summarize(var_by_sex, sex = mean(male.f, na.rm = TRUE) n = n(), avg_age = mean(age, na.rm = #TRUE), mean_pss = mean(pss, na.rm = TRUE), mean_cog = mean(cog, na.rm = TRUE), mean_beh = #mean(beh, na.rm = TRUE), mean_aff = mean(aff, na.rm = TRUE))}
+\CommentTok{#}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Word cloud}\label{word-cloud}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("tm")}
+\CommentTok{#install.packages("SnowballC")}
+\CommentTok{#install.packages("wordcloud")}
+
+
+\KeywordTok{library}\NormalTok{(tm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: NLP
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'NLP'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     annotate
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(SnowballC)}
+\KeywordTok{library}\NormalTok{(wordcloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Psy_792F.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{qual <-}\StringTok{ }\NormalTok{qual }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(stress_def)}
+
+\CommentTok{#Now, we will perform a series of operations on the text data to simplify it.First, we need to create a corpus.}
+
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{Corpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(qual}\OperatorTok{$}\NormalTok{stress_def))}
+
+\CommentTok{#Next, we will convert the corpus to a plain text document.}
+
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(qual, PlainTextDocument)}
+
+\CommentTok{#Then, we will remove all punctuation and stopwords. Stopwords are commonly used words in the English language such as I, me, my, etc. You can see the full list of stopwords using stopwords('english').}
+
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(qual, removePunctuation)}
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(qual, removeWords, }\KeywordTok{stopwords}\NormalTok{(}\StringTok{'english'}\NormalTok{))}
+
+
+\CommentTok{#Next, we will perform stemming. This means that all the words are converted to their stem (Ex: learning -> learn, walked -> walk, etc.). This will ensure that different forms of the word are converted to the same form and plotted only once in the wordcloud.}
+
+\NormalTok{qual <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(qual, stemDocument)}
+
+\CommentTok{#test<- wordcloud(qual, max.words = 100, random.order = FALSE)}
+
+\NormalTok{qual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<SimpleCorpus>>
+## Metadata:  corpus specific: 1, document level (indexed): 0
+## Content:  documents: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{word <-}\StringTok{ }\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(stress_def)}
+
+\CommentTok{#write.csv(word, "C:/Users/Neil/Desktop/Class folder/Fall 2017/Psy792F/Final_proj/word.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Checking for group
+differences.}\label{checking-for-group-differences.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(pss }\OperatorTok{~}\StringTok{ }\NormalTok{sexor, }\DataTypeTok{data=}\NormalTok{survey)}
+
+\KeywordTok{summary}\NormalTok{(fit) }\CommentTok{# display Type I ANOVA table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## sexor        1   1.20  1.1953   2.311  0.133
+## Residuals   75  38.79  0.5172               
+## 1 observation deleted due to missingness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{drop1}\NormalTok{(fit,}\OperatorTok{~}\NormalTok{.,}\DataTypeTok{test=}\StringTok{"F"}\NormalTok{) }\CommentTok{# type III SS and F Tests}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Single term deletions
+## 
+## Model:
+## pss ~ sexor
+##        Df Sum of Sq    RSS     AIC F value Pr(>F)
+## <none>              38.792 -48.791               
+## sexor   1    1.1953 39.987 -48.454  2.3111 0.1327
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(pss }\OperatorTok{~}\StringTok{ }\NormalTok{sexor, }\DataTypeTok{data=}\NormalTok{survey)}
+
+\KeywordTok{summary}\NormalTok{(fit) }\CommentTok{# display Type I ANOVA table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## sexor        1   1.20  1.1953   2.311  0.133
+## Residuals   75  38.79  0.5172               
+## 1 observation deleted due to missingness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{drop1}\NormalTok{(fit,}\OperatorTok{~}\NormalTok{.,}\DataTypeTok{test=}\StringTok{"F"}\NormalTok{) }\CommentTok{# type III SS and F Tests}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Single term deletions
+## 
+## Model:
+## pss ~ sexor
+##        Df Sum of Sq    RSS     AIC F value Pr(>F)
+## <none>              38.792 -48.791               
+## sexor   1    1.1953 39.987 -48.454  2.3111 0.1327
+\end{verbatim}
+
+
+\end{document}

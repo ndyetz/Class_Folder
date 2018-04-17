@@ -1,0 +1,949 @@
+                                        The SAS System    13:09 Thursday, November 16, 2017  50
+
+                                      The MEANS Procedure
+
+                         Analysis Variable : NAGE AGE AT 2012 INTERVIEW
+
+                 N            Mean         Std Dev         Minimum         Maximum
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+             19327      68.0311999      10.7913427      52.0000000     103.0000000
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System    13:09 Thursday, November 16, 2017  51
+
+                                      The FREQ Procedure
+
+                                         Gender Recode
+
+                                                     Cumulative    Cumulative
+                  female    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0        8839       42.79          8839        42.79
+                       1       11820       57.21         20659       100.00
+
+
+                                         RACE/ETHNICITY
+
+                                                    Cumulative    Cumulative
+                   RACE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                      1       15090       73.22         15090        73.22
+                      2        3938       19.11         19028        92.33
+                      7        1580        7.67         20608       100.00
+
+                                     Frequency Missing = 51
+
+
+                                        HISPANICITY TYPE
+
+                                                      Cumulative    Cumulative
+                 HISPANIC    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        1        1552        7.52          1552         7.52
+                        2        1034        5.01          2586        12.53
+                        3          35        0.17          2621        12.70
+                        5       18010       87.30         20631       100.00
+
+                                     Frequency Missing = 28
+
+
+                           Degree combined; 1 = Associates or higher
+
+                                                     Cumulative    Cumulative
+                 DEGREE2    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0       14954       77.05         14954        77.05
+                       1        4454       22.95         19408       100.00
+
+                                   Frequency Missing = 1251
+
+
+                                        The SAS System    13:09 Thursday, November 16, 2017  52
+
+                                      The FREQ Procedure
+
+                               2012 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 NCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0        8184       39.61          8184        39.61
+                       1       12475       60.39         20659       100.00
+
+
+                               2014 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 OCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0        8082       41.50          8082        41.50
+                       1       11393       58.50         19475       100.00
+
+                                   Frequency Missing = 1184
+                                        The SAS System    13:09 Thursday, November 16, 2017  53
+
+                                      The MEANS Procedure
+
+  Variable   Label                             N           Mean        Std Dev        Minimum
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+  CESD_12    CESD-8 composite score 2012   18207      1.5330367      2.0450797              0
+  CESD_14    CESD-8 composite score 2014   16043      1.4995325      2.0340994              0
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+
+                     Variable   Label                              Maximum
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     CESD_12    CESD-8 composite score 2012      8.0000000
+                     CESD_14    CESD-8 composite score 2014      8.0000000
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System    13:09 Thursday, November 16, 2017  54
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_12  (CESD-8 composite score 2012)
+
+       female             N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0               7668      1.3209      1.8739      0.0214           0      8.0000
+       1              10539      1.6874      2.1481      0.0209           0      8.0000
+       Diff (1-2)               -0.3664      2.0371      0.0306
+
+ female        Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.3209      1.2790   1.3629      1.8739      1.8447   1.9041
+ 1                                1.6874      1.6463   1.7284      2.1481      2.1195   2.1775
+ Diff (1-2)    Pooled            -0.3664     -0.4263  -0.3065      2.0371      2.0164   2.0583
+ Diff (1-2)    Satterthwaite     -0.3664     -0.4251  -0.3077
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         18205     -11.98      <.0001
+                  Satterthwaite    Unequal       17618     -12.24      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     10538      7667       1.31    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  55
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_14  (CESD-8 composite score 2014)
+
+        female            N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+        0              6651      1.2812      1.8705      0.0229           0      8.0000
+        1              9392      1.6542      2.1290      0.0220           0      8.0000
+        Diff (1-2)              -0.3730      2.0258      0.0325
+
+ female        Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.2812      1.2362   1.3261      1.8705      1.8392   1.9028
+ 1                                1.6542      1.6111   1.6972      2.1290      2.0990   2.1599
+ Diff (1-2)    Pooled            -0.3730     -0.4366  -0.3094      2.0258      2.0039   2.0483
+ Diff (1-2)    Satterthwaite     -0.3730     -0.4353  -0.3108
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         16041     -11.49      <.0001
+                  Satterthwaite    Unequal       15319     -11.75      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F      9391      6650       1.30    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  56
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_12  (CESD-8 composite score 2012)
+
+       employed_
+       12                 N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0              11263      1.7874      2.1834      0.0206           0      8.0000
+       1               6901      1.1162      1.7167      0.0207           0      8.0000
+       Diff (1-2)                0.6711      2.0189      0.0309
+
+ employed_
+ 12            Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.7874      1.7470   1.8277      2.1834      2.1553   2.2123
+ 1                                1.1162      1.0757   1.1567      1.7167      1.6885   1.7458
+ Diff (1-2)    Pooled             0.6711      0.6106   0.7316      2.0189      1.9983   2.0398
+ Diff (1-2)    Satterthwaite      0.6711      0.6140   0.7283
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         18162      21.75      <.0001
+                  Satterthwaite    Unequal       17078      23.02      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     11262      6900       1.62    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  57
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_14  (CESD-8 composite score 2014)
+
+       employed_
+       14                 N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0              10313      1.7450      2.1752      0.0214           0      8.0000
+       1               5702      1.0545      1.6605      0.0220           0      8.0000
+       Diff (1-2)                0.6904      2.0071      0.0331
+
+ employed_
+ 14            Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.7450      1.7030   1.7870      2.1752      2.1459   2.2053
+ 1                                1.0545      1.0114   1.0977      1.6605      1.6306   1.6916
+ Diff (1-2)    Pooled             0.6904      0.6255   0.7554      2.0071      1.9854   2.0294
+ Diff (1-2)    Satterthwaite      0.6904      0.6303   0.7506
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         16013      20.84      <.0001
+                  Satterthwaite    Unequal       14456      22.49      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     10312      5701       1.72    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  58
+
+                                      The CORR Procedure
+
+                            2  Variables:    CESD_12     self_health
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ CESD_12           18207       1.53304       2.04508         27912             0       8.00000
+ self_health       16934       3.04488       1.06572         51562       1.00000       5.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     CESD_12        CESD-8 composite score 2012
+                     self_health    Reverse scored Self Rated Health 2014
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                                           self_
+                                                           CESD_12        health
+
+               CESD_12                                     1.00000      -0.37698
+               CESD-8 composite score 2012                                <.0001
+                                                             18207         16231
+
+               self_health                                -0.37698       1.00000
+               Reverse scored Self Rated Health 2014        <.0001
+                                                             16231         16934
+                                        The SAS System    13:09 Thursday, November 16, 2017  59
+
+                                      The CORR Procedure
+
+                            2  Variables:    CESD_14     self_health
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ CESD_14           16043       1.49953       2.03410         24057             0       8.00000
+ self_health       16934       3.04488       1.06572         51562       1.00000       5.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     CESD_14        CESD-8 composite score 2014
+                     self_health    Reverse scored Self Rated Health 2014
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                                           self_
+                                                           CESD_14        health
+
+               CESD_14                                     1.00000      -0.42860
+               CESD-8 composite score 2014                                <.0001
+                                                             16043         16031
+
+               self_health                                -0.42860       1.00000
+               Reverse scored Self Rated Health 2014        <.0001
+                                                             16031         16934
+                                        The SAS System    13:09 Thursday, November 16, 2017  60
+
+                                      The CORR Procedure
+
+                               2  Variables:    CESD_12  Impulse
+
+
+                                      Simple Statistics
+
+  Variable           N          Mean       Std Dev           Sum       Minimum       Maximum
+
+  CESD_12        18207       1.53304       2.04508         27912             0       8.00000
+  Impulse         6838       4.26538       0.86419         29167       1.00000       6.00000
+
+                                       Simple Statistics
+
+                            Variable    Label
+
+                            CESD_12     CESD-8 composite score 2012
+                            Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                      CESD_12       Impulse
+
+                    CESD_12                           1.00000      -0.18167
+                    CESD-8 composite score 2012                      <.0001
+                                                        18207          6678
+
+                    Impulse                          -0.18167       1.00000
+                                                       <.0001
+                                                         6678          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  61
+
+                                      The CORR Procedure
+
+                               2  Variables:    CESD_14  Impulse
+
+
+                                      Simple Statistics
+
+  Variable           N          Mean       Std Dev           Sum       Minimum       Maximum
+
+  CESD_14        16043       1.49953       2.03410         24057             0       8.00000
+  Impulse         6838       4.26538       0.86419         29167       1.00000       6.00000
+
+                                       Simple Statistics
+
+                            Variable    Label
+
+                            CESD_14     CESD-8 composite score 2014
+                            Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                      CESD_14       Impulse
+
+                    CESD_14                           1.00000      -0.15135
+                    CESD-8 composite score 2014                      <.0001
+                                                        16043          6006
+
+                    Impulse                          -0.15135       1.00000
+                                                       <.0001
+                                                         6006          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  62
+
+                                      The CORR Procedure
+
+                            2  Variables:    self_health Impulse
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ self_health       16934       3.04488       1.06572         51562       1.00000       5.00000
+ Impulse            6838       4.26538       0.86419         29167       1.00000       6.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     self_health    Reverse scored Self Rated Health 2014
+                     Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                             self_
+                                                            health       Impulse
+
+               self_health                                 1.00000       0.13562
+               Reverse scored Self Rated Health 2014                      <.0001
+                                                             16934          6205
+
+               Impulse                                     0.13562       1.00000
+                                                            <.0001
+                                                              6205          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  63
+
+                                       The REG Procedure
+                                         Model: MODEL1
+             Dependent Variable: self_health Reverse scored Self Rated Health 2014
+
+                    Number of Observations Read                      20659
+                    Number of Observations Used                       6205
+                    Number of Observations with Missing Values       14454
+
+
+                                     Analysis of Variance
+
+                                            Sum of           Mean
+        Source                   DF        Squares         Square    F Value    Pr > F
+
+        Model                     1      126.88048      126.88048     116.22    <.0001
+        Error                  6203     6771.96948        1.09172
+        Corrected Total        6204     6898.84996
+
+
+                     Root MSE              1.04486    R-Square     0.0184
+                     Dependent Mean        3.10008    Adj R-Sq     0.0182
+                     Coeff Var            33.70417
+
+
+                                     Parameter Estimates
+
+                                                    Parameter     Standard
+ Variable     Label                           DF     Estimate        Error  t Value  Pr > |t|
+
+ Intercept    Intercept                        1      2.38986      0.06720    35.56    <.0001
+ Impulse                                       1      0.16612      0.01541    10.78    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  64
+
+                                       The REG Procedure
+                                         Model: MODEL1
+             Dependent Variable: self_health Reverse scored Self Rated Health 2014
+
+                    Number of Observations Read                      20659
+                    Number of Observations Used                       5765
+                    Number of Observations with Missing Values       14894
+
+
+                                     Analysis of Variance
+
+                                            Sum of           Mean
+        Source                   DF        Squares         Square    F Value    Pr > F
+
+        Model                     6      533.35595       88.89266      86.20    <.0001
+        Error                  5758     5937.74310        1.03122
+        Corrected Total        5764     6471.09905
+
+
+                     Root MSE              1.01549    R-Square     0.0824
+                     Dependent Mean        3.09488    Adj R-Sq     0.0815
+                     Coeff Var            32.81184
+
+
+                                     Parameter Estimates
+
+                                                    Parameter     Standard
+ Variable     Label                           DF     Estimate        Error  t Value  Pr > |t|
+
+ Intercept    Intercept                        1      2.58098      0.12573    20.53    <.0001
+ Impulse                                       1      0.14565      0.01561     9.33    <.0001
+ NAGE         AGE AT 2012 INTERVIEW            1     -0.00483      0.00136    -3.54    0.0004
+ RACE         RACE/ETHNICITY                   1     -0.05516      0.00918    -6.01    <.0001
+ OCOUPLE      2014 WHETHER COUPLED OR          1      0.25032      0.02895     8.65    <.0001
+              PARTNERED
+ female       Gender Recode                    1      0.06449      0.02827     2.28    0.0226
+ DEGREE2      Degree combined; 1 =             1      0.46162      0.03133    14.73    <.0001
+              Associates or higher
+                                        The SAS System    13:09 Thursday, November 16, 2017  65
+
+                                      The MEANS Procedure
+
+                         Analysis Variable : NAGE AGE AT 2012 INTERVIEW
+
+                 N            Mean         Std Dev         Minimum         Maximum
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+             19327      65.7183091     689.5661029      52.0000000     103.0000000
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System    13:09 Thursday, November 16, 2017  66
+
+                                      The FREQ Procedure
+
+                                         Gender Recode
+
+                                                     Cumulative    Cumulative
+                  female    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    41680606       45.95      41680606        45.95
+                       1    49018154       54.05      90698760       100.00
+
+
+                                         RACE/ETHNICITY
+
+                                                    Cumulative    Cumulative
+                   RACE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                      1    75281931       83.13      75281931        83.13
+                      2     9254875       10.22      84536806        93.35
+                      7     6019746        6.65      90556552       100.00
+
+                                   Frequency Missing = 142208
+
+
+                                        HISPANICITY TYPE
+
+                                                      Cumulative    Cumulative
+                 HISPANIC    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        1     4888149        5.39       4888149         5.39
+                        2     2824334        3.12       7712483         8.51
+                        3       82681        0.09       7795164         8.60
+                        5    82813225       91.40      90608389       100.00
+
+                                   Frequency Missing = 90371
+
+
+                           Degree combined; 1 = Associates or higher
+
+                                                     Cumulative    Cumulative
+                 DEGREE2    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    58922368       69.87      58922368        69.87
+                       1    25405982       30.13      84328350       100.00
+
+                                  Frequency Missing = 6370410
+
+
+                                        The SAS System    13:09 Thursday, November 16, 2017  67
+
+                                      The FREQ Procedure
+
+                               2012 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 NCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    31748546       35.00      31748546        35.00
+                       1    58950214       65.00      90698760       100.00
+
+
+                               2014 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 OCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    33751331       37.21      33751331        37.21
+                       1    56947429       62.79      90698760       100.00
+                                        The SAS System    13:09 Thursday, November 16, 2017  68
+
+                                      The MEANS Procedure
+
+  Variable   Label                             N           Mean        Std Dev        Minimum
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+  CESD_12    CESD-8 composite score 2012   18207      1.4245054    138.6543418              0
+  CESD_14    CESD-8 composite score 2014   16043      1.3623722    137.0227489              0
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+
+                     Variable   Label                              Maximum
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     CESD_12    CESD-8 composite score 2012      8.0000000
+                     CESD_14    CESD-8 composite score 2014      8.0000000
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System    13:09 Thursday, November 16, 2017  69
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_12  (CESD-8 composite score 2012)
+
+Weight: NWGTR   2012 WEIGHT: RESPONDENT LEVEL
+
+       female             N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0               7606      1.2654       135.4      0.0216           0      8.0000
+       1              10423      1.5561       141.5      0.0205           0      8.0000
+       Diff (1-2)               -0.2907       139.0      0.0299
+
+ female        Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.2654      1.2231   1.3077       135.4       133.3    137.6
+ 1                                1.5561      1.5159   1.5962       141.5       139.6    143.5
+ Diff (1-2)    Pooled            -0.2907     -0.3493  -0.2320       139.0       137.6    140.4
+ Diff (1-2)    Satterthwaite     -0.2907     -0.3490  -0.2324
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         18027      -9.72      <.0001
+                  Satterthwaite    Unequal       17267      -9.77      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     10422      7605       1.09    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  70
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_14  (CESD-8 composite score 2014)
+
+Weight: NWGTR   2012 WEIGHT: RESPONDENT LEVEL
+
+        female            N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+        0              6620      1.1833       133.4      0.0226           0      8.0000
+        1              9334      1.5075       139.4      0.0212           0      8.0000
+        Diff (1-2)              -0.3242       136.9      0.0312
+
+ female        Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.1833      1.1390   1.2275       133.4       131.2    135.8
+ 1                                1.5075      1.4658   1.5491       139.4       137.4    141.4
+ Diff (1-2)    Pooled            -0.3242     -0.3853  -0.2631       136.9       135.5    138.5
+ Diff (1-2)    Satterthwaite     -0.3242     -0.3850  -0.2634
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         15952     -10.40      <.0001
+                  Satterthwaite    Unequal       15115     -10.46      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F      9333      6619       1.09    0.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  71
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_12  (CESD-8 composite score 2012)
+
+Weight: NWGTR   2012 WEIGHT: RESPONDENT LEVEL
+
+       employed_
+       12                 N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0              11087      1.7515       143.6      0.0208           0      8.0000
+       1               6899      1.0258       125.9      0.0201           0      8.0000
+       Diff (1-2)                0.7258       137.1      0.0295
+
+ employed_
+ 12            Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.7515      1.7107   1.7923       143.6       141.8    145.6
+ 1                                1.0258      0.9864   1.0651       125.9       123.8    128.0
+ Diff (1-2)    Pooled             0.7258      0.6678   0.7837       137.1       135.7    138.5
+ Diff (1-2)    Satterthwaite      0.7258      0.6691   0.7824
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         17984      24.56      <.0001
+                  Satterthwaite    Unequal       17274      25.10      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     11086      6898       1.30    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  72
+
+                                      The TTEST Procedure
+
+                       Variable:  CESD_14  (CESD-8 composite score 2014)
+
+Weight: NWGTR   2012 WEIGHT: RESPONDENT LEVEL
+
+       employed_
+       14                 N        Mean     Std Dev     Std Err     Minimum     Maximum
+
+       0              10225      1.6703       142.0      0.0212           0      8.0000
+       1               5701      0.9486       122.1      0.0212           0      8.0000
+       Diff (1-2)                0.7216       135.2      0.0310
+
+ employed_
+ 14            Method               Mean       95% CL Mean        Std Dev      95% CL Std Dev
+
+ 0                                1.6703      1.6286   1.7119       142.0       140.1    143.9
+ 1                                0.9486      0.9071   0.9902       122.1       119.9    124.4
+ Diff (1-2)    Pooled             0.7216      0.6609   0.7824       135.2       133.7    136.7
+ Diff (1-2)    Satterthwaite      0.7216      0.6628   0.7805
+
+                  Method           Variances        DF    t Value    Pr > |t|
+
+                  Pooled           Equal         15924      23.30      <.0001
+                  Satterthwaite    Unequal       14661      24.05      <.0001
+
+                                     Equality of Variances
+
+                       Method      Num DF    Den DF    F Value    Pr > F
+
+                       Folded F     10224      5700       1.35    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  73
+
+                                      The CORR Procedure
+
+                         2        Variables:    CESD_12     self_health
+                           Weight Variable:     NWGTR
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ CESD_12           18207       1.42451     138.65434     124091792             0       8.00000
+ self_health       16934       3.17861      73.37191     258013229       1.00000       5.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     CESD_12        CESD-8 composite score 2012
+                     self_health    Reverse scored Self Rated Health 2014
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                                           self_
+                                                           CESD_12        health
+
+               CESD_12                                     1.00000      -0.38463
+               CESD-8 composite score 2012                                <.0001
+                                                             18207         16231
+
+               self_health                                -0.38463       1.00000
+               Reverse scored Self Rated Health 2014        <.0001
+                                                             16231         16934
+                                        The SAS System    13:09 Thursday, November 16, 2017  74
+
+                                      The CORR Procedure
+
+                         2        Variables:    CESD_14     self_health
+                           Weight Variable:     NWGTR
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ CESD_14           16043       1.36237     137.02275     106241537             0       8.00000
+ self_health       16934       3.17861      73.37191     258013229       1.00000       5.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     CESD_14        CESD-8 composite score 2014
+                     self_health    Reverse scored Self Rated Health 2014
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                                           self_
+                                                           CESD_14        health
+
+               CESD_14                                     1.00000      -0.43169
+               CESD-8 composite score 2014                                <.0001
+                                                             16043         16031
+
+               self_health                                -0.43169       1.00000
+               Reverse scored Self Rated Health 2014        <.0001
+                                                             16031         16934
+                                        The SAS System    13:09 Thursday, November 16, 2017  75
+
+                                      The CORR Procedure
+
+                            2        Variables:    CESD_12  Impulse
+                              Weight Variable:     NWGTR
+
+
+                                      Simple Statistics
+
+  Variable           N          Mean       Std Dev           Sum       Minimum       Maximum
+
+  CESD_12        18207       1.42451     138.65434     124091792             0       8.00000
+  Impulse         6838       4.28239      58.74681     141300137       1.00000       6.00000
+
+                                       Simple Statistics
+
+                            Variable    Label
+
+                            CESD_12     CESD-8 composite score 2012
+                            Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                      CESD_12       Impulse
+
+                    CESD_12                           1.00000      -0.17655
+                    CESD-8 composite score 2012                      <.0001
+                                                        18207          6678
+
+                    Impulse                          -0.17655       1.00000
+                                                       <.0001
+                                                         6678          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  76
+
+                                      The CORR Procedure
+
+                            2        Variables:    CESD_14  Impulse
+                              Weight Variable:     NWGTR
+
+
+                                      Simple Statistics
+
+  Variable           N          Mean       Std Dev           Sum       Minimum       Maximum
+
+  CESD_14        16043       1.36237     137.02275     106241537             0       8.00000
+  Impulse         6838       4.28239      58.74681     141300137       1.00000       6.00000
+
+                                       Simple Statistics
+
+                            Variable    Label
+
+                            CESD_14     CESD-8 composite score 2014
+                            Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                      CESD_14       Impulse
+
+                    CESD_14                           1.00000      -0.15071
+                    CESD-8 composite score 2014                      <.0001
+                                                        16043          6006
+
+                    Impulse                          -0.15071       1.00000
+                                                       <.0001
+                                                         6006          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  77
+
+                                      The CORR Procedure
+
+                         2        Variables:    self_health Impulse
+                           Weight Variable:     NWGTR
+
+
+                                       Simple Statistics
+
+ Variable              N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ self_health       16934       3.17861      73.37191     258013229       1.00000       5.00000
+ Impulse            6838       4.28239      58.74681     141300137       1.00000       6.00000
+
+                                      Simple Statistics
+
+                     Variable       Label
+
+                     self_health    Reverse scored Self Rated Health 2014
+                     Impulse
+
+
+                               Pearson Correlation Coefficients
+                                  Prob > |r| under H0: Rho=0
+                                    Number of Observations
+
+                                                             self_
+                                                            health       Impulse
+
+               self_health                                 1.00000       0.14415
+               Reverse scored Self Rated Health 2014                      <.0001
+                                                             16934          6205
+
+               Impulse                                     0.14415       1.00000
+                                                            <.0001
+                                                              6205          6838
+                                        The SAS System    13:09 Thursday, November 16, 2017  78
+
+                                       The REG Procedure
+                                         Model: MODEL1
+             Dependent Variable: self_health Reverse scored Self Rated Health 2014
+
+                    Number of Observations Read                      20659
+                    Number of Observations Used                       6158
+                    Number of Observations with Missing Values       14454
+
+
+                          Weight: NWGTR 2012 WEIGHT: RESPONDENT LEVEL
+
+                                     Analysis of Variance
+
+                                            Sum of           Mean
+        Source                   DF        Squares         Square    F Value    Pr > F
+
+        Model                     1         698452         698452     130.64    <.0001
+        Error                  6156       32912537     5346.41596
+        Corrected Total        6157       33610988
+
+
+                     Root MSE             73.11919    R-Square     0.0208
+                     Dependent Mean        3.21540    Adj R-Sq     0.0206
+                     Coeff Var          2274.03269
+
+
+                                     Parameter Estimates
+
+                                                    Parameter     Standard
+ Variable     Label                           DF     Estimate        Error  t Value  Pr > |t|
+
+ Intercept    Intercept                        1      2.43987      0.06914    35.29    <.0001
+ Impulse                                       1      0.18063      0.01580    11.43    <.0001
+                                        The SAS System    13:09 Thursday, November 16, 2017  79
+
+                                       The REG Procedure
+                                         Model: MODEL1
+             Dependent Variable: self_health Reverse scored Self Rated Health 2014
+
+                    Number of Observations Read                      20659
+                    Number of Observations Used                       5719
+                    Number of Observations with Missing Values       14894
+
+
+                          Weight: NWGTR 2012 WEIGHT: RESPONDENT LEVEL
+
+                                     Analysis of Variance
+
+                                            Sum of           Mean
+        Source                   DF        Squares         Square    F Value    Pr > F
+
+        Model                     6        3310638         551773     111.31    <.0001
+        Error                  5712       28313921     4956.91896
+        Corrected Total        5718       31624559
+
+
+                     Root MSE             70.40539    R-Square     0.1047
+                     Dependent Mean        3.20769    Adj R-Sq     0.1037
+                     Coeff Var          2194.89696
+
+
+                                     Parameter Estimates
+
+                                                    Parameter     Standard
+ Variable     Label                           DF     Estimate        Error  t Value  Pr > |t|
+
+ Intercept    Intercept                        1      2.65069      0.12504    21.20    <.0001
+ Impulse                                       1      0.15250      0.01594     9.57    <.0001
+ NAGE         AGE AT 2012 INTERVIEW            1     -0.00673      0.00141    -4.76    <.0001
+ RACE         RACE/ETHNICITY                   1     -0.04576      0.00980    -4.67    <.0001
+ OCOUPLE      2014 WHETHER COUPLED OR          1      0.31192      0.02891    10.79    <.0001
+              PARTNERED
+ female       Gender Recode                    1      0.10527      0.02746     3.83    0.0001
+ DEGREE2      Degree combined; 1 =             1      0.48264      0.02924    16.51    <.0001
+              Associates or higher

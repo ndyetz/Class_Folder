@@ -1,0 +1,234 @@
+239      /*Creating a library to tell SAS which folder to use*/
+240  libname Psy792F 'T:\Common\PSY792F\Data';
+NOTE: Libref PSY792F was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: T:\Common\PSY792F\Data
+241
+242
+243  /*Creating a Dataset with Demographics*/
+244  /*An "O" at the beginning = from the 2014 wave*/
+245  /*An "N" at the beginning = from the 2012 wave*/
+246
+247  Data Demographics;
+248      SET Psy792F.Trk2014tr_r (Keep =
+249  HHID
+250  PN
+251  NSUBHH
+252  OSUBHH
+253  GENDER
+254  RACE
+255  HISPANIC
+256  SCHLYRS
+257  DEGREE
+258  NCOUPLE
+259  OCOUPLE
+260  NAGE
+261  BIRTHYR
+262  BIRTHMO
+263  NIWMONTH
+264  NIWYEAR
+265  NIWWAVE
+266  OIWWAVE
+267  NRESCODE
+268  ORESCODE
+269  NLBWGTR
+270  NWGTR
+271  OWGTR);
+272          IF NAGE =999    THEN NAGE=.; /*NAGE: 999 = MISSSING*/
+273          IF SCHLYRS = 99 THEN SCHLYRS = .; /*SCHLYRS 99 = MISSING*/
+274          IF RACE = 0     THEN RACE = .; /*Race 0 = "Race Not obtained, changing to
+274! missing*/
+275
+276
+277  /*DEGREE2 = DEGREE;*/
+278  /*  IF DEGREE = 4 THEN DEGREE2 = 3;*/
+279  RUN;
+
+NOTE: There were 38183 observations read from the data set PSY792F.TRK2014TR_R.
+NOTE: The data set WORK.DEMOGRAPHICS has 38183 observations and 23 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.54 seconds
+      cpu time            0.18 seconds
+
+
+280
+281  /*Proc contents will print out the dataset information*/
+282
+283  PROC CONTENTS varnum data = Psy792F.Trk2014tr_r;
+284  RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.03 seconds
+
+
+285
+286  /*Getting Frequency of data*/
+287
+288  proc freq data = Demographics;
+289      TABLES NAGE GENDER SCHLYRS DEGREE RACE HISPANIC NCOUPLE OCOUPLE;
+290  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+291
+292  /*Get means of continuous variables*/
+293  PROC MEANS data = Demographics;
+294      VAR NAGE;
+295  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+296
+297
+298  /*Creating Female variable
+299  1 = female
+300  0 = male
+301  . = MISSING
+302
+303  Recoding Hispanic 0 -> MISSING
+304  . = MISSING
+305
+306  Creating 2012 & 2014 Couple recode variable: couple12 & couple14
+307  1 = Couple
+308  0 = Not coupled
+309
+310  Creating Degree2 variable
+311  1 = Associates degree obtained
+312  0 = No associates degree obtained
+313
+314  Change couple, set 5 -> 0 (not in a couple)
+315  */;
+316
+317
+318
+319  DATA Demographics;
+320      SET Demographics;
+321  /*Gender Recode*/
+322          IF Gender = 1 THEN female = 0;
+323              ELSE IF Gender = 2 THEN female = 1;
+324              ELSE if Gender = . THEN female = .;
+325          LABEL Female = "Gender Recode";
+326  /*Hispanic Recode*/
+327          IF HISPANIC = 0 THEN Hispanic = .;
+328              ELSE Hispanic = Hispanic;
+329  /*2012 Couple recode*/
+330          IF  NCOUPLE = 5 THEN Couple12 = 0;
+331              ELSE Couple12 = NCOUPLE;
+332          LABEL Couple12 = "2012 Couple recode";
+333  /*2014 Couple recode*/
+334          IF  OCOUPLE = 5 THEN Couple14 = 0;
+335              ELSE Couple14 = OCOUPLE;
+336          LABEL Couple14 = "2014 Couple recode";
+337  /*Creating new degree variable with all degrees combined */
+338          IF 3 < DEGREE < 9 THEN DEGREE2 = 1;
+339          Else IF Degree < 3 THEN Degree2 = 0;
+340          ELSE degree2 = .;
+341          LABEL DEGREE2 = "Degree combined; 1 = Associates or higher";
+342  /*recoding couple12 variable*/
+343          IF NCOUPLE = 5 THEN NCOUPLE = 0;
+344  /*recoding couple12 variable*/
+345          IF OCOUPLE = 5 THEN OCOUPLE = 0;
+346      RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: The data set WORK.DEMOGRAPHICS has 38183 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+347
+348  proc freq data = demographics;
+349      TABLES degree*degree2 / MISSING;
+350  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+351
+352  PROC CONTENTS data = demographics;
+353  RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+354
+355  /*Creating dataset with only participants that were in 2012*/
+356  DATA Demographics2012;
+357      SET Demographics;
+358          IF NIWWAVE=1;
+359  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: The data set WORK.DEMOGRAPHICS2012 has 21891 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+360
+361
+362  /*Get means of continuous variables in 2012 data*/
+363  PROC MEANS data = Demographics2012;
+364      VAR NAGE;
+365  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+366
+367
+368  /*Descriptives of  ordinal/nominal variables*/
+369  proc Freq data = demographics2012;
+370      TABLES GENDER RACE HISPANIC DEGREE Degree2 SCHLYRS Couple12 Couple14;
+371  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+372
+373  /*Continuous varibales with weights added*/
+374  proc means data = demographics2012;
+375      VAR NAGE;
+376      WEIGHT NWGTR;
+377  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+378
+379  /*Descriptives of ordinal/ nominal variables with weights added*/
+380  proc Freq data = demographics2012;
+381      TABLES GENDER RACE HISPANIC DEGREE Degree2 Couple12 Couple14;
+382      WEIGHT NWGTR;
+383  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+

@@ -1,0 +1,1003 @@
+4073  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4073! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4073! */
+4074  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4074! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4074! */
+4075  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*Assig
+4075! nment
+4075! 1*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4076  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4076! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4076! */
+4077  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4077! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4077! */;
+4078
+4079  /*Creating a library to tell SAS which folder to use*/
+4080  libname Psy792F 'T:\Common\PSY792F\Data';
+NOTE: Libref PSY792F was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: T:\Common\PSY792F\Data
+4081
+4082
+4083  /*Creating a Dataset with Demographics*/
+4084  /*An "O" at the beginning = from the 2014 wave*/
+4085  /*An "N" at the beginning = from the 2012 wave*/
+4086
+4087  Data Demographics;
+4088      SET Psy792F.Trk2014tr_r (Keep =
+4089  HHID
+4090  PN
+4091  NSUBHH
+4092  OSUBHH
+4093  GENDER
+4094  RACE
+4095  HISPANIC
+4096  SCHLYRS
+4097  DEGREE
+4098  NCOUPLE
+4099  OCOUPLE
+4100  NAGE
+4101  BIRTHYR
+4102  BIRTHMO
+4103  NIWMONTH
+4104  NIWYEAR
+4105  NIWWAVE
+4106  OIWWAVE
+4107  NRESCODE
+4108  ORESCODE
+4109  NLBWGTR
+4110  NWGTR
+4111  OWGTR);
+4112          IF NAGE =999    THEN NAGE=.; /*NAGE: 999 = MISSSING*/
+4113          IF SCHLYRS = 99 THEN SCHLYRS = .; /*SCHLYRS 99 = MISSING*/
+4114          IF RACE = 0     THEN RACE = .; /*Race 0 = "Race Not obtained, changing to
+4114! missing*/
+4115
+4116
+4117  /*DEGREE2 = DEGREE;*/
+4118  /*  IF DEGREE = 4 THEN DEGREE2 = 3;*/
+4119  RUN;
+
+NOTE: There were 38183 observations read from the data set PSY792F.TRK2014TR_R.
+NOTE: The data set WORK.DEMOGRAPHICS has 38183 observations and 23 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.60 seconds
+      cpu time            0.28 seconds
+
+
+4120
+4121  /*Proc contents will print out the dataset information*/
+4122
+4123  PROC CONTENTS varnum data = Psy792F.Trk2014tr_r;
+4124  RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4125
+4126  /*Getting Frequency of data*/
+4127
+4128  proc freq data = Demographics;
+4129      TABLES NAGE GENDER SCHLYRS DEGREE RACE HISPANIC NCOUPLE OCOUPLE;
+4130  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4131
+4132  /*Get means of continuous variables*/
+4133  PROC MEANS data = Demographics;
+4134      VAR NAGE;
+4135  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+4136
+4137
+4138
+4139  /*Creating Female variable
+4140  1 = female
+4141  0 = male
+4142  . = MISSING
+4143
+4144  Recoding Hispanic 0 -> MISSING
+4145  . = MISSING
+4146
+4147  Creating 2012 & 2014 Couple recode variable: couple12 & couple14
+4148  1 = Couple
+4149  0 = Not coupled
+4150
+4151  Creating Degree2 variable
+4152  1 = Associates degree obtained
+4153  0 = No associates degree obtained
+4154
+4155  Change couple, set 5 -> 0 (not in a couple)
+4156  */;
+4157
+4158
+4159
+4160  DATA Demographics;
+4161      SET Demographics;
+4162  /*Gender Recode*/
+4163          IF Gender = 1 THEN female = 0;
+4164              ELSE IF Gender = 2 THEN female = 1;
+4165              ELSE if Gender = . THEN female = .;
+4166          LABEL Female = "Gender Recode";
+4167  /*Hispanic Recode*/
+4168          IF HISPANIC = 0 THEN Hispanic = .;
+4169              ELSE Hispanic = Hispanic;
+4170  /*2012 Couple recode*/
+4171          IF  NCOUPLE = 5 THEN Couple12 = 0;
+4172              ELSE Couple12 = NCOUPLE;
+4173          LABEL Couple12 = "2012 Couple recode";
+4174  /*2014 Couple recode*/
+4175          IF  OCOUPLE = 5 THEN Couple14 = 0;
+4176              ELSE Couple14 = OCOUPLE;
+4177          LABEL Couple14 = "2014 Couple recode";
+4178  /*Creating new degree variable with all degrees combined */
+4179          IF 3 < DEGREE < 9 THEN DEGREE2 = 1;
+4180          Else IF Degree < 3 THEN Degree2 = 0;
+4181          ELSE degree2 = .;
+4182          LABEL DEGREE2 = "Degree combined; 1 = Associates or higher";
+4183  /*recoding couple12 variable*/
+4184          IF NCOUPLE = 5 THEN NCOUPLE = 0;
+4185  /*recoding couple12 variable*/
+4186          IF OCOUPLE = 5 THEN OCOUPLE = 0;
+4187      RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: The data set WORK.DEMOGRAPHICS has 38183 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+4188
+4189  proc freq data = demographics;
+4190      TABLES degree*degree2 / MISSING;
+4191  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4192
+4193  PROC CONTENTS data = demographics;
+4194  RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+4195
+4196  /*Creating dataset with only participants that were in 2012*/
+4197  DATA Demographics2012;
+4198      SET Demographics;
+4199          IF NIWWAVE=1;
+4200  RUN;
+
+NOTE: There were 38183 observations read from the data set WORK.DEMOGRAPHICS.
+NOTE: The data set WORK.DEMOGRAPHICS2012 has 21891 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+4201
+4202
+4203  /*Get means of continuous variables in 2012 data*/
+4204  PROC MEANS data = Demographics2012;
+4205      VAR NAGE;
+4206  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+4207
+4208
+4209  /*Descriptives of  ordinal/nominal variables*/
+4210  proc Freq data = demographics2012;
+4211      TABLES GENDER RACE HISPANIC DEGREE Degree2 SCHLYRS Couple12;
+4212  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+
+
+4213
+4214  /*Continuous varibales with weights added*/
+4215  proc means data = demographics2012;
+4216      VAR NAGE;
+4217      WEIGHT NWGTR;
+4218  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+4219
+4220  /*Descriptives of ordinal/ nominal variables with weights added*/
+4221  proc Freq data = demographics2012;
+4222      TABLES GENDER RACE HISPANIC DEGREE Degree2 Couple12;
+4223      WEIGHT NWGTR;
+4224  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+4225
+4226  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4226! */**/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4226! */*/*/
+4227  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4227! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4227! */
+4228  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/Assignme
+4228! nt
+4228! 2*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4228! */
+4229  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4229! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4229! */
+4230  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4230! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+4230! */;
+4231
+4232  /*Set section D from 2012*/
+4233  Data sec_D2012;
+4234      SET Psy792F.h12d_r;
+4235  RUN;
+
+NOTE: There were 20555 observations read from the data set PSY792F.H12D_R.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 238 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.59 seconds
+      cpu time            0.29 seconds
+
+
+4236
+4237
+4238  /*Set section D from 2014*/
+4239
+4240  Data sec_D2014;
+4241      SET Psy792F.h14d_r;
+4242  RUN;
+
+NOTE: There were 18747 observations read from the data set PSY792F.H14D_R.
+NOTE: The data set WORK.SEC_D2014 has 18747 observations and 198 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.46 seconds
+      cpu time            0.10 seconds
+
+
+4243
+4244
+4245  /*recode depression variables 2012*/
+4246
+4247
+4248  DATA sec_D2012;
+4249      SET sec_D2012;
+4250
+4251
+4252
+4253
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 238 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+4254  DATA sec_D2012;
+4255      SET sec_D2012;
+4256
+4257      array dep {8} ND110 - ND117;
+4258
+4259  do _n_=1 to 8;
+4260
+4261     if dep{_n_}=5 then dep{_n_}=0;
+4262     else if  dep{_n_}=8 then dep{_n_}=.;
+4263     else if  dep{_n_}=9 then dep{_n_}=.;
+4264     else if dep{_n_}=1 then dep{_n_}=1;
+4265     else  dep{_n_}=.;
+4266
+4267  end;
+4268
+4269  drop _n_;
+4270
+4271  run;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 238 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+
+
+4272
+4273  /*Reverse score ND113 Question = "I was happy... recode to yes = 0 - no =1*/
+4274
+4275  DATA sec_D2012;
+4276      SET sec_D2012;
+4277      IF ND113 = 1        THEN ND113R = 0;
+4278      else IF ND113 = 0   THEN ND113R = 1;
+4279      else if ND113 =.    THEN ND113R = .;
+4280
+4281      IF ND115 = 1        THEN ND115R = 0;
+4282      else IF ND115 = 0   THEN ND115R = 1;
+4283      else if ND115 =.    THEN ND115R = .;
+4284  RUN;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 240 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+
+
+4285
+4286  /*Checks Reverse scoring*/
+4287  PROC Freq data = sec_D2012;
+4288      TABLES ND113*ND113R / MISSING;
+4289  RUN;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+4290
+4291
+4292  /*recode depression variables 2014*/
+4293
+4294  DATA sec_D2014;
+4295      SET sec_D2014;
+4296
+4297      array dep {8} OD110 - OD117;
+4298
+4299  do _n_=1 to 8;
+4300
+4301     if dep{_n_}=5 then dep{_n_}=0;
+4302     else if  dep{_n_}=8 then dep{_n_}=.;
+4303     else if  dep{_n_}=9 then dep{_n_}=.;
+4304     else if dep{_n_}=1 then dep{_n_}=1;
+4305     else  dep{_n_}=.;
+4306
+4307  end;
+4308
+4309  drop _n_;
+4310
+4311  run;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: The data set WORK.SEC_D2014 has 18747 observations and 198 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+
+
+4312
+4313  /*Reverse score ND113 Question = "I was happy... recode to yes = 0 - no = 1*/
+4314
+4315  DATA sec_D2014;
+4316      SET sec_D2014;
+4317      IF OD113 = 1 THEN OD113R = 0;
+4318      else IF OD113 = 0 THEN OD113R = 1;
+4319      else if OD113 =. THEN OD113R = .;
+4320
+4321      IF OD115 = 1 THEN OD115R = 0;
+4322      else IF OD115 = 0 THEN OD115R = 1;
+4323      else if OD115 =. THEN OD115R = .;
+4324  RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: The data set WORK.SEC_D2014 has 18747 observations and 200 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+
+
+4325
+4326  /*Checks Reverse scoring*/
+4327  PROC Freq data = sec_D2014;
+4328      TABLES  OD113*OD113R
+4329              OD115*OD115R / MISSING;
+4330  RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4331
+4332
+4333  /*Create Depress scale 2012*/
+4334
+4335  DATA sec_D2012;
+4336      SET Sec_D2012;
+4337          CESD_12 = sum(ND110, ND111, ND112, ND113R,  ND114, ND115R, ND116, ND117);
+4338          LABEL CESD_12 = "CESD-8 composite score 2012";
+4339      RUN;
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      1154 at 4337:19
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 241 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+4340
+4341  /*Create Depress scale 2014*/
+4342  DATA sec_D2014;
+4343      SET Sec_D2014;
+4344          CESD_14 = sum(OD110, OD111, OD112, OD113R,  OD114, OD115R, OD116, OD117);
+4345          LABEL CESD_14 = "CESD-8 composite score 2014";
+4346      RUN;
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      1051 at 4344:19
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: The data set WORK.SEC_D2014 has 18747 observations and 201 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4347
+4348  /*Check Scales CESD_12 and CESD_14 should be the sum of all the items*/
+4349
+4350  proc print data = Sec_D2012 (obs = 20);
+4351      VAR  ND110-ND112 ND113R ND114 ND115R ND116 ND117 CESD_12;
+4352      RUN;
+
+NOTE: There were 20 observations read from the data set WORK.SEC_D2012.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.01 seconds
+
+
+4353
+4354  proc print data = Sec_D2014 (obs = 20);
+4355      VAR  OD110-OD112 OD113R OD114 OD115R OD116 OD117 CESD_14;
+4356      RUN;
+
+NOTE: There were 20 observations read from the data set WORK.SEC_D2014.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+4357
+4358
+4359  proc freq data = Sec_D2014;
+4360      TABLES CESD_14;
+4361      RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.01 seconds
+
+
+4362
+4363
+4364
+4365  /*Set section C from 2014*/
+4366  Data sec_c2014;
+4367      SET Psy792F.h14c_r;
+4368  RUN;
+
+NOTE: There were 18747 observations read from the data set PSY792F.H14C_R.
+NOTE: The data set WORK.SEC_C2014 has 18747 observations and 227 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.50 seconds
+      cpu time            0.12 seconds
+
+
+4369
+4370  /*Recode and reverse score Life satisfcation item */
+4371
+4372  DATA sec_c2014;
+4373      SET sec_c2014;
+4374
+4375      IF OC001 = 9 THEN OC001 = .;
+4376      ELSE IF OC001 = 8 THEN OC001 = .;
+4377  /*Revesere score Max = 5*/
+4378      self_health = 6 - OC001;
+4379      LABEL self_health = "Reverse scored Self Rated Health 2014";
+4380  RUN;
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      16 at 4378:21
+NOTE: There were 18747 observations read from the data set WORK.SEC_C2014.
+NOTE: The data set WORK.SEC_C2014 has 18747 observations and 228 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.07 seconds
+
+
+4381
+4382  /*Score Check*/
+4383
+4384  proc freq data = sec_c2014;
+4385      TABLES OC001*self_health / MISSING;
+4386  RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_C2014.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4387
+4388  /*Set section LB from 2012*/
+4389  Data sec_LB2012;
+4390      SET Psy792F.h12lb_r;
+4391  RUN;
+
+NOTE: There were 20555 observations read from the data set PSY792F.H12LB_R.
+NOTE: The data set WORK.SEC_LB2012 has 20555 observations and 482 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.82 seconds
+      cpu time            0.67 seconds
+
+
+4392
+4393
+4394  /*Scale I'd like to Anlayze:
+4395
+4396  Q34. Self-Control/ Impulsiveness
+4397
+4398
+4399  2012: 6 items (Q34x_2 – Q34x_7)
+4400  Q34x_2 I keep close track of where my money goes.
+4401  Q34x_3 I often stop one thing before completing it and start another. (-)
+4402  Q34x_4 I often act without thinking. (-)
+4403  Q34x_5 Before I get into a new situation, I like to find out what to expect from it.
+4404  Q34x_6 I am often not as cautious as I should be. (-)
+4405  Q34x_7 I often prefer to “play things by ear” rather than to plan ahead. (-)
+4406  .
+4407  Coding: 1 = Strongly disagree, 2 = Somewhat disagree, 3 = Slightly disagree,
+4408  4 = Slightly agree, 5 = Somewhat agree, 6 = Strongly agree
+4409
+4410  Scaling: Reverse code the negatively phrased items (-) and then average the scores across
+4410!  items to create an index of conscientiousness for each facet with a high score
+4410! indicating high conscientiousness. Set the final score to missing for each facet if there
+4410!  are more than two items with missing values.
+4411  Psychometrics: Self-Control/Impulsiveness: 2012 Alpha = .60, 2010 Alpha = .63
+4412
+4413  */
+4414
+4415  /*Reverse Impulsivity items - Max = 6*/
+4416  DATA sec_LB2012;
+4417      SET sec_LB2012;
+4418
+4419  NLB034X_3R = 7 - NLB034X_3;
+4420  NLB034X_4R = 7 - NLB034X_4;
+4421  NLB034X_6R = 7 - NLB034X_6;
+4422  NLB034X_7R = 7 - NLB034X_7;
+4423
+4424  RUN;
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      13393 at 4419:16   13383 at 4420:16   13378 at 4421:16   13372 at 4422:16
+NOTE: There were 20555 observations read from the data set WORK.SEC_LB2012.
+NOTE: The data set WORK.SEC_LB2012 has 20555 observations and 486 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.07 seconds
+
+
+4425
+4426  /*Checking backwards codes*/
+4427  Proc Freq data = sec_LB2012;
+4428  TABLES  NLB034X_3*NLB034X_3R
+4429          NLB034X_4*NLB034X_4R
+4430          NLB034X_6*NLB034X_6R
+4431          NLB034X_7*NLB034X_7R
+4432                              / MISSING;
+4433  RUN;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_LB2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.04 seconds
+
+
+4434
+4435
+4436  /*Create Impulsivity scale*/
+4437
+4438  DATA sec_LB2012;
+4439      SET sec_LB2012;
+4440  Impulse = mean( NLB034X_2 ,
+4441                  NLB034X_3R ,
+4442                  NLB034X_4R,
+4443                  NLB034X_5,
+4444                  NLB034X_6R,
+4445                  NLB034X_7R
+4446                  );
+4447  /*If they missed more than 2 items then Impulse scale = MISSING*/
+4448  IF NMISS(   NLB034X_2 ,
+4449              NLB034X_3R ,
+4450              NLB034X_4R,
+4451              NLB034X_5,
+4452              NLB034X_6R,
+4453              NLB034X_7R
+4454                          ) > 2 THEN Impulse = .;
+4455  RUN;
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      13323 at 4440:11
+NOTE: There were 20555 observations read from the data set WORK.SEC_LB2012.
+NOTE: The data set WORK.SEC_LB2012 has 20555 observations and 487 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.07 seconds
+
+
+4456
+4457  /*Check scale*/
+4458  proc print data = sec_LB2012 (obs = 50); /*Randomly check some of these observations to
+4458! see if scoring averaged appropriately. Check 10/24/17. WORKS! - Neil*/
+4459      VAR     NLB034X_2
+4460              NLB034X_3R
+4461              NLB034X_4R
+4462              NLB034X_5
+4463              NLB034X_6R
+4464              NLB034X_7R
+4465              Impulse;
+4466  /*
+4467  Where   NMISS(NLB034X_2 ,
+4468              NLB034X_3R ,
+4469              NLB034X_4R,
+4470              NLB034X_5,
+4471              NLB034X_6R,
+4472              NLB034X_7R) = 2
+4473      OR
+4474          NMISS(NLB034X_2 ,
+4475              NLB034X_3R ,
+4476              NLB034X_4R,
+4477              NLB034X_5,
+4478              NLB034X_6R,
+4479              NLB034X_7R) = 1; */ /*Uncomment this WHERE statement to make sure values of
+4479! NMISS <=2 Are getting scored. Impulse should be mean score of answered items.
+4480                                      Neil Checked on 10/24/17. WORKS! -NEIL /*
+4481  /*
+4482  Where   NMISS(NLB034X_2 ,
+4483              NLB034X_3R ,
+4484              NLB034X_4R,
+4485              NLB034X_5,
+4486              NLB034X_6R,
+4487              NLB034X_7R) > 2
+4488      &
+4489          NMISS(NLB034X_2 ,
+4490              NLB034X_3R ,
+4491              NLB034X_4R,
+4492              NLB034X_5,
+4493              NLB034X_6R,
+4494              NLB034X_7R) < 6;*/  /*Uncomment this WHERE statement to look for evidence of
+4494! if NMISS > 2 code worked, Impulse should be missing for items with 2+ missing items:
+4495                                                  Checked on 10/24/17... WORKS! -NEIL */
+4496  RUN;
+
+NOTE: There were 50 observations read from the data set WORK.SEC_LB2012.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+4497
+4498  PROC CORR data = sec_LB2012
+4499                              NOMISS ALPHA;
+4500      VAR NLB034X_2
+4501          NLB034X_3R
+4502          NLB034X_4R
+4503          NLB034X_5
+4504          NLB034X_6R
+4505          NLB034X_7R;
+4506  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+
+
+4507
+4508
+4509
+4510  /*Set section j from 2012*/
+4511  Data sec_j2012;
+4512      SET Psy792F.h12j_r;
+4513  RUN;
+
+NOTE: There were 20555 observations read from the data set PSY792F.H12J_R.
+NOTE: The data set WORK.SEC_J2012 has 20555 observations and 632 variables.
+NOTE: DATA statement used (Total process time):
+      real time           3.96 seconds
+      cpu time            0.93 seconds
+
+
+4514
+4515  /*Dichotomize employment variable 2014*/
+4516
+4517  DATA sec_j2012;
+4518      SET sec_j2012;
+4519          IF NJ020 = 1 THEN employed_12 = 1;
+4520          Else IF  NJ020 = 98 THEN employed_12 = .;
+4521          Else IF  NJ020 = 99 THEN employed_12 = .;
+4522          Else IF  NJ020 = 5 THEN employed_12 =0;
+4523          ELSE  employed_12 = .;
+4524      LABEL employed_12 = "Employment status dichotomized 2012";
+4525  RUN;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_J2012.
+NOTE: The data set WORK.SEC_J2012 has 20555 observations and 633 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.11 seconds
+
+
+4526
+4527
+4528  /*J20*/
+4529
+4530  /*CHECK*/
+4531  PROC FREQ data = sec_j2012;
+4532      TABLES  NJ005M1*employed_12 / MISSING;
+4533  RUN;
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_J2012.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+
+
+4534
+4535
+4536
+4537  /*Set section j from 2014*/;
+4538  Data sec_j2014;
+4539      SET Psy792F.h14j_r;
+4540  RUN;
+
+NOTE: There were 18747 observations read from the data set PSY792F.H14J_R.
+NOTE: The data set WORK.SEC_J2014 has 18747 observations and 644 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.99 seconds
+      cpu time            0.21 seconds
+
+
+4541
+4542  /*Dichotomize employment variable 2014*/
+4543
+4544  DATA sec_j2014;
+4545      SET sec_j2014;
+4546          IF OJ020 = 1 THEN employed_14 = 1;
+4547          Else IF  OJ020 = 98 THEN employed_14 = .;
+4548          Else IF  OJ020 = 99 THEN employed_14 = .;
+4549          Else IF  OJ020 = 5 THEN employed_14 =0;
+4550          ELSE  employed_14 = .;
+4551      LABEL employed_14 = "Employment status dichotomized 2014";
+4552  RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_J2014.
+NOTE: The data set WORK.SEC_J2014 has 18747 observations and 645 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.26 seconds
+      cpu time            0.12 seconds
+
+
+4553
+4554  /*CHECK*/
+4555  PROC FREQ data = sec_j2014;
+4556      TABLES  OJ005M1*employed_14 / MISSING;
+4557  RUN;
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_J2014.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+
+
+4558
+4559  /*sort macro*/
+4560  %macro srt(dtn,keyvar);
+4561  proc sort data=&dtn;
+4562  by &keyvar;
+4563  run;
+4564  %mend srt;
+4565
+4566  /*sort by HHID & PN*/
+4567  %srt(Demographics2012,  HHID PN)
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: The data set WORK.DEMOGRAPHICS2012 has 21891 observations and 27 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.04 seconds
+
+
+4568  %srt(Sec_c2014,         HHID PN)
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_C2014.
+NOTE: The data set WORK.SEC_C2014 has 18747 observations and 228 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+
+
+4569  %srt(Sec_d2012,         HHID PN)
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: The data set WORK.SEC_D2012 has 20555 observations and 241 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+
+
+4570  %srt(Sec_d2014,         HHID PN)
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: The data set WORK.SEC_D2014 has 18747 observations and 201 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+
+
+4571  %srt(Sec_j2012,         HHID PN)
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_J2012.
+NOTE: The data set WORK.SEC_J2012 has 20555 observations and 633 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.14 seconds
+
+
+4572  %srt(Sec_j2014,         HHID PN)
+
+NOTE: There were 18747 observations read from the data set WORK.SEC_J2014.
+NOTE: The data set WORK.SEC_J2014 has 18747 observations and 645 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.15 seconds
+
+
+4573  %srt(Sec_lb2012,        HHID PN)
+
+NOTE: There were 20555 observations read from the data set WORK.SEC_LB2012.
+NOTE: The data set WORK.SEC_LB2012 has 20555 observations and 487 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           3.05 seconds
+      cpu time            0.17 seconds
+
+
+4574
+4575
+4576  /*Create Final Dataset*/
+4577
+4578  DATA FINAL;
+4579      MERGE   Demographics2012 (IN = x)
+4580              Sec_c2014
+4581              Sec_d2012
+4582              Sec_d2014
+4583              Sec_j2012
+4584              Sec_j2014
+4585              Sec_lb2012;
+4586          BY HHID PN;
+4587              IF x = 1;
+4588      KEEP
+4589          HHID
+4590          PN
+4591          NSUBHH
+4592          OSUBHH
+4593          FEMALE
+4594          RACE
+4595          HISPANIC
+4596          SCHLYRS
+4597          DEGREE2
+4598          NCOUPLE
+4599          OCOUPLE
+4600          NAGE
+4601          BIRTHYR
+4602          BIRTHMO
+4603          NIWMONTH
+4604          NIWYEAR
+4605          NIWWAVE
+4606          OIWWAVE
+4607          NRESCODE
+4608          ORESCODE
+4609          NLBWGTR
+4610          NWGTR
+4611          OWGTR
+4612          ND110 - ND117
+4613          ND113R
+4614          ND115R
+4615          CESD_12
+4616          OD110 - OD117
+4617          OD113R
+4618          OD115R
+4619          CESD_14
+4620          self_health
+4621          NJ020
+4622          OJ020
+4623          employed_12
+4624          employed_14
+4625
+4626          NLB034X_2 - NLB034X_7
+4627          NLB034X_3R
+4628          NLB034X_4R
+4629          NLB034X_6R
+4630          NLB034X_7R
+4631          Impulse
+4632
+4633          OC001
+4634          self_health
+4635
+4636          NJ005M1
+4637          employed_12
+4638
+4639          OJ005M1
+4640          employed_14
+4641
+4642          NWGTR
+4643          ;
+4644  RUN;
+
+NOTE: There were 21891 observations read from the data set WORK.DEMOGRAPHICS2012.
+NOTE: There were 18747 observations read from the data set WORK.SEC_C2014.
+NOTE: There were 20555 observations read from the data set WORK.SEC_D2012.
+NOTE: There were 18747 observations read from the data set WORK.SEC_D2014.
+NOTE: There were 20555 observations read from the data set WORK.SEC_J2012.
+NOTE: There were 18747 observations read from the data set WORK.SEC_J2014.
+NOTE: There were 20555 observations read from the data set WORK.SEC_LB2012.
+NOTE: The data set WORK.FINAL has 21891 observations and 64 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.24 seconds
+      cpu time            0.90 seconds
+
+
+4645
+4646
+4647  PROC CONTENTS DATA = FINAL;
+4648  RUN;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+

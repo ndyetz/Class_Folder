@@ -1,0 +1,1967 @@
+                                        The SAS System      09:40 Friday, November 10, 2017  63
+
+                                    The CONTENTS Procedure
+
+        Data Set Name        PSY792F.TRK2014TR_R           Observations          38183
+        Member Type          DATA                          Variables             444
+        Engine               V9                            Indexes               0
+        Created              09/01/2017 13:55:33           Observation Length    3344
+        Last Modified        09/01/2017 13:55:33           Deleted Observations  0
+        Protection                                         Compressed            NO
+        Data Set Type                                      Sorted                NO
+        Label
+        Data Representation  WINDOWS_64
+        Encoding             wlatin1  Western (Windows)
+
+
+                               Engine/Host Dependent Information
+
+            Data Set Page Size          262144
+            Number of Data Set Pages    490
+            First Data Page             1
+            Max Obs per Page            78
+            Obs in First Data Page      61
+            Number of Data Set Repairs  0
+            ExtendObsCounter            YES
+            Filename                    T:\Common\PSY792F\Data\trk2014tr_r.sas7bdat
+            Release Created             9.0401M1
+            Host Created                X64_7PRO
+                                        The SAS System      09:40 Friday, November 10, 2017  64
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+  1    HHID           Char      6    HOUSEHOLD IDENTIFIER
+  2    PN             Char      3    PERSON NUMBER
+  3    BIRTHMO        Num       8    BIRTHDATE: MONTH
+  4    BIRTHYR        Num       8    BIRTHDATE: YEAR
+  5    DEGREE         Num       8    HIGHEST DEGREE OF EDUCATION
+  6    EFTFASSIGN     Num       8    RESPONDENTS ASSIGNMENT FOR EFTF INTERVIEWS
+  7    EXDEATHMO      Num       8    MONTH OF DEATH
+  8    EXDEATHYR      Num       8    YEAR OF DEATH
+  9    EXDODSOURCE    Num       8    SOURCE OF EXIT DATE OF DEATH
+ 10    FIRSTIW        Num       8    FIRST INTERVIEW: STUDY YEAR
+ 11    GENDER         Num       8    GENDER
+ 12    GENETICS06     Num       8    GENETICS 2006
+ 13    GENETICS08     Num       8    GENETICS 2008
+ 14    GENETICS10     Num       8    GENETICS 2010
+ 15    GENETICS12     Num       8    GENETICS 2012
+ 16    HISPANIC       Num       8    HISPANICITY TYPE
+ 17    IMMGYEAR       Num       8    YEAR IMMIGRATED TO THE U.S.
+ 18    MOSFLAG        Num       8    2010 MINORITY OVERSAMPLE FLAG
+ 19    NMONTH         Num       8    NDI MONTH OF DEATH
+ 20    NSCORE         Num       8    NDI MATCH SCORE
+ 21    NYEAR          Num       8    NDI YEAR OF DEATH
+ 22    OVHHID         Char      6    OVERLAP CASE: OLD HHID
+ 23    OVPN           Char      3    OVERLAP CASE: OLD PN
+ 24    OVRESULT       Num       8    OVERLAP CASE: RESULT CODE
+ 25    RACE           Num       8    RACE/ETHNICITY
+ 26    SCHLYRS        Num       8    NUMBER OF YEARS IN SCHOOL
+ 27    SECU           Num       8    SAMPLING ERROR COMPUTATION UNIT
+ 28    STRATUM        Num       8    STRATUM ID
+ 29    STUDY          Num       8    STUDY MEMBERSHIP
+ 30    USBORN         Num       8    BORN IN THE U.S.
+ 31    WTCOHORT       Num       8    BIRTH COHORT USED FOR CREATING WEIGHTS
+ 32    YRENTER        Num       8    YEAR RESPONDENT ENTERED STUDY
+ 33    ADAMS1         Num       8    ADAMS1 SAMPLE STATUS
+ 34    CAMS01         Num       8    2001 CAMS SAMPLE STATUS
+ 35    CAMS03         Num       8    2003 CAMS SAMPLE STATUS
+ 36    CAMS05         Num       8    2005 CAMS SAMPLE STATUS
+ 37    CAMS07         Num       8    2007 CAMS SAMPLE STATUS
+ 38    CAMS09         Num       8    2009 CAMS SAMPLE STATUS
+ 39    CAMS11         Num       8    2011 CAMS SAMPLE STATUS
+ 40    CAMS13         Num       8    2013 CAMS SAMPLE STATUS
+ 41    CAMS15         Num       8    2015 CAMS SAMPLE STATUS
+ 42    DIAB03         Num       8    2003 DIABETES SAMPLE STATUS
+ 43    DISAB04        Num       8    SAMPLE INDICATOR FOR DISABILITY QNAIRE
+ 44    DVSA07         Num       8    2007 DVS-A SAMPLE STATUS
+ 45    DVSB07         Num       8    2007 DVS-B SAMPLE STATUS
+                                        The SAS System      09:40 Friday, November 10, 2017  65
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+ 46    HCMS11         Num       8    2011 HEALTH CARE MAIL SURVEY SAMPLE STATUS
+ 47    HCNS13         Num       8    2013 HEALTH CARE & NUTRITION MAIL SURVEY SAMPLE STATUS
+ 48    HUMS01         Num       8    2001 HUMAN CAPITAL MAIL SURVEY STATUS
+ 49    HWB09          Num       8    2009 HEALTH AND WELL-BEING SURVEY SAMPLE STATUS
+ 50    INTRNT03       Num       8    2003 INTERNET SURVEY SAMPLE STATUS
+ 51    INTRNT06       Num       8    2006 INTERNET SURVEY SAMPLE STATUS
+ 52    INTRNT07       Num       8    2007 INTERNET SURVEY SAMPLE STATUS
+ 53    INTRNT09       Num       8    2009 INTERNET SURVEY SAMPLE STATUS
+ 54    INTRNT11       Num       8    2011 INTERNET SURVEY SAMPLE STATUS
+ 55    INTRNT13       Num       8    2013 INTERNET SURVEY SAMPLE STATUS
+ 56    LHMS15         Num       8    2015 LHMS SAMPLE STATUS
+ 57    MAIL99         Num       8    1999 MAILOUT PILOT SURVEY STATUS
+ 58    PDS05          Num       8    2005 PDS SAMPLE STATUS
+ 59    PDS07          Num       8    2007 PDS SAMPLE STATUS
+ 60    PHYMSR04       Num       8    SAMPLE INDICATOR FOR PHYSICAL MEASURES
+ 61    PSYSOC04       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2004
+ 62    PSYSOC06       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2006
+ 63    PSYSOC08       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2008
+ 64    PSYSOC10       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2010
+ 65    PSYSOC12       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2012
+ 66    PSYSOC14       Num       8    SAMPLE INDICATOR FOR PSYCSOCIAL QNAIRE 2014
+ 67    VA13           Num       8    2013 VA SAMPLE STATUS
+ 68    AAGE           Num       8    AGE AT 1992 INTERVIEW
+ 69    AALIVE         Num       8    1992 VITAL STATUS
+ 70    ACOUPID        Char      6    1992 WAVE HOUSEHOLD ID
+ 71    ACOUPLE        Num       8    1992 WHETHER COUPLED OR PARTNERED
+ 72    AFAMR          Num       8    1992 WHETHER FAMILY RESPONDENT
+ 73    AFINR          Num       8    1992 WHETHER FINANCIAL RESPONDENT
+ 74    AINSAMP        Num       8    1992 SAMPLE STATUS
+ 75    AIWLANG        Num       8    1992 INTERVIEW LANGUAGE
+ 76    AIWMODE        Num       8    1992 INTERVIEW MODE
+ 77    AIWMONTH       Num       8    1992 INTERVIEW MONTH
+ 78    AIWTYPE        Num       8    1992 INTERVIEW TYPE
+ 79    AIWWAVE        Num       8    1992 WHETHER INTERVIEWED IN THE WAVE
+ 80    AIWYEAR        Num       8    1992 INTERVIEW YEAR
+ 81    ANEWSP         Num       8    1992 NEW SPOUSE-PARTNER FLAG
+ 82    ANURSHM        Num       8    1992 NURSING HOME STATUS
+ 83    APENFLAG       Num       8    HRS PENSION DATA FLAG IN 1992
+ 84    APPN           Char      3    1992 SPOUSE-PARTNER PERSON NUMBER
+ 85    APROXY         Num       8    1992 PROXY TYPE STATUS
+ 86    ARESCODE       Num       8    1992 RESULT CODE
+ 87    ASUBHH         Char      1    1992 SUB-HOUSEHOLD IDENTIFIER
+ 88    ASUBHHIW       Num       8    1992 WHETHER SUBHH INTERVIEWED
+ 89    AWGTHH         Num       8    1992 WEIGHT: HOUSEHOLD-LEVEL
+ 90    AWGTR          Num       8    1992 WEIGHT: RESPONDENT-LEVEL
+                                        The SAS System      09:40 Friday, November 10, 2017  66
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+ 91    AWHY0WGT       Num       8    1992 WHY ZERO WEIGHT
+ 92    BAGE           Num       8    AGE AT 1993 INTERVIEW
+ 93    BALIVE         Num       8    1993 VITAL STATUS
+ 94    BCOUPID        Char      6    1993 WAVE HOUSEHOLD ID
+ 95    BCOUPLE        Num       8    1993 WHETHER COUPLED OR PARTNERED
+ 96    BFAMR          Num       8    1993 WHETHER FAMILY RESPONDENT
+ 97    BFINR          Num       8    1993 WHETHER FINANCIAL RESPONDENT
+ 98    BINSAMP        Num       8    1993 SAMPLE STATUS
+ 99    BIWLANG        Num       8    1993 INTERVIEW LANGUAGE
+100    BIWMODE        Num       8    1993 INTERVIEW MODE
+101    BIWMONTH       Num       8    1993 INTERVIEW MONTH
+102    BIWTYPE        Num       8    1993 INTERVIEW TYPE
+103    BIWWAVE        Num       8    1993 WHETHER INTERVIEWED IN THE WAVE
+104    BIWYEAR        Num       8    1993 INTERVIEW YEAR
+105    BNEWSP         Num       8    1993 NEW SPOUSE-PARTNER FLAG
+106    BNURSHM        Num       8    1993 NURSING HOME STATUS
+107    BPPN           Char      3    1993 SPOUSE-PARTNER PERSON NUMBER
+108    BPROXY         Num       8    1993 PROXY TYPE STATUS
+109    BRESCODE       Num       8    1993 RESULT CODE
+110    BSUBHH         Char      1    1993 SUB-HOUSEHOLD IDENTIFIER
+111    BSUBHHIW       Num       8    1993 WHETHER SUBHH INTERVIEWED
+112    BWGTHH         Num       8    1993 WEIGHT: HOUSEHOLD-LEVEL
+113    BWGTR          Num       8    1993 WEIGHT: RESPONDENT-LEVEL
+114    BWHY0WGT       Num       8    1993 WHY ZERO WEIGHT
+115    CAGE           Num       8    AGE AT 1994 INTERVIEW
+116    CALIVE         Num       8    1994 VITAL STATUS
+117    CCOUPID        Char      6    1994 WAVE HOUSEHOLD ID
+118    CCOUPLE        Num       8    1994 WHETHER COUPLED OR PARTNERED
+119    CFAMR          Num       8    1994 WHETHER FAMILY RESPONDENT
+120    CFINR          Num       8    1994 WHETHER FINANCIAL RESPONDENT
+121    CINSAMP        Num       8    1994 SAMPLE STATUS
+122    CIWLANG        Num       8    1994 INTERVIEW LANGUAGE
+123    CIWMODE        Num       8    1994 INTERVIEW MODE
+124    CIWMONTH       Num       8    1994 INTERVIEW MONTH
+125    CIWTYPE        Num       8    1994 INTERVIEW TYPE
+126    CIWWAVE        Num       8    1994 WHETHER INTERVIEWED IN THE WAVE
+127    CIWYEAR        Num       8    1994 INTERVIEW YEAR
+128    CNEWSP         Num       8    1994 NEW SPOUSE-PARTNER FLAG
+129    CNURSHM        Num       8    1994 NURSING HOME STATUS
+130    CPPN           Char      3    1994 SPOUSE-PARTNER PERSON NUMBER
+131    CPROXY         Num       8    1994 PROXY TYPE STATUS
+132    CRESCODE       Num       8    1994 RESULT CODE
+133    CSUBHH         Char      1    1994 SUB-HOUSEHOLD IDENTIFIER
+134    CSUBHHIW       Num       8    1994 WHETHER SUBHH INTERVIEWED
+135    CWGTHH         Num       8    1994 WEIGHT: HOUSEHOLD-LEVEL
+                                        The SAS System      09:40 Friday, November 10, 2017  67
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+136    CWGTR          Num       8    1994 WEIGHT: RESPONDENT-LEVEL
+137    CWHY0WGT       Num       8    1994 WHY ZERO WEIGHT
+138    DAGE           Num       8    AGE AT 1995 INTERVIEW
+139    DALIVE         Num       8    1995 VITAL STATUS
+140    DCOUPID        Char      6    1995 WAVE HOUSEHOLD ID
+141    DCOUPLE        Num       8    1995 WHETHER COUPLED OR PARTNERED
+142    DFAMR          Num       8    1995 WHETHER FAMILY RESPONDENT
+143    DFINR          Num       8    1995 WHETHER FINANCIAL RESPONDENT
+144    DINSAMP        Num       8    1995 SAMPLE STATUS
+145    DIWLANG        Num       8    1995 INTERVIEW LANGUAGE
+146    DIWMODE        Num       8    1995 INTERVIEW MODE
+147    DIWMONTH       Num       8    1995 INTERVIEW MONTH
+148    DIWTYPE        Num       8    1995 INTERVIEW TYPE
+149    DIWWAVE        Num       8    1995 WHETHER INTERVIEWED IN THE WAVE
+150    DIWYEAR        Num       8    1995 INTERVIEW YEAR
+151    DNDIFLAG       Num       8    NDI 1995 ALIVE OR DECEASED FLAG
+152    DNEWSP         Num       8    1995 NEW SPOUSE-PARTNER FLAG
+153    DNURSHM        Num       8    1995 NURSING HOME STATUS
+154    DPPN           Char      3    1995 SPOUSE-PARTNER PERSON NUMBER
+155    DPROXY         Num       8    1995 PROXY TYPE STATUS
+156    DRESCODE       Num       8    1995 RESULT CODE
+157    DSUBHH         Char      1    1995 SUB-HOUSEHOLD IDENTIFIER
+158    DSUBHHIW       Num       8    1995 WHETHER SUBHH INTERVIEWED
+159    DWGTHH         Num       8    1995 WEIGHT: HOUSEHOLD-LEVEL
+160    DWGTR          Num       8    1995 WEIGHT: RESPONDENT-LEVEL
+161    DWHY0WGT       Num       8    1995 WHY ZERO WEIGHT
+162    EAGE           Num       8    AGE AT 1996 INTERVIEW
+163    EALIVE         Num       8    1996 VITAL STATUS
+164    ECOUPID        Char      6    1996 WAVE HOUSEHOLD ID
+165    ECOUPLE        Num       8    1996 WHETHER COUPLED OR PARTNERED
+166    EFAMR          Num       8    1996 WHETHER FAMILY RESPONDENT
+167    EFINR          Num       8    1996 WHETHER FINANCIAL RESPONDENT
+168    EINSAMP        Num       8    1996 SAMPLE STATUS
+169    EIWLANG        Num       8    1996 INTERVIEW LANGUAGE
+170    EIWMODE        Num       8    1996 INTERVIEW MODE
+171    EIWMONTH       Num       8    1996 INTERVIEW MONTH
+172    EIWTYPE        Num       8    1996 INTERVIEW TYPE
+173    EIWWAVE        Num       8    1996 WHETHER INTERVIEWED IN THE WAVE
+174    EIWYEAR        Num       8    1996 INTERVIEW YEAR
+175    ENEWSP         Num       8    1996 NEW SPOUSE-PARTNER FLAG
+176    ENURSHM        Num       8    1996 NURSING HOME STATUS
+177    EPPN           Char      3    1996 SPOUSE-PARTNER PERSON NUMBER
+178    EPROXY         Num       8    1996 PROXY TYPE STATUS
+179    ERESCODE       Num       8    1996 RESULT CODE
+180    ESUBHH         Char      1    1996 SUB-HOUSEHOLD IDENTIFIER
+                                        The SAS System      09:40 Friday, November 10, 2017  68
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+181    ESUBHHIW       Num       8    1996 WHETHER SUBHH INTERVIEWED
+182    EWGTHH         Num       8    1996 WEIGHT: HOUSEHOLD-LEVEL
+183    EWGTR          Num       8    1996 WEIGHT: RESPONDENT-LEVEL
+184    EWHY0WGT       Num       8    1996 WHY ZERO WEIGHT
+185    FAGE           Num       8    AGE AT 1998 INTERVIEW
+186    FALIVE         Num       8    1998 VITAL STATUS
+187    FCOUPID        Char      6    1998 WAVE HOUSEHOLD ID
+188    FCOUPLE        Num       8    1998 WHETHER COUPLED OR PARTNERED
+189    FFAMR          Num       8    1998 WHETHER FAMILY RESPONDENT
+190    FFINR          Num       8    1998 WHETHER FINANCIAL RESPONDENT
+191    FINSAMP        Num       8    1998 SAMPLE STATUS
+192    FIWLANG        Num       8    1998 INTERVIEW LANGUAGE
+193    FIWMODE        Num       8    1998 INTERVIEW MODE
+194    FIWMONTH       Num       8    1998 INTERVIEW MONTH
+195    FIWTYPE        Num       8    1998 INTERVIEW TYPE
+196    FIWWAVE        Num       8    1998 WHETHER INTERVIEWED IN THE WAVE
+197    FIWYEAR        Num       8    1998 INTERVIEW YEAR
+198    FNEWSP         Num       8    1998 NEW SPOUSE-PARTNER FLAG
+199    FNURSHM        Num       8    1998 NURSING HOME STATUS
+200    FPENFLAG       Num       8    HRS PENSION DATA FLAG IN 1998
+201    FPPN           Char      3    1998 SPOUSE-PARTNER PERSON NUMBER
+202    FPROXY         Num       8    1998 PROXY TYPE STATUS
+203    FRESCODE       Num       8    1998 RESULT CODE
+204    FSUBHH         Char      1    1998 SUB-HOUSEHOLD IDENTIFIER
+205    FSUBHHIW       Num       8    1998 WHETHER SUBHH INTERVIEWED
+206    FWGTHH         Num       8    1998 WEIGHT: HOUSEHOLD-LEVEL
+207    FWGTR          Num       8    1998 WEIGHT: RESPONDENT-LEVEL
+208    FWHY0WGT       Num       8    1998 WHY ZERO WEIGHT
+209    GAGE           Num       8    AGE AT 2000 INTERVIEW
+210    GALIVE         Num       8    2000 VITAL STATUS
+211    GCOUPID        Char      6    2000 WAVE HOUSEHOLD ID
+212    GCOUPLE        Num       8    2000 WHETHER COUPLED OR PARTNERED
+213    GFAMR          Num       8    2000 WHETHER FAMILY RESPONDENT
+214    GFINR          Num       8    2000 WHETHER FINANCIAL RESPONDENT
+215    GINSAMP        Num       8    2000 SAMPLE STATUS
+216    GIWLANG        Num       8    2000 INTERVIEW LANGUAGE
+217    GIWMODE        Num       8    2000 INTERVIEW MODE
+218    GIWMONTH       Num       8    2000 INTERVIEW MONTH
+219    GIWTYPE        Num       8    2000 INTERVIEW TYPE
+220    GIWWAVE        Num       8    2000 WHETHER INTERVIEWED IN THE WAVE
+221    GIWYEAR        Num       8    2000 INTERVIEW YEAR
+222    GNDIFLAG       Num       8    NDI 2000 ALIVE OR DECEASE FLAG
+223    GNEWSP         Num       8    2000 NEW SPOUSE-PARTNER FLAG
+224    GNURSHM        Num       8    2000 NURSING HOME STATUS
+225    GPPN           Char      3    2000 SPOUSE-PARTNER PERSON NUMBER
+                                        The SAS System      09:40 Friday, November 10, 2017  69
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+226    GPROXY         Num       8    2000 PROXY TYPE STATUS
+227    GRESCODE       Num       8    2000 RESULT CODE
+228    GSUBHH         Char      1    2000 SUB-HOUSEHOLD IDENTIFIER
+229    GSUBHHIW       Num       8    2000 WHETHER SUBHH INTERVIEWED
+230    GWGTHH         Num       8    2000 WEIGHT: HOUSEHOLD-LEVEL
+231    GWGTR          Num       8    2000 WEIGHT: RESPONDENT-LEVEL
+232    GWGTRNH        Num       8    2000 WEIGHT: NURSING HOME RESIDENT
+233    GWHY0WGT       Num       8    2000 WHY ZERO WEIGHT
+234    HAGE           Num       8    AGE AT 2002 INTERVIEW
+235    HALIVE         Num       8    2002 VITAL STATUS
+236    HLIVARR        Num       8    2002 LIVING ARRAGEMENT STATUS
+237    HCOUPID        Char      6    2002 WAVE HOUSEHOLD ID
+238    HCOUPLE        Num       8    2002 WHETHER COUPLED OR PARTNERED
+239    HFAMR          Num       8    2002 WHETHER FAMILY RESPONDENT
+240    HFINR          Num       8    2002 WHETHER FINANCIAL RESPONDENT
+241    HINSAMP        Num       8    2002 SAMPLE STATUS
+242    HIWLANG        Num       8    2002 INTERVIEW LANGUAGE
+243    HIWMODE        Num       8    2002 INTERVIEW MODE
+244    HIWMONTH       Num       8    2002 INTERVIEW MONTH
+245    HIWTYPE        Num       8    2002 INTERVIEW TYPE
+246    HIWWAVE        Num       8    2002 WHETHER INTERVIEWED IN THE WAVE
+247    HIWYEAR        Num       8    2002 INTERVIEW YEAR
+248    HNDIFLAG       Num       8    NDI 2002 ALIVE OR DECEASE FLAG
+249    HNEWSP         Num       8    2002 NEW SPOUSE-PARTNER FLAG
+250    HNURSHM        Num       8    2002 NURSING HOME STATUS
+251    HPPN           Char      3    2002 SPOUSE-PARTNER PERSON NUMBER
+252    HPROXY         Num       8    2002 PROXY TYPE STATUS
+253    HRESCODE       Num       8    2002 RESULT CODE
+254    HSUBHH         Char      1    2002 SUB-HOUSEHOLD IDENTIFIER
+255    HSUBHHIW       Num       8    2002 WHETHER SUBHH INTERVIEWED
+256    HWGTHH         Num       8    2002 WEIGHT: HOUSEHOLD LEVEL
+257    HWGTR          Num       8    2002 WEIGHT: RESPONDENT-LEVEL
+258    HWGTRNH        Num       8    2002 WEIGHT: NURSING HOME RESIDENT
+259    HWHY0WGT       Num       8    2002 WHY ZERO WEIGHT
+260    JAGE           Num       8    AGE AT 2004 INTERVIEW
+261    JALIVE         Num       8    2004 VITAL STATUS
+262    JCOUPID        Char      6    2004 WAVE HOUSEHOLD ID
+263    JCOUPLE        Num       8    2004 WHETHER COUPLED OR PARTNERED
+264    JFAMR          Num       8    2004 WHETHER FAMILY RESPONDENT
+265    JFINR          Num       8    2004 WHETHER FINANCIAL RESPONDENT
+266    JINSAMP        Num       8    2004 SAMPLE STATUS
+267    JIWLANG        Num       8    2004 INTERVIEW LANGUAGE
+268    JIWMODE        Num       8    2004 INTERVIEW MODE
+269    JIWMONTH       Num       8    2004 INTERVIEW MONTH
+270    JIWTYPE        Num       8    2004 INTERVIEW TYPE
+                                        The SAS System      09:40 Friday, November 10, 2017  70
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+271    JIWWAVE        Num       8    2004 WHETHER INTERVIEWED IN THE WAVE
+272    JIWYEAR        Num       8    2004 INTERVIEW YEAR
+273    JLIVARR        Num       8    2004 LIVING ARRAGEMENT STATUS
+274    JMARST         Num       8    2004 MARITAL STATUS
+275    JNDIFLAG       Num       8    NDI 2004 ALIVE OR DECEASE FLAG
+276    JNEWSP         Num       8    2004 NEW SPOUSE-PARTNER FLAG
+277    JNURSHM        Num       8    2004 NURSING HOME STATUS
+278    JPENFLAG       Num       8    HRS PENSION DATA FLAG IN 2004
+279    JPMSELWT       Num       8    SAMPLE WEIGHT FOR PHYSICAL MEASURES
+280    JPMWGTR        Num       8    RESPONDENT WEIGHT FOR PHYSICAL MEASURE
+281    JPPN           Char      3    2004 SPOUSE-PARTNER PERSON NUMBER
+282    JPROXY         Num       8    2004 PROXY TYPE STATUS
+283    JRESCODE       Num       8    2004 RESULT CODE
+284    JSUBHH         Char      1    2004 SUB-HOUSEHOLD IDENTIFIER
+285    JSUBHHIW       Num       8    2004 WHETHER SUBHH INTERVIEWED
+286    JWGTHH         Num       8    2004 WEIGHT: HOUSEHOLD LEVEL
+287    JWGTR          Num       8    2004 WEIGHT: RESPONDENT LEVEL
+288    JWGTR_DB       Num       8    2004 RESP WEIGHT FOR DISABILITY QNAIRE
+289    JWGTR_PS       Num       8    RESP WEIGHT FOR PSYCHOSOCIAL QNAIRE
+290    JWHY0HWT       Num       8    2004 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+291    JWHY0RWT       Num       8    2004 WHY ZERO RESPONDENT LEVEL WEIGHT
+292    JWGTRNH        Num       8    2004 WEIGHT: NURSING HOME RESIDENT
+293    KAGE           Num       8    AGE AT 2006 INTERVIEW
+294    KALIVE         Num       8    2006 VITAL STATUS
+295    KBIOWGTR       Num       8    RESPONDENT WEIGHT FOR THE 2006 BIOMARKER SUBSAMPLE
+296    KCOUPID        Char      6    2006 WAVE HOUSEHOLD ID
+297    KCOUPLE        Num       8    2006 WHETHER COUPLED OR PARTNERED
+298    KFAMR          Num       8    2006 WHETHER FAMILY RESPONDENT
+299    KFINR          Num       8    2006 WHETHER FINANCIAL RESPONDENT
+300    KINSAMP        Num       8    2006 SAMPLE STATUS
+301    KIWLANG        Num       8    2006 INTERVIEW LANGUAGE
+302    KIWMODE        Num       8    2006 INTERVIEW MODE
+303    KIWMONTH       Num       8    2006 INTERVIEW MONTH
+304    KIWTYPE        Num       8    2006 INTERVIEW TYPE
+305    KIWWAVE        Num       8    2006 WHETHER INTERVIEWED IN THE WAVE
+306    KIWYEAR        Num       8    2006 INTERVIEW YEAR
+307    KLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2006 LEAVE BEHIND QNAIRE
+308    KLIVARR        Num       8    2006 LIVING ARRANGEMENT STATUS
+309    KMARST         Num       8    2006 MARITAL STATUS
+310    KNDIFLAG       Num       8    NDI 2006 ALIVE OR DECEASE FLAG
+311    KNEWSP         Num       8    2006 NEW SPOUSE-PARTNER FLAG
+312    KNURSHM        Num       8    2006 NURSING HOME STATUS
+313    KPMWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2006 PHYSICAL MEASURES SUBSAMPLE
+314    KPPN           Char      3    2006 SPOUSE-PARTNER PERSON NUMBER
+315    KPROXY         Num       8    2006 PROXY TYPE STATUS
+                                        The SAS System      09:40 Friday, November 10, 2017  71
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+316    KRESCODE       Num       8    2006 RESULT CODE
+317    KSUBHH         Char      1    2006 SUB-HOUSEHOLD IDENTIFIER
+318    KSUBHHIW       Num       8    2006 WHETHER SUBHH INTERVIEWED
+319    KWGTHH         Num       8    2006 WEIGHT: HOUSEHOLD LEVEL
+320    KWGTR          Num       8    2006 WEIGHT: RESPONDENT LEVEL
+321    KWHY0HWT       Num       8    2006 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+322    KWHY0RWT       Num       8    2006 WHY ZERO RESPONDENT LEVEL WEIGHT
+323    KWGTRNH        Num       8    2006 WEIGHT: NURSING HOME RESIDENT
+324    LAGE           Num       8    AGE AT 2008 INTERVIEW
+325    LALIVE         Num       8    2008 VITAL STATUS
+326    LBIOWGTR       Num       8    RESPONDENT WEIGHT FOR THE 2008 BIOMARKER SUBSAMPLE
+327    LCOUPID        Char      6    2008 WAVE HOUSEHOLD ID
+328    LCOUPLE        Num       8    2008 WHETHER COUPLED OR PARTNERED
+329    LFAMR          Num       8    2008 WHETHER FAMILY RESPONDENT
+330    LFINR          Num       8    2008 WHETHER FINANCIAL RESPONDENT
+331    LINSAMP        Num       8    2008 SAMPLE STATUS
+332    LIWLANG        Num       8    2008 INTERVIEW LANGUAGE
+333    LIWMODE        Num       8    2008 INTERVIEW MODE
+334    LIWMONTH       Num       8    2008 INTERVIEW MONTH
+335    LIWTYPE        Num       8    2008 INTERVIEW TYPE
+336    LIWWAVE        Num       8    2008 WHETHER INTERVIEWED IN THE WAVE
+337    LIWYEAR        Num       8    2008 INTERVIEW YEAR
+338    LLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2008 PSYCHO-SOCIAL QNAIRE
+339    LLIVARR        Num       8    2008 LIVING ARRAGEMENT STATUS
+340    LMARST         Num       8    2008 MARITAL STATUS
+341    LNEWSP         Num       8    2008 NEW SPOUSE-PARTNER FLAG
+342    LNURSHM        Num       8    2008 NURSING HOME STATUS
+343    LPMWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2008 PHYSICAL MEASURES SUBSAMPLE
+344    LPPN           Char      3    2008 SPOUSE-PARTNER PERSON NUMBER
+345    LPROXY         Num       8    2008 PROXY TYPE STATUS
+346    LRESCODE       Num       8    2008 RESULT CODE
+347    LSUBHH         Char      1    2008 SUB-HOUSEHOLD IDENTIFIER
+348    LSUBHHIW       Num       8    2008 WHETHER SUBHH INTERVIEWED
+349    LWGTHH         Num       8    2008 WEIGHT: HOUSEHOLD LEVEL
+350    LWGTR          Num       8    2008 WEIGHT: RESPONDENT LEVEL
+351    LWHY0HWT       Num       8    2008 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+352    LWHY0RWT       Num       8    2008 WHY ZERO RESPONDENT LEVEL WEIGHT
+353    LWGTRNH        Num       8    2008 WEIGHT: NURSING HOME RESIDENT
+354    MAGE           Num       8    AGE AT 2010 INTERVIEW
+355    MALIVE         Num       8    2010 VITAL STATUS
+356    MBIOWGTR       Num       8    RESPONDENT WEIGHT FOR THE 2010 BIOMARKER SUBSAMPLE
+357    MCOUPID        Char      6    2010 WAVE HOUSEHOLD ID
+358    MCOUPLE        Num       8    2010 WHETHER COUPLED OR PARTNERED
+359    MFAMR          Num       8    2010 WHETHER FAMILY RESPONDENT
+360    MFINR          Num       8    2010 WHETHER FINANCIAL RESPONDENT
+                                        The SAS System      09:40 Friday, November 10, 2017  72
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+361    MINSAMP        Num       8    2010 SAMPLE STATUS
+362    MIWLANG        Num       8    2010 INTERVIEW LANGUAGE
+363    MIWMODE        Num       8    2010 INTERVIEW MODE
+364    MIWMONTH       Num       8    2010 INTERVIEW MONTH
+365    MIWTYPE        Num       8    2010 INTERVIEW TYPE
+366    MIWWAVE        Num       8    2010 WHETHER INTERVIEWED IN THE WAVE
+367    MIWYEAR        Num       8    2010 INTERVIEW YEAR
+368    MLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2010 LEAVE BEHIND QNAIRE
+369    MLIVARR        Num       8    2010 LIVING ARRANGEMENT STATUS
+370    MMARST         Num       8    2010 MARITAL STATUS
+371    MNEWSP         Num       8    2010 NEW SPOUSE-PARTNER FLAG
+372    MNURSHM        Num       8    2010 NURSING HOME STATUS
+373    MPMWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2010 PHYSICAL MEASURES SUBSAMPLE
+374    MPPN           Char      3    2010 SPOUSE-PARTNER PERSON NUMBER
+375    MPROXY         Num       8    2010 PROXY TYPE STATUS
+376    MRESCODE       Num       8    2010 RESULT CODE
+377    MSUBHH         Char      1    2010 SUB-HOUSEHOLD IDENTIFIER
+378    MSUBHHIW       Num       8    2010 WHETHER SUBHH INTERVIEWED
+379    MWGTHH         Num       8    2010 WEIGHT: HOUSEHOLD LEVEL
+380    MWGTR          Num       8    2010 WEIGHT: RESPONDENT LEVEL
+381    MWHY0HWT       Num       8    2010 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+382    MWHY0RWT       Num       8    2010 WHY ZERO RESPONDENT LEVEL WEIGHT
+383    MWGTRNH        Num       8    2010 WEIGHT: NURSING HOME RESIDENT
+384    NAGE           Num       8    AGE AT 2012 INTERVIEW
+385    NALIVE         Num       8    2012 VITAL STATUS
+386    NBIOWGTR       Num       8    RESPONDENT WEIGHT FOR THE 2012 BIOMARKER SUBSAMPLE
+387    NCOUPID        Char      6    2012 WAVE HOUSEHOLD ID
+388    NCOUPLE        Num       8    2012 WHETHER COUPLED OR PARTNERED
+389    NFAMR          Num       8    2012 WHETHER FAMILY RESPONDENT
+390    NFINR          Num       8    2012 WHETHER FINANCIAL RESPONDENT
+391    NINSAMP        Num       8    2012 SAMPLE STATUS
+392    NIWLANG        Num       8    2012 INTERVIEW LANGUAGE
+393    NIWMODE        Num       8    2012 INTERVIEW MODE
+394    NIWMONTH       Num       8    2012 INTERVIEW MONTH
+395    NIWTYPE        Num       8    2012 INTERVIEW TYPE
+396    NIWWAVE        Num       8    2012 WHETHER INTERVIEWED IN THE WAVE
+397    NIWYEAR        Num       8    2012 INTERVIEW YEAR
+398    NLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2012 LEAVE BEHIND QNAIRE
+399    NLIVARR        Num       8    2012 LIVING ARRAGEMENT STATUS
+400    NMARST         Num       8    2012 MARITAL STATUS
+401    NNEWSP         Num       8    2012 NEW SPOUSE-PARTNER FLAG
+402    NNURSHM        Num       8    2012 NURSING HOME STATUS
+403    NPMWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2012 PHYSICAL MEASURES SUBSAMPLE
+404    NPPN           Char      3    2012 SPOUSE-PARTNER PERSON NUMBER
+405    NPROXY         Num       8    2012 PROXY TYPE STATUS
+                                        The SAS System      09:40 Friday, November 10, 2017  73
+
+                                    The CONTENTS Procedure
+
+                                  Variables in Creation Order
+
+  #    Variable       Type    Len    Label
+
+406    NRESCODE       Num       8    2012 RESULT CODE
+407    NSUBHH         Char      1    2012 SUB-HOUSEHOLD IDENTIFIER
+408    NSUBHHIW       Num       8    2012 WHETHER SUBHH INTERVIEWED
+409    NWGTHH         Num       8    2012 WEIGHT: HOUSEHOLD LEVEL
+410    NWGTR          Num       8    2012 WEIGHT: RESPONDENT LEVEL
+411    NWHY0HWT       Num       8    2012 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+412    NWHY0RWT       Num       8    2012 WHY ZERO RESPONDENT LEVEL WEIGHT
+413    NWGTRNH        Num       8    2012 WEIGHT: NURSING HOME RESIDENT
+414    OAGE           Num       8    AGE AT 2014 INTERVIEW
+415    OALIVE         Num       8    2014 VITAL STATUS
+416    OBIOWGTR       Num       8    RESPONDENT WEIGHT FOR THE 2014 BIOMARKER SUBSAMPLE
+417    OCOUPID        Char      6    2014 WAVE HOUSEHOLD ID
+418    OCOUPLE        Num       8    2014 WHETHER COUPLED OR PARTNERED
+419    OFAMR          Num       8    2014 WHETHER FAMILY RESPONDENT
+420    OFINR          Num       8    2014 WHETHER FINANCIAL RESPONDENT
+421    OINSAMP        Num       8    2014 SAMPLE STATUS
+422    OIWLANG        Num       8    2014 INTERVIEW LANGUAGE
+423    OIWMODE        Num       8    2014 INTERVIEW MODE
+424    OIWMONTH       Num       8    2014 INTERVIEW MONTH
+425    OIWTYPE        Num       8    2014 INTERVIEW TYPE
+426    OIWWAVE        Num       8    2014 WHETHER INTERVIEWED IN THE WAVE
+427    OIWYEAR        Num       8    2014 INTERVIEW YEAR
+428    OLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2014 LEAVE BEHIND QNAIRE
+429    OLIVARR        Num       8    2014 LIVING ARRANGEMENT STATUS
+430    OMARST         Num       8    2014 MARITAL STATUS
+431    ONEWSP         Num       8    2014 NEW SPOUSE-PARTNER FLAG
+432    ONURSHM        Num       8    2014 NURSING HOME STATUS
+433    OPMWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2014 PHYSICAL MEASURES SUBSAMPLE
+434    OPPN           Char      3    2014 SPOUSE-PARTNER PERSON NUMBER
+435    OPROXY         Num       8    2014 PROXY TYPE STATUS
+436    ORESCODE       Num       8    2014 RESULT CODE
+437    OSUBHH         Char      1    2014 SUB-HOUSEHOLD IDENTIFIER
+438    OSUBHHIW       Num       8    2014 WHETHER SUBHH INTERVIEWED
+439    OWGTHH         Num       8    2014 WEIGHT: HOUSEHOLD LEVEL
+440    OWGTR          Num       8    2014 WEIGHT: RESPONDENT LEVEL
+441    OWHY0HWT       Num       8    2014 WHY ZERO HOUSEHOLD LEVEL WEIGHT
+442    OWHY0RWT       Num       8    2014 WHY ZERO RESPONDENT LEVEL WEIGHT
+443    OWGTRNH        Num       8    2014 WEIGHT: NURSING HOME RESIDENT
+444    VERSION        Num       8    TRACKER FILE VERSION NUMBER
+                                        The SAS System      09:40 Friday, November 10, 2017  74
+
+                                      The FREQ Procedure
+
+                                     AGE AT 2012 INTERVIEW
+
+                                                    Cumulative    Cumulative
+                   NAGE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     20           1        0.00             1         0.00
+                     24           1        0.00             2         0.01
+                     27           2        0.01             4         0.02
+                     28           1        0.00             5         0.02
+                     29           4        0.02             9         0.04
+                     30           2        0.01            11         0.05
+                     31           3        0.01            14         0.07
+                     32           7        0.03            21         0.10
+                     33           5        0.02            26         0.13
+                     34           4        0.02            30         0.15
+                     35           5        0.02            35         0.17
+                     36          10        0.05            45         0.22
+                     37          10        0.05            55         0.27
+                     38          15        0.07            70         0.34
+                     39          19        0.09            89         0.43
+                     40          23        0.11           112         0.54
+                     41          16        0.08           128         0.62
+                     42          38        0.18           166         0.81
+                     43          27        0.13           193         0.94
+                     44          41        0.20           234         1.14
+                     45          62        0.30           296         1.44
+                     46          67        0.33           363         1.77
+                     47          81        0.39           444         2.16
+                     48         110        0.54           554         2.70
+                     49         141        0.69           695         3.38
+                     50         149        0.72           844         4.11
+                     51         198        0.96          1042         5.07
+                     52         428        2.08          1470         7.15
+                     53         749        3.64          2219        10.80
+                     54         790        3.84          3009        14.64
+                     55         753        3.66          3762        18.30
+                     56         768        3.74          4530        22.04
+                     57         778        3.79          5308        25.82
+                     58         698        3.40          6006        29.22
+                     59         688        3.35          6694        32.57
+                     60         666        3.24          7360        35.81
+                     61         652        3.17          8012        38.98
+                     62         651        3.17          8663        42.15
+                     63         626        3.05          9289        45.19
+                     64         530        2.58          9819        47.77
+                     65         521        2.53         10340        50.31
+                     66         369        1.80         10709        52.10
+
+                                   Frequency Missing = 17629
+                                        The SAS System      09:40 Friday, November 10, 2017  75
+
+                                      The FREQ Procedure
+
+                                     AGE AT 2012 INTERVIEW
+
+                                                    Cumulative    Cumulative
+                   NAGE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     67         406        1.98         11115        54.08
+                     68         414        2.01         11529        56.09
+                     69         451        2.19         11980        58.29
+                     70         541        2.63         12521        60.92
+                     71         658        3.20         13179        64.12
+                     72         584        2.84         13763        66.96
+                     73         572        2.78         14335        69.74
+                     74         573        2.79         14908        72.53
+                     75         588        2.86         15496        75.39
+                     76         531        2.58         16027        77.98
+                     77         478        2.33         16505        80.30
+                     78         428        2.08         16933        82.38
+                     79         432        2.10         17365        84.48
+                     80         410        1.99         17775        86.48
+                     81         351        1.71         18126        88.19
+                     82         312        1.52         18438        89.71
+                     83         272        1.32         18710        91.03
+                     84         270        1.31         18980        92.34
+                     85         233        1.13         19213        93.48
+                     86         210        1.02         19423        94.50
+                     87         204        0.99         19627        95.49
+                     88         168        0.82         19795        96.31
+                     89         157        0.76         19952        97.07
+                     90         135        0.66         20087        97.73
+                     91         117        0.57         20204        98.30
+                     92          96        0.47         20300        98.76
+                     93          60        0.29         20360        99.06
+                     94          60        0.29         20420        99.35
+                     95          33        0.16         20453        99.51
+                     96          37        0.18         20490        99.69
+                     97          18        0.09         20508        99.78
+                     98          15        0.07         20523        99.85
+                     99          15        0.07         20538        99.92
+                    100           8        0.04         20546        99.96
+                    101           4        0.02         20550        99.98
+                    102           2        0.01         20552        99.99
+                    103           2        0.01         20554       100.00
+
+                                   Frequency Missing = 17629
+                                        The SAS System      09:40 Friday, November 10, 2017  76
+
+                                      The FREQ Procedure
+
+                                             GENDER
+
+                                                     Cumulative    Cumulative
+                  GENDER    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       1       16772       43.97         16772        43.97
+                       2       21372       56.03         38144       100.00
+
+                                     Frequency Missing = 39
+
+
+                                   NUMBER OF YEARS IN SCHOOL
+
+                                                     Cumulative    Cumulative
+                 SCHLYRS    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0         372        1.00           372         1.00
+                       1         126        0.34           498         1.33
+                       2         198        0.53           696         1.86
+                       3         437        1.17          1133         3.03
+                       4         371        0.99          1504         4.02
+                       5         409        1.09          1913         5.12
+                       6         910        2.44          2823         7.55
+                       7         673        1.80          3496         9.36
+                       8        1988        5.32          5484        14.67
+                       9        1370        3.67          6854        18.34
+                      10        1962        5.25          8816        23.59
+                      11        1903        5.09         10719        28.68
+                      12       11742       31.42         22461        60.10
+                      13        2632        7.04         25093        67.15
+                      14        3727        9.97         28820        77.12
+                      15        1374        3.68         30194        80.80
+                      16        3749       10.03         33943        90.83
+                      17        3427        9.17         37370       100.00
+
+                                    Frequency Missing = 813
+
+
+                                        The SAS System      09:40 Friday, November 10, 2017  77
+
+                                      The FREQ Procedure
+
+                                  HIGHEST DEGREE OF EDUCATION
+
+                                                     Cumulative    Cumulative
+                  DEGREE    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0       10041       26.30         10041        26.30
+                       1        1763        4.62         11804        30.91
+                       2       16926       44.33         28730        75.24
+                       3        1645        4.31         30375        79.55
+                       4        4100       10.74         34475        90.29
+                       5        2059        5.39         36534        95.68
+                       6         717        1.88         37251        97.56
+                       9         932        2.44         38183       100.00
+
+
+                                         RACE/ETHNICITY
+
+                                                    Cumulative    Cumulative
+                   RACE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                      1       28237       75.36         28237        75.36
+                      2        6737       17.98         34974        93.34
+                      7        2497        6.66         37471       100.00
+
+                                    Frequency Missing = 712
+
+
+                                        HISPANICITY TYPE
+
+                                                      Cumulative    Cumulative
+                 HISPANIC    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        0         681        1.78           681         1.78
+                        1        2469        6.47          3150         8.25
+                        2        1683        4.41          4833        12.66
+                        3          51        0.13          4884        12.79
+                        5       33299       87.21         38183       100.00
+
+
+                                        The SAS System      09:40 Friday, November 10, 2017  78
+
+                                      The FREQ Procedure
+
+                               2012 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 NCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       1       15346       62.31         15346        62.31
+                       5        9282       37.69         24628       100.00
+
+                                   Frequency Missing = 13555
+
+
+                               2014 WHETHER COUPLED OR PARTNERED
+
+                                                     Cumulative    Cumulative
+                 OCOUPLE    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       1       14085       60.65         14085        60.65
+                       5        9139       39.35         23224       100.00
+
+                                   Frequency Missing = 14959
+                                        The SAS System      09:40 Friday, November 10, 2017  79
+
+                                      The MEANS Procedure
+
+                         Analysis Variable : NAGE AGE AT 2012 INTERVIEW
+
+                 N            Mean         Std Dev         Minimum         Maximum
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+             20554      66.8069962      11.5938949      20.0000000     103.0000000
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System      09:40 Friday, November 10, 2017  80
+
+                                      The FREQ Procedure
+
+                                  Table of DEGREE by DEGREE2
+
+                         DEGREE(HIGHEST DEGREE OF EDUCATION)
+                                   DEGREE2(Degree combined; 1 = Associates or higher)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                0 ‚      0 ‚  10041 ‚      0 ‚  10041
+                                  ‚   0.00 ‚  26.30 ‚   0.00 ‚  26.30
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚  34.95 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚   1763 ‚      0 ‚   1763
+                                  ‚   0.00 ‚   4.62 ‚   0.00 ‚   4.62
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚   6.14 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                2 ‚      0 ‚  16926 ‚      0 ‚  16926
+                                  ‚   0.00 ‚  44.33 ‚   0.00 ‚  44.33
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚  58.91 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                3 ‚   1645 ‚      0 ‚      0 ‚   1645
+                                  ‚   4.31 ‚   0.00 ‚   0.00 ‚   4.31
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                                  ‚  63.83 ‚   0.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total        2577    28730     6876    38183
+                                      6.75    75.24    18.01   100.00
+                         (Continued)
+                                        The SAS System      09:40 Friday, November 10, 2017  81
+
+                                      The FREQ Procedure
+
+                                  Table of DEGREE by DEGREE2
+
+                         DEGREE(HIGHEST DEGREE OF EDUCATION)
+                                   DEGREE2(Degree combined; 1 = Associates or higher)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                4 ‚      0 ‚      0 ‚   4100 ‚   4100
+                                  ‚   0.00 ‚   0.00 ‚  10.74 ‚  10.74
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚  59.63 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                5 ‚      0 ‚      0 ‚   2059 ‚   2059
+                                  ‚   0.00 ‚   0.00 ‚   5.39 ‚   5.39
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚  29.94 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                6 ‚      0 ‚      0 ‚    717 ‚    717
+                                  ‚   0.00 ‚   0.00 ‚   1.88 ‚   1.88
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚  10.43 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                9 ‚    932 ‚      0 ‚      0 ‚    932
+                                  ‚   2.44 ‚   0.00 ‚   0.00 ‚   2.44
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                                  ‚  36.17 ‚   0.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total        2577    28730     6876    38183
+                                      6.75    75.24    18.01   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  82
+
+                                    The CONTENTS Procedure
+
+        Data Set Name        WORK.DEMOGRAPHICS             Observations          38183
+        Member Type          DATA                          Variables             27
+        Engine               V9                            Indexes               0
+        Created              11/10/2017 16:17:47           Observation Length    200
+        Last Modified        11/10/2017 16:17:47           Deleted Observations  0
+        Protection                                         Compressed            NO
+        Data Set Type                                      Sorted                NO
+        Label
+        Data Representation  WINDOWS_64
+        Encoding             wlatin1  Western (Windows)
+
+
+                               Engine/Host Dependent Information
+
+Data Set Page Size          65536
+Number of Data Set Pages    117
+First Data Page             1
+Max Obs per Page            327
+Obs in First Data Page      306
+Number of Data Set Repairs  0
+ExtendObsCounter            YES
+Filename                    C:\Users\ndyetz\AppData\Local\Temp\SAS Temporary
+                            Files\_TD4988_HENRYLAB2_\demographics.sas7bdat
+Release Created             9.0401M1
+Host Created                X64_7PRO
+
+
+                          Alphabetic List of Variables and Attributes
+
+       #    Variable    Type    Len    Label
+
+       3    BIRTHMO     Num       8    BIRTHDATE: MONTH
+       4    BIRTHYR     Num       8    BIRTHDATE: YEAR
+      25    Couple12    Num       8    2012 Couple recode
+      26    Couple14    Num       8    2014 Couple recode
+       5    DEGREE      Num       8    HIGHEST DEGREE OF EDUCATION
+      27    DEGREE2     Num       8    Degree combined; 1 = Associates or higher
+       6    GENDER      Num       8    GENDER
+       1    HHID        Char      6    HOUSEHOLD IDENTIFIER
+       7    HISPANIC    Num       8    HISPANICITY TYPE
+      10    NAGE        Num       8    AGE AT 2012 INTERVIEW
+      11    NCOUPLE     Num       8    2012 WHETHER COUPLED OR PARTNERED
+      12    NIWMONTH    Num       8    2012 INTERVIEW MONTH
+      13    NIWWAVE     Num       8    2012 WHETHER INTERVIEWED IN THE WAVE
+      14    NIWYEAR     Num       8    2012 INTERVIEW YEAR
+      15    NLBWGTR     Num       8    RESPONDENT WEIGHT FOR THE 2012 LEAVE BEHIND QNAIRE
+      16    NRESCODE    Num       8    2012 RESULT CODE
+      17    NSUBHH      Char      1    2012 SUB-HOUSEHOLD IDENTIFIER
+      18    NWGTR       Num       8    2012 WEIGHT: RESPONDENT LEVEL
+                                        The SAS System      09:40 Friday, November 10, 2017  83
+
+                                    The CONTENTS Procedure
+
+                          Alphabetic List of Variables and Attributes
+
+       #    Variable    Type    Len    Label
+
+      19    OCOUPLE     Num       8    2014 WHETHER COUPLED OR PARTNERED
+      20    OIWWAVE     Num       8    2014 WHETHER INTERVIEWED IN THE WAVE
+      21    ORESCODE    Num       8    2014 RESULT CODE
+      22    OSUBHH      Char      1    2014 SUB-HOUSEHOLD IDENTIFIER
+      23    OWGTR       Num       8    2014 WEIGHT: RESPONDENT LEVEL
+       2    PN          Char      3    PERSON NUMBER
+       8    RACE        Num       8    RACE/ETHNICITY
+       9    SCHLYRS     Num       8    NUMBER OF YEARS IN SCHOOL
+      24    female      Num       8    Gender Recode
+                                        The SAS System      09:40 Friday, November 10, 2017  84
+
+                                      The MEANS Procedure
+
+                         Analysis Variable : NAGE AGE AT 2012 INTERVIEW
+
+                 N            Mean         Std Dev         Minimum         Maximum
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+             20554      66.8069962      11.5938949      20.0000000     103.0000000
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System      09:40 Friday, November 10, 2017  85
+
+                                      The FREQ Procedure
+
+                                             GENDER
+
+                                                     Cumulative    Cumulative
+                  GENDER    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       1        9156       41.83          9156        41.83
+                       2       12735       58.17         21891       100.00
+
+
+                                         RACE/ETHNICITY
+
+                                                    Cumulative    Cumulative
+                   RACE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                      1       15800       72.38         15800        72.38
+                      2        4221       19.34         20021        91.72
+                      7        1807        8.28         21828       100.00
+
+                                     Frequency Missing = 63
+
+
+                                        HISPANICITY TYPE
+
+                                                      Cumulative    Cumulative
+                 HISPANIC    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        1        1738        7.95          1738         7.95
+                        2        1139        5.21          2877        13.16
+                        3          35        0.16          2912        13.32
+                        5       18948       86.68         21860       100.00
+
+                                     Frequency Missing = 31
+
+
+                                  HIGHEST DEGREE OF EDUCATION
+
+                                                     Cumulative    Cumulative
+                  DEGREE    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0        4379       20.00          4379        20.00
+                       1        1139        5.20          5518        25.21
+                       2       10275       46.94         15793        72.14
+                       3        1202        5.49         16995        77.63
+                       4        2822       12.89         19817        90.53
+                       5        1447        6.61         21264        97.14
+                       6         461        2.11         21725        99.24
+                       9         166        0.76         21891       100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  86
+
+                                      The FREQ Procedure
+
+                           Degree combined; 1 = Associates or higher
+
+                                                     Cumulative    Cumulative
+                 DEGREE2    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0       15793       76.95         15793        76.95
+                       1        4730       23.05         20523       100.00
+
+                                   Frequency Missing = 1368
+
+
+                                   NUMBER OF YEARS IN SCHOOL
+
+                                                     Cumulative    Cumulative
+                 SCHLYRS    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0         148        0.68           148         0.68
+                       1          54        0.25           202         0.93
+                       2          90        0.41           292         1.34
+                       3         195        0.89           487         2.23
+                       4         139        0.64           626         2.87
+                       5         159        0.73           785         3.60
+                       6         482        2.21          1267         5.81
+                       7         250        1.15          1517         6.96
+                       8         666        3.06          2183        10.02
+                       9         647        2.97          2830        12.99
+                      10         944        4.33          3774        17.32
+                      11        1054        4.84          4828        22.15
+                      12        6901       31.67         11729        53.82
+                      13        1707        7.83         13436        61.66
+                      14        2493       11.44         15929        73.10
+                      15         926        4.25         16855        77.34
+                      16        2583       11.85         19438        89.20
+                      17        2354       10.80         21792       100.00
+
+                                    Frequency Missing = 99
+
+
+                                       2012 Couple recode
+
+                                                      Cumulative    Cumulative
+                 Couple12    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        0        8291       37.87          8291        37.87
+                        1       13600       62.13         21891       100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  87
+
+                                      The MEANS Procedure
+
+                         Analysis Variable : NAGE AGE AT 2012 INTERVIEW
+
+                 N            Mean         Std Dev         Minimum         Maximum
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+             20554      65.7183091     668.6660619      20.0000000     103.0000000
+             ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                        The SAS System      09:40 Friday, November 10, 2017  88
+
+                                      The FREQ Procedure
+
+                                             GENDER
+
+                                                     Cumulative    Cumulative
+                  GENDER    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       1    41680606       45.95      41680606        45.95
+                       2    49018154       54.05      90698760       100.00
+
+
+                                         RACE/ETHNICITY
+
+                                                    Cumulative    Cumulative
+                   RACE    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                      1    75281931       83.13      75281931        83.13
+                      2     9254875       10.22      84536806        93.35
+                      7     6019746        6.65      90556552       100.00
+
+                                   Frequency Missing = 142208
+
+
+                                        HISPANICITY TYPE
+
+                                                      Cumulative    Cumulative
+                 HISPANIC    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        1     4888149        5.39       4888149         5.39
+                        2     2824334        3.12       7712483         8.51
+                        3       82681        0.09       7795164         8.60
+                        5    82813225       91.40      90608389       100.00
+
+                                   Frequency Missing = 90371
+
+
+                                  HIGHEST DEGREE OF EDUCATION
+
+                                                     Cumulative    Cumulative
+                  DEGREE    Frequency     Percent     Frequency      Percent
+                  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    12522133       13.81      12522133        13.81
+                       1     4157478        4.58      16679611        18.39
+                       2    42242757       46.57      58922368        64.96
+                       3     5534270        6.10      64456638        71.07
+                       4    14693857       16.20      79150495        87.27
+                       5     8066038        8.89      87216533        96.16
+                       6     2646087        2.92      89862620        99.08
+                       9      836140        0.92      90698760       100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  89
+
+                                      The FREQ Procedure
+
+                           Degree combined; 1 = Associates or higher
+
+                                                     Cumulative    Cumulative
+                 DEGREE2    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0    58922368       69.87      58922368        69.87
+                       1    25405982       30.13      84328350       100.00
+
+                                  Frequency Missing = 6370410
+
+
+                                       2012 Couple recode
+
+                                                      Cumulative    Cumulative
+                 Couple12    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                        0    31748546       35.00      31748546        35.00
+                        1    58950214       65.00      90698760       100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  90
+
+                                      The FREQ Procedure
+
+                                   Table of ND113 by ND113R
+
+                         ND113(WAS R HAPPY W/IN PREV WK)     ND113R
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                . ‚   1209 ‚      0 ‚      0 ‚   1209
+                                  ‚   5.88 ‚   0.00 ‚   0.00 ‚   5.88
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                0 ‚      0 ‚      0 ‚   2791 ‚   2791
+                                  ‚   0.00 ‚   0.00 ‚  13.58 ‚  13.58
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚  16555 ‚      0 ‚  16555
+                                  ‚   0.00 ‚  80.54 ‚   0.00 ‚  80.54
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total        1209    16555     2791    20555
+                                      5.88    80.54    13.58   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  91
+
+                                      The FREQ Procedure
+
+                                   Table of OD113 by OD113R
+
+                         OD113(WAS R HAPPY W/IN PREV WK)     OD113R
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                . ‚   1102 ‚      0 ‚      0 ‚   1102
+                                  ‚   5.88 ‚   0.00 ‚   0.00 ‚   5.88
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                0 ‚      0 ‚      0 ‚   2537 ‚   2537
+                                  ‚   0.00 ‚   0.00 ‚  13.53 ‚  13.53
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚  15108 ‚      0 ‚  15108
+                                  ‚   0.00 ‚  80.59 ‚   0.00 ‚  80.59
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total        1102    15108     2537    18747
+                                      5.88    80.59    13.53   100.00
+
+
+                                        The SAS System      09:40 Friday, November 10, 2017  92
+
+                                      The FREQ Procedure
+
+                                   Table of OD115 by OD115R
+
+                         OD115(ENJOYED LIFE W/IN PREV WK)     OD115R
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                . ‚   1078 ‚      0 ‚      0 ‚   1078
+                                  ‚   5.75 ‚   0.00 ‚   0.00 ‚   5.75
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                                  ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                0 ‚      0 ‚      0 ‚   1688 ‚   1688
+                                  ‚   0.00 ‚   0.00 ‚   9.00 ‚   9.00
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚  15981 ‚      0 ‚  15981
+                                  ‚   0.00 ‚  85.25 ‚   0.00 ‚  85.25
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                                  ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total        1078    15981     1688    18747
+                                      5.75    85.25     9.00   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  93
+
+    Obs    ND110    ND111    ND112    ND113R    ND114    ND115R    ND116    ND117    CESD_12
+
+      1      0        0        0         0        0         0        0        0         0
+      2      0        1        0         0        0         0        0        0         1
+      3      0        0        1         0        0         0        0        0         1
+      4      0        0        0         0        0         0        0        0         0
+      5      0        0        0         1        0         0        0        0         1
+      6      0        0        0         0        0         0        1        0         1
+      7      0        0        0         0        0         0        0        0         0
+      8      0        0        0         1        0         0        0        0         1
+      9      0        0        1         1        0         0        0        0         2
+     10      0        0        0         0        0         0        0        0         0
+     11      0        0        0         0        0         0        0        0         0
+     12      0        0        0         0        0         0        0        0         0
+     13      1        1        0         0        1         0        1        0         4
+     14      0        0        0         0        0         0        0        0         0
+     15      0        1        0         0        0         0        0        1         2
+     16      0        0        0         0        0         0        0        0         0
+     17      0        0        1         0        0         0        0        0         1
+     18      0        0        0         0        0         0        0        0         0
+     19      0        0        1         0        0         0        0        0         1
+     20      0        1        1         1        0         1        0        0         4
+                                        The SAS System      09:40 Friday, November 10, 2017  94
+
+    Obs    OD110    OD111    OD112    OD113R    OD114    OD115R    OD116    OD117    CESD_14
+
+      1      0        0        0         0        0         0        0        0         0
+      2      0        0        0         0        0         0        0        0         0
+      3      0        0        1         0        0         0        0        0         1
+      4      0        0        0         0        0         0        0        0         0
+      5      0        0        0         0        0         0        0        0         0
+      6      1        0        1         1        0         0        0        0         3
+      7      0        0        1         0        0         0        0        0         1
+      8      0        0        1         0        0         0        0        0         1
+      9      0        0        0         0        0         0        0        0         0
+     10      0        0        0         0        0         0        0        0         0
+     11      0        0        0         0        0         0        0        0         0
+     12      0        0        0         0        0         0        0        0         0
+     13      0        0        0         0        0         0        0        0         0
+     14      0        0        0         0        0         0        0        0         0
+     15      .        .        .         .        .         .        .        .         .
+     16      0        0        1         0        0         0        0        0         1
+     17      0        0        0         0        0         0        0        0         0
+     18      0        1        0         0        1         0        0        0         2
+     19      0        1        1         0        0         1        1        0         4
+     20      0        1        0         0        0         0        0        0         1
+                                        The SAS System      09:40 Friday, November 10, 2017  95
+
+                                      The FREQ Procedure
+
+                                  CESD-8 composite score 2014
+
+                                                     Cumulative    Cumulative
+                 CESD_14    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                       0        7880       44.53          7880        44.53
+                       1        3985       22.52         11865        67.05
+                       2        1852       10.47         13717        77.51
+                       3        1199        6.78         14916        84.29
+                       4         763        4.31         15679        88.60
+                       5         620        3.50         16299        92.11
+                       6         605        3.42         16904        95.52
+                       7         475        2.68         17379        98.21
+                       8         317        1.79         17696       100.00
+
+                                   Frequency Missing = 1051
+                                        The SAS System      09:40 Friday, November 10, 2017  96
+
+                                      The FREQ Procedure
+
+                                 Table of OC001 by self_health
+
+            OC001(RATE HEALTH)
+                      self_health(Reverse scored Self Rated Health 2014)
+
+            Frequency‚
+            Percent  ‚
+            Row Pct  ‚
+            Col Pct  ‚       .‚       1‚       2‚       3‚       4‚       5‚  Total
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   . ‚     16 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚     16
+                     ‚   0.09 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.09
+                     ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                     ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   1 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1484 ‚   1484
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.92 ‚   7.92
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   2 ‚      0 ‚      0 ‚      0 ‚      0 ‚   5255 ‚      0 ‚   5255
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  28.03 ‚   0.00 ‚  28.03
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   3 ‚      0 ‚      0 ‚      0 ‚   6251 ‚      0 ‚      0 ‚   6251
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚  33.34 ‚   0.00 ‚   0.00 ‚  33.34
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                     ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   4 ‚      0 ‚      0 ‚   4239 ‚      0 ‚      0 ‚      0 ‚   4239
+                     ‚   0.00 ‚   0.00 ‚  22.61 ‚   0.00 ‚   0.00 ‚   0.00 ‚  22.61
+                     ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                     ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                   5 ‚      0 ‚   1502 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1502
+                     ‚   0.00 ‚   8.01 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.01
+                     ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                     ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+            ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+            Total          16     1502     4239     6251     5255     1484    18747
+                         0.09     8.01    22.61    33.34    28.03     7.92   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  97
+
+                                      The FREQ Procedure
+
+                               Table of NLB034X_3 by NLB034X_3R
+
+       NLB034X_3(Q34X_3. OFTEN STOP THINGS BEFORE COMPLETING)     NLB034X_3R
+
+       Frequency‚
+       Percent  ‚
+       Row Pct  ‚
+       Col Pct  ‚       .‚       1‚       2‚       3‚       4‚       5‚       6‚  Total
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              . ‚  13393 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚  13393
+                ‚  65.16 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  65.16
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              1 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1372 ‚   1372
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   6.67 ‚   6.67
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              2 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1080 ‚      0 ‚   1080
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.25 ‚   0.00 ‚   5.25
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              3 ‚      0 ‚      0 ‚      0 ‚      0 ‚    844 ‚      0 ‚      0 ‚    844
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   4.11 ‚   0.00 ‚   0.00 ‚   4.11
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              4 ‚      0 ‚      0 ‚      0 ‚   1726 ‚      0 ‚      0 ‚      0 ‚   1726
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.40 ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.40
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              5 ‚      0 ‚      0 ‚   1478 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1478
+                ‚   0.00 ‚   0.00 ‚   7.19 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.19
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              6 ‚      0 ‚    662 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚    662
+                ‚   0.00 ‚   3.22 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   3.22
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+       Total       13393      662     1478     1726      844     1080     1372    20555
+                   65.16     3.22     7.19     8.40     4.11     5.25     6.67   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  98
+
+                                      The FREQ Procedure
+
+                               Table of NLB034X_4 by NLB034X_4R
+
+       NLB034X_4(Q34X_4. OFTEN ACT WITHOUT THINKING)     NLB034X_4R
+
+       Frequency‚
+       Percent  ‚
+       Row Pct  ‚
+       Col Pct  ‚       .‚       1‚       2‚       3‚       4‚       5‚       6‚  Total
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              . ‚  13383 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚  13383
+                ‚  65.11 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  65.11
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              1 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   2418 ‚   2418
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  11.76 ‚  11.76
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              2 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1520 ‚      0 ‚   1520
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.39 ‚   0.00 ‚   7.39
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              3 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1082 ‚      0 ‚      0 ‚   1082
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.26 ‚   0.00 ‚   0.00 ‚   5.26
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              4 ‚      0 ‚      0 ‚      0 ‚   1179 ‚      0 ‚      0 ‚      0 ‚   1179
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.74 ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.74
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              5 ‚      0 ‚      0 ‚    679 ‚      0 ‚      0 ‚      0 ‚      0 ‚    679
+                ‚   0.00 ‚   0.00 ‚   3.30 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   3.30
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              6 ‚      0 ‚    294 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚    294
+                ‚   0.00 ‚   1.43 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   1.43
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+       Total       13383      294      679     1179     1082     1520     2418    20555
+                   65.11     1.43     3.30     5.74     5.26     7.39    11.76   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017  99
+
+                                      The FREQ Procedure
+
+                               Table of NLB034X_6 by NLB034X_6R
+
+       NLB034X_6(Q34X_6. OFTEN NOT AS CAUTIOUS)     NLB034X_6R
+
+       Frequency‚
+       Percent  ‚
+       Row Pct  ‚
+       Col Pct  ‚       .‚       1‚       2‚       3‚       4‚       5‚       6‚  Total
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              . ‚  13378 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚  13378
+                ‚  65.08 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  65.08
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              1 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1505 ‚   1505
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.32 ‚   7.32
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              2 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1220 ‚      0 ‚   1220
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.94 ‚   0.00 ‚   5.94
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              3 ‚      0 ‚      0 ‚      0 ‚      0 ‚    887 ‚      0 ‚      0 ‚    887
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   4.32 ‚   0.00 ‚   0.00 ‚   4.32
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              4 ‚      0 ‚      0 ‚      0 ‚   1760 ‚      0 ‚      0 ‚      0 ‚   1760
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.56 ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.56
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              5 ‚      0 ‚      0 ‚   1312 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1312
+                ‚   0.00 ‚   0.00 ‚   6.38 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   6.38
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              6 ‚      0 ‚    493 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚    493
+                ‚   0.00 ‚   2.40 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   2.40
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+       Total       13378      493     1312     1760      887     1220     1505    20555
+                   65.08     2.40     6.38     8.56     4.32     5.94     7.32   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017 100
+
+                                      The FREQ Procedure
+
+                               Table of NLB034X_7 by NLB034X_7R
+
+       NLB034X_7(Q34X_7. OFTEN PREFER TO PLAY THINGS BY EAR)     NLB034X_7R
+
+       Frequency‚
+       Percent  ‚
+       Row Pct  ‚
+       Col Pct  ‚       .‚       1‚       2‚       3‚       4‚       5‚       6‚  Total
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              . ‚  13372 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚  13372
+                ‚  65.05 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚  65.05
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              1 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1747 ‚   1747
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   8.50 ‚   8.50
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              2 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1414 ‚      0 ‚   1414
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   6.88 ‚   0.00 ‚   6.88
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              3 ‚      0 ‚      0 ‚      0 ‚      0 ‚    999 ‚      0 ‚      0 ‚    999
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   4.86 ‚   0.00 ‚   0.00 ‚   4.86
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              4 ‚      0 ‚      0 ‚      0 ‚   1491 ‚      0 ‚      0 ‚      0 ‚   1491
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.25 ‚   0.00 ‚   0.00 ‚   0.00 ‚   7.25
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              5 ‚      0 ‚      0 ‚   1049 ‚      0 ‚      0 ‚      0 ‚      0 ‚   1049
+                ‚   0.00 ‚   0.00 ‚   5.10 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   5.10
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+              6 ‚      0 ‚    483 ‚      0 ‚      0 ‚      0 ‚      0 ‚      0 ‚    483
+                ‚   0.00 ‚   2.35 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   2.35
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+                ‚   0.00 ‚ 100.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚   0.00 ‚
+       ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+       Total       13372      483     1049     1491      999     1414     1747    20555
+                   65.05     2.35     5.10     7.25     4.86     6.88     8.50   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017 101
+
+            NLB034X_    NLB034X_    NLB034X_    NLB034X_    NLB034X_    NLB034X_
+     Obs        2          3R          4R           5          6R          7R       Impulse
+
+       1        .           .           .           .           .           .        .
+       2        .           .           .           .           .           .        .
+       3        1           5           3           5           3           1       3.00000
+       4        .           .           .           .           .           .        .
+       5        .           .           .           .           .           .        .
+       6        .           .           .           .           .           .        .
+       7        .           .           .           .           .           .        .
+       8        .           .           .           .           .           .        .
+       9        .           .           .           .           .           .        .
+      10        .           .           .           .           .           .        .
+      11        .           .           .           .           .           .        .
+      12        .           .           .           .           .           .        .
+      13        5           5           6           6           3           5       5.00000
+      14        5           6           5           6           6           2       5.00000
+      15        .           .           .           .           .           .        .
+      16        6           1           5           6           5           6       4.83333
+      17        .           .           .           .           .           .        .
+      18        .           .           .           .           .           .        .
+      19        .           .           .           .           .           .        .
+      20        .           .           .           .           .           .        .
+      21        .           .           .           .           .           .        .
+      22        5           2           2           5           2           2       3.00000
+      23        6           3           3           4           3           3       3.66667
+      24        .           .           .           .           .           .        .
+      25        .           4           6           6           6           4       5.20000
+      26        4           4           2           6           3           6       4.16667
+      27        .           .           .           .           .           .        .
+      28        .           .           .           .           .           .        .
+      29        .           .           .           .           .           .        .
+      30        5           2           4           5           3           3       3.66667
+      31        4           4           4           3           3           3       3.50000
+      32        6           2           5           6           2           2       3.83333
+      33        .           .           .           .           .           .        .
+      34        3           1           1           3           1           2       1.83333
+      35        5           5           5           4           5           5       4.83333
+      36        .           .           .           .           .           .        .
+      37        .           .           .           .           .           .        .
+      38        6           5           6           4           6           4       5.16667
+      39        .           .           .           .           .           .        .
+      40        .           .           .           .           .           .        .
+      41        .           .           .           .           .           .        .
+      42        .           .           .           .           .           .        .
+      43        .           .           .           .           .           .        .
+      44        .           .           .           .           .           .        .
+      45        6           3           5           4           3           2       3.83333
+      46        4           3           2           5           .           2       3.20000
+      47        6           2           6           5           1           1       3.50000
+      48        6           2           6           4           1           1       3.33333
+                                        The SAS System      09:40 Friday, November 10, 2017 102
+
+            NLB034X_    NLB034X_    NLB034X_    NLB034X_    NLB034X_    NLB034X_
+     Obs        2          3R          4R           5          6R          7R       Impulse
+
+      49        .           .           .           .           .           .          .
+      50        .           .           .           .           .           .          .
+                                        The SAS System      09:40 Friday, November 10, 2017 103
+
+                                      The CORR Procedure
+
+       6  Variables:    NLB034X_2  NLB034X_3R NLB034X_4R NLB034X_5  NLB034X_6R NLB034X_7R
+
+
+                                      Simple Statistics
+
+ Variable             N          Mean       Std Dev           Sum       Minimum       Maximum
+
+ NLB034X_2         7015       5.02366       1.28558         35241       1.00000       6.00000
+ NLB034X_3R        7015       3.59943       1.62776         25250       1.00000       6.00000
+ NLB034X_4R        7015       4.40898       1.51617         30929       1.00000       6.00000
+ NLB034X_5         7015       4.81041       1.27465         33745       1.00000       6.00000
+ NLB034X_6R        7015       3.76650       1.59356         26422       1.00000       6.00000
+ NLB034X_7R        7015       3.98019       1.59770         27921       1.00000       6.00000
+
+                                      Simple Statistics
+
+                       Variable      Label
+
+                       NLB034X_2     Q34X_2. KEEP CLOSE TRACK OF MONEY
+                       NLB034X_3R
+                       NLB034X_4R
+                       NLB034X_5     Q34X_5. NEW SITUATION EXPECTATIONS
+                       NLB034X_6R
+                       NLB034X_7R
+
+
+                                  Cronbach Coefficient Alpha
+
+                                 Variables              Alpha
+                                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                 Raw                 0.608481
+                                 Standardized        0.596606
+
+
+                       Cronbach Coefficient Alpha with Deleted Variable
+
+                 Raw Variables      Standardized Variables
+
+ Deleted     Correlation            Correlation
+ Variable     with Total     Alpha   with Total      Alpha  Label
+ ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+ NLB034X_2      0.201011  0.613036     0.215378   0.598822  Q34X_2. KEEP CLOSE TRACK OF MONEY
+ NLB034X_3R     0.300247  0.583134     0.285532   0.570678
+ NLB034X_4R     0.520833  0.485439     0.500149   0.477227
+ NLB034X_5      0.153082  0.628052     0.167449   0.617399  Q34X_5. NEW SITUATION EXPECTATIONS
+ NLB034X_6R     0.438155  0.520772     0.421628   0.512737
+ NLB034X_7R     0.433417  0.522895     0.419767   0.513560
+                                        The SAS System      09:40 Friday, November 10, 2017 104
+
+                                      The CORR Procedure
+
+                          Pearson Correlation Coefficients, N = 7015
+                                  Prob > |r| under H0: Rho=0
+
+                                                                NLB034X_      NLB034X_
+                                                 NLB034X_2            3R            4R
+
+         NLB034X_2                                 1.00000       0.02674       0.12765
+         Q34X_2. KEEP CLOSE TRACK OF MONEY                        0.0251        <.0001
+
+         NLB034X_3R                                0.02674       1.00000       0.35772
+                                                    0.0251                      <.0001
+
+         NLB034X_4R                                0.12765       0.35772       1.00000
+                                                    <.0001        <.0001
+
+         NLB034X_5                                 0.29186       0.00826       0.09546
+         Q34X_5. NEW SITUATION EXPECTATIONS         <.0001        0.4890        <.0001
+
+         NLB034X_6R                                0.10451       0.21891       0.47006
+                                                    <.0001        <.0001        <.0001
+
+         NLB034X_7R                                0.11650       0.25444       0.37149
+                                                    <.0001        <.0001        <.0001
+
+                          Pearson Correlation Coefficients, N = 7015
+                                  Prob > |r| under H0: Rho=0
+
+                                                                NLB034X_      NLB034X_
+                                                 NLB034X_5            6R            7R
+
+         NLB034X_2                                 0.29186       0.10451       0.11650
+         Q34X_2. KEEP CLOSE TRACK OF MONEY          <.0001        <.0001        <.0001
+
+         NLB034X_3R                                0.00826       0.21891       0.25444
+                                                    0.4890        <.0001        <.0001
+
+         NLB034X_4R                                0.09546       0.47006       0.37149
+                                                    <.0001        <.0001        <.0001
+
+         NLB034X_5                                 1.00000       0.04222       0.08854
+         Q34X_5. NEW SITUATION EXPECTATIONS                       0.0004        <.0001
+
+         NLB034X_6R                                0.04222       1.00000       0.39190
+                                                    0.0004                      <.0001
+
+         NLB034X_7R                                0.08854       0.39190       1.00000
+                                                    <.0001        <.0001
+                                        The SAS System      09:40 Friday, November 10, 2017 105
+
+                                      The FREQ Procedure
+
+                                Table of NJ005M1 by employed_12
+
+                         NJ005M1(CURRENT JOB STATUS- 1)
+                                   employed_12(Employment status dichotomized 2012)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                . ‚     36 ‚      1 ‚      0 ‚     37
+                                  ‚   0.18 ‚   0.00 ‚   0.00 ‚   0.18
+                                  ‚  97.30 ‚   2.70 ‚   0.00 ‚
+                                  ‚  69.23 ‚   0.01 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚      0 ‚   6987 ‚   6987
+                                  ‚   0.00 ‚   0.00 ‚  33.99 ‚  33.99
+                                  ‚   0.00 ‚   0.00 ‚ 100.00 ‚
+                                  ‚   0.00 ‚   0.00 ‚  88.26 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                2 ‚      0 ‚    615 ‚     76 ‚    691
+                                  ‚   0.00 ‚   2.99 ‚   0.37 ‚   3.36
+                                  ‚   0.00 ‚  89.00 ‚  11.00 ‚
+                                  ‚   0.00 ‚   4.89 ‚   0.96 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                3 ‚      0 ‚     36 ‚    111 ‚    147
+                                  ‚   0.00 ‚   0.18 ‚   0.54 ‚   0.72
+                                  ‚   0.00 ‚  24.49 ‚  75.51 ‚
+                                  ‚   0.00 ‚   0.29 ‚   1.40 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                4 ‚      0 ‚   2285 ‚     29 ‚   2314
+                                  ‚   0.00 ‚  11.12 ‚   0.14 ‚  11.26
+                                  ‚   0.00 ‚  98.75 ‚   1.25 ‚
+                                  ‚   0.00 ‚  18.15 ‚   0.37 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                5 ‚      5 ‚   8097 ‚    575 ‚   8677
+                                  ‚   0.02 ‚  39.39 ‚   2.80 ‚  42.21
+                                  ‚   0.06 ‚  93.32 ‚   6.63 ‚
+                                  ‚   9.62 ‚  64.33 ‚   7.26 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total          52    12587     7916    20555
+                                      0.25    61.24    38.51   100.00
+                         (Continued)
+                                        The SAS System      09:40 Friday, November 10, 2017 106
+
+                                      The FREQ Procedure
+
+                                Table of NJ005M1 by employed_12
+
+                         NJ005M1(CURRENT JOB STATUS- 1)
+                                   employed_12(Employment status dichotomized 2012)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                6 ‚      2 ‚   1333 ‚     59 ‚   1394
+                                  ‚   0.01 ‚   6.49 ‚   0.29 ‚   6.78
+                                  ‚   0.14 ‚  95.62 ‚   4.23 ‚
+                                  ‚   3.85 ‚  10.59 ‚   0.75 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                7 ‚      0 ‚    192 ‚     60 ‚    252
+                                  ‚   0.00 ‚   0.93 ‚   0.29 ‚   1.23
+                                  ‚   0.00 ‚  76.19 ‚  23.81 ‚
+                                  ‚   0.00 ‚   1.53 ‚   0.76 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                8 ‚      0 ‚     10 ‚     18 ‚     28
+                                  ‚   0.00 ‚   0.05 ‚   0.09 ‚   0.14
+                                  ‚   0.00 ‚  35.71 ‚  64.29 ‚
+                                  ‚   0.00 ‚   0.08 ‚   0.23 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                               98 ‚      1 ‚     12 ‚      1 ‚     14
+                                  ‚   0.00 ‚   0.06 ‚   0.00 ‚   0.07
+                                  ‚   7.14 ‚  85.71 ‚   7.14 ‚
+                                  ‚   1.92 ‚   0.10 ‚   0.01 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                               99 ‚      8 ‚      6 ‚      0 ‚     14
+                                  ‚   0.04 ‚   0.03 ‚   0.00 ‚   0.07
+                                  ‚  57.14 ‚  42.86 ‚   0.00 ‚
+                                  ‚  15.38 ‚   0.05 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total          52    12587     7916    20555
+                                      0.25    61.24    38.51   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017 107
+
+                                      The FREQ Procedure
+
+                                Table of OJ005M1 by employed_14
+
+                         OJ005M1(CURRENT JOB STATUS- 1)
+                                   employed_14(Employment status dichotomized 2014)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                . ‚     28 ‚      1 ‚      0 ‚     29
+                                  ‚   0.15 ‚   0.01 ‚   0.00 ‚   0.15
+                                  ‚  96.55 ‚   3.45 ‚   0.00 ‚
+                                  ‚  71.79 ‚   0.01 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                1 ‚      0 ‚      2 ‚   6056 ‚   6058
+                                  ‚   0.00 ‚   0.01 ‚  32.30 ‚  32.31
+                                  ‚   0.00 ‚   0.03 ‚  99.97 ‚
+                                  ‚   0.00 ‚   0.02 ‚  87.98 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                2 ‚      1 ‚    409 ‚     66 ‚    476
+                                  ‚   0.01 ‚   2.18 ‚   0.35 ‚   2.54
+                                  ‚   0.21 ‚  85.92 ‚  13.87 ‚
+                                  ‚   2.56 ‚   3.46 ‚   0.96 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                3 ‚      0 ‚     26 ‚     58 ‚     84
+                                  ‚   0.00 ‚   0.14 ‚   0.31 ‚   0.45
+                                  ‚   0.00 ‚  30.95 ‚  69.05 ‚
+                                  ‚   0.00 ‚   0.22 ‚   0.84 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                4 ‚      0 ‚   2266 ‚     36 ‚   2302
+                                  ‚   0.00 ‚  12.09 ‚   0.19 ‚  12.28
+                                  ‚   0.00 ‚  98.44 ‚   1.56 ‚
+                                  ‚   0.00 ‚  19.16 ‚   0.52 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                5 ‚      4 ‚   7866 ‚    562 ‚   8432
+                                  ‚   0.02 ‚  41.96 ‚   3.00 ‚  44.98
+                                  ‚   0.05 ‚  93.29 ‚   6.67 ‚
+                                  ‚  10.26 ‚  66.52 ‚   8.17 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total          39    11825     6883    18747
+                                      0.21    63.08    36.72   100.00
+                         (Continued)
+                                        The SAS System      09:40 Friday, November 10, 2017 108
+
+                                      The FREQ Procedure
+
+                                Table of OJ005M1 by employed_14
+
+                         OJ005M1(CURRENT JOB STATUS- 1)
+                                   employed_14(Employment status dichotomized 2014)
+
+                         Frequency‚
+                         Percent  ‚
+                         Row Pct  ‚
+                         Col Pct  ‚       .‚       0‚       1‚  Total
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                6 ‚      2 ‚   1120 ‚     67 ‚   1189
+                                  ‚   0.01 ‚   5.97 ‚   0.36 ‚   6.34
+                                  ‚   0.17 ‚  94.20 ‚   5.63 ‚
+                                  ‚   5.13 ‚   9.47 ‚   0.97 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                7 ‚      1 ‚    118 ‚     14 ‚    133
+                                  ‚   0.01 ‚   0.63 ‚   0.07 ‚   0.71
+                                  ‚   0.75 ‚  88.72 ‚  10.53 ‚
+                                  ‚   2.56 ‚   1.00 ‚   0.20 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                                8 ‚      0 ‚      6 ‚     23 ‚     29
+                                  ‚   0.00 ‚   0.03 ‚   0.12 ‚   0.15
+                                  ‚   0.00 ‚  20.69 ‚  79.31 ‚
+                                  ‚   0.00 ‚   0.05 ‚   0.33 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                               98 ‚      0 ‚      5 ‚      1 ‚      6
+                                  ‚   0.00 ‚   0.03 ‚   0.01 ‚   0.03
+                                  ‚   0.00 ‚  83.33 ‚  16.67 ‚
+                                  ‚   0.00 ‚   0.04 ‚   0.01 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                               99 ‚      3 ‚      6 ‚      0 ‚      9
+                                  ‚   0.02 ‚   0.03 ‚   0.00 ‚   0.05
+                                  ‚  33.33 ‚  66.67 ‚   0.00 ‚
+                                  ‚   7.69 ‚   0.05 ‚   0.00 ‚
+                         ƒƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆƒƒƒƒƒƒƒƒˆ
+                         Total          39    11825     6883    18747
+                                      0.21    63.08    36.72   100.00
+                                        The SAS System      09:40 Friday, November 10, 2017 109
+
+                                    The CONTENTS Procedure
+
+        Data Set Name        WORK.FINAL                    Observations          21891
+        Member Type          DATA                          Variables             64
+        Engine               V9                            Indexes               0
+        Created              11/10/2017 16:18:07           Observation Length    496
+        Last Modified        11/10/2017 16:18:07           Deleted Observations  0
+        Protection                                         Compressed            NO
+        Data Set Type                                      Sorted                NO
+        Label
+        Data Representation  WINDOWS_64
+        Encoding             wlatin1  Western (Windows)
+
+
+                               Engine/Host Dependent Information
+
+Data Set Page Size          65536
+Number of Data Set Pages    166
+First Data Page             1
+Max Obs per Page            132
+Obs in First Data Page      114
+Number of Data Set Repairs  0
+ExtendObsCounter            YES
+Filename                    C:\Users\ndyetz\AppData\Local\Temp\SAS Temporary
+                            Files\_TD4988_HENRYLAB2_\final.sas7bdat
+Release Created             9.0401M1
+Host Created                X64_7PRO
+
+
+                          Alphabetic List of Variables and Attributes
+
+     #    Variable       Type    Len    Label
+
+     3    BIRTHMO        Num       8    BIRTHDATE: MONTH
+     4    BIRTHYR        Num       8    BIRTHDATE: YEAR
+    36    CESD_12        Num       8    CESD-8 composite score 2012
+    47    CESD_14        Num       8    CESD-8 composite score 2014
+    23    DEGREE2        Num       8    Degree combined; 1 = Associates or higher
+     1    HHID           Char      6    HOUSEHOLD IDENTIFIER
+     5    HISPANIC       Num       8    HISPANICITY TYPE
+    64    Impulse        Num       8
+     8    NAGE           Num       8    AGE AT 2012 INTERVIEW
+     9    NCOUPLE        Num       8    2012 WHETHER COUPLED OR PARTNERED
+    26    ND110          Num       8    FEELING DEPRESSED W/IN PREV WK
+    27    ND111          Num       8    FELT ACTIVITIES WERE EFFORTS
+    28    ND112          Num       8    WAS SLEEP RESTLESS W/IN PREV WK
+    29    ND113          Num       8    WAS R HAPPY W/IN PREV WK
+    30    ND114          Num       8    LONELINESS FELT W/IN PREV WK
+    31    ND115          Num       8    ENJOYED LIFE W/IN PREV WK
+    32    ND116          Num       8    FELT SAD W/IN PREV WK
+    33    ND117          Num       8    FELT UNMOTIVATED W/IN PREV WK
+                                        The SAS System      09:40 Friday, November 10, 2017 110
+
+                                    The CONTENTS Procedure
+
+                          Alphabetic List of Variables and Attributes
+
+     #    Variable       Type    Len    Label
+
+    34    ND113R         Num       8
+    35    ND115R         Num       8
+    10    NIWMONTH       Num       8    2012 INTERVIEW MONTH
+    11    NIWWAVE        Num       8    2012 WHETHER INTERVIEWED IN THE WAVE
+    12    NIWYEAR        Num       8    2012 INTERVIEW YEAR
+    49    NJ020          Num       8    WORKING FOR PAY
+    48    NJ005M1        Num       8    CURRENT JOB STATUS- 1
+    54    NLB034X_2      Num       8    Q34X_2. KEEP CLOSE TRACK OF MONEY
+    55    NLB034X_3      Num       8    Q34X_3. OFTEN STOP THINGS BEFORE COMPLETING
+    56    NLB034X_4      Num       8    Q34X_4. OFTEN ACT WITHOUT THINKING
+    57    NLB034X_5      Num       8    Q34X_5. NEW SITUATION EXPECTATIONS
+    58    NLB034X_6      Num       8    Q34X_6. OFTEN NOT AS CAUTIOUS
+    59    NLB034X_7      Num       8    Q34X_7. OFTEN PREFER TO PLAY THINGS BY EAR
+    60    NLB034X_3R     Num       8
+    61    NLB034X_4R     Num       8
+    62    NLB034X_6R     Num       8
+    63    NLB034X_7R     Num       8
+    13    NLBWGTR        Num       8    RESPONDENT WEIGHT FOR THE 2012 LEAVE BEHIND QNAIRE
+    14    NRESCODE       Num       8    2012 RESULT CODE
+    15    NSUBHH         Char      1    2012 SUB-HOUSEHOLD IDENTIFIER
+    16    NWGTR          Num       8    2012 WEIGHT: RESPONDENT LEVEL
+    24    OC001          Num       8    RATE HEALTH
+    17    OCOUPLE        Num       8    2014 WHETHER COUPLED OR PARTNERED
+    37    OD110          Num       8    FEELING DEPRESSED W/IN PREV WK
+    38    OD111          Num       8    FELT ACTIVITIES WERE EFFORTS
+    39    OD112          Num       8    WAS SLEEP RESTLESS W/IN PREV WK
+    40    OD113          Num       8    WAS R HAPPY W/IN PREV WK
+    41    OD114          Num       8    LONELINESS FELT W/IN PREV WK
+    42    OD115          Num       8    ENJOYED LIFE W/IN PREV WK
+    43    OD116          Num       8    FELT SAD W/IN PREV WK
+    44    OD117          Num       8    FELT UNMOTIVATED W/IN PREV WK
+    45    OD113R         Num       8
+    46    OD115R         Num       8
+    18    OIWWAVE        Num       8    2014 WHETHER INTERVIEWED IN THE WAVE
+    52    OJ020          Num       8    WORKING FOR PAY
+    51    OJ005M1        Num       8    CURRENT JOB STATUS- 1
+    19    ORESCODE       Num       8    2014 RESULT CODE
+    20    OSUBHH         Char      1    2014 SUB-HOUSEHOLD IDENTIFIER
+    21    OWGTR          Num       8    2014 WEIGHT: RESPONDENT LEVEL
+     2    PN             Char      3    PERSON NUMBER
+     6    RACE           Num       8    RACE/ETHNICITY
+     7    SCHLYRS        Num       8    NUMBER OF YEARS IN SCHOOL
+    50    employed_12    Num       8    Employment status dichotomized 2012
+    53    employed_14    Num       8    Employment status dichotomized 2014
+    22    female         Num       8    Gender Recode
+                                        The SAS System      09:40 Friday, November 10, 2017 111
+
+                                    The CONTENTS Procedure
+
+                          Alphabetic List of Variables and Attributes
+
+     #    Variable       Type    Len    Label
+
+    25    self_health    Num       8    Reverse scored Self Rated Health 2014

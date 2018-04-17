@@ -1,0 +1,624 @@
+---
+title: "Psy 792F Project"
+output:
+  html_document:
+    toc: yes
+  html_notebook:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+#HI DELLA, READ ME!!!
+
+
+Hey Della, Neil here. Okay this document contains a bunch of descriptive statistics of our data. From reading over the group project, I realized we really don't need to get to into deep analysis. However, I have created charts for all of our demographic variables and done some anlalyses. I also sent a complimentary word document into the email and am hoping the answers on that are helpful as well. 
+
+
+Insert an "r-chunk" by clicking "insert" then "R" This is a space for R-coding an is runnable
+To run this notebook, click "Run" (Upper right) The "Restart R and run all Chuncks. Chunk = exceutable R-code.
+
+#First set up our packages
+```{r, message = FALSE}
+
+#install.packages("tydyverse")
+#install.packages("psych")
+#install.packages("apaTables")
+#install.packages("olsrr")
+
+library(tidyverse) #the best package for reading & cleaning data
+library(psych) #we use this for relibaility
+library(apaTables) #Creates really cool tables (and APA formatted!)
+library(olsrr) #<- regression analysis package
+
+
+```
+
+#Load in the data
+```{r, message = FALSE}
+
+survey <- read_csv("Psy_792F.csv")
+
+```
+
+#Research Question / Hypothesis 
+
+Is there an association between learning orientation and perceived stress? 
+
+**Answer**: There seems to be an associatin between affective learning orientation and perceived stress. However, this is not the case for the behavioral and cognitive subscales
+
+Ho = No difference
+Ha = There is a difference
+
+All t-tests = two sided. 
+
+
+
+#Clean the data
+Here I am removing any particpants that did not consent or is over 18.(We ahd 1 underage particpant attept to take the survey... They were exited out immediately)
+```{r}
+
+survey <- survey %>% 
+  filter(consent == 1 & over_18 == 1) %>% #selecting only individuals over 18 & consented
+  select(-(StartDate:over_18)) #Remove uneccessary variables (start date - Over_18)
+  
+
+```
+
+
+
+#Recode & Factor variables
+Here I am recoding and labeling our demographic variables for the charts I am about to create
+```{r}
+
+survey <- survey %>% 
+  mutate(male = ifelse(gender == 2, 0, gender), #recoding gende to male variable. Male = 1, female = 0
+         age = (2017 - yrborn), #creating age variable
+         
+         male.f = factor(male, levels = c(0,1), labels = c("Female", "Male")), #factoring and labeling "male"
+         
+        
+        sexor = (ifelse(sexor == 5, 2, sexor)), # combining Gay/lesbian... category = homosexual
+        sexor.f = factor(sexor, levels = c(1,2,3,6), labels = c("Heterosexual", "Homosexual", "Bisexual", "Other")), #factoring and labeling sexual orientation
+        
+        income.f = factor(income, levels = c(1,2,3,4,5,6), labels = c("< $20k", "$20k to $39k", "$40k - $59k", "$60k - $79k", "$80k - $99k", "$100k +")), #factoring and labeling income
+        educ.f = factor(educ, levels = c(1:6), labels = c("Grade school", "High school diploma", "Some college", "Associates Degree", "Bacholer's Degree", "Post Bachelors degree")), #labeling and factoring udcation level
+        edu_di = ifelse(educ >= 5, 1, 0),
+        edu_di.f = factor(edu_di, c(1,0), labels = c("obtained a 4-year college degree", "No college")), #Dichotomizing education
+        
+        marstat.f = factor(marstat, levels = (1:6), labels = c("Single", "Married", "Not married,living w/ partner", "Seperated", "Divorced", "Widowed")), #factroing and leveling marriage status
+        marstat_di = ifelse(marstat == 2, 1, 0), #dichotomizing marstatus, 1 = married 0 = single
+        marstat_di.f = factor(marstat_di, levels = c(0,1), labels = c("Single", "Married")))  #factoring and labeling dichotomized marriage status
+
+```
+
+
+##Recode and factor race
+Race was a little it more difficult to recode...
+
+```{r}
+
+####Special recode for race 0 = No response, , 1 = "Amer Indian" 2 = "Asian", "3" = "Black", 4 = "Hispanic", 5 = "Hawian/PI",, 6 = "White", 7 = "Other", 8 = "Mixed Race"
+survey <- survey %>% 
+ mutate(race_1 = ifelse(is.na(race_1), 0, 1))%>% 
+ mutate(race_2 = ifelse(is.na(race_2), 0, 2)) %>% 
+ mutate(race_3 = ifelse(is.na(race_3), 0, 3)) %>% 
+ mutate(race_4 = ifelse(is.na(race_4), 0, 4)) %>% 
+ mutate(race_5 = ifelse(is.na(race_5), 0, 5)) %>% 
+ mutate(race_6 = ifelse(is.na(race_6), 0, 6)) %>% 
+ mutate(race_7 = ifelse(is.na(race_7), 0, 7)) %>%
+  rowwise() %>% 
+ mutate(race_temp = sum(race_1, race_2, race_3, race_4, race_5, race_6, race_7),
+         race = ifelse(race_temp > 7, 8, race_temp),
+        race.f = factor(race, levels= c(0,8,1,5,2,3,4,6,7), labels = c("No response","Mixed Race", "American Indian or Alaska Native", "Native Hawaiian Other Pacific Islander","Asian","Black/African American", "Hispanic/Latino", "White", "Other"))) #Reorder so it looked better on the bar chart (semi-descending order with mixed and no response on bottom.)
+```
+
+#Tables for demograhic variables
+
+```{r}
+#Age summary
+summary(survey$age)
+# race frequencies
+table(survey$race.f)
+#sex frequencies
+table(survey$male.f)
+#marital status frequencies
+table(survey$marstat.f)
+#Sexual orientation table
+table(survey$sexor.f)
+#education frequencies
+table(survey$educ.f)
+```
+
+#Charts and graphs! 
+##AGE 
+```{r}
+ggplot(survey, aes(x = age)) +
+  geom_histogram(aes(y = (..density..)*100), binwidth = 3, fill = "blue") +
+  labs(title = "Distribution of age", y = "percent", x = "Age")  + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+```
+
+##race plot
+###Percentage
+```{r}
+ggplot(survey, aes(race.f)) +
+  geom_bar( aes(fill = race.f, y = (..count..)/sum(..count..)*100) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Percentage of respondents by race", x="", y = "") + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+```
+
+
+
+###Count
+```{r}
+ggplot(survey, aes(race.f)) +
+  geom_bar( aes(fill = race.f) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Respondents by race", x="")
+```
+
+
+
+
+##Gender
+###Count
+```{r}
+
+ggplot(survey, aes(male.f)) +
+  geom_bar(aes(fill = male.f)) +
+  theme(legend.position = "none") + labs( title = "Respondents by Gender", x = "")
+  
+
+```
+
+
+
+###Percentag
+```{r}
+
+ggplot(survey, aes(male.f)) +
+  geom_bar( aes(fill = male.f, y = (..count..)/sum(..count..)*100))  +
+  theme(legend.position="none") + 
+  labs(title = "Percentage of respondents by gender", x="", y = "") + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+
+```
+
+
+
+
+
+##Sexual Orientation
+###Count
+```{r}
+ggplot(survey, aes(sexor.f)) +
+  geom_bar(aes(fill = sexor.f) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Respondents by sexual orientation", x="")
+```
+
+
+###Percentage
+```{r}
+ggplot(survey, aes(sexor.f)) +
+  geom_bar( aes(fill = sexor.f, y = (..count..)/sum(..count..)*100) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Percentage of respondents by sexual orientation", x="", y = "") + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+```
+
+
+##Marital Status
+###Count
+```{r}
+ggplot(survey, aes(marstat.f)) +
+  geom_bar(aes(fill = marstat.f) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Respondents by marital status", x="")
+```
+
+
+
+###Percent
+
+```{r}
+ggplot(survey, aes(marstat.f)) +
+  geom_bar( aes(fill = marstat.f, y = (..count..)/sum(..count..)*100) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Percentage of respondents by marital status", x="", y = "") + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+```
+
+
+##Education
+###Count
+```{r}
+ggplot(survey, aes(educ.f)) +
+  geom_bar(aes(fill = educ.f) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Respondents by education level", x="")
+```
+
+
+
+###Percent
+```{r}
+ggplot(survey, aes(educ.f)) +
+  geom_bar( aes(fill = educ.f, y = (..count..)/sum(..count..)*100) , position = position_stack(reverse =TRUE)) +
+  coord_flip() + theme(legend.position="none") + 
+  labs(title = "Percentage of respondents by education level", x="", y = "") + scale_y_continuous(labels = function(x){ paste0(x, "%") })
+  
+```
+
+
+#Working with measures/Scales
+
+**Pss Scale scoring Instructions**
+
+Figuring Your PSS Score
+
+You can determine your PSS score by following these directions:
+
+• First, reverse your scores for questions 4, 5, 7, and 8. On these 4 questions, change the scores like
+this:
+0 = 4, 1 = 3, 2 = 2, 3 = 1, 4 = 0.
+• Now add up your scores for each item to get a total. My total score is ___________.
+• Individual scores on the PSS can range from 0 to 40 with higher scores indicating higher perceived
+stress.
+
+
+► Scores ranging from 0-13 would be considered low stress.
+► Scores ranging from 14-26 would be considered moderate stress.
+► Scores ranging from 27-40 would be considered high perceived stress.
+
+**^Note from Neil: We can create these categories and factor them^**
+
+
+
+#create scales
+##PSS
+```{r}
+
+
+survey <- survey %>% #Reverse code items 4,5, 7, 8
+  mutate(pss_4R = 4 - (pss_4), #Normally reverse scaling = scalemax +1, but our scale runs 0 - 4... 0 has a meaningful value
+         pss_5R = 4 - (pss_5),
+         pss_7R = 4 - (pss_7),
+         pss_8R = 4 - (pss_8))
+
+#Check backward scoring worked
+
+table(survey$pss_4R, survey$pss_4)
+table(survey$pss_5R, survey$pss_5)
+table(survey$pss_7R, survey$pss_7)
+table(survey$pss_7R, survey$pss_7)
+
+
+#Check Reliabilty:
+
+pss <- survey %>% 
+  select(pss_1:pss_3, pss_4R, pss_5R, pss_6, pss_7R, pss_8R, pss_9, pss_10) %>% 
+  alpha(check.keys =TRUE) 
+
+pss #<- reliability = 0.85 Dropping any item woudl decrease the reliabilty THIS IS GOOD!
+
+#Works! -Neil 11/15/17
+
+survey <- survey %>% 
+   rowwise() %>% 
+  mutate(pss = mean(pss_1:pss_3, pss_4R, pss_5R, pss_6, pss_7R, pss_8R, pss_9, pss_10, na.rm = TRUE))
+
+
+```
+
+###PSS item level statistics
+
+```{r}
+
+summary(survey$pss_1)
+summary(survey$pss_2)
+summary(survey$pss_3)
+summary(survey$pss_4R)
+summary(survey$pss_5R)
+summary(survey$pss_6)
+summary(survey$pss_7)
+summary(survey$pss_8R)
+summary(survey$pss_9)
+summary(survey$pss_10)
+
+```
+
+##Learning Orientation Scale
+###Cognitive subscale (lo_cog_1-6)
+```{r}
+
+#No need for backwards scroing? confirm with perla.
+
+
+#Check Reliabilty:
+
+cog <- survey %>% 
+  select(lo_cog_1:lo_cog_6) %>% 
+  alpha(check.keys =TRUE) 
+
+cog #<- reliability = 0.82 Dropping any item woudl decrease the reliabilty THIS IS GOOD!
+
+#Works! -Neil 11/15/17
+
+survey <- survey %>% 
+   rowwise() %>% #<- without this our code would sum the columns
+  mutate(cog = mean(lo_cog_1:lo_cog_6))
+
+
+```
+###Item level statistics
+```{r}
+summary(survey$lo_cog_1)
+summary(survey$lo_cog_2)
+summary(survey$lo_cog_3)
+summary(survey$lo_cog_4)
+summary(survey$lo_cog_5)
+summary(survey$lo_cog_6)
+
+```
+
+
+
+###Behavior subscale (lo_beh_1-5)
+```{r}
+
+#backwards code item 4,
+
+survey <- survey %>% 
+  mutate(lo_beh_4R = 7 - (lo_beh_4))
+
+table(survey$lo_beh_4, survey$lo_beh_4R)
+
+#Check Reliabilty:
+
+beh <- survey %>% 
+  select(lo_beh_1:lo_beh_3, lo_beh_4R, lo_beh_5) %>% 
+  alpha(check.keys =TRUE) 
+
+beh #<- reliability = 0.66 Dropping 4R would increase reliability to 0.73... was I right in backwards coding this? #Yes, confirmed he reverse coding is correct on 11/16/17
+
+#Works! -Neil 11/15/17
+
+survey <- survey %>% 
+   rowwise() %>% #<- without this our code would sum the columns
+  mutate(beh = mean(lo_beh_1:lo_beh_3, lo_beh_4R, lo_beh_5))
+
+
+```
+
+###behavior single items
+
+```{r}
+summary(survey$lo_beh_1)
+summary(survey$lo_beh_2)
+summary(survey$lo_beh_3)
+summary(survey$lo_beh_4R)
+summary(survey$lo_beh_5)
+```
+
+
+
+
+##Affective subscale (lo_aff_1-4)
+```{r}
+
+#No backwards scoring confirm with Perla
+
+#Check Reliabilty:
+
+aff <- survey %>% 
+  select(lo_aff_1:lo_aff_4) %>% 
+  alpha(check.keys =TRUE) 
+
+aff #<- reliability = 0.81 dropping any item would reduce the reliability. This is Good!
+
+
+
+survey <- survey %>% 
+   rowwise() %>%  #<- without this our code would sum the columns
+  mutate(aff = mean(lo_aff_1:lo_aff_4))
+
+
+```
+
+###affect scale single item stats
+
+```{r}
+
+summary(survey$lo_aff_1)
+summary(survey$lo_aff_2)
+summary(survey$lo_aff_3)
+summary(survey$lo_aff_4)
+
+```
+
+
+
+
+#scale descriptives
+
+
+**cog** = Learning orientation: Cognitive subscale
+**beh** = Learning Orientation: Behavior Subscale
+**aff** = Learning orientation: Affect subscale
+
+**pss** = Perceived stress scale
+
+
+```{r}
+
+scales <- survey %>% 
+  select(cog, beh, aff, pss, male)
+
+describe(scales)
+
+```
+
+##Correlations
+
+```{r}
+apa.cor.table(scales, filename= "scales.doc",
+              table.number = 1, show.conf.interval = TRUE)
+
+#affective subscale & pss are significantle correlated (r = 0.26)
+```
+
+
+
+##Regression Analysis
+In summary, while controlling for sex (which is also predictive of stress fyi) and the other scale items, We see that that affect is related to stress. Individuals more willing to take on more tasks are morel likely to experience more stress. The other scales are not too predictive of this.
+```{r}
+
+m1 <- lm(data = survey, pss ~ aff + beh + cog + male)
+ols_regress(m1)
+
+```
+
+###Creating LO total score
+```{r}
+
+survey <- survey %>% 
+  mutate( total = (aff + beh + cog)/15,
+          total_sum = (aff + beh + cog))
+
+```
+
+
+
+###Simple Linear Rregression of total
+Personally not a fan of regressing the whole scale. No significant findings
+```{r}
+
+m2 <- lm(data = survey, pss ~ total_sum)
+ols_regress(m2)
+
+```
+
+#Seperating results by groups
+##education level
+
+```{r}
+
+
+var_by_edu <- group_by(survey, edu_di.f)
+
+summarize(var_by_edu, n = n(), avg_age = mean(age, na.rm = TRUE), mean_pss = mean(pss), mean_cog = mean(cog), mean_beh = mean(beh), mean_aff = mean(aff)) 
+
+
+
+
+
+```
+
+##sexual orientation
+
+```{r}
+
+
+var_by_ori <- group_by(survey, sexor.f) %>% 
+  filter( )
+
+summarize(var_by_ori, ncount = n(), avg_age = mean(age, na.rm = TRUE), mean_pss = mean(pss), mean_cog = mean(cog), mean_beh = mean(beh), mean_aff = mean(aff))
+
+```
+
+
+
+
+##Sex
+```{r}
+
+
+#var_by_sex <- group_by(survey, male.f)
+#
+#summarize(var_by_sex, sex = mean(male.f, na.rm = TRUE) n = n(), avg_age = mean(age, na.rm = #TRUE), mean_pss = mean(pss, na.rm = TRUE), mean_cog = mean(cog, na.rm = TRUE), mean_beh = #mean(beh, na.rm = TRUE), mean_aff = mean(aff, na.rm = TRUE))
+#
+```
+
+#Word cloud
+```{r}
+
+#install.packages("tm")
+#install.packages("SnowballC")
+#install.packages("wordcloud")
+
+
+library(tm)
+library(SnowballC)
+library(wordcloud)
+
+```
+
+
+```{r}
+
+qual <- read.csv("Psy_792F.csv", stringsAsFactors = FALSE)
+
+qual <- qual %>% 
+  select(stress_def)
+
+#Now, we will perform a series of operations on the text data to simplify it.First, we need to create a corpus.
+
+qual <- Corpus(VectorSource(qual$stress_def))
+
+#Next, we will convert the corpus to a plain text document.
+
+qual <- tm_map(qual, PlainTextDocument)
+
+#Then, we will remove all punctuation and stopwords. Stopwords are commonly used words in the English language such as I, me, my, etc. You can see the full list of stopwords using stopwords('english').
+
+qual <- tm_map(qual, removePunctuation)
+qual <- tm_map(qual, removeWords, stopwords('english'))
+
+
+#Next, we will perform stemming. This means that all the words are converted to their stem (Ex: learning -> learn, walked -> walk, etc.). This will ensure that different forms of the word are converted to the same form and plotted only once in the wordcloud.
+
+qual <- tm_map(qual, stemDocument)
+
+#test<- wordcloud(qual, max.words = 100, random.order = FALSE)
+
+qual
+
+
+```
+```{r}
+word <- survey %>% 
+  select(stress_def)
+
+#write.csv(word, "C:/Users/Neil/Desktop/Class folder/Fall 2017/Psy792F/Final_proj/word.csv")
+```
+
+
+#Checking for group differences.
+```{r}
+fit <- aov(pss ~ sexor, data=survey)
+
+summary(fit) # display Type I ANOVA table
+drop1(fit,~.,test="F") # type III SS and F Tests
+
+```
+
+
+
+
+```{r}
+fit <- aov(pss ~ sexor, data=survey)
+
+summary(fit) # display Type I ANOVA table
+drop1(fit,~.,test="F") # type III SS and F Tests
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

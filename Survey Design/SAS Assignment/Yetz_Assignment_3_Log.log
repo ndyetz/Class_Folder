@@ -1,0 +1,427 @@
+1305
+1306
+1307  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1307! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1307! */
+1308  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1308! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1308! */
+1309  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*ASSIG
+1309! NMENT
+1309! 3*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1310  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1310! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1310! */
+1311  /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1311! **/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+1311! */;
+1312
+1313
+1314  DATA Final_1959;
+1315      set Final;
+1316          WHERE BIRTHYR <= 1959;
+1317  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL.
+      WHERE BIRTHYR<=1959;
+NOTE: The data set WORK.FINAL_1959 has 20659 observations and 64 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+1318
+1319  /*CHECK, this should NOT print any observatins. Makign sure all cases less than 1959 are
+1319! not included.*/
+1320  PROC PRINT DAta= FINAL_1959;
+1321      where BIRTHYR >1959;
+1322  RUN;
+
+NOTE: No observations were selected from data set WORK.FINAL_1959.
+NOTE: There were 0 observations read from the data set WORK.FINAL_1959.
+      WHERE BIRTHYR>1959;
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+1323
+1324
+1325  /*Mean & SD of Age*/
+1326  PROC MEANS  data = FINAL_1959 ;
+1327      VAR NAGE;
+1328  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+1329
+1330
+1331  /*Demographic characteristics*/
+1332  PROC FREQ DATA = FINAL_1959;
+1333      TABLES FEMALE RACE HISPANIC Degree2 NCOUPLE OCOUPLE;
+1334  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+1335
+1336
+1337  /*MEAN & SD of Depression in 2012 and 2014*/
+1338  proc means data = FINAL_1959;
+1339      VAR CESD_12 CESD_14;
+1340  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1341
+1342
+1343  /*t-tests for depression scores by gender in 12 and 14*/
+1344
+1345  proc ttest data = FINAL_1959;
+1346      CLASS FEMALE;
+1347        var CESD_12;
+1348     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           2.91 seconds
+      cpu time            0.98 seconds
+
+
+1349
+1350  proc ttest data = FINAL_1959;
+1351      CLASS FEMALE;
+1352        var CESD_14;
+1353     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           3.41 seconds
+      cpu time            0.92 seconds
+
+
+1354
+1355
+1356
+1357
+1358  /*/*t-tests for depression scores by work status in 12 and 14*/
+1359
+1360  proc ttest data = FINAL_1959;
+1361      CLASS employed_12;
+1362        var CESD_12;
+1363     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           3.21 seconds
+      cpu time            0.96 seconds
+
+
+1364
+1365
+1366  proc ttest data = FINAL_1959;
+1367      CLASS employed_14;
+1368        var CESD_14;
+1369     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           1.91 seconds
+      cpu time            0.76 seconds
+
+
+1370
+1371
+1372  /*Correlation for Life Sat and Depression at 2012 and 2014*/
+1373
+1374  PROC CORR data = FINAL_1959;
+1375      VAR CESD_12 self_health ;
+1376  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1377
+1378
+1379  PROC CORR data = FINAL_1959;
+1380      VAR CESD_14 self_health ;
+1381  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+1382
+1383
+1384
+1385  /*Correlation for Impulse scale and Depression at 2012 and 2014*/
+1386
+1387  PROC CORR data = FINAL_1959;
+1388      VAR CESD_12 Impulse ;
+1389  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+1390
+1391
+1392  PROC CORR data = FINAL_1959;
+1393      VAR CESD_14 Impulse;
+1394  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1395
+1396  /*Correlation with Self-reported Health*/
+1397
+1398  PROC CORR data = FINAL_1959;
+1399      VAR self_health Impulse;
+1400  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1401
+1402  /*regression for Impulse scale and self-rated health at 2012 and 2014*/
+1403
+1404
+1405  PROC REG data = FInal_1959;
+1406      MODEL self_health = Impulse;
+1407  RUN;
+
+WARNING: Most ODS graphics with more than 5000 points have been suppressed. Use the
+         PLOTS(MAXPOINTS= ) option in the PROC REG statement to change or override the cutoff.
+NOTE: Heat maps are displayed instead of scatter plots when residual plots or fit plots are
+      produced.
+1408
+
+NOTE: PROCEDURE REG used (Total process time):
+      real time           2.10 seconds
+      cpu time            0.68 seconds
+
+
+1409  PROC REG data = FInal_1959;
+1410      MODEL self_health = Impulse Nage race ocouple female DEGREE2;
+1411  RUN;
+
+WARNING: Most ODS graphics with more than 5000 points have been suppressed. Use the
+         PLOTS(MAXPOINTS= ) option in the PROC REG statement to change or override the cutoff.
+NOTE: Heat maps are displayed instead of scatter plots when residual plots or fit plots are
+      produced.
+1412
+1413
+1414  /*WEIGHTED ANALYSIS*/
+1415
+1416  /*Mean & SD of Age*/
+
+NOTE: PROCEDURE REG used (Total process time):
+      real time           0.90 seconds
+      cpu time            0.34 seconds
+
+
+1417  PROC MEANS  data = FINAL_1959 ;
+1418      VAR NAGE;
+1419      WEIGHT NWGTR;
+1420  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+
+
+1421
+1422
+1423  /*Demographic characteristics*/
+1424  PROC FREQ DATA = FINAL_1959;
+1425      TABLES FEMALE RACE HISPANIC Degree2 NCOUPLE OCOUPLE;
+1426      WEIGHT NWGTR;
+1427  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+
+
+1428
+1429
+1430  /*MEAN & SD of Depression in 2012 and 2014*/
+1431  proc means data = FINAL_1959;
+1432      VAR CESD_12 CESD_14;
+1433      WEIGHT NWGTR;
+1434  RUN;
+
+NOTE: There were 20659 observations read from the data set WORK.FINAL_1959.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.04 seconds
+
+
+1435
+1436
+1437  /*t-tests for depression scores by gender in 12 and 14*/
+1438
+1439  proc ttest data = FINAL_1959;
+1440      CLASS FEMALE;
+1441        var CESD_12;
+1442        WEIGHT NWGTR;
+1443     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           2.27 seconds
+      cpu time            0.87 seconds
+
+
+1444
+1445  proc ttest data = FINAL_1959;
+1446      CLASS FEMALE;
+1447        var CESD_14;
+1448        WEIGHT NWGTR;
+1449     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           1.77 seconds
+      cpu time            0.79 seconds
+
+
+1450
+1451
+1452
+1453
+1454  /*/*t-tests for depression scores by work status in 12 and 14*/
+1455
+1456  proc ttest data = FINAL_1959;
+1457      CLASS employed_12;
+1458        var CESD_12;
+1459        WEIGHT NWGTR;
+1460     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           2.32 seconds
+      cpu time            0.84 seconds
+
+
+1461
+1462  proc ttest data = FINAL_1959;
+1463      CLASS employed_14;
+1464        var CESD_14;
+1465        WEIGHT NWGTR;
+1466     run;
+
+NOTE: PROCEDURE TTEST used (Total process time):
+      real time           2.09 seconds
+      cpu time            0.87 seconds
+
+
+1467
+1468
+1469  /*Correlation for Life Sat and Depression at 2012 and 2014*/
+1470
+1471  PROC CORR data = FINAL_1959;
+1472      VAR CESD_12 self_health ;
+1473      WEIGHT NWGTR;
+1474  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1475
+1476
+1477  PROC CORR data = FINAL_1959;
+1478      VAR CESD_14 self_health ;
+1479      WEIGHT NWGTR;
+1480  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1481
+1482
+1483
+1484  /*Correlation for Impulse scale and Depression at 2012 and 2014*/
+1485
+1486  PROC CORR data = FINAL_1959;
+1487      VAR CESD_12 Impulse ;
+1488      WEIGHT NWGTR;
+1489  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1490
+1491
+1492  PROC CORR data = FINAL_1959;
+1493      VAR CESD_14 Impulse;
+1494      WEIGHT NWGTR;
+1495  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1496
+1497  PROC CORR data = FINAL_1959;
+1498      VAR Self_health Impulse;
+1499      WEIGHT NWGTR;
+1500  RUN;
+
+NOTE: PROCEDURE CORR used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+
+
+1501
+1502  /*Regression for Impulsivity and self-rated health at 2014*/
+1503
+1504  PROC REG data = FInal_1959;
+1505      MODEL self_health = Impulse;
+1506      WEIGHT NWGTR;
+1507  RUN;
+
+NOTE: 1808 observations have invalid weights or frequencies.
+WARNING: Most ODS graphics with more than 5000 points have been suppressed. Use the
+         PLOTS(MAXPOINTS= ) option in the PROC REG statement to change or override the cutoff.
+NOTE: Heat maps are displayed instead of scatter plots when residual plots or fit plots are
+      produced.
+1508
+
+NOTE: PROCEDURE REG used (Total process time):
+      real time           2.85 seconds
+      cpu time            0.73 seconds
+
+
+1509  PROC REG data = FInal_1959;
+1510      MODEL self_health = Impulse Nage race ocouple female DEGREE2;
+1511      WEIGHT NWGTR;
+1512  RUN;
+
+NOTE: 1808 observations have invalid weights or frequencies.
+WARNING: Most ODS graphics with more than 5000 points have been suppressed. Use the
+         PLOTS(MAXPOINTS= ) option in the PROC REG statement to change or override the cutoff.
+NOTE: Heat maps are displayed instead of scatter plots when residual plots or fit plots are
+      produced.
