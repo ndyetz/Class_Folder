@@ -1,0 +1,488 @@
+---
+title: "Psy 653: MIDUS Group Project"
+subtitle: 'Authors: Neil Yetz, Shelby Tuthill & Brian Canning'
+output:
+  html_notebook:
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+  html_document:
+    theme: cerulean
+    toc: yes
+    toc_float: true
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+---
+
+#Introduction
+<center>
+![MIDUS](http://cph.georgetown.edu/_/rsrc/1432819558258/research/midus/midus.jpg)
+</center>
+This R-Notebook is for Dr. Kimberly Henry's Psy 653 Final Project. All data was obtained from the [MIDUS II](http://midus.wisc.edu/) Dataset. Any questions or correspondences should be adressed to: *Neil Yetz, Brian Canning, & Shelby Tuthill* at <Neil.Yetz@colostate.edu>, <Brian.Canning@colostate.edu>, & <Shelby.Tuthill@colostate.edu> respectively. This R-Notebook was last updated on `r format(Sys.time(), "%B %d, %Y")`.
+
+#Load packages
+```{r, message = FALSE}
+library(tidyverse)
+library(psych)
+library(apaTables)
+library(ggplot2)
+library(GGally)
+library(olsrr)
+library(boot)
+```
+
+#Datasets
+```{r, message = FALSE}
+#midus2<- read_tsv("04652-0001-Data.tsv") #Commented out because we saved it as an RDS file for efficiency
+#saveRDS(midus2, "midus2.rds")            #Need to uncomment these if the RDS file is not saved
+
+midus2<- readRDS("midus2.rds")            #Load in the R-Dataet of Midus2
+```
+
+#Select & recode variables of interest
+```{r}
+#participant ID, age, sex, sexual orientation, race/ethn, 
+vars <- midus2 %>% 
+    select(M2ID, #ID
+    B1PAGE_M2,   #Age
+    B1PRSEX,     #Sex
+    B1SM6,       #Sexual orientation
+    B1PF7A,      #Race/ethnicity
+    B1SPWBA2,    #Autonomy
+    B1SPWBE2,    #Environmental mastry
+    B1SPWBG2,    #Personal growth
+    B1SPWBR2,    #Positive relations with others
+    B1SPWBU2,    #Purpose in life
+    B1SPWBS2,    #Self acceptance
+    B1SSWBMS,    #Meaningfulness of society
+    B1SSWBSI,    #Social integration
+    B1SSWBAO,    #Acceptance of others
+    B1SSWBSC,    #Social contribution
+    B1SSWBSA,    #Social actualization
+    B1SDAYDI,    #Daily discrimination, high score = more discrimination (already reverse coded)
+    B1SLFEDI     #Lifetime discrimination, high score = more discrimation
+  ) %>%
+  
+  #format Missing Values and rename our variables (and factor some)
+  mutate(
+    age       =   ifelse(B1PAGE_M2 == 98, NA, B1PAGE_M2), #....................Age
+    male      =   ifelse(B1PRSEX == 2, 0, B1PRSEX),  #.........................Sex (Has no missing value indicators),
+    male.f    =   factor(male, levels = c(0,1), labels = c("Female", "Male")),#Factor for sex. 
+    lgb       =   ifelse(B1SM6 >= 8, NA, B1SM6), #.............................Sexual orientation (8 = refused, 9 = inapplicable)
+    white     =   ifelse(B1PF7A >= 7, NA, B1PF7A),    #........................Race/ethnicity... Eventually we will dummy code this
+    auton     =   ifelse(B1SPWBA2 == 98, NA, B1SPWBA2),  #.....................Autonomy
+    env_m     =   ifelse(B1SPWBE2 == 98, NA, B1SPWBE2),  #.....................Environmental mastry
+    pers_gro  =   ifelse(B1SPWBG2 == 98, NA, B1SPWBG2),  #.....................Personal growth
+    pos_rel   =   ifelse(B1SPWBR2 == 98, NA, B1SPWBR2),  #.....................Positive relations with others
+    purp      =   ifelse(B1SPWBU2 == 98, NA, B1SPWBU2),  #.....................Purpose in life
+    self_acc  =   ifelse(B1SPWBS2 == 98, NA, B1SPWBS2),  #.....................Self acceptance
+    mean_soc  =   ifelse(B1SSWBMS == 98, NA, B1SSWBMS),  #.....................Meaningfulness of society
+    soc_int   =   ifelse(B1SSWBSI == 98, NA, B1SSWBSI),  #.....................Social integration
+    acc_oth   =   ifelse(B1SSWBAO == 98, NA, B1SSWBAO),  #.....................Acceptance of others
+    soc_cont  =   ifelse(B1SSWBSC == 98, NA, B1SSWBAO),  #.....................Social contribution
+    soc_act   =   ifelse(B1SSWBSA == 98, NA, B1SSWBSA),  #.....................Social actualization
+    discrim   =   ifelse(B1SDAYDI == 98, NA, B1SDAYDI),  #.....................Daily Discrimination scale
+    li_discrim=   ifelse(B1SLFEDI == 99998, NA, B1SLFEDI)#.....................Lifetime Discrimination scale
+  ) %>%
+  
+  select(
+    age,
+    male,
+    male.f,
+    lgb,
+    white,
+    discrim,
+    li_discrim,
+    auton,
+    env_m,
+    pers_gro,
+    pos_rel,
+    purp,
+    self_acc,
+    mean_soc,
+    soc_int,
+    acc_oth,
+    soc_cont,
+    soc_act
+    )
+vars <- na.omit(vars) 
+#Keeping only complete dataset (No missing values allowed) #New N = 3569 (original MIDUS II = 4963)
+
+vars <- vars %>%
+  mutate(
+    
+    #Create factor structure for white/non-white
+    white     =   ifelse(white>1, 0, white),
+    white.f   =   factor(white, levels = c(0,1), labels = c("Non-white", "White")),
+    
+    #Create factor structure for heterosexual/homosexual
+    lgb       =   ifelse(lgb==1, 0, 1), 
+    lgb.f     =   factor(lgb, levels = c(0,1), labels = c("Heterosexual" , "Homosexual/Bisexual")),
+    
+    #Add subscales for psychological well-being and social well-being
+    psy_well  =   (auton + env_m + pers_gro + pos_rel + purp + self_acc), 
+    soc_well  =   (mean_soc + soc_int + acc_oth + soc_cont + soc_act)
+  )%>%
+  select(
+    
+    #Select relvant variables, ommitting temporary variables
+    age, #......age
+    male, #.....dummy coded sex 1=male, 0=female
+    male.f, #...factored version of sex variable
+    lgb, #......dummy coded lgb status: 1=lgb, 0=heterosexual
+    lgb.f, #....factored version of lgb variable
+    white, #....dummy coded race variable: 1=white, 0=non-white
+    white.f, #..factored version of race variable
+    discrim, #..daily discrimination scale
+    li_discrim,#lifetime discrimination scale
+    psy_well, #.psychological well-being scale
+    soc_well) #.social well-being scale
+
+```
+
+
+
+
+##Get descriptives of key variables
+```{r}
+des<- describe(vars)
+des
+```
+
+##Summarize descriptives by orientation
+```{r}
+options(digits = 10)
+
+var_by_or <- group_by(vars, lgb.f)
+
+des_orien<- summarize(var_by_or, n = n(), avg_age = mean(age), perc_male = mean(male), avg_dail_discrim = mean(discrim), avg_life_discrim = mean(li_discrim), avg_psy_well = mean(psy_well), avg_soc_well = mean(soc_well))
+des_orien
+
+```
+
+
+
+#Grouped descriptives for table 
+```{r}
+
+#Age
+describe(vars$age)
+
+#Sex
+vars %>% 
+  group_by(male.f) %>% 
+  summarize(n = n(), prop = n()/3701)
+
+#Race
+vars %>% 
+  group_by(white.f) %>% 
+  summarize(n = n(),  prop = n()/3701)
+
+#Sexual Orientation
+vars %>% 
+  group_by(lgb.f) %>% 
+  summarize(n = n(),  prop = n()/3701)
+```
+
+
+#Plots of key relationships
+##Mean difference of daily discrimination by sexual orientation
+```{r}
+ggplot(vars, aes(x = lgb.f, y = discrim, group = lgb.f, color = lgb.f)) +
+  geom_point(show.legend = FALSE) +
+  stat_summary(fun.y=mean, geom="line", lwd = 1, colour = "black", aes(group=1)) +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Mean difference of daily discrimination by sexual orientation",
+  subtitle = "X = mean for group",
+  x = "Sexual orientation", y = "Daily discrimination score")
+
+
+```
+
+##Mean difference of lifetime discrimination by sexual orientation
+```{r}
+ggplot(vars, aes(x = lgb.f, y = li_discrim, group = lgb.f, color = lgb.f)) +
+  geom_point(show.legend = FALSE) +
+  stat_summary(fun.y=mean, geom="line", lwd = 1, colour = "black", aes(group=1)) +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Mean difference of lifetime discrimination by sexual orientation",
+  subtitle = "X = mean for group",
+  x = "Sexual orientation", y = "Lifetime discrimination score")
+
+
+```
+
+##Mean difference of psychological well-being score by sexual orientation
+```{r}
+
+ggplot(vars, aes(x = lgb.f, y = psy_well, group = lgb.f, color = lgb.f)) +
+  geom_point(show.legend = FALSE) +
+  stat_summary(fun.y=mean, geom="line", lwd = 1, colour = "black", aes(group=1)) +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Mean difference of psychological well-being score by sexual orientation",
+  subtitle = "X = mean for group",
+  x = "Sexual orientation", y = "Psychological well-being")
+
+
+```
+
+##Mean difference of social well-being score by sexual orientation
+```{r}
+
+ggplot(vars, aes(x = lgb.f, y = soc_well, group = lgb.f, color = lgb.f)) +
+  geom_point(show.legend = FALSE) +
+  stat_summary(fun.y=mean, geom="line", lwd = 1, colour = "black", aes(group=1)) +
+  stat_summary(fun.y=mean, size = 5, shape = 4, geom="point", colour = "black", show.legend = FALSE) +
+  labs(title = "Mean difference of Social well-being score by sexual orientation",
+  subtitle = "X = mean for group",
+  x = "Sexual orientation", y = "Social Well-being")
+
+
+```
+
+##Bivariate relationship of key variables
+```{r, fig.width=12, fig.height=10}
+scatterplot <- ggpairs(vars, columns = c("psy_well", "soc_well", "discrim", "li_discrim"),
+                      upper = list(continuous = wrap("cor", size=3, color="blue")),
+title = "Bivariate relationship of key variables")
+print(scatterplot, progress=FALSE )
+```
+
+
+##APA styled correlation table
+```{r, message = FALSE}
+apa.cor.table(vars, show.conf.interval = FALSE, filename = "cor.doc")
+```
+
+##Scatterplot of psychological well-being and daily discrimination
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(vars, aes(x = discrim, y =psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & psychological well-being",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Psychological well-being")
+```
+
+
+##Scatterplot of social well-being and daily discrimination
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(vars, aes(x = discrim, y =soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & social well-being",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Social well-being")
+```
+
+##Scatterplot of psychological well-being and lifetime discrimination
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(vars, aes(x = li_discrim, y =psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & psychological well-being",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Psychological well-being")
+```
+
+###Scatterplot of social well-being and lifetime discrimination
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(vars, aes(x = li_discrim, y =soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & social well-being",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Social well-being")
+```
+
+##Relationship separated by sexual orientation
+###Seperate by sexual orientation
+```{r}
+lgb    <- vars %>% 
+  filter(lgb == 1)
+
+hetero <- vars %>% 
+  filter(lgb == 0)
+```
+###Daily discrimination
+####Homosexual/bisexual psychological well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(lgb, aes(x = discrim, y = psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & psychological well-being: homsexual/bisexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Psychological well-being")
+```
+
+####Homosexual/bisexual social well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(lgb, aes(x = discrim, y = soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & social well-being: homosexual/bisexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Social well-being")
+```
+
+####Heterosexual Psychological well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(hetero, aes(x = discrim, y =psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & psychological well-being: heterosexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Psychological well-being")
+```
+####Heterosexual social well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(hetero, aes(x = discrim, y =soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of daily discrimination & social well-being: heterosexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Daily discrimination", y = "Social well-being")
+```
+
+
+###Lifetime discrimination
+####Homosexual/bisexual psychological well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(lgb, aes(x = li_discrim, y =psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & psychological well-being: homosexual/bisexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Psychological well-being")
+```
+
+####Homosexual/bisexual social well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(lgb, aes(x = li_discrim, y = soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & social well-being: homosexual/bisexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Social well-being")
+```
+
+
+####Heterosexual psychological well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(hetero, aes(x = li_discrim, y = psy_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & psychological well-being: heterosexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Psychological well-being")
+```
+####Heterosexual social well-being
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+ggplot(hetero, aes(x = discrim, y =soc_well)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Distributions of lifetime discrimination & social well-being: heterosexual",
+       subtitle = "Confidence interval in gray shaded area", 
+       x = "Lifetime discrimination", y = "Social well-being")
+```
+
+#Analysis
+All analyses contain race and sex as controls.
+
+##Psychological well-being
+
+###Model xy
+```{r}
+psy_xy <- lm(psy_well~lgb + white + male, data=vars)
+ols_regress(psy_xy)
+```
+The path from lgg to psychological well-being is significant at a 95% CI.
+
+####APA Table
+```{r}
+apa.reg.table(psy_xy, filename = "psy_xy.doc", table.number = 5,
+prop.var.conf.level = 0.95)
+```
+
+
+###Model xm
+```{r}
+psy_xm <- lm(li_discrim~lgb + white + male, data=vars)
+ols_regress(psy_xm)
+```
+The path from lifetime discrimination and lgb is significant at a 99% CI
+
+####APA Table
+```{r}
+apa.reg.table(psy_xm, filename = "psy_xm.doc", table.number = 6,
+prop.var.conf.level = 0.95)
+```
+
+
+###Model xmy
+```{r}
+psy_xmy <- lm(psy_well~lgb + li_discrim + white + male, data=vars)
+ols_regress(psy_xmy)
+```
+
+####APA Table
+```{r}
+apa.reg.table(psy_xmy, filename = "psy_xmy.doc", table.number = 7,
+prop.var.conf.level = 0.95)
+```
+
+
+###Get path information
+```{r}
+path.a <- coefficients(psy_xm)["lgb"]
+path.b <- coefficients(psy_xmy)["li_discrim"]
+se.path.a<-sqrt(vcov(psy_xm)["lgb", "lgb"])
+se.path.b<-sqrt(vcov(psy_xmy)["li_discrim", "li_discrim"])
+
+path.a
+se.path.a
+
+path.b
+se.path.b
+```
+
+###Bootstrap CI's
+```{r, fig.width=9, fig.height=6, fig.align='center'}
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xm <- lm(li_discrim~ lgb + white + male, data=data)
+model.xmy <- lm(psy_well~ lgb + li_discrim + white + male, data=data)
+
+path.a <- coefficients(model.xm)["lgb"] #the a-path coefficient
+path.b <- coefficients(model.xmy)["li_discrim"] #the b-path coefficient
+ab <- path.a*path.b #returns the product of a*b
+return(ab)
+}
+
+
+path.a*path.b
+
+medboot<-boot(data=vars, statistic = boot.med, R = 5000)
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+plot(medboot)
+```
+
+#Social well-being
+##Model xy
+```{r}
+soc_xy <- lm(soc_well~lgb + white + male, data=vars)
+ols_regress(soc_xy)
+```
+
+The path from lgb status to social well-being is not significant, likely due to small sample size.
+
+###APA table
+```{r}
+apa.reg.table(soc_xy, filename = "soc_xy.doc", table.number = 4,
+prop.var.conf.level = 0.95)
+```
+
+
