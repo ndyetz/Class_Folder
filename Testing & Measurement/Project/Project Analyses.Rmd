@@ -1,10 +1,17 @@
 ---
 title: "R Notebook - Belief in Change Scale Analyses"
-output: html_notebook
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 5
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '5'
 ---
 
 # Load libraries 
-```{r}
+```{r, message = FALSE}
 library(psych)
 # install.packages("GPArotation")
 library(GPArotation)
@@ -101,6 +108,7 @@ write.csv(cortable, file = "Cor Table.csv")
 # Factor Analysis
 ## All items
 ### CFA - two factor no items removed
+
 ```{r}
 model.2f <- 'f1 =~ change1_1 + change1_2R + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
             f2 =~ change2_1 + change2_2R + change2_3 + change2_4 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
@@ -112,6 +120,7 @@ resid(fit.model.2f, type = "cor")
 
 reliability(fit.model.2f)
 ```
+
 
 ### EFA - no items removed 
 #### Scree plot 
@@ -156,7 +165,7 @@ efa_full_3
 ```
 
 
-#### 1-factor & 2-factor Model COmparison
+#### 1-factor & 2-factor Model Comparison
 ```{r}
 
 chi_diff <- chi_full_1 - chi_full_2
@@ -167,7 +176,7 @@ pchisq(chi_diff, df=dof_diff, lower.tail = FALSE)
 ```
 The p-value for a chi-square difference (X^2 = 245.24, df = 18) test  of 7.550373e-422 is an indication that the the 2-factor model has a much better fit than the 1-factor model.
 
-#### 2-factor & 3-factor Model COmparison
+#### 2-factor & 3-factor Model Comparison
 ```{r}
 
 chi_diff <- chi_full_2 - chi_full_3
@@ -176,7 +185,7 @@ dof_diff <- dof_full_2 - dof_full_3
 pchisq(chi_diff, df=dof_diff, lower.tail = FALSE)
 
 ```
-The p-value for a chi-square difference (X^2 = 82.78, df = 17) test  of 1.227792e-10 is an indication that the the 2-factor model has a much better fit than the 1-factor model.
+The p-value for a chi-square difference (X^2 = 82.78, df = 17) test  of 1.227792e-10 is an indication that the the 3-factor model has a much better fit than the 2-factor model.
 
 
 ### CFA - one factor
@@ -305,7 +314,7 @@ dof_fi_3 <- efa_fi_3$dof # <- Getting degrees of freedom
 efa_fi_3
 ```
 
-#### 1-factor & 2-factor Model COmparison
+#### 1-factor & 2-factor Model Comparison
 
 ```{r}
 
