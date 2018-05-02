@@ -23,7 +23,7 @@ library(tidyverse)
 
 # Import data
 ```{r}
-data <- read.csv("Class Survey Data.csv", header = TRUE, stringsAsFactors = FALSE)
+data <- read.csv("Class Survey Data.csv", header = TRUE, stringsAsFactors = FALSE)\
 ```
 
 # Subset the data - our scale + convergent + Big 5 + demographics 
@@ -116,6 +116,7 @@ model.2f <- 'f1 =~ change1_1 + change1_2R + change1_3 + change1_4R + change1_5 +
 fit.model.2f <- cfa(model.2f, change)
 summary(fit.model.2f, fit.measures = TRUE, standardized = TRUE)
 
+
 resid(fit.model.2f, type = "cor")
 
 reliability(fit.model.2f)
@@ -146,6 +147,8 @@ efa_full_1
 
 #### EFA - all items - two factors 
 ```{r}
+
+
 efa_full_2 <- fa(change, nfactors = 2, fm = "ml", rotate = "geominQ")
 
 chi_full_2 <- efa_full_2$chi # <- #get Chi square value
