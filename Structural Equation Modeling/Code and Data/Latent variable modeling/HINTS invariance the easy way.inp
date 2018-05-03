@@ -1,0 +1,33 @@
+DATA:
+FILE is hints.csv;
+
+VARIABLE:
+NAMES ARE ID Gender Rural Metro Census Age Employ Military Marital
+Educ EducA EducB BornUSA English NotHisp HispCat White RaceCat RaceEthn
+HHInc Income Internet Health
+Happy Angry Anxious Hopeful Sad Strengths Values Optimistic
+Fruit Veggies Soda ExerDays Weights TV BMI
+SleepWk SleepWkEND Smoke100 SmokeNow SmokeDay SmokeHome
+;
+
+MISSING ARE ALL (999);
+
+USEVARIABLES ARE Angry Anxious Sad Health;
+
+GROUPING IS gender (0=female 1=male);
+
+ANALYSIS:
+MODEL = CONFIGURAL METRIC SCALAR;
+
+MODEL:
+!Factor model for negative mood
+mood BY Angry Anxious Sad;
+!Factor model for healthy
+healthy BY Health@1;
+!Constrain variance of Health at 0.10
+Health@.1;
+!Allow  mood to covary with health
+mood WITH healthy;
+
+OUTPUT:
+SAMPSTAT RESIDUAL CINTERVAL TECH1 TECH4;

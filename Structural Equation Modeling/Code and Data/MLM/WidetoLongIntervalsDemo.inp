@@ -1,0 +1,23 @@
+DATA:
+FILE IS WidetoLongIntervalDemo.csv;
+
+DATA WIDETOLONG: 
+    WIDE = Baa1-Baa10 | BaaInt1-BaaInt10 | Bab1-Bab10 | 
+    BabInt1-BabInt10 | Bba1-Bba10 | 
+    BbaInt1-BbaInt10 | Bbb1-Bbb10 | BbbInt1-BbbInt10; 
+    LONG = BaaT1 | BaaE1I | BabT2 | BabE2I | BbaT1 | BbaR1I | BbbT2 | BbbR2I;
+    IDVARIABLE = ID;
+    REPETITION = trial;
+    SAVEDATA: FILE IS Demolong.dat;
+
+VARIABLE:
+NAMES ARE  ID interven Baa1-Baa10 BaaInt1-BaaInt10 Bab1-Bab10 
+BabInt1-BabInt10 Bba1-Bba10 BbaInt1-BbaInt10 Bbb1-Bbb10 
+BbbInt1-BbbInt10 cz1 fz1 pz1 cz2 fz2 pz2; 
+
+USEVARIABLES ARE  ID interven cz1 fz1 pz1 cz2 fz2 pz2 
+BaaT1 BaaE1I BabT2 BabE2I BbaT1 BbaR1I BbbT2 BbbR2I trial;
+
+CLUSTER = ID;
+
+ANALYSIS: TYPE is twolevel basic; 

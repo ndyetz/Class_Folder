@@ -1,0 +1,31 @@
+﻿Helpful Power Analysis Websites
+
+http://timo.gnambs.at/en/scripts/powerforsem
+
+
+http://quantpsy.org/rmsea/rmsea.htm
+
+http://www.afhayes.com/spss-sas-and-mplus-macros-and-code.html
+
+
+
+Citation for power Analysis:
+MacCallum, R. C., Browne, M. W., & Sugawara, H. M. (1996). Power analysis and determination of sample size for covariance structure modeling. Psychological Methods, 1, 130-149.
+
+
+http://quantpsy.org/rmsea/rmsea.htm
+
+
+Bentler, P. M., & Chou, C. P. (1987) Practical issues in structural modeling.  Sociological Methods & Research, 16, 78-117.
+
+
+Rule of thumb 5 to 1 participants per degrees of freedom 
+
+
+
+Citation for chosen cutoffs in MacCallum et al., 1996 also referenced: 
+http://davidakenny.net/cm/fit.htm
+
+
+
+Preacher, K. J., & Coffman, D. L. (2006, May). Computing power and minimum sample size for RMSEA [Computer software]. Available from http://quantpsy.org/.

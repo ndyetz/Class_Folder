@@ -1,0 +1,469 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+02/06/2018  12:24 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+      simulating z moderation of binary x to m using a random slope
+  MONTECARLO:
+      NAMES = y m x z;
+      NOBSERVATIONS = 150;
+      NREPS = 1;
+      SAVE = ex3.18.dat;
+      CUTPOINTS = x(0);
+  MODEL POPULATION:
+      x-z@1;
+      x WITH z@0;
+      y ON m*.5;
+      gamma1 | m ON x;
+      [gamma1*-.4];
+      gamma1 ON z*-.2;
+      gamma1@0;
+      m ON z*.1;
+      y*.5;
+      m*1;
+  ANALYSIS:
+      TYPE = RANDOM;
+  MODEL:
+      y ON m*.5 (b);
+      gamma1 | m ON x;
+      [gamma1*-.4] (gamma1);
+      gamma1 ON z*-.2 (gamma2);
+      gamma1@0;
+      m ON z*.1;
+      y*.5;
+      m*1;
+  MODEL CONSTRAINT:
+      NEW(indavg*-0.20 indlow*-.10 indhigh*-.25);
+      indavg = b*gamma1;
+      indlow = b*(gamma1-gamma2);
+      indhigh = b*(gamma1+gamma2);
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+simulating z moderation of binary x to m using a random slope
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of replications
+    Requested                                                    1
+    Completed                                                    1
+Value of seed                                                    0
+
+Number of dependent variables                                    2
+Number of independent variables                                  2
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   Y           M
+
+Observed independent variables
+   X           Z
+
+Continuous latent variables
+   GAMMA1
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Optimization algorithm                                         EMA
+
+
+SAMPLE STATISTICS FOR THE FIRST REPLICATION
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              Y             M             X             Z
+              ________      ________      ________      ________
+ 1             -0.162        -0.223         0.573         0.085
+
+
+           Covariances
+              Y             M             X             Z
+              ________      ________      ________      ________
+ Y              0.709
+ M              0.501         1.001
+ X             -0.005        -0.079         0.245
+ Z              0.011        -0.103         0.024         0.936
+
+
+           Correlations
+              Y             M             X             Z
+              ________      ________      ________      ________
+ Y              1.000
+ M              0.595         1.000
+ X             -0.012        -0.160         1.000
+ Z              0.013        -0.106         0.051         1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        8
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                              -363.969
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000         -363.969       -363.969
+           0.980       0.000         -363.969       -363.969
+           0.950       0.000         -363.969       -363.969
+           0.900       0.000         -363.969       -363.969
+           0.800       0.000         -363.969       -363.969
+           0.700       0.000         -363.969       -363.969
+           0.500       0.000         -363.969       -363.969
+           0.300       0.000         -363.969       -363.969
+           0.200       0.000         -363.969       -363.969
+           0.100       0.000         -363.969       -363.969
+           0.050       0.000         -363.969       -363.969
+           0.020       0.000         -363.969       -363.969
+           0.010       0.000         -363.969       -363.969
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                               743.937
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000          743.937        743.937
+           0.980       0.000          743.937        743.937
+           0.950       0.000          743.937        743.937
+           0.900       0.000          743.937        743.937
+           0.800       0.000          743.937        743.937
+           0.700       0.000          743.937        743.937
+           0.500       0.000          743.937        743.937
+           0.300       0.000          743.937        743.937
+           0.200       0.000          743.937        743.937
+           0.100       0.000          743.937        743.937
+           0.050       0.000          743.937        743.937
+           0.020       0.000          743.937        743.937
+           0.010       0.000          743.937        743.937
+
+    Bayesian (BIC)
+
+        Mean                               768.022
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000          768.022        768.022
+           0.980       0.000          768.022        768.022
+           0.950       0.000          768.022        768.022
+           0.900       0.000          768.022        768.022
+           0.800       0.000          768.022        768.022
+           0.700       0.000          768.022        768.022
+           0.500       0.000          768.022        768.022
+           0.300       0.000          768.022        768.022
+           0.200       0.000          768.022        768.022
+           0.100       0.000          768.022        768.022
+           0.050       0.000          768.022        768.022
+           0.020       0.000          768.022        768.022
+           0.010       0.000          768.022        768.022
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                               742.704
+        Std Dev                              0.000
+        Number of successful computations        1
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.000          742.704        742.704
+           0.980       0.000          742.704        742.704
+           0.950       0.000          742.704        742.704
+           0.900       0.000          742.704        742.704
+           0.800       0.000          742.704        742.704
+           0.700       0.000          742.704        742.704
+           0.500       0.000          742.704        742.704
+           0.300       0.000          742.704        742.704
+           0.200       0.000          742.704        742.704
+           0.100       0.000          742.704        742.704
+           0.050       0.000          742.704        742.704
+           0.020       0.000          742.704        742.704
+           0.010       0.000          742.704        742.704
+
+
+
+MODEL RESULTS
+
+                              ESTIMATES              S. E.     M. S. E.  95%  % Sig
+                 Population   Average   Std. Dev.   Average             Cover Coeff
+ GAMMA1     ON
+  Z                  -0.200    -0.1742     0.0000     0.1776     0.0007 1.000 0.000
+
+ Y          ON
+  M                   0.500     0.5005     0.0000     0.0551     0.0000 1.000 1.000
+
+ M          ON
+  Z                   0.100    -0.0002     0.0000     0.1539     0.0100 1.000 0.000
+
+ Intercepts
+  Y                   0.000    -0.0506     0.0000     0.0573     0.0026 1.000 0.000
+  M                   0.000    -0.0378     0.0000     0.1246     0.0014 1.000 0.000
+  GAMMA1             -0.400    -0.3007     0.0000     0.1643     0.0099 1.000 0.000
+
+ Residual Variances
+  Y                   0.500     0.4579     0.0000     0.0670     0.0018 1.000 1.000
+  M                   1.000     0.9590     0.0000     0.1021     0.0017 1.000 1.000
+  GAMMA1              0.000     0.0000     0.0000     0.0000     0.0000 1.000 0.000
+
+New/Additional Parameters
+  INDAVG             -0.200    -0.1505     0.0000     0.0819     0.0025 1.000 0.000
+  INDLOW             -0.100    -0.0633     0.0000     0.1297     0.0013 1.000 0.000
+  INDHIGH            -0.250    -0.2376     0.0000     0.1087     0.0002 1.000 1.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.322E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              Y             M             X             Z
+              ________      ________      ________      ________
+ 1                  0             0             0             0
+
+
+           LAMBDA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ Y                  0             0             0             0             0
+ M                  0             0             0             0             0
+ X                  0             0             0             0             0
+ Z                  0             0             0             0             0
+
+
+           THETA
+              Y             M             X             Z
+              ________      ________      ________      ________
+ Y                  0
+ M                  0             0
+ X                  0             0             0
+ Z                  0             0             0             0
+
+
+           ALPHA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ 1                  1             2             3             0             0
+
+
+           BETA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1             0             0             0             0             4
+ Y                  0             0             5             0             0
+ M                  0             0             0             0             6
+ X                  0             0             0             0             0
+ Z                  0             0             0             0             0
+
+
+           PSI
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1             0
+ Y                  0             7
+ M                  0             0             8
+ X                  0             0             0             0
+ Z                  0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              INDAVG        INDLOW        INDHIGH
+              ________      ________      ________
+ 1                  9            10            11
+
+
+     STARTING VALUES
+
+
+           NU
+              Y             M             X             Z
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ Y              0.000         1.000         0.000         0.000         0.000
+ M              0.000         0.000         1.000         0.000         0.000
+ X              0.000         0.000         0.000         1.000         0.000
+ Z              0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y             M             X             Z
+              ________      ________      ________      ________
+ Y              0.000
+ M              0.000         0.000
+ X              0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ 1             -0.400         0.000         0.000         0.000         0.000
+
+
+           BETA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1         0.000         0.000         0.000         0.000        -0.200
+ Y              0.000         0.000         0.500         0.000         0.000
+ M              0.000         0.000         0.000         0.000         0.100
+ X              0.000         0.000         0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1         0.000
+ Y              0.000         0.500
+ M              0.000         0.000         1.000
+ X              0.000         0.000         0.000         0.500
+ Z              0.000         0.000         0.000         0.000         0.500
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              INDAVG        INDLOW        INDHIGH
+              ________      ________      ________
+ 1             -0.200        -0.100        -0.250
+
+
+     POPULATION VALUES
+
+
+           NU
+              Y             M             X             Z
+              ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ Y              0.000         1.000         0.000         0.000         0.000
+ M              0.000         0.000         1.000         0.000         0.000
+ X              0.000         0.000         0.000         1.000         0.000
+ Z              0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y             M             X             Z
+              ________      ________      ________      ________
+ Y              0.000
+ M              0.000         0.000
+ X              0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ 1             -0.400         0.000         0.000         0.000         0.000
+
+
+           BETA
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1         0.000         0.000         0.000         0.000        -0.200
+ Y              0.000         0.000         0.500         0.000         0.000
+ M              0.000         0.000         0.000         0.000         0.100
+ X              0.000         0.000         0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              GAMMA1        Y             M             X             Z
+              ________      ________      ________      ________      ________
+ GAMMA1         0.000
+ Y              0.000         0.500
+ M              0.000         0.000         1.000
+ X              0.000         0.000         0.000         1.000
+ Z              0.000         0.000         0.000         0.000         1.000
+
+
+SAVEDATA INFORMATION
+
+  Order of variables
+
+    Y
+    M
+    X
+    Z
+
+  Save file
+    ex3.18.dat
+
+  Save file format           Free
+  Save file record length    10000
+
+
+     Beginning Time:  12:24:47
+        Ending Time:  12:24:47
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

@@ -1,0 +1,52 @@
+TITLE:	moderation
+DATA:	FILE = ex3.18.dat;
+VARIABLE:	NAMES = y m x z;
+	USEVARIABLES = y x z xz;
+DEFINE:	xz = x*z;
+
+		
+MODEL:	
+y ON x (b1); 
+y ON z (b2); 
+y ON xz (b3);
+
+!x is the predictor, z is the moderator.
+	
+
+
+OUTPUT:	
+sampstat
+tech3;
+
+!!!!!!!!!!!!!!!!!!!!!!!
+! Code for loop plot: !
+!!!!!!!!!!!!!!!!!!!!!!!
+
+Model Constraint: 
+ PLOT (lowZ highZ); !These get defined below.  
+ 
+ 
+ LOOP(x, -.5, .5, 0.1); 
+ ! x = predictor variable
+ ! -.5 = lower bound of X-axis
+ ! .5 = upper bound of X-axis
+ ! 0.1 = interval of X-axis
+
+ !The code from: https://www.statmodel.com/download/Latent%20variable%20interaction%20LOOP%20plot.pdf
+ ! lowf2 = (b1+b3*(-1))*f1+b2*(-1); 
+ ! highf2 = (b1+b3*(+1))*f1+b2*(+1); 
+
+ ! I like to re-write it to include the intercept and put into familiar y = mx + b form
+ ! 
+
+ lowZ = -0.148+(b1*x)+(b2*(-1))+(b3*x*(-1));
+ highZ = -0.148+(b1*x)+(b2*(1))+(b3*x*(1));
+ !For some reason, 1 & -1 must be inside parentheses for the code to run
+
+ !Z is standardized in this case (or if it's a latent variable, then variance is fixed @1)
+ !If Z is unstandardized, then multiply by +1/-1 SD (or whatever levels of Z you want to plot)
+Plot: 
+ type = plot2; 
+
+ !To view: Run the model, then click plot > view plot > loop plots > plot all parameters in the same window
+ !It's tedious, but you can edit/clean up the plots in the viewer window for APA style, etc. 

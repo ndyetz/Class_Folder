@@ -1,0 +1,164 @@
+Hi Mark,
+
+Y (or its error) may be ZINB distributed across people, but the coefficient itself should still be normally distributed across repeated samples, and that's what counts when generting a CI. You want a joint sampling distribution of the relevant coefficient estimates (a and b), from which you can construct a sampling distribution of a*b. I don't know anything about ZINB models (apart from what it stands for) -- if there are two coefficients for just one regression, I'm unsure how the indirect effect would be computed.
+
+But assuming you have only a single 'a' and a single 'b', regardless of the distributions of M and Y, you can use the same R code invoking mvrnorm to generate a CI because 'a' and 'b' are both normally distributed.
+
+Here is a list of articles dealing with categorical (binary), count, or survival M or Y variables that I threw together last year. Surely there will be something here that is more helpful than me!
+
+
+Blood, E. A., & Cheng, D. M. (2012). Non-linear mixed models in the analysis of mediated longitudinal data with binary outcomes. BMC Medical Research Methodology, 12, 1-10.
+ 
+Buis, M. L. (2010). Direct and indirect effects in a logit model. The Stata Journal, 10, 11-29.
+ 
+Chen, C. (2011). Bayesian analyses of mediational models for survival outcome. Unpublished dissertation, University of Cincinnati.
+ 
+Collins, L. M., Graham, J. W., & Flaherty, B. P. (1998). An alternative framework for defining mediation. Multivariate Behavioral Research, 33, 295-312.
+ 
+Coxe, S., & MacKinnon, D. P. (2010). Abstract: Mediation analysis of Poisson distributed count outcomes. Multivariate Behavioral Research, 45, 1022.
+ 
+Ditlevsen, S., Christensen, U., Lynch, J., Damsgaard, M., & Keiding, N. (2005). The mediation proportion: A structural equation approach for estimating the proportion of exposure effect on outcome explained by an intermediate variable. Epidemiology, 16, 114-120.
+ 
+Elliott, M. R., Raghunathan, T. E., & Li, Y. (2010). Bayesian inference for causal mediation effects using principal stratification with dichotomous mediators and outcomes. Biostatistics, 11, 353-372.
+ 
+Emsley, R., Dunn, G., & White, I. R. (2010). Mediation and moderation of treatment effects in randomised controlled trials of complex interventions. Statistical Methods in Medical Research, 19, 237-270.
+ 
+Fairchild, A. J., Abara, W. E., Gottschall, A. C., Tein, J.-Y., & Prinz, R. J. (2013). Improving our ability to evaluate underlying mechanisms of behavioral onset and other event occurrence outcomes: A discrete-time survival mediation model. Evaluation and the Health Professions. Epub ahead of print. doi: 10.1177/0163278713512124
+ 
+Filiaci, V. L. (2010). Evaluation of binary intermediate endpoints for their departure from perfect surrogacy. Unpublished dissertation, University at Buffalo, State University of New York.
+ 
+Finch, J. F., West, S. G., & MacKinnon, D. P. (1997). Effects of sample size and nonnormality on the estimation of mediated effects in latent variable models. Structural Equation Modeling, 4, 87-107.
+ 
+Grotta, A. (2012). Causal mediation analysis on survival data: An application on the National March Cohort. University of Milano-Bicocca.
+ 
+Gunzler, D. (2011). A class of distribution-free models for longitudinal mediation analysis. Unpublished dissertation, University of Rochester.
+ 
+Huang, B., Sivaganesan, S., Succop, P., & Goodman, E. (2004). Statistical assessment of mediational effects for logistic mediational models. Statistics in Medicine, 23, 2713-2728.
+ 
+Jasti, S., Dudley, W. N., & Goldwater, E. (2008). SAS macros for testing statistical mediation in data with binary mediators or outcomes. Nursing Research, 57, 118-121.
+ 
+Karlson, K. B., Holm, A., & Breen, R. (2010). Total, direct, and indirect effects in logit models. Centre for Strategic Research in Education Working Paper No. 0005.
+ 
+Lange, T., & Hansen, J. V. (2011). Direct and indirect effects in a survival context. Epidemiology, 22, 575-581.
+ 
+Li, Y., Schneider, J. A., & Bennett, D. A. (2007). Estimation of the mediation effect with a binary mediator. Statistics in Medicine, 26, 3398-3414.
+ 
+MacKinnon, D. P., & Dwyer, J. H. (1993). Estimating mediated effects in prevention studies. Evaluation Review, 17, 144-158.
+ 
+MacKinnon, D. P., Lockwood, C. M., Brown, C. H., Wang, W., & Hoffman, J. M. (2007). The intermediate endpoint effect in logistic and probit regression. Clinical Trials, 4, 499-513.
+ 
+Muthén, B. (2011). Applications of causally defined direct and indirect effects in mediation analysis using SEM in Mplus. Unpublished manuscript.
+ 
+Pan, Z. (2000). Surrogate markers for survival times in clinical trials: A proposed class of intermediate events as marker variables. Unpublished dissertation, University of Colorado.
+ 
+Sun, Y. (2010). Methods for estimating mediation effect in survival analysis: Does weight loss mediate the undernutrition-mortality relationship in the older adults? Unpublished dissertation, The University of Alabama at Birmingham.
+ 
+Tchetgen Tchetgen, E. J. (2011). On causal mediation analysis with a survival outcome. International Journal of Biostatistics, 7, Art. 33, 38.
+ 
+Tchetgen Tchetgen, E. J. (2012a). Formulae for causal mediation analysis in an odds ratio context without a normality assumption for the continuous mediator. Unpublished manuscript, Harvard University.
+ 
+Tchetgen Tchetgen, E. J. (2012b). Inverse odds ratio-weighted estimation for causal mediation analysis. Unpublished manuscript, Harvard University.
+ 
+Tchetgen Tchetgen, E. J. (2013). A note on formulae for causal mediation analysis in an odds ratio context. Epidemiologic Methods, 2, 21-31.
+ 
+Tein, J.-Y., & MacKinnon, D. P. (2003). Estimating mediated effects with survival data. In H. Yanai, A. Okada, K. Shigemasu, Y. Kano, & J. J. Meulman (Eds.), New developments in psychometrics. Tokyo: Springer-Verlag.
+ 
+Valeri, L., & VanderWeele, T. J. (2013). Mediation analysis allowing for exposure-mediator interactions and causal interpretation: Theoretical assumptions and implementation with SAS and SPSS macros. Psychological Methods, 18, 137-150. [note: erratum in PM, 18(4)]
+ 
+VanderWeele, T. J. (2011). Causal mediation analysis with survival data. Epidemiology, 22, 582-585.
+ 
+Wang, L., & Zhang, Z. (2011). Estimating and testing mediation effects with censored data. Structural Equation Modeling, 18, 18-34.
+ 
+Wang, W., & Albert, J. M. (2012). Estimation of mediation effects for zero-inflated regression models. Statistics in Medicine, 31, 3118-3132.
+ 
+Xiao, Y. (2012). Flexible marginal structural models for survival analysis. Unpublished dissertation, McGill University.
+ 
+Yuan, Y., & MacKinnon, D. P. (in press). Robust mediation analysis based on median regression. Psychological Methods.
+ 
+Zhao, S. (2012). Covariate measurement error correction methods in mediation analysis with failure time data. Unpublished dissertation, University of Washington.
+ 
+Zu, J., & Yuan, K.-H. (2010). Local influence and robust procedures for mediation analysis. Multivaraite Behavioral Research, 45, 1-44.
+ 
+American Journal of Epidemiology special issue
+ 
+VanderWeele, T. J., & Vansteelandt, S. (2010a). Odds ratios for mediation analysis with a dichotomous outcome. American Journal of Epidemiology, 172, 1339-1348.
+ 
+Kaufman, J. S. (2010). Decomposing with a lot of supposing. American Journal of Epidemiology, 172, 1349-1351.
+ 
+Ten Have, T. (2010). Pushing the mediation envelope. American Journal of Epidemiology, 172, 1352-1354.
+ 
+VanderWeele, T. J., & Vansteelandt, S. (2010b). Response to invited comments. American Journal of Epidemiology, 172, 1355-1356.
+ 
+Journal of Consumer Psychology special issue
+ 
+Iacobucci, D. (2012). Mediation analysis and categorical variables: The final frontier. Journal of Consumer Psychology, 22, 582-594.
+ 
+Feinberg, F. M. (2012). Mediation analysis and categorical variables: Some further frontiers. Journal of Consumer Psychology, 22, 595-598.
+ 
+Gilula, Z. (2012). Mediation with categorical variables: Consider ordinal models, empirical Bayes, and alternatives to R2. Journal of Consumer Psychology, 22, 599.
+ 
+MacKinnon, D. P., & Cox, M. G. (2012). Commentary on “Mediation analysis and categorical variables: The final frontier” by Dawn Iacobucci. Journal of Consumer Psychology, 22, 600-602.
+ 
+Iacobucci, D. (2012). Mediation with categorical variables compleat. Journal of Consumer Psychology, 22, 603-604.
+
+Kris
+
+
+At 08:23 AM 7/8/2015, MPrince@ria.buffalo.edu wrote:
+
+Hi Kris,
+
+Thank you for the thoughtful and helpful response. If you have the articles that test mediation with count variables handy I would definitely appreciate them. Luckily it is only my Y variable that is zero-inflated count, I bet its tricker if M is the zero-inflated count variable because it is sometimes a DV and sometimes an IV. 
+
+Regarding the process using R. So my Y variable is really ZINB and it looks like I can use gamlss.dist to generate random variables with that (distribution http://www.inside-r.org/packages/cran/gamlss.dist/docs/ZANBI), but in the script you provided for the normal case you used mvrnorm. Can I create a multivariate ZINB variable with certain parameters? Do, I even need to? Also, should I be generating data on both parts (i.e., the 0, 1 and the NB) parts together or separately? Or since my a path is normal and my b path is ZINB do I need to create some other kind of multivariate distribution to draw from? Sorry for my confusion, it just seems like there are just a lot of little things to consider. 
+
+I appreciate your help. It is tough to find people who know how to do this stuff. Thank you again for your time. 
+
+Take care,
+Mark 
+
+Mark A. Prince, PhD
+NIAAA Postdoctoral Research Fellow
+Research Institute on Addictions (RIA)
+University at Buffalo, State University of New York
+Office: (716) 887-2570
+Fax: (716) 887-2477
+
+
+-----"Kristopher J. Preacher" <kris.preacher@vanderbilt.edu> wrote: ----- 
+To: <MPrince@ria.buffalo.edu>
+From: "Kristopher J. Preacher" <kris.preacher@vanderbilt.edu>
+Date: 07/07/2015 07:55PM
+Subject: Re: MCCI question
+
+Hi Mark,
+
+I don't have R script for a ZIP mediation model. But if b1 and b2 are what I would call the 'a' and 'b' paths of a standard mediation model(only with a count outcome), then I think you would want b1*b2 rather than b1-b2. And you could use the same MCCI method as you would withcontinuous outcomes.
+
+Say you use Mplus for fitting the model, and R for obtaining the MCCI. Everything should be the same in terms of computing the MCCI, andeverything would be the same in Mplus, save that the outcome would be declared as a COUNT variable, and there are one or two quirky things you have to do in the Mplus syntax to get it to estimate a ZIP model:
+http://www.ats.ucla.edu/stat/mplus/dae/zip.htm
+
+Actually, it's possible to everything in Mplus -- both the model fitting and the MCCI, but the latter is a bit of a pain in Mplus (it'seasier in R).
+
+I have never fit such a model, but if you like, I can dig up somearticles on testing mediation in models with count variables. There are a few, believe it or not.
+
+Kris
+
+At 03:02 PM 7/7/2015, MPrince@ria.buffalo.edu wrote:
+
+Hi Dr.Preacher, 
+
+I recently attended your MSEM course in Philly. I really enjoyed the workshop and it has been helpful for tightening up my models. 
+
+I am working on a model with a zero-inflated count outcome and a mediation path for which I want to test using the MCCI method you provided in the appendix but was not discussed in the lectures. I assume you can generate the pairs of b1 and b2 values and compute b1-b2 for each pair in R. I have some experience with R but I was wondering if you had a sample script I could use as a model? Or if you use some other software other than R can you please direct me there? 
+
+Thank you for your time and help. 
+Mark 
+
+
+Mark A. Prince, PhD
+NIAAA Postdoctoral Research Fellow
+Research Institute on Addictions (RIA)
+University at Buffalo, State University of New York
+Office: (716) 887-2570
+Fax: (716) 887-2477 

@@ -1,0 +1,435 @@
+Mplus VERSION 7.4
+MUTHEN & MUTHEN
+05/11/2016   3:49 PM
+
+INPUT INSTRUCTIONS
+
+!This file compares Dummy code 1 to dummy code 2. 
+!This makes TT the reference group
+!This file and dum13 must both be run to get all pairwise comparisons
+
+   TITLE:  Rural
+
+
+           DATA:   FILE is rural 040716 dum.dat;
+
+
+      VARIABLE:   NAMES ARE
+     id txcond q2 q8 q9 q10 q11 q12n q12t
+     q13 q14 q15 q16 tla11 tll11 tlm11 tlh11
+      tls11 tla12 tll12 tlm12 tlh12 tls12
+      tla13 tll13 tlm13 tlh13 tls13 tla14
+      tll14 tlm14 tlh14 tls14
+      tla15 tll15 tlm15 tlh15 tls15 tla16
+      tll16 tlm16 tlh16 tls16 tla21 tll21
+      tlm21 tlh21 tls21 tla22
+      tll22 tlm22 tlh22 tls22 tla23 tll23
+      tlm23 tlh23 tls23 book201 book202
+      book203 book204 book205
+      book206 book207 book208 book209 book210
+      book211 book212 book213 book214 book215
+      book216 book217
+      tla31 tll31 tlm31 tlh31 tls31 tla32 tll32
+      tlm32 tlh32 tls32 tla33 tll33 tlm33 tlh33
+      tls33 book401
+      book402 book403 book404 book405 book406
+      book407 book408 book409 book410 book411
+      book412 book413
+      book414 book415 book416 book417 tled41m
+      tled41d tled41y tla41 tll41 tlm41 tlh41
+      tls41 tled42m
+      tled42d tled42y tla42 tll42 tlm42 tlh42
+      tls42 tled43m tled43d tled43y tla43 tll43
+      tlm43 tlh43 tls43
+      tla51 tll51 tlm51 tlh51 tls51 tla52 tll52
+      tlm52 tlh52 tls52 tla53 tll53 tlm53 tlh53
+      tls53 book601
+      book602 book603 book604 book605 book606
+      book607 book608 book609 book610 book611
+      book612 book613
+      book614 book615 book616 book617 tled61m
+      tled61d tled61y tla61 tll61 tlm61 tlh61
+      tls61 tled62m
+      tled62d tled62y tla62 tll62 tlm62 tlh62
+      tls62 tled63m tled63d tled63y tla63 tll63
+      tlm63 tlh63 tls63
+      tla1 tll1 tlm1 tlh1 tls1 tlha1 tlhn1 tlr1
+      tlj1 tlal1 tlhs1 ctla1 ctll1 ctlm1 ctlh1 ctls1 ctlha1
+      ctlhn1 ctlr1 ctlj1 ctlal1 ctlhs1 tla2 tll2
+      tlm2 tlh2 tls2 tlha2 tlhn2 tlr2 tlj2 tlal2
+      tlhs2 ctla2
+      ctll2 ctlm2 ctlh2 ctls2 ctlha2 ctlhn2 ctlr2
+      ctlj2 ctlal2 ctlhs2 tla3 tll3 tlm3 tlh3 tls3 tlha3
+      tlhn3 tlr3 tlj3 tlal3 tlhs3 ctla3 ctll3 ctlm3
+      ctlh3 ctls3 ctlha3 ctlhn3 ctlr3 ctlj3 ctlal3 ctlhs3
+      tla4 tll4 tlm4 tlh4 tls4 tlha4 tlhn4 tlr4
+      tlj4 tlal4 tlhs4 ctla4 ctll4 ctlm4 ctlh4 ctls4 ctlha4
+      ctlhn4 ctlr4 ctlj4 ctlal4 ctlhs4 tla5 tll5
+      tlm5 tlh5 tls5 tlha5 tlhn5 tlr5 tlj5 tlal5 tlhs5 ctla5
+      ctll5 ctlm5 ctlh5 ctls5 ctlha5 ctlhn5 ctlr5
+      ctlj5 ctlal5 ctlhs5 tla6 tll6 tlm6 tlh6 tls6 tlha6
+      tlhn6 tlr6 tlj6 tlal6 tlhs6 ctla6 ctll6 ctlm6
+      ctlh6 ctls6 ctlha6 ctlhn6 ctlr6 ctlj6 ctlal6 ctlhs6
+      freq1 quant1 freq2 quant2 freq3 quant3 freq4
+      quant4 freq5 quant5 freq6 quant6 cfreq1 cquant1 cfreq2
+      cquant2 cfreq3 cquant3 cfreq4 cquant4 cfreq5
+      cquant5 cfreq6 cquant6 audit ras1 ras2 ras4 ras6 rse1
+      rse2 rse4 rse6 bsis11 bsis12 bsis13 bsis14
+      bsis15 bsis16 bsis17 bsis18 bsis19 bsis110 bsigsi1
+      bsipst1 bsitot1 bsipsd1 bsis21 bsis22 bsis23
+      bsis24 bsis25 bsis26 bsis27 bsis28 bsis29 bsis210
+      bsigsi2 bsipst2 bsitot2 bsipsd2 bsis41
+      bsis42 bsis43 bsis44 bsis45 bsis46 bsis47 bsis48 bsis49
+      bsis410 bsigsi4 bsipst4 bsitot4 bsipsd4
+      bsis61 bsis62 bsis63 bsis64 bsis65
+      bsis66 bsis67 bsis68
+      bsis69 bsis610 bsigsi6 bsipst6 bsitot6
+      bsipsd6 drcl11 drcl12 drcl13 drcl14
+      drcl15 drcl16 drcl1
+      drcr11 drcr12 drcr13 drcr14 drcr15 drcr16
+      drcr1 drcr21 drcr22 drcr23 drcr24 drcr25 drcr26 drcr2
+      drcr41 drcr42 drcr43 drcr44 drcr45 drcr46
+      drcr4 drcr61 drcr62 drcr63 drcr64 drcr65 drcr66 drcr6
+      aeq1s01 aeq1s02 aeq1s03 aeq1s04 aeq1s05
+      aeq1s06 aeq1s07 aeq1s08 aeq1s09 aeq1s10
+      aeq2s01 aeq2s02
+      aeq2s03 aeq2s04 aeq2s05 aeq2s06 aeq2s07
+      aeq2s08 aeq2s09 aeq2s10 aeq4s01 aeq4s02
+      aeq4s03 aeq4s04
+      aeq4s05 aeq4s06 aeq4s07 aeq4s08 aeq4s09
+      aeq4s10 aeq6s01 aeq6s02 aeq6s03 aeq6s04 aeq6s05 aeq6s06
+      aeq6s07 aeq6s08 aeq6s09 aeq6s10 fsmast1
+      dadsum dadmiss msmast1 momsum mommiss
+      dadhx momhx famhx
+      urica11 urica12 urica13 urica14 uricar1
+      urica21 urica22 urica23 urica24 uricar2
+      urica41 urica42
+      urica43 urica44 uricar4 urica61 urica62
+      urica63 urica64 uricar6 proc1s01 proc1s02
+      proc1s03 proc1s04
+      proc1s05 proc1s06 proc1s07 proc1s08 proc1s09
+      proc1s10 proc1s11 proc1s12 proc1s13 proc2s01
+      proc2s02
+      proc2s03 proc2s04 proc2s05 proc2s06 proc2s07
+      proc2s08 proc2s09 proc2s10 proc2s11 proc2s12 proc2s13
+      proc4s01 proc4s02 proc4s03 proc4s04 proc4s05
+      proc4s06 proc4s07 proc4s08 proc4s09 proc4s10 proc4s11
+      proc4s12 proc4s13 proc6s01 proc6s02 proc6s03
+      proc6s04 proc6s05 proc6s06 proc6s07 proc6s08 proc6s09
+      proc6s10 proc6s11 proc6s12 proc6s13 proc1a
+      proc1b proc2a proc2b proc4a proc4b proc6a proc6b scq11
+      scq12 scq13 scq14 scq15 scq16 scq17 scq18
+      scqtot1 scq21 scq22 scq23 scq24 scq25 scq26 scq27 scq28
+      scqtot2 scq41 scq42 scq43 scq44 scq45 scq46
+      scq47 scq48 scqtot4 scq61 scq62 scq63 scq64 scq65 scq66
+      scq67 scq68 scqtot6 ids11 ids12 ids13 ids14
+      ids15 ids16 ids17 ids18 idstot1 ids21 ids22
+      ids23 ids24
+      ids25 ids26 ids27 ids28 idstot2 ids41 ids42
+      ids43 ids44 ids45 ids46 ids47 ids48 idstot4 ids61 ids62
+      ids63 ids64 ids65 ids66 ids67 ids68 idstot6
+      tri1s tri1s1 tri1s2 tri1s3 tri1s4 tri1s5 tri1cep
+      tri1cbc tri2s tri2s1 tri2s2 tri2s3 tri2s4
+      tri2s5 tri2cep tri2cbc tri4s tri4s1 tri4s2 tri4s3 tri4s4
+      tri4s5 tri4cep tri4cbc tri6s tri6s1 tri6s2
+      tri6s3 tri6s4 tri6s5 tri6cep tri6cbc dfd101 dfd102
+      dfd103 dfd104 dfd105 dfd106 dfd107 dfd108
+      dfd109 dfd110 dfd201 dfd202 dfd203 dfd204 dfd205 dfd206
+      dfd207 dfd208 dfd209 dfd210 dfd401 dfd402
+      dfd403 dfd404 dfd405 dfd406 dfd407 dfd408 dfd409 dfd410
+      dfd601 dfd602 dfd603 dfd604 dfd605 dfd606
+      dfd607 dfd608 dfd609 dfd610 swb1 swb1s1 swb1s2 swb2
+      swb2s1 swb2s2 swb4 swb4s1 swb4s2 swb6
+      swb6s1 swb6s2 ssqa1 ssqb1 ssqa2 ssqb2 ssqa4
+      ssqb4 ssqa6 ssqb6
+      csq2 csq4 csq6 rbook215 rbook216 rbook415
+      rbook416 rbook615 rbook616 book2s1 book2s2 book2s3
+      book4s1 book4s2 book4s3 book6s1 book6s2
+      book6s3 baserel2 baserel3 censor2 censor3 time2 time3
+      missdata totsess dum1 dum2 dum3;
+
+!Dummy code matrix
+!These are types of theraputic interventions
+!BT = Biliotherapy - A self-directed manual done alone
+!MI = Motivational interveiew via phone + bibliotherapy
+!TT = telephone therapy    
+    !   D1  D2  D3
+    !BT 1   0   0
+    !MI 0   1   0
+    !TT 0   0   1
+    !with dummy codes to get the all pairwise you have to run the model twice with a new reference group
+
+              MISSING = all (-999);
+
+  censored are tlhs1 (b) tlhs2 (b)
+   tlhs3 (b) tlhs4 (b) tlhs5(b) tlhs6 (b); !highly skewed data (alochohol some people said they had 2.5 drinks)
+   !inflated censored bi (censored from below and inflated)
+
+  USEVARIABLES ARE
+
+  tlhs1 tlhs2 tlhs3 tlhs4 tlhs5 tlhs6
+
+  dum1 dum2; !This means that TT is the reference group
+!see matrix above
+
+  analysis:
+  !Both of these commands manage the censored data
+  algorithm = integration;  
+  integration = montecarlo; 
+
+  model:
+
+  i s | tlhs1@0 tlhs2@1 tlhs3@2 tlhs4@3 tlhs5@4 tlhs6@5;
+  
+  i on dum1 dum2;
+  s on dum1 dum2;
+
+  output: cinterval;
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+Rural
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         111
+
+Number of dependent variables                                    6
+Number of independent variables                                  2
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Censored
+   TLHS1       TLHS2       TLHS3       TLHS4       TLHS5       TLHS6
+
+Observed independent variables
+   DUM1        DUM2
+
+Continuous latent variables
+   I           S
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                  MONTECARLO
+  Number of integration points                                2000
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+  Monte Carlo integration seed                                   0
+Cholesky                                                        ON
+
+Input data file(s)
+  rural 040716 dum.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+SUMMARY OF CENSORED LIMITS
+
+      TLHS1              0.000
+      TLHS2              0.000
+      TLHS3              0.000
+      TLHS4              0.000
+      TLHS5              0.000
+      TLHS6              0.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       15
+
+Loglikelihood
+
+          H0 Value                       -1063.824
+          H0 Scaling Correction Factor      1.9135
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    2157.647
+          Bayesian (BIC)                  2198.290
+          Sample-Size Adjusted BIC        2150.887
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    TLHS1              1.000      0.000    999.000    999.000
+    TLHS2              1.000      0.000    999.000    999.000
+    TLHS3              1.000      0.000    999.000    999.000
+    TLHS4              1.000      0.000    999.000    999.000
+    TLHS5              1.000      0.000    999.000    999.000
+    TLHS6              1.000      0.000    999.000    999.000
+
+ S        |
+    TLHS1              0.000      0.000    999.000    999.000
+    TLHS2              1.000      0.000    999.000    999.000
+    TLHS3              2.000      0.000    999.000    999.000
+    TLHS4              3.000      0.000    999.000    999.000
+    TLHS5              4.000      0.000    999.000    999.000
+    TLHS6              5.000      0.000    999.000    999.000
+
+ I          ON !DUM 1 is a comparsion of the 1 and the reference group example now is with T as reference group
+    DUM1              -1.851      1.489     -1.243      0.214 !where does someone with heavy drinking start in book compared to phone  
+    DUM2              -0.507      1.771     -0.286      0.775  !where does someone with heavy drinking start in MI compared to phone
+
+ S          ON !when you interpret the slope this is the relationship of the dummy codes
+    DUM1               0.350      0.365      0.958      0.338 !dum1 is Book to Phone: slope is steeper for book compared to phone
+    DUM2              -0.174      0.423     -0.411      0.681 !dum2 is MI to Phone: slope is steeper for phone compared to MI
+
+ S        WITH
+    I                  1.522      1.413      1.078      0.281 
+
+ Intercepts
+    I                  1.548      1.174      1.319      0.187
+    S                 -1.240      0.413     -3.005      0.003 
+    TLHS1              0.000      0.000    999.000    999.000
+    TLHS2              0.000      0.000    999.000    999.000
+    TLHS3              0.000      0.000    999.000    999.000
+    TLHS4              0.000      0.000    999.000    999.000
+    TLHS5              0.000      0.000    999.000    999.000
+    TLHS6              0.000      0.000    999.000    999.000
+
+ Residual Variances
+    I                 29.288     10.230      2.863      0.004
+    S                  0.285      0.385      0.740      0.459
+    TLHS1             31.644     11.681      2.709      0.007
+    TLHS2             16.766      7.835      2.140      0.032
+    TLHS3             12.069      5.359      2.252      0.024
+    TLHS4             16.603      7.271      2.283      0.022
+    TLHS5             10.599      4.204      2.521      0.012
+    TLHS6             20.953      8.459      2.477      0.013
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.151E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    TLHS1            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS2            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS3            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS4            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS5            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS6            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ S        |
+    TLHS1            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS2            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    TLHS3            2.000       2.000       2.000       2.000       2.000       2.000       2.000
+    TLHS4            3.000       3.000       3.000       3.000       3.000       3.000       3.000
+    TLHS5            4.000       4.000       4.000       4.000       4.000       4.000       4.000
+    TLHS6            5.000       5.000       5.000       5.000       5.000       5.000       5.000
+
+ I        ON
+    DUM1            -5.687      -4.770      -4.301      -1.851       0.599       1.068       1.985
+    DUM2            -5.068      -3.978      -3.420      -0.507       2.407       2.964       4.055
+
+ S        ON
+    DUM1            -0.591      -0.366      -0.251       0.350       0.950       1.065       1.290
+    DUM2            -1.262      -1.002      -0.869      -0.174       0.521       0.654       0.915
+
+ S        WITH
+    I               -2.116      -1.246      -0.801       1.522       3.846       4.291       5.161
+
+ Intercepts
+    I               -1.475      -0.753      -0.383       1.548       3.478       3.848       4.570
+    S               -2.303      -2.049      -1.919      -1.240      -0.561      -0.431      -0.177
+    TLHS1            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS2            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS3            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS4            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS5            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    TLHS6            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Residual Variances
+    I                2.937       9.237      12.459      29.288      46.116      49.339      55.638
+    S               -0.707      -0.470      -0.349       0.285       0.919       1.040       1.278
+    TLHS1            1.557       8.750      12.429      31.644      50.858      54.537      61.730
+    TLHS2           -3.415       1.409       3.878      16.766      29.655      32.123      36.947
+    TLHS3           -1.735       1.565       3.253      12.069      20.885      22.573      25.874
+    TLHS4           -2.125       2.352       4.642      16.603      28.563      30.853      35.331
+    TLHS5           -0.230       2.359       3.683      10.599      17.515      18.840      21.429
+    TLHS6           -0.836       4.373       7.038      20.953      34.868      37.533      42.742
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\mprince\dropbox\gerard\rural\rural tlhs lgcm dum12.dgm
+
+     Beginning Time:  15:49:45
+        Ending Time:  15:50:14
+       Elapsed Time:  00:00:29
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2015 Muthen & Muthen

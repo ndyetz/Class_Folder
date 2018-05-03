@@ -1,0 +1,28 @@
+TITLE:	Path Analysis All Continuous Variables
+DATA:	FILE IS ex3.11.dat;
+VARIABLE:	NAMES ARE depression HoB anxiety
+ Host rumination Sub;
+ 
+USEVARIABLES ARE
+depression anxiety HoB
+ host rumination sub;
+
+MODEL:	
+depression on host (a);
+depression on rumination;
+depression on sub;
+
+anxiety on host (b);
+anxiety on rumination;
+anxiety on sub;
+
+depression with anxiety;
+
+anxiety on HoB;
+
+model constraint:
+new (H_da);
+
+H_da = a - b;
+
+Output: sampstat stdyx cinterval;

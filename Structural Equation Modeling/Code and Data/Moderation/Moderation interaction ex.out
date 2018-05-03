@@ -1,0 +1,477 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+02/12/2018  12:15 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS triethnic 092216.dat;
+
+
+  VARIABLE:
+  NAMES ARE
+      form scandt q1 q2 q3 q54a q54b q54c v4d a755d
+      v4f q54d q54h q4 q5 q6 q7a q7b
+      q8a q8b q9 v11 v12 q12a q12b q12c q12d q13
+       q14a q14b q14c q14d q14e q14f q14g q14h q14i q14j q14k
+      q14l v15m id1 q15a q15b q15c q15d q15e q15f
+      q15g q15h q15i q15j v16k q10 q11 q16a q16b q17 q19 q20
+      q21 q22 q23 q24 q25 q26 q27a q27b v29c
+      q28a q28b v30c q29a q29b v31c q30a q30b v32c q35 q38a q38b
+      q38c q38f q38g q38h q38k q38l q38n v34j
+      q39a q39b q39c q39f q39g v35f q39i q39j
+      q39k q39l v35k q40a
+      q40b q40c q40f q40g v36f q40i q40j q40k
+      q40l v36k q31 q32 q36 q37 q41a q41b q42 q43 v44a v44b v44c
+      v44d v44e v44f v44g v44h v44i v44j q45a
+      q45b q45c q45d q45f q45h q45i q45j q45k q46a q46b q46c q46i
+      v46e q46h q47a q47b q47c q47d q47e q47f
+      q47g q47h q47j q47k q47l q47m q48a q48b q48c q48d q48e
+      a949f a749a a749b a749c a749d a749e a750f
+       q49a q49b q49c q49d q49e q50a q50b q50c q50d q50e q51c
+      q51f q51g q51h q51i q52a q52b q52c q52d
+      q52e q52f q52g q52h q52i q52j q52k v53l q53a q53b q53c q53d
+      q53e q53f q53m q53n v55a v55b v56a v56b
+      v57a v57b v58a v58b v58c v59a v59b v59c v60a v60b v60c v61a
+      v61b v61c v62a v62b v62c v63a v63b v63c
+      v64a v64b v64c v65a v65b v65c v66a v66b v66c v67a v67b v67c
+      v68a v68b v68c v68d v69a v69b v69c v69d
+      v70a v70b v70c v70d q55 q56 q57 pps49a pps49b pps49c pps49d
+      pps50a pps50b pps50c pps50d pps51b
+      pps51a pps51c pps51d pps52b pps52a
+      pps52c pps52d pps53c pps53a
+      pps53b pps53d pps54a pps54b pps54c
+      pps54d pps4 pps5 pps6 pps7 pps8a
+      pps8b pps8c pps8d pps9 pps10
+      pps11 pps12 pps13 v88a v88b v88c
+      v88d v88e v88f v88g v89a v89b v89c v89d
+      pps16a v90b pps16b pps16c
+      pps16d pps16e pps17a v91b pps17b pps17c
+      pps17d pps17e pps19a pps19b pps19c pps20 pps21 pps22a
+      pps22b pps22c pps22d pps23a pps23b pps23c
+      pps23d ppsc223f ppsc223g v96g pps24a ppsc223h pps24c v96k
+      pps24e pps28 pps29 ppsc244a ppsc244b ppsc244c
+      pps44g pps44e pps44f pps30a pps30b pps31a pps31b
+      pps31c pps31d pps32 pps33 pps34 pps35a v103b
+      pps35b pps35c pps35d pps35e pps36a pps36b pps36d
+      pps36e pps37a pps37b pps37e pps38a pps38b pps38c
+      pps38e pps39c pps39d pps40a pps40b pps40c pps40d
+      pps40e pps41a pps41c pps41e pps42a pps42b pps42d
+      pps42e pps43a pps43c pps43d year ulocation region
+      comm_code MJ_rc
+    ;
+
+
+      MISSING = ALL (-999);
+
+  !GROUPING is q3 (1 = male 2 = female);
+
+  USEVARIABLES ARE
+  !v59b
+  !v61b
+  !q22
+  !q53b
+  mj_rc
+  !q3
+  q3_r !note defined variables must appear at the end of the use variables list
+  DNc
+  INc
+  HarmC
+  q3XDNc
+  q3XINc
+  q3XHarmc
+  ;
+
+  useobservations are q53b lt 5 ;
+  define:
+  q3_r = q3-1; !q3_r is male = 0, female = 1
+  DNc = v59b - 2.826; !mean centering DN
+  INc = v61b - 1.748; !mean centering IN
+  HarmC = q53b - 2.709; !mean centering harm
+
+  q3XDNc = q3_r*v58b;
+  q3XINc = q3_r*v61b;
+  q3XHarmc = q3_r*q53b;
+
+  ANALYSIS:
+
+  bootstrap = 1000;
+
+  MODEL:
+
+  mj_rc on DNc (c1); !DN
+  mj_rc on INc (c2); !IN
+  mj_rc on HarmC (b); !harm from using mj regulary
+  mj_rc on q3_r;
+
+  mj_rc on q3XDNc;
+  mj_rc on q3XINc;
+  mj_rc on q3XHarmc;
+
+
+  HarmC on DNc (a1);
+  Harmc on INc (a2);
+
+  DNc with INc (w);
+
+
+
+
+  Model constraint:
+  new (
+
+  ind1
+  ind2
+  );
+
+
+  ind1 = a1*b;
+  ind2 = a2*b;
+
+
+   Output: stdyx sampstat cinterval (bcbootstrap);
+
+
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  12
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  637
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4402
+
+Number of dependent variables                                    2
+Number of independent variables                                  6
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   MJ_RC       HARMC
+
+Observed independent variables
+   Q3_R        DNC         INC         Q3XDNC      Q3XINC      Q3XHARMC
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Number of bootstrap draws
+    Requested                                                 1000
+    Completed                                                 1000
+
+Input data file(s)
+  triethnic 092216.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             4
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              MJ_RC         HARMC         DNC           INC           Q3_R
+              ________      ________      ________      ________      ________
+ MJ_RC          0.975
+ HARMC          0.975         1.000
+ DNC            0.970         0.993         0.993
+ INC            0.975         1.000         0.993         1.000
+ Q3_R           0.975         1.000         0.993         1.000         1.000
+ Q3XDNC         0.975         1.000         0.993         1.000         1.000
+ Q3XINC         0.975         1.000         0.993         1.000         1.000
+ Q3XHARMC       0.975         1.000         0.993         1.000         1.000
+
+
+           Covariance Coverage
+              Q3XDNC        Q3XINC        Q3XHARMC
+              ________      ________      ________
+ Q3XDNC         1.000
+ Q3XINC         1.000         1.000
+ Q3XHARMC       1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              MJ_RC         HARMC         DNC           INC           Q3_R
+              ________      ________      ________      ________      ________
+      1        13.123         0.000         0.000         0.000         0.498
+
+
+           Means
+              Q3XDNC        Q3XINC        Q3XHARMC
+              ________      ________      ________
+      1         1.622         0.823         1.433
+
+
+           Covariances
+              MJ_RC         HARMC         DNC           INC           Q3_R
+              ________      ________      ________      ________      ________
+ MJ_RC         10.323
+ HARMC         -0.639         1.364
+ DNC            0.795        -0.186         1.710
+ INC            0.499        -0.396         0.174         1.271
+ Q3_R          -0.005         0.083         0.086        -0.048         0.250
+ Q3XDNC         0.320         0.149         0.857        -0.086         0.814
+ Q3XINC         0.178        -0.025         0.217         0.454         0.413
+ Q3XHARMC      -0.310         0.867         0.147        -0.300         0.719
+
+
+           Covariances
+              Q3XDNC        Q3XINC        Q3XHARMC
+              ________      ________      ________
+ Q3XDNC         3.570
+ Q3XINC         1.414         1.215
+ Q3XHARMC       2.218         1.025         2.695
+
+
+           Correlations
+              MJ_RC         HARMC         DNC           INC           Q3_R
+              ________      ________      ________      ________      ________
+ MJ_RC          1.000
+ HARMC         -0.170         1.000
+ DNC            0.189        -0.122         1.000
+ INC            0.138        -0.301         0.118         1.000
+ Q3_R          -0.003         0.142         0.131        -0.085         1.000
+ Q3XDNC         0.053         0.067         0.347        -0.040         0.861
+ Q3XINC         0.050        -0.019         0.150         0.365         0.749
+ Q3XHARMC      -0.059         0.452         0.069        -0.162         0.876
+
+
+           Correlations
+              Q3XDNC        Q3XINC        Q3XHARMC
+              ________      ________      ________
+ Q3XDNC         1.000
+ Q3XINC         0.679         1.000
+ Q3XHARMC       0.715         0.566         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -47641.306
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       18
+
+Loglikelihood
+
+          H0 Value                      -31783.318
+          H1 Value                      -28541.074
+
+Information Criteria
+
+          Akaike (AIC)                   63602.636
+          Bayesian (BIC)                 63717.653
+          Sample-Size Adjusted BIC       63660.456
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                           6484.488
+          Degrees of Freedom                    12
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.350
+          90 Percent C.I.                    0.343  0.357
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                               -0.939
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           3629.158
+          Degrees of Freedom                    13
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.114
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ MJ_RC    ON
+    DNC                0.381      0.053      7.204      0.000
+    INC                0.267      0.088      3.014      0.003
+    HARMC             -0.338      0.057     -5.940      0.000
+    Q3_R              -0.019      0.364     -0.052      0.958
+    Q3XDNC             0.066      0.057      1.168      0.243
+    Q3XINC            -0.086      0.123     -0.698      0.485
+    Q3XHARMC          -0.014      0.084     -0.164      0.870
+
+ HARMC    ON
+    DNC               -0.078      0.014     -5.744      0.000
+    INC               -0.301      0.015    -20.036      0.000
+
+ DNC      WITH
+    INC                0.173      0.024      7.135      0.000
+
+ Means
+    DNC                0.000      0.019     -0.009      0.992
+    INC                0.000      0.016     -0.023      0.981
+
+ Intercepts
+    MJ_RC             13.115      0.071    183.740      0.000
+    HARMC             -0.001      0.017     -0.035      0.972
+
+ Variances
+    DNC                1.710      0.024     70.980      0.000
+    INC                1.271      0.037     34.122      0.000
+
+ Residual Variances
+    MJ_RC              9.661      1.063      9.087      0.000
+    HARMC              1.230      0.018     67.945      0.000
+
+New/Additional Parameters
+    IND1               0.026      0.007      4.042      0.000
+    IND2               0.101      0.018      5.729      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+                      StdYX
+                    Estimate
+
+ MJ_RC    ON
+    DNC                0.155
+    INC                0.094
+    HARMC             -0.123
+    Q3_R              -0.003
+    Q3XDNC             0.039
+    Q3XINC            -0.029
+    Q3XHARMC          -0.007
+
+ HARMC    ON
+    DNC               -0.088
+    INC               -0.290
+
+ DNC      WITH
+    INC                0.117
+
+ Means
+    DNC                0.000
+    INC                0.000
+
+ Intercepts
+    MJ_RC              4.083
+    HARMC             -0.001
+
+ Variances
+    DNC                1.000
+    INC                1.000
+
+ Residual Variances
+    MJ_RC              0.936
+    HARMC              0.902
+
+
+R-SQUARE
+
+    Observed
+    Variable        Estimate
+
+    MJ_RC              0.064
+    HARMC              0.098
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ MJ_RC    ON
+    DNC              0.249       0.284       0.295       0.381       0.479       0.493       0.508
+    INC              0.057       0.107       0.122       0.267       0.415       0.447       0.509
+    HARMC           -0.483      -0.447      -0.433      -0.338      -0.242      -0.230      -0.191
+    Q3_R            -0.980      -0.730      -0.620      -0.019       0.610       0.703       0.840
+    Q3XDNC          -0.082      -0.047      -0.030       0.066       0.157       0.172       0.209
+    Q3XINC          -0.418      -0.319      -0.284      -0.086       0.111       0.158       0.245
+    Q3XHARMC        -0.261      -0.195      -0.174      -0.014       0.110       0.139       0.173
+
+ HARMC    ON
+    DNC             -0.113      -0.106      -0.102      -0.078      -0.057      -0.053      -0.042
+    INC             -0.339      -0.328      -0.323      -0.301      -0.274      -0.269      -0.262
+
+ DNC      WITH
+    INC              0.112       0.125       0.134       0.173       0.213       0.221       0.241
+
+ Means
+    DNC             -0.046      -0.036      -0.029       0.000       0.034       0.041       0.050
+    INC             -0.043      -0.031      -0.025       0.000       0.030       0.033       0.044
+
+ Intercepts
+    MJ_RC           12.945      12.986      13.003      13.115      13.243      13.264      13.315
+    HARMC           -0.042      -0.034      -0.028      -0.001       0.027       0.033       0.045
+
+ Variances
+    DNC              1.647       1.665       1.674       1.710       1.751       1.757       1.772
+    INC              1.170       1.196       1.210       1.271       1.332       1.344       1.372
+
+ Residual Variances
+    MJ_RC            7.214       7.695       7.980       9.661      11.461      11.820      12.783
+    HARMC            1.184       1.195       1.201       1.230       1.261       1.267       1.277
+
+New/Additional Parameters
+    IND1             0.013       0.015       0.017       0.026       0.039       0.041       0.047
+    IND2             0.057       0.068       0.072       0.101       0.132       0.137       0.145
+
+
+     Beginning Time:  12:15:56
+        Ending Time:  12:15:59
+       Elapsed Time:  00:00:03
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

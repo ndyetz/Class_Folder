@@ -1,0 +1,53 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+02/12/2018  12:07 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	Path Analysis All Continuous Variables
+  DATA:	FILE IS ex3.11.dat;
+  VARIABLE:	NAMES ARE depression HoB anxiety
+   Host rumination Sub;
+
+  USEVARIABLES ARE
+  depression anxiety HoB
+   host rumination sub;
+
+  MODEL:	
+  depression on host (a);
+  depression on rumination;
+  depression on sub;
+
+  anxiety on host (b);
+  anxiety on rumination;
+  anxiety on sub;
+
+  depression with anxiety;
+
+  anxiety on HoB;
+
+  model constraint:
+  new (H_da);
+
+  H_da = a - b;
+
+  Output: sampstat stdyx cinterval;
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** ERROR in DATA command
+  The file specified for the FILE option cannot be found.  Check that this
+  file exists:  ex3.11.dat
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

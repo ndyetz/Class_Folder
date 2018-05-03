@@ -1,0 +1,189 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+02/12/2018  11:15 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a path analysis
+  	with continuous dependent variables,
+  	bootstrapped standard errors, indirect
+  	effects, and confidence intervals
+  DATA:	FILE IS ex3.11.dat;
+  VARIABLE:	NAMES ARE y1-y3 x1-x3;
+  ANALYSIS:	BOOTSTRAP = 1000;
+
+  MODEL:	y1 on x1 (a1);
+  	y1 on x2;
+  	y1 on x3;
+  	
+  	y2 ON x1 (a2);
+  	y2 on x2;
+  	y2 on x3;
+  	
+  	y3 ON y1 (b1);
+  	y3 on y2 (b2);
+  	y3 on x2;
+  	y3 on x1 (c);
+
+  Model constraint:
+  new(ind1 ind2 rm1 rm2
+  pm1 pm2);
+  ind1 = a1*b1;
+  ind2 = a2*b2;
+  rm1 = (a1*b1)/c;
+  rm2 = (a2*b2)/c;
+  pm1 = (a1*b1)/((a1*b1)+c);
+  pm2 = (a2*b2)/((a2*b2)+c);
+
+  !MODEL INDIRECT:
+  !	y3 IND y1 x1;
+  !	y3 IND y2 x1;
+
+  OUTPUT:	CINTERVAL (bcbootstrap);
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a path analysis
+with continuous dependent variables,
+bootstrapped standard errors, indirect
+effects, and confidence intervals
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         500
+
+Number of dependent variables                                    3
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y1          Y2          Y3
+
+Observed independent variables
+   X1          X2          X3
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Number of bootstrap draws
+    Requested                                                 1000
+    Completed                                                    0
+
+Input data file(s)
+  ex3.11.dat
+
+Input data format  FREE
+
+
+
+     NO CONVERGENCE.  SERIOUS PROBLEMS IN ITERATIONS.
+     ESTIMATED COVARIANCE MATRIX NON-INVERTIBLE.
+     CHECK YOUR STARTING VALUES.
+
+
+
+MODEL RESULTS
+
+                    Estimate
+
+ Y1       ON
+    X1                 0.000
+    X2                 0.000
+    X3                 0.000
+
+ Y2       ON
+    X1                 0.000
+    X2                 0.000
+    X3                 0.000
+
+ Y3       ON
+    Y1                 0.000
+    Y2                 0.000
+    X2                 0.000
+    X1                 0.000
+
+ Intercepts
+    Y1                -1.108
+    Y2                 0.027
+    Y3                 0.499
+
+ Residual Variances
+    Y1                 8.734
+    Y2                 8.569
+    Y3                15.910
+
+ New/Additional Parameters
+    IND1               0.000
+    IND2               0.000
+    RM1                0.000
+    RM2                0.000
+    PM1                0.000
+    PM2                0.000
+
+
+MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
+
+     y1 ON x1*0 (a1);
+     y1 ON x2*0;
+     y1 ON x3*0;
+     y2 ON x1*0 (a2);
+     y2 ON x2*0;
+     y2 ON x3*0;
+     y3 ON y1*0 (b1);
+     y3 ON y2*0 (b2);
+     y3 ON x2*0;
+     y3 ON x1*0 (c);
+
+     [ y1*-1.10757 ];
+     [ y2*0.02658 ];
+     [ y3*0.49900 ];
+
+     y1*8.73392;
+     y2*8.56888;
+     y3*15.91040;
+
+     ! NEW statements in MODEL CONSTRAINT
+     NEW(ind1*0);
+     NEW(ind2*0);
+     NEW(rm1*0);
+     NEW(rm2*0);
+     NEW(pm1*0);
+     NEW(pm2*0);
+
+
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\lara\dropbox\sem 2018 shared\code and data\mediation\ex3.16_modconst_bcbootstrap_c.dgm
+
+     Beginning Time:  11:15:28
+        Ending Time:  11:15:28
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

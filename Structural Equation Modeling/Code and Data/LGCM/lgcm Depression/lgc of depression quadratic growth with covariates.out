@@ -1,0 +1,1422 @@
+Mplus VERSION 7.3
+MUTHEN & MUTHEN
+03/28/2015   3:21 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS aim3_cbi.dat;
+
+  VARIABLE:
+  NAMES ARE
+  ID_COMB Site TXASSGN CELL ACAMPROS NALTREXO THERAPY GENDER AGE MARRIED RACE
+  EMPLOY EDUC INCOME MINORITY FAMHIS FAMHISNO AEDA32 WAGE
+  AUD_CNSM AUD_DPND AUD_PROB AUD_TTL
+  ADSTOT SCDAE19 SCDAE22 ALCDEPND SMKHIS PACKYR EXSMKYRS EXSMKNO SMKCDAY SMKCYRS
+  AEDA37 AEDA37A AEDA37C AEDA37D COMORBID
+  AEDA8A AEDA10A AEDA19A AEDA19B AEDA22A AEDA23A AEDA19CH
+  MHEA3 TEEA1A TEEA1B TEEA1C TEEA1D TEEA1E TEEA1F THD1 THD2 THD3
+  FRST_DK FRST_DTM TOTL_REL INTX_REL FSTTRTD
+  PSYA1A PSYA1B PSYA1C PSYA1D PSYA2A PSYA2B PSYA3A PSYA3B PSYA4A
+  IPI_SIZE IPI_NODRN IPI_PCTDRN WHOPHYS WHOPSYC WHOSOC WHOENVI
+  TXHIS TEEA2 TEEA3 TEEA4 SUPPORT DRNCBPH DRNCBRE DRNCBIN DRNCBIM DRNCBSR
+  DRNCBTOT CONTROL PRECONT CONTEMP ACTION MAINTEN READINES
+  T0_ABST T1_ABST T2_ABST T3_ABST T4_ABST T26_ABST T52_ABST T68_ABST
+  T0_TDRK T1_TDRK T2_TDRK T3_TDRK T4_TDRK T26_TDRK T52_TDRK T68_TDRK
+  T0_TDHD T1_TDHD T2_TDHD T3_TDHD T4_TDHD T5_TDHD T6_TDHD T26_TDHD
+  T7_TDHD T8_TDHD T9_TDHD T10_TDHD T11_TDHD T12_TDHD T13_TDHD T52_TDHD
+  T14_TDHD T15_TDHD T16_TDHD T17_TDHD T68_TDHD T0_TDHW T1_TDHW T2_TDHW
+  T3_TDHW T4_TDHW T26_TDHW T52_TDHW T68_TDHW
+  T0_DPDD T1_DPDD T2_DPDD T3_DPDD T4_DPDD T26_DPDD T52_DPDD T68_DPDD
+  T0_DPD2 T1_DPD2 T2_DPD2 T3_DPD2 T4_DPD2 T26_DPD2 T52_DPD2 T68_DPD2
+  T0_DPDW T1_DPDW T2_DPDW T3_DPDW T4_DPDW T26_DPDW T52_DPDW T68_DPDW
+  T0_PDA T1_PDA T2_PDA T3_PDA T4_PDA T26_PDA T52_PDA T68_PDA
+  T0_PPDD T1_PPDD T2_PPDD T3_PPDD T4_PPDD T26_PPDD T52_PPDD T68_PPDD
+  T0_PHD T1_PHD  T2_PHD  T3_PHD  T4_PHD  T26_PHD  T52_PHD  T68_PHD
+  MAXDRINK  T1_THD  T2_THD  T3_THD  T4_THD  T26_THD  T52_THD  T68_THD
+  T0_ACPR  T2_ACPR  T4_ACPR  T26_ACPR  T52_ACPR  T68_ACPR  T0_FDRO
+  T1_FDRO  T2_FDRO  T3_FDRO  T4_FDRO  T26_FDRO  T52_FDRO  T68_FDRO
+  RELAPSE1  RELAPSE2  RELAPSE3  DTH1  DTH2  DTH3  DRELPSE1  DRELPSE2  DRELPSE3
+  DLASTR   TDD1  TDD2  TDD3  FULLTIME  FRST_DRK  FRSTDKTM  ABSTI
+  T0_CCO T2_CCO  T4_CCO  T26_CCO  T52_CCO  T68_CCO CAD  TAD
+  PSS0 PSS1 PSS2 PSS4 PSS6 PSS8 PSS10 PSS12 PSS14 PSS16 PSS23 PSS26 PSS52 PSS54 PSS68
+  TENS0 TENS1 TENS2 TENS4 TENS6 TENS8 TENS9 TENS10 TENS12 TENS14 TENS15 TENS16
+  DEPRES0 DEPRES1 DEPRES2 DEPRES4 DEPRES6 DEPRES8 DEPRES9 DEPRES10
+  DEPRES12 DEPRES14 DEPRES15 DEPRES16
+  ANGER0 ANGER1 ANGER2 ANGER4 ANGER6 ANGER8 ANGER9 ANGER10
+  ANGER12 ANGER14 ANGER15 ANGER16
+  VIGOR0 VIGOR1 VIGOR2 VIGOR4 VIGOR6 VIGOR8 VIGOR9 VIGOR10
+  VIGOR12 VIGOR14 VIGOR15 VIGOR16
+  FATIG0 FATIG1 FATIG2 FATIG4 FATIG6 FATIG8 FATIG9 FATIG10
+  FATIG12 FATIG14 FATIG15 FATIG16
+  CONFUS0 CONFUS1 CONFUS2 CONFUS4 CONFUS6 CONFUS8 CONFUS9 CONFUS10
+  CONFUS12 CONFUS14 CONFUS15 CONFUS16
+  ocdtot0 ocdtot1 ocdtot2 ocdtot4 ocdtot6 ocdtot8 ocdtot10 ocdtot12
+  ocdtot14 ocdtot16 ocdtot26 ocdtot52
+  T0_DRO T2_DRO T4_DRO T26_DRO T52_DRO T68_DRO
+  TREAT totrel INTXREL pstxrel
+  t1ddd_u t2ddd_u t3ddd_u t4ddd_u t26ddd_u t52ddd_u t68ddd_u
+  frstdrnk abstain RELAPSE INTXRL POSTL ADHERE numcase moodnum cravnum moodmod cravmod
+  mood_0 mood_1 mood_2 mood_3 mood_4 mood_5 mood_6 mood_7 mood_8 mood_9 mood_10 mood_11
+  mood_12 mood_13 mood_14 mood_15 mood_16
+  crav_0 crav_1 crav_2 crav_3 crav_4 crav_5 crav_6 crav_7 crav_8 crav_9 crav_10 crav_11
+  crav_12 crav_13 crav_14 crav_15 crav_16
+  deppre0 deppre1 deppre2 deppre3 deppre4 deppre5 deppre6 deppre7 deppre8 deppre9
+  deppre10 deppre11 deppo0 deppo1 deppo2 deppo3 deppo4 deppo5 deppo6 deppo7 deppo8
+  deppo9 deppo10 deppo11
+  ;
+
+  MISSING ARE ALL (999);
+
+  USEVARIABLES ARE age gender adstot
+  depres0 depres4 depres8 depres12 depres16;
+
+
+  MODEL:
+  !The | command provides all of the default constraints for a growth model,
+  i s q | depres0@0 depres4@1 depres8@2 depres12@3 depres16@4;
+
+  i s q ON age gender adstot;
+
+  OUTPUT:
+  TECH1 TECH4 TECH8 SAMPSTAT STANDARDIZED CINTERVAL MODINDICES;
+
+  PLOT:
+  TYPE IS PLOT3;
+  SERIES IS depres0(0) depres4(4) depres8(8) depres12(12) depres16(16);
+
+
+
+
+*** WARNING in OUTPUT command
+  TECH8 option is available only with analysis types MIXTURE, RANDOM, or
+  TWOLEVEL with estimators ML, MLF, or MLR or ALGORITHM=INTEGRATION.
+  Request for TECH8 is ignored.
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  3
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  1
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         772
+
+Number of dependent variables                                    5
+Number of independent variables                                  3
+Number of continuous latent variables                            3
+
+Observed dependent variables
+
+  Continuous
+   DEPRES0     DEPRES4     DEPRES8     DEPRES12    DEPRES16
+
+Observed independent variables
+   AGE         GENDER      ADSTOT
+
+Continuous latent variables
+   I           S           Q
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  aim3_cbi.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            19
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        0.995
+ DEPRES4        0.850         0.854
+ DEPRES8        0.803         0.762         0.807
+ DEPRES12       0.742         0.699         0.701         0.745
+ DEPRES16       0.815         0.756         0.746         0.716         0.819
+ AGE            0.995         0.854         0.807         0.745         0.819
+ GENDER         0.995         0.854         0.807         0.745         0.819
+ ADSTOT         0.995         0.854         0.807         0.745         0.819
+
+
+           Covariance Coverage
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+ AGE            1.000
+ GENDER         1.000         1.000
+ ADSTOT         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1         4.360         3.669         3.423         3.624         3.313
+
+
+           Means
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+      1        44.727         1.689        16.348
+
+
+           Covariances
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0       17.261
+ DEPRES4        9.977        16.703
+ DEPRES8        9.207        11.203        16.458
+ DEPRES12       8.544        10.886        12.598        17.806
+ DEPRES16       7.795        10.043        11.687        12.740        16.636
+ AGE           -4.545        -3.141        -4.595        -2.644        -4.306
+ GENDER        -0.169        -0.076        -0.122        -0.167        -0.082
+ ADSTOT         8.025         6.477         6.451         5.542         5.841
+
+
+           Covariances
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+ AGE          103.903
+ GENDER        -0.363         0.214
+ ADSTOT       -19.227         0.112        50.908
+
+
+           Correlations
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        1.000
+ DEPRES4        0.588         1.000
+ DEPRES8        0.546         0.676         1.000
+ DEPRES12       0.487         0.631         0.736         1.000
+ DEPRES16       0.460         0.602         0.706         0.740         1.000
+ AGE           -0.107        -0.075        -0.111        -0.061        -0.104
+ GENDER        -0.088        -0.040        -0.065        -0.086        -0.044
+ ADSTOT         0.271         0.222         0.223         0.184         0.201
+
+
+           Correlations
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+ AGE            1.000
+ GENDER        -0.077         1.000
+ ADSTOT        -0.264         0.034         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -14293.394
+
+
+UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     DEPRES0               4.363       1.032       0.000   21.48%       0.000      2.000      3.000
+             768.000      17.282       0.523      20.000    0.13%       5.000      8.000
+     DEPRES4               3.578       1.476       0.000   29.14%       0.000      1.000      2.000
+             659.000      16.090       2.134      20.000    0.46%       4.000      6.000
+     DEPRES8               3.380       1.711       0.000   30.82%       0.000      1.000      2.000
+             623.000      16.344       3.118      20.000    0.96%       3.000      6.000
+     DEPRES12              3.570       1.414       0.000   29.74%       0.000      1.000      2.000
+             575.000      16.930       1.684      20.000    0.52%       3.000      7.000
+     DEPRES16              3.274       1.653       0.000   31.80%       0.000      1.000      2.000
+             632.000      16.227       2.538      20.000    0.32%       3.000      5.000
+     AGE                  44.727       0.244      20.000    0.13%      36.000     42.000     44.000
+             772.000     103.903      -0.112      80.000    0.13%      47.000     53.000
+     GENDER                1.689      -0.817       1.000   31.09%       1.000      2.000      2.000
+             772.000       0.214      -1.332       2.000   68.91%       2.000      2.000
+     ADSTOT               16.348       0.536       0.000    0.26%      10.000     14.000     16.000
+             772.000      50.908       0.161      41.000    0.26%      18.000     22.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       23
+
+Loglikelihood
+
+          H0 Value                       -8333.626
+          H1 Value                       -8322.813
+
+Information Criteria
+
+          Akaike (AIC)                   16713.252
+          Bayesian (BIC)                 16820.178
+          Sample-Size Adjusted BIC       16747.142
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             21.625
+          Degrees of Freedom                    12
+          P-Value                           0.0419
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.032
+          90 Percent C.I.                    0.006  0.054
+          Probability RMSEA <= .05           0.908
+
+CFI/TLI
+
+          CFI                                0.994
+          TLI                                0.988
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1745.223
+          Degrees of Freedom                    25
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.015
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            1.000      0.000    999.000    999.000
+    DEPRES4            1.000      0.000    999.000    999.000
+    DEPRES8            1.000      0.000    999.000    999.000
+    DEPRES12           1.000      0.000    999.000    999.000
+    DEPRES16           1.000      0.000    999.000    999.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            1.000      0.000    999.000    999.000
+    DEPRES8            2.000      0.000    999.000    999.000
+    DEPRES12           3.000      0.000    999.000    999.000
+    DEPRES16           4.000      0.000    999.000    999.000
+
+ Q        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            1.000      0.000    999.000    999.000
+    DEPRES8            4.000      0.000    999.000    999.000
+    DEPRES12           9.000      0.000    999.000    999.000
+    DEPRES16          16.000      0.000    999.000    999.000
+
+ I        ON
+    AGE               -0.018      0.014     -1.242      0.214
+    GENDER            -0.773      0.304     -2.539      0.011
+    ADSTOT             0.151      0.020      7.393      0.000
+
+ S        ON
+    AGE                0.003      0.012      0.267      0.789
+    GENDER             0.051      0.249      0.204      0.838
+    ADSTOT            -0.024      0.017     -1.441      0.150
+
+ Q        ON
+    AGE               -0.001      0.003     -0.383      0.701
+    GENDER             0.000      0.055     -0.002      0.998
+    ADSTOT             0.003      0.004      0.906      0.365
+
+ S        WITH
+    I                 -0.726      0.815     -0.891      0.373
+
+ Q        WITH
+    I                  0.010      0.158      0.062      0.951
+    S                 -0.424      0.163     -2.604      0.009
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+    I                  3.913      0.979      3.996      0.000
+    S                 -0.389      0.810     -0.481      0.631
+    Q                  0.074      0.178      0.417      0.677
+
+ Residual Variances
+    DEPRES0            6.291      0.963      6.534      0.000
+    DEPRES4            5.945      0.443     13.435      0.000
+    DEPRES8            4.066      0.377     10.793      0.000
+    DEPRES12           4.734      0.417     11.363      0.000
+    DEPRES16           3.661      0.835      4.386      0.000
+    I                  9.532      1.087      8.767      0.000
+    S                  2.570      0.786      3.271      0.001
+    Q                  0.083      0.038      2.207      0.027
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            0.797      0.034     23.099      0.000
+    DEPRES4            0.804      0.036     22.150      0.000
+    DEPRES8            0.815      0.044     18.556      0.000
+    DEPRES12           0.782      0.043     18.117      0.000
+    DEPRES16           0.810      0.045     18.139      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.393      0.059      6.701      0.000
+    DEPRES8            0.796      0.121      6.579      0.000
+    DEPRES12           1.146      0.172      6.671      0.000
+    DEPRES16           1.581      0.244      6.482      0.000
+
+ Q        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.071      0.016      4.487      0.000
+    DEPRES8            0.286      0.064      4.438      0.000
+    DEPRES12           0.618      0.137      4.524      0.000
+    DEPRES16           1.136      0.259      4.383      0.000
+
+ I        ON
+    AGE               -0.055      0.044     -1.242      0.214
+    GENDER            -0.108      0.042     -2.555      0.011
+    ADSTOT             0.326      0.044      7.490      0.000
+
+ S        ON
+    AGE                0.020      0.075      0.267      0.789
+    GENDER             0.015      0.071      0.205      0.838
+    ADSTOT            -0.108      0.076     -1.425      0.154
+
+ Q        ON
+    AGE               -0.035      0.092     -0.382      0.703
+    GENDER             0.000      0.087     -0.002      0.998
+    ADSTOT             0.083      0.092      0.895      0.371
+
+ S        WITH
+    I                 -0.147      0.141     -1.043      0.297
+
+ Q        WITH
+    I                  0.011      0.175      0.062      0.950
+    S                 -0.916      0.036    -25.291      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+    I                  1.184      0.302      3.924      0.000
+    S                 -0.241      0.503     -0.480      0.631
+    Q                  0.256      0.617      0.415      0.678
+
+ Residual Variances
+    DEPRES0            0.366      0.055      6.654      0.000
+    DEPRES4            0.352      0.023     15.278      0.000
+    DEPRES8            0.247      0.023     10.866      0.000
+    DEPRES12           0.265      0.021     12.417      0.000
+    DEPRES16           0.220      0.050      4.391      0.000
+    I                  0.873      0.030     29.443      0.000
+    S                  0.987      0.017     59.278      0.000
+    Q                  0.990      0.017     56.913      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            0.797      0.034     23.099      0.000
+    DEPRES4            0.804      0.036     22.150      0.000
+    DEPRES8            0.815      0.044     18.556      0.000
+    DEPRES12           0.782      0.043     18.117      0.000
+    DEPRES16           0.810      0.045     18.139      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.393      0.059      6.701      0.000
+    DEPRES8            0.796      0.121      6.579      0.000
+    DEPRES12           1.146      0.172      6.671      0.000
+    DEPRES16           1.581      0.244      6.482      0.000
+
+ Q        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.071      0.016      4.487      0.000
+    DEPRES8            0.286      0.064      4.438      0.000
+    DEPRES12           0.618      0.137      4.524      0.000
+    DEPRES16           1.136      0.259      4.383      0.000
+
+ I        ON
+    AGE               -0.005      0.004     -1.243      0.214
+    GENDER            -0.234      0.091     -2.561      0.010
+    ADSTOT             0.046      0.006      7.597      0.000
+
+ S        ON
+    AGE                0.002      0.007      0.267      0.789
+    GENDER             0.032      0.154      0.205      0.838
+    ADSTOT            -0.015      0.011     -1.426      0.154
+
+ Q        ON
+    AGE               -0.003      0.009     -0.382      0.703
+    GENDER             0.000      0.188     -0.002      0.998
+    ADSTOT             0.012      0.013      0.895      0.371
+
+ S        WITH
+    I                 -0.147      0.141     -1.043      0.297
+
+ Q        WITH
+    I                  0.011      0.175      0.062      0.950
+    S                 -0.916      0.036    -25.291      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+    I                  1.184      0.302      3.924      0.000
+    S                 -0.241      0.503     -0.480      0.631
+    Q                  0.256      0.617      0.415      0.678
+
+ Residual Variances
+    DEPRES0            0.366      0.055      6.654      0.000
+    DEPRES4            0.352      0.023     15.278      0.000
+    DEPRES8            0.247      0.023     10.866      0.000
+    DEPRES12           0.265      0.021     12.417      0.000
+    DEPRES16           0.220      0.050      4.391      0.000
+    I                  0.873      0.030     29.443      0.000
+    S                  0.987      0.017     59.278      0.000
+    Q                  0.990      0.017     56.913      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            3.305      0.173     19.069      0.000
+    DEPRES4            3.305      0.173     19.069      0.000
+    DEPRES8            3.305      0.173     19.069      0.000
+    DEPRES12           3.305      0.173     19.069      0.000
+    DEPRES16           3.305      0.173     19.069      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            1.614      0.244      6.616      0.000
+    DEPRES8            3.227      0.488      6.616      0.000
+    DEPRES12           4.841      0.732      6.616      0.000
+    DEPRES16           6.455      0.976      6.616      0.000
+
+ Q        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.290      0.065      4.455      0.000
+    DEPRES8            1.160      0.260      4.455      0.000
+    DEPRES12           2.609      0.586      4.455      0.000
+    DEPRES16           4.639      1.041      4.455      0.000
+
+ I        ON
+    AGE               -0.005      0.004     -1.243      0.214
+    GENDER            -0.234      0.091     -2.561      0.010
+    ADSTOT             0.046      0.006      7.597      0.000
+
+ S        ON
+    AGE                0.002      0.007      0.267      0.789
+    GENDER             0.032      0.154      0.205      0.838
+    ADSTOT            -0.015      0.011     -1.426      0.154
+
+ Q        ON
+    AGE               -0.003      0.009     -0.382      0.703
+    GENDER             0.000      0.188     -0.002      0.998
+    ADSTOT             0.012      0.013      0.895      0.371
+
+ S        WITH
+    I                 -0.147      0.141     -1.043      0.297
+
+ Q        WITH
+    I                  0.011      0.175      0.062      0.950
+    S                 -0.916      0.036    -25.291      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+    I                  1.184      0.302      3.924      0.000
+    S                 -0.241      0.503     -0.480      0.631
+    Q                  0.256      0.617      0.415      0.678
+
+ Residual Variances
+    DEPRES0            6.291      0.963      6.534      0.000
+    DEPRES4            5.945      0.443     13.435      0.000
+    DEPRES8            4.066      0.377     10.793      0.000
+    DEPRES12           4.734      0.417     11.363      0.000
+    DEPRES16           3.661      0.835      4.386      0.000
+    I                  0.873      0.030     29.443      0.000
+    S                  0.987      0.017     59.278      0.000
+    Q                  0.990      0.017     56.913      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    DEPRES0            0.634      0.055     11.550      0.000
+    DEPRES4            0.648      0.023     28.142      0.000
+    DEPRES8            0.753      0.023     33.095      0.000
+    DEPRES12           0.735      0.021     34.367      0.000
+    DEPRES16           0.780      0.050     15.597      0.000
+
+     Latent                                         Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    I                  0.127      0.030      4.289      0.000
+    S                  0.013      0.017      0.793      0.428
+    Q                  0.010      0.017      0.552      0.581
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.229E-07
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES4          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES8          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES12         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES16         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES8          2.000       2.000       2.000       2.000       2.000       2.000       2.000
+    DEPRES12         3.000       3.000       3.000       3.000       3.000       3.000       3.000
+    DEPRES16         4.000       4.000       4.000       4.000       4.000       4.000       4.000
+
+ Q        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES8          4.000       4.000       4.000       4.000       4.000       4.000       4.000
+    DEPRES12         9.000       9.000       9.000       9.000       9.000       9.000       9.000
+    DEPRES16        16.000      16.000      16.000      16.000      16.000      16.000      16.000
+
+ I        ON
+    AGE             -0.055      -0.046      -0.041      -0.018       0.006       0.010       0.019
+    GENDER          -1.556      -1.369      -1.273      -0.773      -0.272      -0.176       0.011
+    ADSTOT           0.098       0.111       0.117       0.151       0.185       0.191       0.204
+
+ S        ON
+    AGE             -0.027      -0.020      -0.016       0.003       0.023       0.026       0.034
+    GENDER          -0.591      -0.438      -0.359       0.051       0.461       0.540       0.693
+    ADSTOT          -0.068      -0.057      -0.052      -0.024       0.003       0.009       0.019
+
+ Q        ON
+    AGE             -0.008      -0.006      -0.005      -0.001       0.003       0.004       0.006
+    GENDER          -0.141      -0.107      -0.090       0.000       0.090       0.107       0.141
+    ADSTOT          -0.006      -0.004      -0.003       0.003       0.009       0.011       0.013
+
+ S        WITH
+    I               -2.824      -2.323      -2.066      -0.726       0.614       0.871       1.372
+
+ Q        WITH
+    I               -0.397      -0.300      -0.250       0.010       0.270       0.319       0.416
+    S               -0.843      -0.743      -0.691      -0.424      -0.156      -0.105      -0.005
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    I                1.391       1.994       2.302       3.913       5.523       5.832       6.435
+    S               -2.475      -1.976      -1.721      -0.389       0.943       1.198       1.696
+    Q               -0.384      -0.274      -0.218       0.074       0.367       0.423       0.532
+
+ Residual Variances
+    DEPRES0          3.811       4.404       4.707       6.291       7.875       8.178       8.771
+    DEPRES4          4.805       5.078       5.217       5.945       6.673       6.812       7.085
+    DEPRES8          3.096       3.328       3.447       4.066       4.686       4.805       5.037
+    DEPRES12         3.661       3.918       4.049       4.734       5.420       5.551       5.807
+    DEPRES16         1.511       2.025       2.288       3.661       5.034       5.296       5.810
+    I                6.732       7.401       7.744       9.532      11.321      11.663      12.333
+    S                0.546       1.030       1.277       2.570       3.862       4.110       4.594
+    Q               -0.014       0.009       0.021       0.083       0.145       0.157       0.180
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          0.708       0.729       0.740       0.797       0.853       0.864       0.885
+    DEPRES4          0.710       0.733       0.744       0.804       0.864       0.875       0.897
+    DEPRES8          0.702       0.729       0.743       0.815       0.887       0.901       0.928
+    DEPRES12         0.671       0.698       0.711       0.782       0.853       0.867       0.894
+    DEPRES16         0.695       0.722       0.736       0.810       0.883       0.897       0.924
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.242       0.278       0.296       0.393       0.489       0.507       0.543
+    DEPRES8          0.484       0.559       0.597       0.796       0.995       1.033       1.107
+    DEPRES12         0.704       0.809       0.864       1.146       1.429       1.483       1.589
+    DEPRES16         0.953       1.103       1.180       1.581       1.982       2.059       2.210
+
+ Q        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.030       0.040       0.045       0.071       0.096       0.101       0.111
+    DEPRES8          0.120       0.160       0.180       0.286       0.392       0.412       0.452
+    DEPRES12         0.266       0.350       0.393       0.618       0.842       0.885       0.970
+    DEPRES16         0.469       0.628       0.710       1.136       1.563       1.644       1.804
+
+ I        ON
+    AGE             -0.168      -0.141      -0.127      -0.055       0.018       0.032       0.059
+    GENDER          -0.217      -0.191      -0.178      -0.108      -0.039      -0.025       0.001
+    ADSTOT           0.214       0.241       0.254       0.326       0.398       0.411       0.438
+
+ S        ON
+    AGE             -0.173      -0.127      -0.103       0.020       0.144       0.167       0.213
+    GENDER          -0.169      -0.125      -0.103       0.015       0.132       0.155       0.199
+    ADSTOT          -0.302      -0.256      -0.232      -0.108       0.017       0.040       0.087
+
+ Q        ON
+    AGE             -0.273      -0.216      -0.187      -0.035       0.117       0.146       0.203
+    GENDER          -0.225      -0.171      -0.144       0.000       0.143       0.171       0.224
+    ADSTOT          -0.155      -0.098      -0.069       0.083       0.235       0.264       0.320
+
+ S        WITH
+    I               -0.509      -0.422      -0.378      -0.147       0.085       0.129       0.216
+
+ Q        WITH
+    I               -0.441      -0.333      -0.278       0.011       0.299       0.355       0.463
+    S               -1.009      -0.987      -0.975      -0.916      -0.856      -0.845      -0.823
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    I                0.407       0.593       0.688       1.184       1.680       1.775       1.961
+    S               -1.536      -1.227      -1.068      -0.241       0.586       0.744       1.054
+    Q               -1.334      -0.954      -0.759       0.256       1.271       1.466       1.846
+
+ Residual Variances
+    DEPRES0          0.224       0.258       0.275       0.366       0.456       0.473       0.507
+    DEPRES4          0.293       0.307       0.314       0.352       0.390       0.397       0.411
+    DEPRES8          0.189       0.203       0.210       0.247       0.285       0.292       0.306
+    DEPRES12         0.210       0.224       0.230       0.265       0.301       0.307       0.320
+    DEPRES16         0.091       0.122       0.137       0.220       0.302       0.318       0.349
+    I                0.796       0.815       0.824       0.873       0.922       0.931       0.949
+    S                0.944       0.954       0.959       0.987       1.014       1.019       1.030
+    Q                0.946       0.956       0.962       0.990       1.019       1.025       1.035
+
+
+STDY Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          0.708       0.729       0.740       0.797       0.853       0.864       0.885
+    DEPRES4          0.710       0.733       0.744       0.804       0.864       0.875       0.897
+    DEPRES8          0.702       0.729       0.743       0.815       0.887       0.901       0.928
+    DEPRES12         0.671       0.698       0.711       0.782       0.853       0.867       0.894
+    DEPRES16         0.695       0.722       0.736       0.810       0.883       0.897       0.924
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.242       0.278       0.296       0.393       0.489       0.507       0.543
+    DEPRES8          0.484       0.559       0.597       0.796       0.995       1.033       1.107
+    DEPRES12         0.704       0.809       0.864       1.146       1.429       1.483       1.589
+    DEPRES16         0.953       1.103       1.180       1.581       1.982       2.059       2.210
+
+ Q        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.030       0.040       0.045       0.071       0.096       0.101       0.111
+    DEPRES8          0.120       0.160       0.180       0.286       0.392       0.412       0.452
+    DEPRES12         0.266       0.350       0.393       0.618       0.842       0.885       0.970
+    DEPRES16         0.469       0.628       0.710       1.136       1.563       1.644       1.804
+
+ I        ON
+    AGE             -0.017      -0.014      -0.012      -0.005       0.002       0.003       0.006
+    GENDER          -0.469      -0.413      -0.384      -0.234      -0.084      -0.055       0.001
+    ADSTOT           0.030       0.034       0.036       0.046       0.056       0.057       0.061
+
+ S        ON
+    AGE             -0.017      -0.012      -0.010       0.002       0.014       0.016       0.021
+    GENDER          -0.366      -0.271      -0.222       0.032       0.285       0.334       0.429
+    ADSTOT          -0.042      -0.036      -0.032      -0.015       0.002       0.006       0.012
+
+ Q        ON
+    AGE             -0.027      -0.021      -0.018      -0.003       0.011       0.014       0.020
+    GENDER          -0.485      -0.369      -0.310       0.000       0.309       0.369       0.485
+    ADSTOT          -0.022      -0.014      -0.010       0.012       0.033       0.037       0.045
+
+ S        WITH
+    I               -0.509      -0.422      -0.378      -0.147       0.085       0.129       0.216
+
+ Q        WITH
+    I               -0.441      -0.333      -0.278       0.011       0.299       0.355       0.463
+    S               -1.009      -0.987      -0.975      -0.916      -0.856      -0.845      -0.823
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    I                0.407       0.593       0.688       1.184       1.680       1.775       1.961
+    S               -1.536      -1.227      -1.068      -0.241       0.586       0.744       1.054
+    Q               -1.334      -0.954      -0.759       0.256       1.271       1.466       1.846
+
+ Residual Variances
+    DEPRES0          0.224       0.258       0.275       0.366       0.456       0.473       0.507
+    DEPRES4          0.293       0.307       0.314       0.352       0.390       0.397       0.411
+    DEPRES8          0.189       0.203       0.210       0.247       0.285       0.292       0.306
+    DEPRES12         0.210       0.224       0.230       0.265       0.301       0.307       0.320
+    DEPRES16         0.091       0.122       0.137       0.220       0.302       0.318       0.349
+    I                0.796       0.815       0.824       0.873       0.922       0.931       0.949
+    S                0.944       0.954       0.959       0.987       1.014       1.019       1.030
+    Q                0.946       0.956       0.962       0.990       1.019       1.025       1.035
+
+
+STD Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          2.858       2.965       3.020       3.305       3.590       3.644       3.751
+    DEPRES4          2.858       2.965       3.020       3.305       3.590       3.644       3.751
+    DEPRES8          2.858       2.965       3.020       3.305       3.590       3.644       3.751
+    DEPRES12         2.858       2.965       3.020       3.305       3.590       3.644       3.751
+    DEPRES16         2.858       2.965       3.020       3.305       3.590       3.644       3.751
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.985       1.136       1.212       1.614       2.015       2.092       2.242
+    DEPRES8          1.971       2.271       2.425       3.227       4.030       4.184       4.484
+    DEPRES12         2.956       3.407       3.637       4.841       6.045       6.275       6.726
+    DEPRES16         3.942       4.542       4.850       6.455       8.060       8.367       8.968
+
+ Q        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.122       0.162       0.183       0.290       0.397       0.417       0.458
+    DEPRES8          0.489       0.649       0.731       1.160       1.588       1.670       1.830
+    DEPRES12         1.101       1.461       1.646       2.609       3.573       3.757       4.118
+    DEPRES16         1.957       2.598       2.926       4.639       6.352       6.680       7.321
+
+ I        ON
+    AGE             -0.017      -0.014      -0.012      -0.005       0.002       0.003       0.006
+    GENDER          -0.469      -0.413      -0.384      -0.234      -0.084      -0.055       0.001
+    ADSTOT           0.030       0.034       0.036       0.046       0.056       0.057       0.061
+
+ S        ON
+    AGE             -0.017      -0.012      -0.010       0.002       0.014       0.016       0.021
+    GENDER          -0.366      -0.271      -0.222       0.032       0.285       0.334       0.429
+    ADSTOT          -0.042      -0.036      -0.032      -0.015       0.002       0.006       0.012
+
+ Q        ON
+    AGE             -0.027      -0.021      -0.018      -0.003       0.011       0.014       0.020
+    GENDER          -0.485      -0.369      -0.310       0.000       0.309       0.369       0.485
+    ADSTOT          -0.022      -0.014      -0.010       0.012       0.033       0.037       0.045
+
+ S        WITH
+    I               -0.509      -0.422      -0.378      -0.147       0.085       0.129       0.216
+
+ Q        WITH
+    I               -0.441      -0.333      -0.278       0.011       0.299       0.355       0.463
+    S               -1.009      -0.987      -0.975      -0.916      -0.856      -0.845      -0.823
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    I                0.407       0.593       0.688       1.184       1.680       1.775       1.961
+    S               -1.536      -1.227      -1.068      -0.241       0.586       0.744       1.054
+    Q               -1.334      -0.954      -0.759       0.256       1.271       1.466       1.846
+
+ Residual Variances
+    DEPRES0          3.811       4.404       4.707       6.291       7.875       8.178       8.771
+    DEPRES4          4.805       5.078       5.217       5.945       6.673       6.812       7.085
+    DEPRES8          3.096       3.328       3.447       4.066       4.686       4.805       5.037
+    DEPRES12         3.661       3.918       4.049       4.734       5.420       5.551       5.807
+    DEPRES16         1.511       2.025       2.288       3.661       5.034       5.296       5.810
+    I                0.796       0.815       0.824       0.873       0.922       0.931       0.949
+    S                0.944       0.954       0.959       0.987       1.014       1.019       1.030
+    Q                0.946       0.956       0.962       0.990       1.019       1.025       1.035
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+BY Statements
+
+I        BY DEPRES16              10.420    -0.172     -0.569       -0.139
+
+Means/Intercepts/Thresholds
+
+[ DEPRES12 ]                      12.741     0.402      0.402        0.095
+[ DEPRES16 ]                      13.604    -0.993     -0.993       -0.243
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1           0             0             0             0             0
+
+
+           NU
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+      1           0             0             0
+
+
+           LAMBDA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ DEPRES0            0             0             0             0             0
+ DEPRES4            0             0             0             0             0
+ DEPRES8            0             0             0             0             0
+ DEPRES12           0             0             0             0             0
+ DEPRES16           0             0             0             0             0
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ ADSTOT             0             0             0             0             0
+
+
+           LAMBDA
+              ADSTOT
+              ________
+ DEPRES0            0
+ DEPRES4            0
+ DEPRES8            0
+ DEPRES12           0
+ DEPRES16           0
+ AGE                0
+ GENDER             0
+ ADSTOT             0
+
+
+           THETA
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0            1
+ DEPRES4            0             2
+ DEPRES8            0             0             3
+ DEPRES12           0             0             0             4
+ DEPRES16           0             0             0             0             5
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ ADSTOT             0             0             0             0             0
+
+
+           THETA
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+ AGE                0
+ GENDER             0             0
+ ADSTOT             0             0             0
+
+
+           ALPHA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1           6             7             8             0             0
+
+
+           ALPHA
+              ADSTOT
+              ________
+      1           0
+
+
+           BETA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I                  0             0             0             9            10
+ S                  0             0             0            12            13
+ Q                  0             0             0            15            16
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ ADSTOT             0             0             0             0             0
+
+
+           BETA
+              ADSTOT
+              ________
+ I                 11
+ S                 14
+ Q                 17
+ AGE                0
+ GENDER             0
+ ADSTOT             0
+
+
+           PSI
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I                 18
+ S                 19            20
+ Q                 21            22            23
+ AGE                0             0             0             0
+ GENDER             0             0             0             0             0
+ ADSTOT             0             0             0             0             0
+
+
+           PSI
+              ADSTOT
+              ________
+ ADSTOT             0
+
+
+     STARTING VALUES
+
+
+           NU
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+      1         0.000         0.000         0.000
+
+
+           LAMBDA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ DEPRES0        1.000         0.000         0.000         0.000         0.000
+ DEPRES4        1.000         1.000         1.000         0.000         0.000
+ DEPRES8        1.000         2.000         4.000         0.000         0.000
+ DEPRES12       1.000         3.000         9.000         0.000         0.000
+ DEPRES16       1.000         4.000        16.000         0.000         0.000
+ AGE            0.000         0.000         0.000         1.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         1.000
+ ADSTOT         0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              ADSTOT
+              ________
+ DEPRES0        0.000
+ DEPRES4        0.000
+ DEPRES8        0.000
+ DEPRES12       0.000
+ DEPRES16       0.000
+ AGE            0.000
+ GENDER         0.000
+ ADSTOT         1.000
+
+
+           THETA
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        8.641
+ DEPRES4        0.000         8.045
+ DEPRES8        0.000         0.000         8.172
+ DEPRES12       0.000         0.000         0.000         8.465
+ DEPRES16       0.000         0.000         0.000         0.000         8.114
+ AGE            0.000         0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         0.000
+ ADSTOT         0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              AGE           GENDER        ADSTOT
+              ________      ________      ________
+ AGE            0.000
+ GENDER         0.000         0.000
+ ADSTOT         0.000         0.000         0.000
+
+
+           ALPHA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1         4.369        -0.831         0.218        44.727         1.689
+
+
+           ALPHA
+              ADSTOT
+              ________
+      1        16.348
+
+
+           BETA
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              0.000         0.000         0.000         0.000         0.000
+ S              0.000         0.000         0.000         0.000         0.000
+ Q              0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         0.000
+ ADSTOT         0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              ADSTOT
+              ________
+ I              0.000
+ S              0.000
+ Q              0.000
+ AGE            0.000
+ GENDER         0.000
+ ADSTOT         0.000
+
+
+           PSI
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I             17.212
+ S              0.000        12.641
+ Q              0.000         0.000         1.278
+ AGE            0.000         0.000         0.000       103.903
+ GENDER         0.000         0.000         0.000        -0.363         0.214
+ ADSTOT         0.000         0.000         0.000       -19.227         0.112
+
+
+           PSI
+              ADSTOT
+              ________
+ ADSTOT        50.908
+
+
+TECHNICAL 4 OUTPUT
+
+
+     ESTIMATES DERIVED FROM THE MODEL
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1         4.282        -0.559         0.084        44.727         1.689
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+      1        16.348
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1         0.147         0.117         0.026         0.367         0.017
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+      1         0.257
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1        29.135        -4.779         3.267       121.916       101.397
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+      1        63.663
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.001         0.000         0.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+      1         0.000
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I             10.921
+ S             -0.941         2.604
+ Q              0.041        -0.429         0.084
+ AGE           -4.467         0.779        -0.169       103.903
+ GENDER        -0.142         0.007         0.001        -0.363         0.214
+ ADSTOT         7.942        -1.295         0.190       -19.227         0.112
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT        50.908
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              1.145
+ S              0.831         0.787
+ Q              0.161         0.163         0.038
+ AGE            1.502         1.184         0.260         5.289
+ GENDER         0.068         0.053         0.012         0.170         0.011
+ ADSTOT         1.086         0.828         0.181         2.708         0.119
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT         2.591
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              9.534
+ S             -1.132         3.308
+ Q              0.253        -2.632         2.228
+ AGE           -2.974         0.658        -0.649        19.647
+ GENDER        -2.087         0.132         0.061        -2.134        19.647
+ ADSTOT         7.314        -1.564         1.052        -7.101         0.944
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT        19.647
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              0.000
+ S              0.257         0.001
+ Q              0.800         0.008         0.026
+ AGE            0.003         0.510         0.517         0.000
+ GENDER         0.037         0.895         0.951         0.033         0.000
+ ADSTOT         0.000         0.118         0.293         0.000         0.345
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              1.000
+ S             -0.176         1.000
+ Q              0.043        -0.916         1.000
+ AGE           -0.133         0.047        -0.057         1.000
+ GENDER        -0.093         0.009         0.005        -0.077         1.000
+ ADSTOT         0.337        -0.112         0.092        -0.264         0.034
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              0.000
+ S              0.128         0.000
+ Q              0.161         0.036         0.000
+ AGE            0.044         0.072         0.089         0.000
+ GENDER         0.044         0.071         0.087         0.036         0.000
+ ADSTOT         0.042         0.073         0.089         0.033         0.036
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I            999.000
+ S             -1.375       999.000
+ Q              0.264       -25.529       999.000
+ AGE           -3.017         0.656        -0.642       999.000
+ GENDER        -2.111         0.132         0.061        -2.153       999.000
+ ADSTOT         8.005        -1.546         1.034        -7.897         0.945
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q             AGE           GENDER
+              ________      ________      ________      ________      ________
+ I              0.000
+ S              0.169         0.000
+ Q              0.791         0.000         0.000
+ AGE            0.003         0.512         0.521         0.000
+ GENDER         0.035         0.895         0.951         0.031         0.000
+ ADSTOT         0.000         0.122         0.301         0.000         0.345
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              ADSTOT
+              ________
+ ADSTOT         0.000
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              I             I_SE          S             S_SE          Q
+              ________      ________      ________      ________      ________
+ 1              4.282         1.607        -0.559         1.254         0.084
+
+
+           Means
+              Q_SE
+              ________
+ 1              0.245
+
+
+           Covariances
+              I             I_SE          S             S_SE          Q
+              ________      ________      ________      ________      ________
+ I              8.326
+ I_SE           0.007         0.012
+ S              0.232         0.003         1.019
+ S_SE          -0.002         0.011         0.001         0.013
+ Q             -0.111         0.000        -0.145         0.000         0.024
+ Q_SE           0.000         0.001         0.000         0.002         0.000
+
+
+           Covariances
+              Q_SE
+              ________
+ Q_SE           0.000
+
+
+           Correlations
+              I             I_SE          S             S_SE          Q
+              ________      ________      ________      ________      ________
+ I              1.000
+ I_SE           0.021         1.000
+ S              0.080         0.029         1.000
+ S_SE          -0.007         0.841         0.012         1.000
+ Q             -0.249        -0.019        -0.934         0.005         1.000
+ Q_SE          -0.002         0.871         0.019         0.979        -0.001
+
+
+           Correlations
+              Q_SE
+              ________
+ Q_SE           1.000
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms (sample values, estimated factor scores, estimated values, residuals)
+  Scatterplots (sample values, estimated factor scores, estimated values, residuals)
+  Sample means
+  Estimated means
+  Sample and estimated means
+  Adjusted estimated means
+  Latent variable distribution plots
+  Observed individual values
+  Estimated individual values
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\laptop\dropbox\teaching\psyc 650 sem\data and examples\latent growth curve\lgc of depre
+
+     Beginning Time:  15:21:53
+        Ending Time:  15:21:54
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

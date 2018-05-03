@@ -1,0 +1,74 @@
+TITLE: LEAP 3 DAILY MLM
+!this data file aligns with MSEM write up
+  DATA:
+
+      FILE IS MApp EMA episode.dat;
+
+
+
+  VARIABLE: NAMES ARE
+      ID TOTALJOINTS 
+      USESTRAT USEOTHSTRAT 
+      HELPFULSTRAT LIKELYUSESTRAT condition;
+
+       MISSING = ALL (-999);
+
+    USEVARIABLES ARE
+        ID TOTALJOINTS 
+      USESTRAT  
+      HELPFULSTRAT 
+      condition
+        cuse chelp
+        ;
+
+ ! COUNT ARE totaljoints ;!(i) ;
+
+ ! USEOBSERVATION ARE (TPt eq 4 and 
+ ! totldrnks gt 0 and totldrnks le 35);
+
+  
+  Between are cuse chelp condition;
+  Within are USESTRAT  
+      HELPFULSTRAT ;
+  Cluster is ID;
+
+  Define:
+  cuse = cluster_mean (usestrat);
+  chelp = cluster_mean (helpfulstrat);
+
+  Analysis:
+  
+  Type is Twolevel;
+
+
+
+  Model:
+
+  %WITHIN%
+  TOTALJOINTS on usestrat (cw);
+  !totldrnks#1 on usestrat (cw1);
+
+  TOTALJOINTS on helpfulstrat (bw);
+  !totldrnks#1 on helpstrat (bw1);
+
+  helpfulstrat on usestrat (aw);
+
+  %BETWEEN%
+  !TOTLDRNKS cuse chelp;
+  ![TOTLDRNKS cuse chelp];
+ ! [totldrnks#1@-5];
+
+ TOTALJOINTS on cuse (cb);
+ TOTALJOINTS on chelp (bb);
+
+  chelp on cuse (ab);
+
+  totaljoints on condition;
+
+!  Model constraint:
+!  New (indw indb);
+
+!  indw = aw*bw;
+!  indb = ab*bb;
+
+  OUTPUT: CINTERVAL ;!tech3;

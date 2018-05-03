@@ -1,0 +1,346 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+04/30/2018   8:45 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: LEAP 3 DAILY MLM
+  !this data file aligns with MSEM write up
+    DATA:
+
+        FILE IS MApp EMA episode.dat;
+
+
+
+    VARIABLE: NAMES ARE
+        ID TOTALJOINTS
+        USESTRAT USEOTHSTRAT
+        HELPFULSTRAT LIKELYUSESTRAT condition;
+
+         MISSING = ALL (-999);
+
+      USEVARIABLES ARE
+          ID TOTALJOINTS
+        USESTRAT
+        HELPFULSTRAT
+        condition
+          cuse chelp
+          ;
+
+   ! COUNT ARE totaljoints ;!(i) ;
+
+   ! USEOBSERVATION ARE (TPt eq 4 and
+   ! totldrnks gt 0 and totldrnks le 35);
+
+
+    Between are cuse chelp condition;
+    Within are USESTRAT
+        HELPFULSTRAT ;
+    Cluster is ID;
+
+    Define:
+    cuse = cluster_mean (usestrat);
+    chelp = cluster_mean (helpfulstrat);
+
+    Analysis:
+
+    Type is Twolevel;
+
+
+
+    Model:
+
+    %WITHIN%
+    TOTALJOINTS on usestrat (cw);
+    !totldrnks#1 on usestrat (cw1);
+
+    TOTALJOINTS on helpfulstrat (bw);
+    !totldrnks#1 on helpstrat (bw1);
+
+    helpfulstrat on usestrat (aw);
+
+    %BETWEEN%
+    !TOTLDRNKS cuse chelp;
+    ![TOTLDRNKS cuse chelp];
+   ! [totldrnks#1@-5];
+
+   TOTALJOINTS on cuse (cb);
+   TOTALJOINTS on chelp (bb);
+
+    chelp on cuse (ab);
+
+    totaljoints on condition;
+
+  !  Model constraint:
+  !  New (indw indb);
+
+  !  indw = aw*bw;
+  !  indb = ab*bb;
+
+    OUTPUT: CINTERVAL ;!tech3;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  586
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+LEAP 3 DAILY MLM
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         884
+
+Number of dependent variables                                    3
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   CHELP       TOTALJOINT  HELPFULSTR
+
+Observed independent variables
+   USESTRAT    CONDITIO    CUSE
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   USESTRAT    HELPFULS
+
+  Between variables
+   CONDITIO    CUSE        CHELP
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  MApp EMA episode.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             2
+     Number of clusters                         34
+
+     Average cluster size       26.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     TOTALJOI     0.306      HELPFULS     0.000
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              CHELP         TOTALJOI      HELPFULS      USESTRAT      CONDITIO
+              ________      ________      ________      ________      ________
+ CHELP          1.000
+ TOTALJOI       0.999         0.999
+ HELPFULS       1.000         0.999         1.000
+ USESTRAT       1.000         0.999         1.000         1.000
+ CONDITIO       1.000         0.999         1.000         1.000         1.000
+ CUSE           1.000         0.999         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              CUSE
+              ________
+ CUSE           1.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+          H0 Value                       -3216.328
+          H0 Scaling Correction Factor      7.6584
+            for MLR
+          H1 Value                       -3216.161
+          H1 Scaling Correction Factor      7.2070
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    6460.657
+          Bayesian (BIC)                  6527.639
+          Sample-Size Adjusted BIC        6483.178
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.378*
+          Degrees of Freedom                     1
+          P-Value                           0.5385
+          Scaling Correction Factor         0.8867
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.011
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            472.108
+          Degrees of Freedom                     8
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.023
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ TOTALJOINT ON
+    USESTRAT           0.109      0.178      0.611      0.541
+    HELPFULSTR        -0.059      0.027     -2.176      0.030
+
+ HELPFULSTR ON
+    USESTRAT          -3.185      0.393     -8.096      0.000
+
+ Intercepts
+    HELPFULSTR         9.777      0.615     15.906      0.000
+
+ Residual Variances
+    TOTALJOINT         1.064      0.409      2.601      0.009
+    HELPFULSTR         3.789      0.370     10.239      0.000
+
+Between Level
+
+ TOTALJOINT ON
+    CUSE               0.093      0.657      0.141      0.888
+    CHELP              0.016      0.108      0.151      0.880
+    CONDITION          0.046      0.263      0.174      0.862
+
+ CHELP      ON
+    CUSE              -4.137      0.729     -5.674      0.000
+
+ Intercepts
+    CHELP             11.268      1.077     10.463      0.000
+    TOTALJOINT         1.514      1.459      1.038      0.299
+
+ Residual Variances
+    CHELP              1.524      0.364      4.189      0.000
+    TOTALJOINT         0.483      0.103      4.708      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.138E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ TOTALJOI ON
+    USESTRAT        -0.350      -0.240      -0.184       0.109       0.402       0.458       0.568
+    HELPFULSTR      -0.130      -0.113      -0.104      -0.059      -0.014      -0.006       0.011
+
+ HELPFULS ON
+    USESTRAT        -4.199      -3.957      -3.833      -3.185      -2.538      -2.414      -2.172
+
+ Intercepts
+    HELPFULSTR       8.194       8.572       8.766       9.777      10.788      10.982      11.360
+
+ Residual Variances
+    TOTALJOINT       0.010       0.262       0.391       1.064       1.737       1.866       2.118
+    HELPFULSTR       2.836       3.064       3.180       3.789       4.398       4.514       4.742
+
+Between Level
+
+ TOTALJOI ON
+    CUSE            -1.600      -1.195      -0.988       0.093       1.173       1.380       1.785
+    CHELP           -0.261      -0.195      -0.161       0.016       0.193       0.227       0.293
+    CONDITION       -0.631      -0.469      -0.387       0.046       0.478       0.561       0.722
+
+ CHELP    ON
+    CUSE            -6.015      -5.566      -5.336      -4.137      -2.938      -2.708      -2.259
+
+ Intercepts
+    CHELP            8.494       9.157       9.496      11.268      13.039      13.379      14.042
+    TOTALJOINT      -2.243      -1.345      -0.885       1.514       3.914       4.374       5.272
+
+ Residual Variances
+    CHELP            0.587       0.811       0.926       1.524       2.122       2.237       2.461
+    TOTALJOINT       0.219       0.282       0.314       0.483       0.652       0.684       0.747
+
+
+     Beginning Time:  20:45:03
+        Ending Time:  20:45:03
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

@@ -1,0 +1,180 @@
+TITLE:  Rural 
+!This file compares Dummy code 1 to dummy code 3. 
+!This makes MI the reference group
+!This file and dum12 must both be run to get all pairwise comparisons
+
+         DATA:   FILE is rural 040716 dum.dat;
+   
+
+    VARIABLE:   NAMES ARE 
+   id txcond q2 q8 q9 q10 q11 q12n q12t 
+   q13 q14 q15 q16 tla11 tll11 tlm11 tlh11 
+    tls11 tla12 tll12 tlm12 tlh12 tls12 
+    tla13 tll13 tlm13 tlh13 tls13 tla14 
+    tll14 tlm14 tlh14 tls14 
+    tla15 tll15 tlm15 tlh15 tls15 tla16 
+    tll16 tlm16 tlh16 tls16 tla21 tll21 
+    tlm21 tlh21 tls21 tla22 
+    tll22 tlm22 tlh22 tls22 tla23 tll23 
+    tlm23 tlh23 tls23 book201 book202 
+    book203 book204 book205 
+    book206 book207 book208 book209 book210 
+    book211 book212 book213 book214 book215 
+    book216 book217 
+    tla31 tll31 tlm31 tlh31 tls31 tla32 tll32 
+    tlm32 tlh32 tls32 tla33 tll33 tlm33 tlh33 
+    tls33 book401 
+    book402 book403 book404 book405 book406 
+    book407 book408 book409 book410 book411 
+    book412 book413 
+    book414 book415 book416 book417 tled41m 
+    tled41d tled41y tla41 tll41 tlm41 tlh41 
+    tls41 tled42m 
+    tled42d tled42y tla42 tll42 tlm42 tlh42 
+    tls42 tled43m tled43d tled43y tla43 tll43 
+    tlm43 tlh43 tls43 
+    tla51 tll51 tlm51 tlh51 tls51 tla52 tll52 
+    tlm52 tlh52 tls52 tla53 tll53 tlm53 tlh53 
+    tls53 book601 
+    book602 book603 book604 book605 book606 
+    book607 book608 book609 book610 book611 
+    book612 book613 
+    book614 book615 book616 book617 tled61m 
+    tled61d tled61y tla61 tll61 tlm61 tlh61 
+    tls61 tled62m 
+    tled62d tled62y tla62 tll62 tlm62 tlh62 
+    tls62 tled63m tled63d tled63y tla63 tll63 
+    tlm63 tlh63 tls63 
+    tla1 tll1 tlm1 tlh1 tls1 tlha1 tlhn1 tlr1 
+    tlj1 tlal1 tlhs1 ctla1 ctll1 ctlm1 ctlh1 ctls1 ctlha1 
+    ctlhn1 ctlr1 ctlj1 ctlal1 ctlhs1 tla2 tll2 
+    tlm2 tlh2 tls2 tlha2 tlhn2 tlr2 tlj2 tlal2 
+    tlhs2 ctla2 
+    ctll2 ctlm2 ctlh2 ctls2 ctlha2 ctlhn2 ctlr2 
+    ctlj2 ctlal2 ctlhs2 tla3 tll3 tlm3 tlh3 tls3 tlha3 
+    tlhn3 tlr3 tlj3 tlal3 tlhs3 ctla3 ctll3 ctlm3 
+    ctlh3 ctls3 ctlha3 ctlhn3 ctlr3 ctlj3 ctlal3 ctlhs3 
+    tla4 tll4 tlm4 tlh4 tls4 tlha4 tlhn4 tlr4 
+    tlj4 tlal4 tlhs4 ctla4 ctll4 ctlm4 ctlh4 ctls4 ctlha4 
+    ctlhn4 ctlr4 ctlj4 ctlal4 ctlhs4 tla5 tll5 
+    tlm5 tlh5 tls5 tlha5 tlhn5 tlr5 tlj5 tlal5 tlhs5 ctla5 
+    ctll5 ctlm5 ctlh5 ctls5 ctlha5 ctlhn5 ctlr5 
+    ctlj5 ctlal5 ctlhs5 tla6 tll6 tlm6 tlh6 tls6 tlha6 
+    tlhn6 tlr6 tlj6 tlal6 tlhs6 ctla6 ctll6 ctlm6 
+    ctlh6 ctls6 ctlha6 ctlhn6 ctlr6 ctlj6 ctlal6 ctlhs6 
+    freq1 quant1 freq2 quant2 freq3 quant3 freq4 
+    quant4 freq5 quant5 freq6 quant6 cfreq1 cquant1 cfreq2 
+    cquant2 cfreq3 cquant3 cfreq4 cquant4 cfreq5 
+    cquant5 cfreq6 cquant6 audit ras1 ras2 ras4 ras6 rse1 
+    rse2 rse4 rse6 bsis11 bsis12 bsis13 bsis14 
+    bsis15 bsis16 bsis17 bsis18 bsis19 bsis110 bsigsi1 
+    bsipst1 bsitot1 bsipsd1 bsis21 bsis22 bsis23 
+    bsis24 bsis25 bsis26 bsis27 bsis28 bsis29 bsis210 
+    bsigsi2 bsipst2 bsitot2 bsipsd2 bsis41 
+    bsis42 bsis43 bsis44 bsis45 bsis46 bsis47 bsis48 bsis49 
+    bsis410 bsigsi4 bsipst4 bsitot4 bsipsd4 
+    bsis61 bsis62 bsis63 bsis64 bsis65 
+    bsis66 bsis67 bsis68 
+    bsis69 bsis610 bsigsi6 bsipst6 bsitot6 
+    bsipsd6 drcl11 drcl12 drcl13 drcl14 
+    drcl15 drcl16 drcl1 
+    drcr11 drcr12 drcr13 drcr14 drcr15 drcr16 
+    drcr1 drcr21 drcr22 drcr23 drcr24 drcr25 drcr26 drcr2 
+    drcr41 drcr42 drcr43 drcr44 drcr45 drcr46 
+    drcr4 drcr61 drcr62 drcr63 drcr64 drcr65 drcr66 drcr6 
+    aeq1s01 aeq1s02 aeq1s03 aeq1s04 aeq1s05 
+    aeq1s06 aeq1s07 aeq1s08 aeq1s09 aeq1s10 
+    aeq2s01 aeq2s02 
+    aeq2s03 aeq2s04 aeq2s05 aeq2s06 aeq2s07 
+    aeq2s08 aeq2s09 aeq2s10 aeq4s01 aeq4s02 
+    aeq4s03 aeq4s04 
+    aeq4s05 aeq4s06 aeq4s07 aeq4s08 aeq4s09 
+    aeq4s10 aeq6s01 aeq6s02 aeq6s03 aeq6s04 aeq6s05 aeq6s06 
+    aeq6s07 aeq6s08 aeq6s09 aeq6s10 fsmast1 
+    dadsum dadmiss msmast1 momsum mommiss 
+    dadhx momhx famhx 
+    urica11 urica12 urica13 urica14 uricar1 
+    urica21 urica22 urica23 urica24 uricar2 
+    urica41 urica42 
+    urica43 urica44 uricar4 urica61 urica62 
+    urica63 urica64 uricar6 proc1s01 proc1s02 
+    proc1s03 proc1s04 
+    proc1s05 proc1s06 proc1s07 proc1s08 proc1s09 
+    proc1s10 proc1s11 proc1s12 proc1s13 proc2s01 
+    proc2s02 
+    proc2s03 proc2s04 proc2s05 proc2s06 proc2s07 
+    proc2s08 proc2s09 proc2s10 proc2s11 proc2s12 proc2s13 
+    proc4s01 proc4s02 proc4s03 proc4s04 proc4s05 
+    proc4s06 proc4s07 proc4s08 proc4s09 proc4s10 proc4s11 
+    proc4s12 proc4s13 proc6s01 proc6s02 proc6s03 
+    proc6s04 proc6s05 proc6s06 proc6s07 proc6s08 proc6s09 
+    proc6s10 proc6s11 proc6s12 proc6s13 proc1a 
+    proc1b proc2a proc2b proc4a proc4b proc6a proc6b scq11 
+    scq12 scq13 scq14 scq15 scq16 scq17 scq18 
+    scqtot1 scq21 scq22 scq23 scq24 scq25 scq26 scq27 scq28 
+    scqtot2 scq41 scq42 scq43 scq44 scq45 scq46 
+    scq47 scq48 scqtot4 scq61 scq62 scq63 scq64 scq65 scq66 
+    scq67 scq68 scqtot6 ids11 ids12 ids13 ids14 
+    ids15 ids16 ids17 ids18 idstot1 ids21 ids22 
+    ids23 ids24 
+    ids25 ids26 ids27 ids28 idstot2 ids41 ids42 
+    ids43 ids44 ids45 ids46 ids47 ids48 idstot4 ids61 ids62 
+    ids63 ids64 ids65 ids66 ids67 ids68 idstot6 
+    tri1s tri1s1 tri1s2 tri1s3 tri1s4 tri1s5 tri1cep 
+    tri1cbc tri2s tri2s1 tri2s2 tri2s3 tri2s4 
+    tri2s5 tri2cep tri2cbc tri4s tri4s1 tri4s2 tri4s3 tri4s4 
+    tri4s5 tri4cep tri4cbc tri6s tri6s1 tri6s2 
+    tri6s3 tri6s4 tri6s5 tri6cep tri6cbc dfd101 dfd102 
+    dfd103 dfd104 dfd105 dfd106 dfd107 dfd108 
+    dfd109 dfd110 dfd201 dfd202 dfd203 dfd204 dfd205 dfd206 
+    dfd207 dfd208 dfd209 dfd210 dfd401 dfd402 
+    dfd403 dfd404 dfd405 dfd406 dfd407 dfd408 dfd409 dfd410 
+    dfd601 dfd602 dfd603 dfd604 dfd605 dfd606 
+    dfd607 dfd608 dfd609 dfd610 swb1 swb1s1 swb1s2 swb2 
+    swb2s1 swb2s2 swb4 swb4s1 swb4s2 swb6 
+    swb6s1 swb6s2 ssqa1 ssqb1 ssqa2 ssqb2 ssqa4 
+    ssqb4 ssqa6 ssqb6 
+    csq2 csq4 csq6 rbook215 rbook216 rbook415 
+    rbook416 rbook615 rbook616 book2s1 book2s2 book2s3 
+    book4s1 book4s2 book4s3 book6s1 book6s2 
+    book6s3 baserel2 baserel3 censor2 censor3 time2 time3 
+    missdata totsess dum1 dum2 dum3;
+!Dummy code matrix
+!These are types of theraputic interventions
+!BT = Biliotherapy - A self-directed manual done alone
+!MI = Motivational interveiew via phone + bibliotherapy
+!TT = telephone therapy    
+    !   D1  D2  D3
+    !BT 1   0   0
+    !MI 0   1   0
+    !TT 0   0   1
+    !with dummy codes to get the all pairwise you have to run the model twice with a new reference group
+
+            MISSING = all (-999);
+            
+censored are tlhs1 (b) tlhs2 (b)
+ tlhs3 (b) tlhs4 (b) tlhs5(b) tlhs6 (b);!highly skewed data (alochohol some people said they had 2.5 drinks)
+   !inflated censored bi (censored from below and inflated)
+
+USEVARIABLES ARE 
+
+tlhs1 tlhs2 tlhs3 tlhs4 tlhs5 tlhs6
+
+dum1 dum3; !This means that MI is the reference group
+!see matrix above
+
+analysis: 
+!Both of these commands manage the censored data
+algorithm = integration;
+integration = montecarlo;
+
+model: 
+
+i s | tlhs1@0 tlhs2@1 tlhs3@2 tlhs4@3 tlhs5@4 tlhs6@5;
+
+
+i on dum1 dum3;
+s on dum1 dum3;
+
+
+output: cinterval;

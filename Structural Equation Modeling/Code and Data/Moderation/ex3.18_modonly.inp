@@ -1,0 +1,15 @@
+TITLE:	moderation
+DATA:	FILE = ex3.18.dat;
+VARIABLE:	NAMES = y m x z;
+	USEVARIABLES = y x z xz;
+DEFINE:	xz = x*z;
+!ANALYSIS:	bootstrap=1000;
+		
+MODEL:	y ON x z xz;
+	
+
+OUTPUT:	
+!cinterval(bcbootstrap)
+sampstat
+tech3;
+!http://quantpsy.org/interact/mlr2.htm

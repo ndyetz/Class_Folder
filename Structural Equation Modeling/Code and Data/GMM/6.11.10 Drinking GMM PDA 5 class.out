@@ -1,0 +1,1639 @@
+Mplus VERSION 7.4 (Mac)
+MUTHEN & MUTHEN
+03/27/2017  12:55 PM
+
+INPUT INSTRUCTIONS
+
+      TITLE:  6.11.10 RREP PDA GMM class 5
+
+
+      DATA:   FILE is 6.11.10 Core1 Drinking only.dat;
+
+      VARIABLE:   NAMES ARE ID pdafm1 pdafm2 pdafm3
+       pdafm4 pdafm5 pdafm6 pdafm7 pdafm8 pdafm9 pdafm10
+      pdafm11 pdafm12 dddfm1 dddfm2 dddfm3 dddfm4 dddfm5
+      dddfm6 dddfm7 dddfm8 dddfm9 dddfm10 dddfm11
+      dddfm12 dpdfm1 dpdfm2 dpdfm3 dpdfm4 dpdfm5 dpdfm6
+       dpdfm7 dpdfm8 dpdfm9 dpdfm10 dpdfm11 dpdfm12
+      phvfm1 phvfm2 phvfm3 phvfm4 phvfm5 phvfm6 phvfm7
+       phvfm8 phvfm9 phvfm10 phvfm11 phvfm12 mxdfm1
+      mxdfm2 mxdfm3 mxdfm4 mxdfm5 mxdfm6 mxdfm7 mxdfm8
+      mxdfm9 mxdfm10 mxdfm11 mxdfm12 mxbfm1 mxbfm2
+      mxbfm3 mxbfm4 mxbfm5 mxbfm6 mxbfm7 mxbfm8 mxbfm9
+      mxbfm10 mxbfm11 mxbfm12 avbfm1 avbfm2 avbfm3
+      avbfm4 avbfm5 avbfm6 avbfm7 avbfm8 avbfm9 avbfm10
+      avbfm11 avbfm12 ba1fm1 ba1fm2 ba1fm3 ba1fm4
+      ba1fm5 ba1fm6 ba1fm7 ba1fm8 ba1fm9 ba1fm10 ba1fm11
+      ba1fm12 cabfm1 cabfm2 cabfm3 cabfm4 cabfm5
+      cabfm6 cabfm7 cabfm8 cabfm9 cabfm10 cabfm11 cabfm12;
+
+                  MISSING = ALL (-999);
+
+                  USEVARIABLES ARE pdafm1 pdafm2
+                  pdafm3 pdafm4 pdafm5 pdafm6
+                  pdafm7 pdafm8 pdafm9 pdafm10
+                  pdafm11 pdafm12;
+
+                  CLASSES = cd (5);
+
+      ANALYSIS:   TYPE = MIXTURE;
+                  STARTS = 50 10;
+
+
+      MODEL: %OVERALL%
+              i s q | pdafm1@0 pdafm2@1 pdafm3@2 pdafm4@3
+              pdafm5@4 pdafm6@5 pdafm7@6 pdafm8@7 pdafm9@8
+              pdafm10@9 pdafm11@10 pdafm12@11;
+
+
+      PLOT: SERIES = pdafm1 pdafm2
+                  pdafm3 pdafm4 pdafm5 pdafm6
+                  pdafm7 pdafm8 pdafm9 pdafm10
+                  pdafm11 pdafm12 (s);
+              SERIES = pdafm1 pdafm2
+                  pdafm3 pdafm4 pdafm5 pdafm6
+                  pdafm7 pdafm8 pdafm9 pdafm10
+                  pdafm11 pdafm12 (q);
+                  TYPE = PLOT3;
+
+      OUTPUT: TECH4 TECH7 TECH14;
+
+
+
+
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  14
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+6.11.10 RREP PDA GMM class 5
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         549
+
+Number of dependent variables                                   12
+Number of independent variables                                  0
+Number of continuous latent variables                            3
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   PDAFM1      PDAFM2      PDAFM3      PDAFM4      PDAFM5      PDAFM6
+   PDAFM7      PDAFM8      PDAFM9      PDAFM10     PDAFM11     PDAFM12
+
+Continuous latent variables
+   I           S           Q
+
+Categorical latent variables
+   CD
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Random Starts Specifications
+  Number of initial stage random starts                         50
+  Number of final stage optimizations                           10
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+
+Input data file(s)
+  6.11.10 Core1 Drinking only.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            15
+     Number of y missing data patterns          15
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1         1.000
+ PDAFM2         0.998         0.998
+ PDAFM3         0.993         0.993         0.993
+ PDAFM4         0.989         0.987         0.987         0.989
+ PDAFM5         0.962         0.960         0.960         0.962         0.962
+ PDAFM6         0.956         0.954         0.954         0.956         0.956
+ PDAFM7         0.944         0.942         0.942         0.942         0.940
+ PDAFM8         0.940         0.938         0.938         0.938         0.938
+ PDAFM9         0.933         0.931         0.931         0.931         0.931
+ PDAFM10        0.925         0.923         0.923         0.923         0.923
+ PDAFM11        0.907         0.905         0.905         0.905         0.903
+ PDAFM12        0.898         0.896         0.896         0.896         0.894
+
+
+           Covariance Coverage
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6         0.956
+ PDAFM7         0.940         0.944
+ PDAFM8         0.938         0.940         0.940
+ PDAFM9         0.931         0.933         0.933         0.933
+ PDAFM10        0.923         0.925         0.925         0.925         0.925
+ PDAFM11        0.903         0.905         0.905         0.905         0.905
+ PDAFM12        0.894         0.896         0.896         0.896         0.896
+
+
+           Covariance Coverage
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11        0.907
+ PDAFM12        0.898         0.898
+
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+          -26682.015  573096           20
+          -26685.545  76974            16
+          -26736.514  407168           44
+          -26742.337  533738           11
+          -26742.337  569131           26
+          -26742.337  902278           21
+          -26742.337  107446           12
+          -26754.490  253358           2
+          -26761.354  749453           33
+          -26761.354  761633           50
+
+
+
+     WARNING:  THE BEST LOGLIKELIHOOD VALUE WAS NOT REPLICATED.  THE
+     SOLUTION MAY NOT BE TRUSTWORTHY DUE TO LOCAL MAXIMA.  INCREASE THE
+     NUMBER OF RANDOM STARTS.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       37
+
+Loglikelihood
+
+          H0 Value                      -26682.015
+          H0 Scaling Correction Factor      3.1111
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   53438.030
+          Bayesian (BIC)                 53597.430
+          Sample-Size Adjusted BIC       53479.976
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1         55.41609          0.10094
+       2         37.83971          0.06892
+       3         33.70031          0.06138
+       4        401.92194          0.73210
+       5         20.12195          0.03665
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1         55.41609          0.10094
+       2         37.83971          0.06892
+       3         33.70031          0.06138
+       4        401.92194          0.73210
+       5         20.12195          0.03665
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1               56          0.10200
+       2               38          0.06922
+       3               34          0.06193
+       4              401          0.73042
+       5               20          0.03643
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         0.962
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2        3        4        5
+
+    1   0.910    0.000    0.005    0.086    0.000
+    2   0.000    0.992    0.004    0.000    0.004
+    3   0.008    0.003    0.946    0.042    0.000
+    4   0.010    0.000    0.003    0.987    0.000
+    5   0.000    0.002    0.000    0.000    0.998
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2        3        4        5
+
+    1   0.919    0.000    0.005    0.076    0.000
+    2   0.000    0.996    0.003    0.000    0.001
+    3   0.008    0.004    0.955    0.033    0.000
+    4   0.012    0.000    0.004    0.984    0.000
+    5   0.000    0.008    0.000    0.000    0.992
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2        3        4        5
+
+    1     13.731    0.000    8.494   11.236    0.000
+    2     -6.686    7.126    1.301   -6.686    0.000
+    3      8.960    8.399   13.769   10.404    0.000
+    4      9.387    0.000    8.185   13.800    0.000
+    5    -13.808   -4.876  -13.808  -13.808    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ I        |
+    PDAFM1             1.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             1.000      0.000    999.000    999.000
+    PDAFM4             1.000      0.000    999.000    999.000
+    PDAFM5             1.000      0.000    999.000    999.000
+    PDAFM6             1.000      0.000    999.000    999.000
+    PDAFM7             1.000      0.000    999.000    999.000
+    PDAFM8             1.000      0.000    999.000    999.000
+    PDAFM9             1.000      0.000    999.000    999.000
+    PDAFM10            1.000      0.000    999.000    999.000
+    PDAFM11            1.000      0.000    999.000    999.000
+    PDAFM12            1.000      0.000    999.000    999.000
+
+ S        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             2.000      0.000    999.000    999.000
+    PDAFM4             3.000      0.000    999.000    999.000
+    PDAFM5             4.000      0.000    999.000    999.000
+    PDAFM6             5.000      0.000    999.000    999.000
+    PDAFM7             6.000      0.000    999.000    999.000
+    PDAFM8             7.000      0.000    999.000    999.000
+    PDAFM9             8.000      0.000    999.000    999.000
+    PDAFM10            9.000      0.000    999.000    999.000
+    PDAFM11           10.000      0.000    999.000    999.000
+    PDAFM12           11.000      0.000    999.000    999.000
+
+ Q        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             4.000      0.000    999.000    999.000
+    PDAFM4             9.000      0.000    999.000    999.000
+    PDAFM5            16.000      0.000    999.000    999.000
+    PDAFM6            25.000      0.000    999.000    999.000
+    PDAFM7            36.000      0.000    999.000    999.000
+    PDAFM8            49.000      0.000    999.000    999.000
+    PDAFM9            64.000      0.000    999.000    999.000
+    PDAFM10           81.000      0.000    999.000    999.000
+    PDAFM11          100.000      0.000    999.000    999.000
+    PDAFM12          121.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  1.740      2.853      0.610      0.542
+
+ Q        WITH
+    I                 -0.174      0.282     -0.618      0.537
+    S                 -3.999      0.513     -7.796      0.000
+
+ Means
+    I                 98.854      0.512    193.033      0.000
+    S                -13.361      2.510     -5.324      0.000
+    Q                  0.586      0.234      2.500      0.012
+
+ Intercepts
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             0.000      0.000    999.000    999.000
+    PDAFM3             0.000      0.000    999.000    999.000
+    PDAFM4             0.000      0.000    999.000    999.000
+    PDAFM5             0.000      0.000    999.000    999.000
+    PDAFM6             0.000      0.000    999.000    999.000
+    PDAFM7             0.000      0.000    999.000    999.000
+    PDAFM8             0.000      0.000    999.000    999.000
+    PDAFM9             0.000      0.000    999.000    999.000
+    PDAFM10            0.000      0.000    999.000    999.000
+    PDAFM11            0.000      0.000    999.000    999.000
+    PDAFM12            0.000      0.000    999.000    999.000
+
+ Variances
+    I                  9.741      4.476      2.176      0.030
+    S                 44.902      5.572      8.058      0.000
+    Q                  0.378      0.049      7.664      0.000
+
+ Residual Variances
+    PDAFM1             4.950      4.412      1.122      0.262
+    PDAFM2           242.488     34.983      6.931      0.000
+    PDAFM3           261.795     33.300      7.862      0.000
+    PDAFM4           300.323     41.549      7.228      0.000
+    PDAFM5           220.937     34.037      6.491      0.000
+    PDAFM6           235.317     35.625      6.605      0.000
+    PDAFM7           271.445     40.391      6.720      0.000
+    PDAFM8           300.995     41.994      7.168      0.000
+    PDAFM9           208.233     32.401      6.427      0.000
+    PDAFM10          194.381     34.206      5.683      0.000
+    PDAFM11          110.823     23.239      4.769      0.000
+    PDAFM12          226.117     51.647      4.378      0.000
+
+Latent Class 2
+
+ I        |
+    PDAFM1             1.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             1.000      0.000    999.000    999.000
+    PDAFM4             1.000      0.000    999.000    999.000
+    PDAFM5             1.000      0.000    999.000    999.000
+    PDAFM6             1.000      0.000    999.000    999.000
+    PDAFM7             1.000      0.000    999.000    999.000
+    PDAFM8             1.000      0.000    999.000    999.000
+    PDAFM9             1.000      0.000    999.000    999.000
+    PDAFM10            1.000      0.000    999.000    999.000
+    PDAFM11            1.000      0.000    999.000    999.000
+    PDAFM12            1.000      0.000    999.000    999.000
+
+ S        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             2.000      0.000    999.000    999.000
+    PDAFM4             3.000      0.000    999.000    999.000
+    PDAFM5             4.000      0.000    999.000    999.000
+    PDAFM6             5.000      0.000    999.000    999.000
+    PDAFM7             6.000      0.000    999.000    999.000
+    PDAFM8             7.000      0.000    999.000    999.000
+    PDAFM9             8.000      0.000    999.000    999.000
+    PDAFM10            9.000      0.000    999.000    999.000
+    PDAFM11           10.000      0.000    999.000    999.000
+    PDAFM12           11.000      0.000    999.000    999.000
+
+ Q        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             4.000      0.000    999.000    999.000
+    PDAFM4             9.000      0.000    999.000    999.000
+    PDAFM5            16.000      0.000    999.000    999.000
+    PDAFM6            25.000      0.000    999.000    999.000
+    PDAFM7            36.000      0.000    999.000    999.000
+    PDAFM8            49.000      0.000    999.000    999.000
+    PDAFM9            64.000      0.000    999.000    999.000
+    PDAFM10           81.000      0.000    999.000    999.000
+    PDAFM11          100.000      0.000    999.000    999.000
+    PDAFM12          121.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  1.740      2.853      0.610      0.542
+
+ Q        WITH
+    I                 -0.174      0.282     -0.618      0.537
+    S                 -3.999      0.513     -7.796      0.000
+
+ Means
+    I                 55.505      2.249     24.684      0.000
+    S                 -1.170      1.817     -0.644      0.520
+    Q                  0.234      0.163      1.434      0.151
+
+ Intercepts
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             0.000      0.000    999.000    999.000
+    PDAFM3             0.000      0.000    999.000    999.000
+    PDAFM4             0.000      0.000    999.000    999.000
+    PDAFM5             0.000      0.000    999.000    999.000
+    PDAFM6             0.000      0.000    999.000    999.000
+    PDAFM7             0.000      0.000    999.000    999.000
+    PDAFM8             0.000      0.000    999.000    999.000
+    PDAFM9             0.000      0.000    999.000    999.000
+    PDAFM10            0.000      0.000    999.000    999.000
+    PDAFM11            0.000      0.000    999.000    999.000
+    PDAFM12            0.000      0.000    999.000    999.000
+
+ Variances
+    I                  9.741      4.476      2.176      0.030
+    S                 44.902      5.572      8.058      0.000
+    Q                  0.378      0.049      7.664      0.000
+
+ Residual Variances
+    PDAFM1             4.950      4.412      1.122      0.262
+    PDAFM2           242.488     34.983      6.931      0.000
+    PDAFM3           261.795     33.300      7.862      0.000
+    PDAFM4           300.323     41.549      7.228      0.000
+    PDAFM5           220.937     34.037      6.491      0.000
+    PDAFM6           235.317     35.625      6.605      0.000
+    PDAFM7           271.445     40.391      6.720      0.000
+    PDAFM8           300.995     41.994      7.168      0.000
+    PDAFM9           208.233     32.401      6.427      0.000
+    PDAFM10          194.381     34.206      5.683      0.000
+    PDAFM11          110.823     23.239      4.769      0.000
+    PDAFM12          226.117     51.647      4.378      0.000
+
+Latent Class 3
+
+ I        |
+    PDAFM1             1.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             1.000      0.000    999.000    999.000
+    PDAFM4             1.000      0.000    999.000    999.000
+    PDAFM5             1.000      0.000    999.000    999.000
+    PDAFM6             1.000      0.000    999.000    999.000
+    PDAFM7             1.000      0.000    999.000    999.000
+    PDAFM8             1.000      0.000    999.000    999.000
+    PDAFM9             1.000      0.000    999.000    999.000
+    PDAFM10            1.000      0.000    999.000    999.000
+    PDAFM11            1.000      0.000    999.000    999.000
+    PDAFM12            1.000      0.000    999.000    999.000
+
+ S        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             2.000      0.000    999.000    999.000
+    PDAFM4             3.000      0.000    999.000    999.000
+    PDAFM5             4.000      0.000    999.000    999.000
+    PDAFM6             5.000      0.000    999.000    999.000
+    PDAFM7             6.000      0.000    999.000    999.000
+    PDAFM8             7.000      0.000    999.000    999.000
+    PDAFM9             8.000      0.000    999.000    999.000
+    PDAFM10            9.000      0.000    999.000    999.000
+    PDAFM11           10.000      0.000    999.000    999.000
+    PDAFM12           11.000      0.000    999.000    999.000
+
+ Q        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             4.000      0.000    999.000    999.000
+    PDAFM4             9.000      0.000    999.000    999.000
+    PDAFM5            16.000      0.000    999.000    999.000
+    PDAFM6            25.000      0.000    999.000    999.000
+    PDAFM7            36.000      0.000    999.000    999.000
+    PDAFM8            49.000      0.000    999.000    999.000
+    PDAFM9            64.000      0.000    999.000    999.000
+    PDAFM10           81.000      0.000    999.000    999.000
+    PDAFM11          100.000      0.000    999.000    999.000
+    PDAFM12          121.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  1.740      2.853      0.610      0.542
+
+ Q        WITH
+    I                 -0.174      0.282     -0.618      0.537
+    S                 -3.999      0.513     -7.796      0.000
+
+ Means
+    I                 81.626      1.437     56.818      0.000
+    S                 -1.071      1.791     -0.598      0.550
+    Q                  0.058      0.162      0.357      0.721
+
+ Intercepts
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             0.000      0.000    999.000    999.000
+    PDAFM3             0.000      0.000    999.000    999.000
+    PDAFM4             0.000      0.000    999.000    999.000
+    PDAFM5             0.000      0.000    999.000    999.000
+    PDAFM6             0.000      0.000    999.000    999.000
+    PDAFM7             0.000      0.000    999.000    999.000
+    PDAFM8             0.000      0.000    999.000    999.000
+    PDAFM9             0.000      0.000    999.000    999.000
+    PDAFM10            0.000      0.000    999.000    999.000
+    PDAFM11            0.000      0.000    999.000    999.000
+    PDAFM12            0.000      0.000    999.000    999.000
+
+ Variances
+    I                  9.741      4.476      2.176      0.030
+    S                 44.902      5.572      8.058      0.000
+    Q                  0.378      0.049      7.664      0.000
+
+ Residual Variances
+    PDAFM1             4.950      4.412      1.122      0.262
+    PDAFM2           242.488     34.983      6.931      0.000
+    PDAFM3           261.795     33.300      7.862      0.000
+    PDAFM4           300.323     41.549      7.228      0.000
+    PDAFM5           220.937     34.037      6.491      0.000
+    PDAFM6           235.317     35.625      6.605      0.000
+    PDAFM7           271.445     40.391      6.720      0.000
+    PDAFM8           300.995     41.994      7.168      0.000
+    PDAFM9           208.233     32.401      6.427      0.000
+    PDAFM10          194.381     34.206      5.683      0.000
+    PDAFM11          110.823     23.239      4.769      0.000
+    PDAFM12          226.117     51.647      4.378      0.000
+
+Latent Class 4
+
+ I        |
+    PDAFM1             1.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             1.000      0.000    999.000    999.000
+    PDAFM4             1.000      0.000    999.000    999.000
+    PDAFM5             1.000      0.000    999.000    999.000
+    PDAFM6             1.000      0.000    999.000    999.000
+    PDAFM7             1.000      0.000    999.000    999.000
+    PDAFM8             1.000      0.000    999.000    999.000
+    PDAFM9             1.000      0.000    999.000    999.000
+    PDAFM10            1.000      0.000    999.000    999.000
+    PDAFM11            1.000      0.000    999.000    999.000
+    PDAFM12            1.000      0.000    999.000    999.000
+
+ S        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             2.000      0.000    999.000    999.000
+    PDAFM4             3.000      0.000    999.000    999.000
+    PDAFM5             4.000      0.000    999.000    999.000
+    PDAFM6             5.000      0.000    999.000    999.000
+    PDAFM7             6.000      0.000    999.000    999.000
+    PDAFM8             7.000      0.000    999.000    999.000
+    PDAFM9             8.000      0.000    999.000    999.000
+    PDAFM10            9.000      0.000    999.000    999.000
+    PDAFM11           10.000      0.000    999.000    999.000
+    PDAFM12           11.000      0.000    999.000    999.000
+
+ Q        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             4.000      0.000    999.000    999.000
+    PDAFM4             9.000      0.000    999.000    999.000
+    PDAFM5            16.000      0.000    999.000    999.000
+    PDAFM6            25.000      0.000    999.000    999.000
+    PDAFM7            36.000      0.000    999.000    999.000
+    PDAFM8            49.000      0.000    999.000    999.000
+    PDAFM9            64.000      0.000    999.000    999.000
+    PDAFM10           81.000      0.000    999.000    999.000
+    PDAFM11          100.000      0.000    999.000    999.000
+    PDAFM12          121.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  1.740      2.853      0.610      0.542
+
+ Q        WITH
+    I                 -0.174      0.282     -0.618      0.537
+    S                 -3.999      0.513     -7.796      0.000
+
+ Means
+    I                 99.246      0.128    774.483      0.000
+    S                 -2.489      0.310     -8.024      0.000
+    Q                  0.197      0.030      6.507      0.000
+
+ Intercepts
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             0.000      0.000    999.000    999.000
+    PDAFM3             0.000      0.000    999.000    999.000
+    PDAFM4             0.000      0.000    999.000    999.000
+    PDAFM5             0.000      0.000    999.000    999.000
+    PDAFM6             0.000      0.000    999.000    999.000
+    PDAFM7             0.000      0.000    999.000    999.000
+    PDAFM8             0.000      0.000    999.000    999.000
+    PDAFM9             0.000      0.000    999.000    999.000
+    PDAFM10            0.000      0.000    999.000    999.000
+    PDAFM11            0.000      0.000    999.000    999.000
+    PDAFM12            0.000      0.000    999.000    999.000
+
+ Variances
+    I                  9.741      4.476      2.176      0.030
+    S                 44.902      5.572      8.058      0.000
+    Q                  0.378      0.049      7.664      0.000
+
+ Residual Variances
+    PDAFM1             4.950      4.412      1.122      0.262
+    PDAFM2           242.488     34.983      6.931      0.000
+    PDAFM3           261.795     33.300      7.862      0.000
+    PDAFM4           300.323     41.549      7.228      0.000
+    PDAFM5           220.937     34.037      6.491      0.000
+    PDAFM6           235.317     35.625      6.605      0.000
+    PDAFM7           271.445     40.391      6.720      0.000
+    PDAFM8           300.995     41.994      7.168      0.000
+    PDAFM9           208.233     32.401      6.427      0.000
+    PDAFM10          194.381     34.206      5.683      0.000
+    PDAFM11          110.823     23.239      4.769      0.000
+    PDAFM12          226.117     51.647      4.378      0.000
+
+Latent Class 5
+
+ I        |
+    PDAFM1             1.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             1.000      0.000    999.000    999.000
+    PDAFM4             1.000      0.000    999.000    999.000
+    PDAFM5             1.000      0.000    999.000    999.000
+    PDAFM6             1.000      0.000    999.000    999.000
+    PDAFM7             1.000      0.000    999.000    999.000
+    PDAFM8             1.000      0.000    999.000    999.000
+    PDAFM9             1.000      0.000    999.000    999.000
+    PDAFM10            1.000      0.000    999.000    999.000
+    PDAFM11            1.000      0.000    999.000    999.000
+    PDAFM12            1.000      0.000    999.000    999.000
+
+ S        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             2.000      0.000    999.000    999.000
+    PDAFM4             3.000      0.000    999.000    999.000
+    PDAFM5             4.000      0.000    999.000    999.000
+    PDAFM6             5.000      0.000    999.000    999.000
+    PDAFM7             6.000      0.000    999.000    999.000
+    PDAFM8             7.000      0.000    999.000    999.000
+    PDAFM9             8.000      0.000    999.000    999.000
+    PDAFM10            9.000      0.000    999.000    999.000
+    PDAFM11           10.000      0.000    999.000    999.000
+    PDAFM12           11.000      0.000    999.000    999.000
+
+ Q        |
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             1.000      0.000    999.000    999.000
+    PDAFM3             4.000      0.000    999.000    999.000
+    PDAFM4             9.000      0.000    999.000    999.000
+    PDAFM5            16.000      0.000    999.000    999.000
+    PDAFM6            25.000      0.000    999.000    999.000
+    PDAFM7            36.000      0.000    999.000    999.000
+    PDAFM8            49.000      0.000    999.000    999.000
+    PDAFM9            64.000      0.000    999.000    999.000
+    PDAFM10           81.000      0.000    999.000    999.000
+    PDAFM11          100.000      0.000    999.000    999.000
+    PDAFM12          121.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  1.740      2.853      0.610      0.542
+
+ Q        WITH
+    I                 -0.174      0.282     -0.618      0.537
+    S                 -3.999      0.513     -7.796      0.000
+
+ Means
+    I                 11.340      3.389      3.346      0.001
+    S                 10.115      2.412      4.193      0.000
+    Q                 -0.663      0.219     -3.022      0.003
+
+ Intercepts
+    PDAFM1             0.000      0.000    999.000    999.000
+    PDAFM2             0.000      0.000    999.000    999.000
+    PDAFM3             0.000      0.000    999.000    999.000
+    PDAFM4             0.000      0.000    999.000    999.000
+    PDAFM5             0.000      0.000    999.000    999.000
+    PDAFM6             0.000      0.000    999.000    999.000
+    PDAFM7             0.000      0.000    999.000    999.000
+    PDAFM8             0.000      0.000    999.000    999.000
+    PDAFM9             0.000      0.000    999.000    999.000
+    PDAFM10            0.000      0.000    999.000    999.000
+    PDAFM11            0.000      0.000    999.000    999.000
+    PDAFM12            0.000      0.000    999.000    999.000
+
+ Variances
+    I                  9.741      4.476      2.176      0.030
+    S                 44.902      5.572      8.058      0.000
+    Q                  0.378      0.049      7.664      0.000
+
+ Residual Variances
+    PDAFM1             4.950      4.412      1.122      0.262
+    PDAFM2           242.488     34.983      6.931      0.000
+    PDAFM3           261.795     33.300      7.862      0.000
+    PDAFM4           300.323     41.549      7.228      0.000
+    PDAFM5           220.937     34.037      6.491      0.000
+    PDAFM6           235.317     35.625      6.605      0.000
+    PDAFM7           271.445     40.391      6.720      0.000
+    PDAFM8           300.995     41.994      7.168      0.000
+    PDAFM9           208.233     32.401      6.427      0.000
+    PDAFM10          194.381     34.206      5.683      0.000
+    PDAFM11          110.823     23.239      4.769      0.000
+    PDAFM12          226.117     51.647      4.378      0.000
+
+Categorical Latent Variables
+
+ Means
+    CD#1               1.013      0.295      3.439      0.001
+    CD#2               0.632      0.292      2.163      0.031
+    CD#3               0.516      0.317      1.626      0.104
+    CD#4               2.994      0.235     12.724      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.479E-06
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 4 OUTPUT
+
+
+     ESTIMATES DERIVED FROM THE MODEL FOR CLASS 1
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             98.854       -13.361         0.586
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.512         2.510         0.234
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1            193.033        -5.324         2.500
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.000         0.000         0.012
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              9.741
+ S              1.740        44.902
+ Q             -0.174        -3.999         0.378
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              4.476
+ S              2.853         5.572
+ Q              0.282         0.513         0.049
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              2.176
+ S              0.610         8.058
+ Q             -0.618        -7.796         7.664
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.030
+ S              0.542         0.000
+ Q              0.537         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              1.000
+ S              0.083         1.000
+ Q             -0.091        -0.971         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.147         0.000
+ Q              0.156         0.007         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I            999.000
+ S              0.568       999.000
+ Q             -0.582      -142.700       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.570         0.000
+ Q              0.561         0.000         0.000
+
+
+     ESTIMATES DERIVED FROM THE MODEL FOR CLASS 2
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             55.505        -1.170         0.234
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              2.249         1.817         0.163
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             24.684        -0.644         1.434
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.000         0.520         0.151
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              9.741
+ S              1.740        44.902
+ Q             -0.174        -3.999         0.378
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              4.476
+ S              2.853         5.572
+ Q              0.282         0.513         0.049
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              2.176
+ S              0.610         8.058
+ Q             -0.618        -7.796         7.664
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.030
+ S              0.542         0.000
+ Q              0.537         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              1.000
+ S              0.083         1.000
+ Q             -0.091        -0.971         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.147         0.000
+ Q              0.156         0.007         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I            999.000
+ S              0.568       999.000
+ Q             -0.582      -142.700       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.570         0.000
+ Q              0.561         0.000         0.000
+
+
+     ESTIMATES DERIVED FROM THE MODEL FOR CLASS 3
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             81.626        -1.071         0.058
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              1.437         1.791         0.162
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             56.818        -0.598         0.357
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.000         0.550         0.721
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              9.741
+ S              1.740        44.902
+ Q             -0.174        -3.999         0.378
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              4.476
+ S              2.853         5.572
+ Q              0.282         0.513         0.049
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              2.176
+ S              0.610         8.058
+ Q             -0.618        -7.796         7.664
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.030
+ S              0.542         0.000
+ Q              0.537         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              1.000
+ S              0.083         1.000
+ Q             -0.091        -0.971         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.147         0.000
+ Q              0.156         0.007         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I            999.000
+ S              0.568       999.000
+ Q             -0.582      -142.700       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.570         0.000
+ Q              0.561         0.000         0.000
+
+
+     ESTIMATES DERIVED FROM THE MODEL FOR CLASS 4
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             99.246        -2.489         0.197
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.128         0.310         0.030
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1            774.483        -8.024         6.507
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.000         0.000         0.000
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              9.741
+ S              1.740        44.902
+ Q             -0.174        -3.999         0.378
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              4.476
+ S              2.853         5.572
+ Q              0.282         0.513         0.049
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              2.176
+ S              0.610         8.058
+ Q             -0.618        -7.796         7.664
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.030
+ S              0.542         0.000
+ Q              0.537         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              1.000
+ S              0.083         1.000
+ Q             -0.091        -0.971         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.147         0.000
+ Q              0.156         0.007         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I            999.000
+ S              0.568       999.000
+ Q             -0.582      -142.700       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.570         0.000
+ Q              0.561         0.000         0.000
+
+
+     ESTIMATES DERIVED FROM THE MODEL FOR CLASS 5
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1             11.340        10.115        -0.663
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              3.389         2.412         0.219
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              3.346         4.193        -3.022
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ 1              0.001         0.000         0.003
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              9.741
+ S              1.740        44.902
+ Q             -0.174        -3.999         0.378
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              4.476
+ S              2.853         5.572
+ Q              0.282         0.513         0.049
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              2.176
+ S              0.610         8.058
+ Q             -0.618        -7.796         7.664
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.030
+ S              0.542         0.000
+ Q              0.537         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              1.000
+ S              0.083         1.000
+ Q             -0.091        -0.971         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.147         0.000
+ Q              0.156         0.007         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I            999.000
+ S              0.568       999.000
+ Q             -0.582      -142.700       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S             Q
+              ________      ________      ________
+ I              0.000
+ S              0.570         0.000
+ Q              0.561         0.000         0.000
+
+
+TECHNICAL 7 OUTPUT
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 1
+
+
+           Means
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ 1             98.973        81.921        68.685        64.959        54.339
+
+
+           Means
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ 1             53.685        49.949        41.926        28.135        26.500
+
+
+           Means
+              PDAFM11       PDAFM12
+              ________      ________
+ 1             25.111        24.827
+
+
+           Covariances
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1         6.440
+ PDAFM2        18.493       634.484
+ PDAFM3         2.558       517.115      1191.259
+ PDAFM4        -5.743       423.720       976.889      1242.490
+ PDAFM5        -8.881       356.461       905.234       921.195      1302.633
+ PDAFM6       -14.516       281.522       637.161       638.578       976.302
+ PDAFM7       -16.914       137.058       555.785       596.007       927.984
+ PDAFM8       -16.711        25.548       342.051       435.336       579.635
+ PDAFM9       -18.087       118.972       439.582       463.945       534.412
+ PDAFM10       -9.660       167.084       332.475       348.651       406.162
+ PDAFM11        2.234       173.722       349.125       334.235       318.985
+ PDAFM12        9.307       112.785       317.979       220.259       251.099
+
+
+           Covariances
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6      1306.952
+ PDAFM7      1022.872      1341.399
+ PDAFM8       574.261       865.800      1211.227
+ PDAFM9       588.103       554.298       620.605       954.399
+ PDAFM10      431.752       341.342       300.825       596.443       653.067
+ PDAFM11      281.382       248.524       106.415        84.610       126.117
+ PDAFM12      274.680       275.702       148.972       -20.664        -8.173
+
+
+           Covariances
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11      478.558
+ PDAFM12      363.173       817.021
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 2
+
+
+           Means
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ 1             55.685        44.325        53.930        51.744        53.775
+
+
+           Means
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ 1             54.849        59.297        60.363        63.085        65.262
+
+
+           Means
+              PDAFM11       PDAFM12
+              ________      ________
+ 1             65.834        69.312
+
+
+           Covariances
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1        81.389
+ PDAFM2        65.183      1034.826
+ PDAFM3        76.967       625.982      1180.832
+ PDAFM4        77.376       599.598       968.382      1424.477
+ PDAFM5       130.577       398.882       803.206      1212.502      1450.755
+ PDAFM6       131.543       280.026       672.271      1082.024      1252.521
+ PDAFM7       128.865       143.664       712.278       947.980      1155.683
+ PDAFM8       120.456       -12.753       469.804       836.528      1034.060
+ PDAFM9       165.448       203.325       671.332      1062.748      1225.214
+ PDAFM10      193.813       225.291       549.991       872.396      1098.627
+ PDAFM11      124.513       177.762       345.427       768.880       975.678
+ PDAFM12      123.781       165.135       463.828       912.153      1078.622
+
+
+           Covariances
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6      1411.464
+ PDAFM7      1128.276      1509.218
+ PDAFM8      1097.193      1291.778      1534.436
+ PDAFM9      1368.721      1205.594      1170.077      1505.918
+ PDAFM10     1159.244      1144.359      1084.890      1308.965      1361.786
+ PDAFM11     1092.604      1033.759       943.325      1270.371      1273.191
+ PDAFM12     1218.710      1103.585      1004.790      1312.981      1216.459
+
+
+           Covariances
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11     1515.105
+ PDAFM12     1392.970      1505.375
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 3
+
+
+           Means
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ 1             81.829        71.640        74.300        76.331        79.038
+
+
+           Means
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ 1             81.053        83.727        74.427        79.310        77.692
+
+
+           Means
+              PDAFM11       PDAFM12
+              ________      ________
+ 1             76.748        75.767
+
+
+           Covariances
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1        26.965
+ PDAFM2        -1.348      1095.464
+ PDAFM3         3.387      1015.106      1069.271
+ PDAFM4         2.904       881.398       884.263       886.552
+ PDAFM5         2.909       865.322       816.311       743.086       786.435
+ PDAFM6        19.005       361.318       303.041       319.556       399.349
+ PDAFM7        11.450       385.663       298.943       281.396       403.092
+ PDAFM8         5.822       652.806       639.449       597.858       591.945
+ PDAFM9       -10.358       847.517       782.208       603.517       694.674
+ PDAFM10      -10.865       805.415       717.102       539.246       647.756
+ PDAFM11      -11.376       541.496       505.295       361.526       437.704
+ PDAFM12      -13.512       371.620       362.587       198.187       258.657
+
+
+           Covariances
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6       517.650
+ PDAFM7       426.491       619.305
+ PDAFM8       390.569       585.209      1100.844
+ PDAFM9       368.449       591.004       817.712       927.234
+ PDAFM10      291.073       537.133       695.486       888.357      1021.594
+ PDAFM11      251.392       571.827       684.134       713.572       761.152
+ PDAFM12      192.105       560.138       676.737       546.488       562.489
+
+
+           Covariances
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11      976.381
+ PDAFM12      959.664      1238.928
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 4
+
+
+           Means
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ 1             99.263        97.008        94.868        92.716        91.766
+
+
+           Means
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ 1             90.963        90.758        92.359        93.291        93.168
+
+
+           Means
+              PDAFM11       PDAFM12
+              ________      ________
+ 1             94.555        93.768
+
+
+           Covariances
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1         4.235
+ PDAFM2         4.299        77.880
+ PDAFM3         2.729        47.976       183.851
+ PDAFM4         5.701        53.001       167.353       351.815
+ PDAFM5         2.912        52.752       122.351       256.485       368.086
+ PDAFM6        -0.196        28.763        95.662       173.288       274.073
+ PDAFM7         0.456        32.328        47.197       100.833       176.415
+ PDAFM8         0.397        22.305        31.910        34.673        83.956
+ PDAFM9         1.283        25.510        37.598        46.626        81.706
+ PDAFM10        2.806        25.737        28.788        17.990        59.786
+ PDAFM11        3.389        20.052         7.443         0.180        33.101
+ PDAFM12        5.395        28.988        33.050        43.085        55.971
+
+
+           Covariances
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6       405.880
+ PDAFM7       287.482       406.497
+ PDAFM8       161.960       277.264       363.136
+ PDAFM9       122.907       180.504       226.787       298.025
+ PDAFM10       64.748       107.551       137.367       194.738       276.394
+ PDAFM11       77.881        91.494        97.839        76.509       112.347
+ PDAFM12       97.558        95.704        88.649        75.776        71.003
+
+
+           Covariances
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11      157.617
+ PDAFM12       90.552       220.328
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 5
+
+
+           Means
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ 1             11.301        22.090        24.606        38.413        39.873
+
+
+           Means
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ 1             52.175        55.207        51.043        46.931        40.079
+
+
+           Means
+              PDAFM11       PDAFM12
+              ________      ________
+ 1             48.516        48.077
+
+
+           Covariances
+              PDAFM1        PDAFM2        PDAFM3        PDAFM4        PDAFM5
+              ________      ________      ________      ________      ________
+ PDAFM1        94.927
+ PDAFM2       100.058       636.784
+ PDAFM3       102.848        80.113       589.568
+ PDAFM4       174.868       102.334       414.999      1225.923
+ PDAFM5       206.479       100.665       283.728       855.831      1199.887
+ PDAFM6        73.116      -175.281       512.579       686.188       865.452
+ PDAFM7         6.559      -262.038       581.994       614.218       483.924
+ PDAFM8        61.837       -27.472       633.832       868.615       619.415
+ PDAFM9       126.752       126.386       802.331       942.206       768.895
+ PDAFM10       81.797        10.928       781.133       452.217       581.160
+ PDAFM11       19.348       -60.839       633.565       371.844       361.889
+ PDAFM12       52.722       -32.935       657.975       238.190       208.080
+
+
+           Covariances
+              PDAFM6        PDAFM7        PDAFM8        PDAFM9        PDAFM10
+              ________      ________      ________      ________      ________
+ PDAFM6      1456.622
+ PDAFM7      1290.784      1672.855
+ PDAFM8      1189.388      1329.467      1610.056
+ PDAFM9      1069.685      1060.176      1488.089      1664.688
+ PDAFM10     1162.754      1180.758      1191.815      1286.360      1467.291
+ PDAFM11     1000.710       888.965       931.010      1073.761      1231.131
+ PDAFM12      828.402      1182.340       811.098       875.319      1157.072
+
+
+           Covariances
+              PDAFM11       PDAFM12
+              ________      ________
+ PDAFM11     1608.075
+ PDAFM12     1188.652      1650.666
+
+
+TECHNICAL 14 OUTPUT
+
+     Random Starts Specifications for the k-1 Class Analysis Model
+        Number of initial stage random starts                  50
+        Number of final stage optimizations                    10
+
+     Random Starts Specification for the k-1 Class Model for Generated Data
+        Number of initial stage random starts                   0
+        Number of final stage optimizations for the
+           initial stage random starts                          0
+     Random Starts Specification for the k Class Model for Generated Data
+        Number of initial stage random starts                  40
+        Number of final stage optimizations                     8
+     Number of bootstrap draws requested                   Varies
+
+
+     PARAMETRIC BOOTSTRAPPED LIKELIHOOD RATIO TEST FOR 4 (H0) VERSUS 5 CLASSES
+
+          H0 Loglikelihood Value                       -26742.337
+          2 Times the Loglikelihood Difference            120.644
+          Difference in the Number of Parameters                4
+          Approximate P-Value                              0.0000
+          Successful Bootstrap Draws                            5
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              I             S             Q             C_I           C_S
+              ________      ________      ________      ________      ________
+ 1             91.888        -2.946         0.199        91.889        -2.940
+
+
+           Means
+              C_Q
+              ________
+ 1              0.198
+
+
+           Covariances
+              I             S             Q             C_I           C_S
+              ________      ________      ________      ________      ________
+ I            386.327
+ S            -46.294        55.424
+ Q              2.563        -4.104         0.342
+ C_I          386.318       -46.347         2.565       386.355
+ C_S          -46.218        55.516        -4.111       -46.289        55.628
+ C_Q            2.556        -4.104         0.343         2.559        -4.113
+
+
+           Covariances
+              C_Q
+              ________
+ C_Q            0.343
+
+
+           Correlations
+              I             S             Q             C_I           C_S
+              ________      ________      ________      ________      ________
+ I              1.000
+ S             -0.316         1.000
+ Q              0.223        -0.942         1.000
+ C_I            1.000        -0.317         0.223         1.000
+ C_S           -0.315         1.000        -0.942        -0.316         1.000
+ C_Q            0.222        -0.941         1.000         0.222        -0.941
+
+
+           Correlations
+              C_Q
+              ________
+ C_Q            1.000
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms (sample values, estimated factor scores, estimated values, residuals)
+  Scatterplots (sample values, estimated factor scores, estimated values, residuals)
+  Sample means
+  Estimated means, medians, modes, and percentiles
+  Sample and estimated means
+  Latent variable distribution plots
+  Observed individual values
+  Estimated individual values
+  Estimated means and observed individual values
+  Estimated means and estimated individual values
+  Estimated overall and class-specific distributions
+
+     Beginning Time:  12:55:53
+        Ending Time:  12:56:48
+       Elapsed Time:  00:00:55
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2015 Muthen & Muthen

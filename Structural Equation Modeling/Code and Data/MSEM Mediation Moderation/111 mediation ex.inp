@@ -1,0 +1,40 @@
+TITLE:	1-1-1 mediation
+DATA: 	FILE IS ex9.10.dat;
+
+VARIABLE:	NAMES ARE x1 m y x2 m2 w clus;
+	!BETWEEN = w;
+	
+usevariables are clus x1 m y;	
+	
+	CLUSTER = clus;
+
+ANALYSIS:	TYPE = TWOLEVEL RANDOM; 
+	!ALGORITHM = INTEGRATION;
+	!INTEGRATION = 10;
+
+MODEL: 
+	%WITHIN%
+	sa | m on x1;
+	sb | y on m;
+	sc | y on x1;
+	
+	%BETWEEN%
+	sa sb sc x1 m y;
+	sa with sc x1 m y;
+	sa with sb (cab);
+	sb with sc x1 m y;
+	m on x1 (ab);
+	y on m (bb);
+	y on x1;
+	
+	[sa] (aw);
+	[sb] (bw);
+	
+MODEL CONSTRAINT:
+	NEW (a b indb indw);
+	a = aw+ab;
+	b = bw+bb;
+	indw = aw*bw+cab;
+	indb = a*b;	
+
+OUTPUT:	TECH1 tech3 sampstat CINTERVAL;

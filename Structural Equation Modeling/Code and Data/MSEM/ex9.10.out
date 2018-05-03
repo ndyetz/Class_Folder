@@ -1,0 +1,586 @@
+Mplus VERSION 7.4 (Mac)
+MUTHEN & MUTHEN
+03/16/2017  11:26 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a two-level SEM with
+  	continuous factor indicators and a random
+  	slope for a factor
+  DATA: 	FILE IS ex9.10.dat;
+  VARIABLE:	NAMES ARE y1-y5 w clus;
+  	BETWEEN = w;
+  	CLUSTER = clus;
+  ANALYSIS:	TYPE = TWOLEVEL RANDOM;
+  	ALGORITHM = INTEGRATION;
+  	INTEGRATION = 10;
+  MODEL:
+  	%WITHIN%
+  	fw BY y1-y4;
+  	s | y5 ON fw;
+  	%BETWEEN%
+  	fb BY y1-y4;
+  	y1-y4@0;
+  	y5 s ON fb w;
+  OUTPUT:	TECH1 TECH8;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a two-level SEM with
+continuous factor indicators and a random
+slope for a factor
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         500
+
+Number of dependent variables                                    5
+Number of independent variables                                  1
+Number of continuous latent variables                            3
+
+Observed dependent variables
+
+  Continuous
+   Y1          Y2          Y3          Y4          Y5
+
+Observed independent variables
+   W
+
+Continuous latent variables
+   FW          FB          S
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+  Between variables
+   W
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  10
+  Dimensions of numerical integration                            4
+  Adaptive quadrature                                           ON
+Cholesky                                                       OFF
+
+Input data file(s)
+  ex9.10.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of clusters                         90
+
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       25
+
+Loglikelihood
+
+          H0 Value                       -4009.729
+          H0 Scaling Correction Factor      0.9481
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    8069.458
+          Bayesian (BIC)                  8174.823
+          Sample-Size Adjusted BIC        8095.472
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ FW       BY
+    Y1                 1.000      0.000    999.000    999.000
+    Y2                 1.286      0.119     10.813      0.000
+    Y3                 1.199      0.098     12.282      0.000
+    Y4                 1.262      0.096     13.201      0.000
+
+ Variances
+    FW                 0.732      0.112      6.539      0.000
+
+ Residual Variances
+    Y1                 1.041      0.083     12.502      0.000
+    Y2                 0.911      0.060     15.276      0.000
+    Y3                 0.983      0.081     12.151      0.000
+    Y4                 0.995      0.069     14.392      0.000
+    Y5                 0.475      0.046     10.400      0.000
+
+Between Level
+
+ FB       BY
+    Y1                 1.000      0.000    999.000    999.000
+    Y2                 0.978      0.094     10.403      0.000
+    Y3                 1.085      0.093     11.628      0.000
+    Y4                 1.007      0.125      8.045      0.000
+
+ S          ON
+    FB                -0.029      0.192     -0.151      0.880
+
+ S          ON
+    W                  0.366      0.109      3.350      0.001
+
+ Y5         ON
+    FB                 0.450      0.142      3.181      0.001
+
+ Y5         ON
+    W                  0.630      0.072      8.801      0.000
+
+ Intercepts
+    Y1                -0.074      0.096     -0.765      0.444
+    Y2                -0.015      0.096     -0.154      0.878
+    Y3                 0.005      0.103      0.044      0.965
+    Y4                -0.029      0.099     -0.294      0.769
+    Y5                -0.026      0.089     -0.286      0.775
+    S                  1.232      0.122     10.070      0.000
+
+ Variances
+    FB                 0.455      0.111      4.110      0.000
+
+ Residual Variances
+    Y1                 0.000      0.000    999.000    999.000
+    Y2                 0.000      0.000    999.000    999.000
+    Y3                 0.000      0.000    999.000    999.000
+    Y4                 0.000      0.000    999.000    999.000
+    Y5                 0.203      0.057      3.554      0.000
+    S                  0.579      0.124      4.657      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.283E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             0
+
+
+           NU
+              W
+              ________
+ 1                  0
+
+
+           LAMBDA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ Y1                 0             0             0             0             0
+ Y2                 1             0             0             0             0
+ Y3                 2             0             0             0             0
+ Y4                 3             0             0             0             0
+ Y5                 0             0             0             0             0
+ W                  0             0             0             0             0
+
+
+           THETA
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ Y1                 4
+ Y2                 0             5
+ Y3                 0             0             6
+ Y4                 0             0             0             7
+ Y5                 0             0             0             0             0
+ W                  0             0             0             0             0
+
+
+           THETA
+              W
+              ________
+ W                  0
+
+
+           ALPHA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             0
+
+
+           BETA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW                 0             0             0             0             0
+ FB                 0             0             0             0             0
+ S                  0             0             0             0             0
+ Y5                 0             0             0             0             0
+ W                  0             0             0             0             0
+
+
+           PSI
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW                 8
+ FB                 0             0
+ S                  0             0             0
+ Y5                 0             0             0             9
+ W                  0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ 1                 10            11            12            13             0
+
+
+           NU
+              W
+              ________
+ 1                  0
+
+
+           LAMBDA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ Y1                 0             0             0             0             0
+ Y2                 0            14             0             0             0
+ Y3                 0            15             0             0             0
+ Y4                 0            16             0             0             0
+ Y5                 0             0             0             0             0
+ W                  0             0             0             0             0
+
+
+           THETA
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ Y1                 0
+ Y2                 0             0
+ Y3                 0             0             0
+ Y4                 0             0             0             0
+ Y5                 0             0             0             0             0
+ W                  0             0             0             0             0
+
+
+           THETA
+              W
+              ________
+ W                  0
+
+
+           ALPHA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ 1                  0             0            17            18             0
+
+
+           BETA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW                 0             0             0             0             0
+ FB                 0             0             0             0             0
+ S                  0            19             0             0            20
+ Y5                 0            21             0             0            22
+ W                  0             0             0             0             0
+
+
+           PSI
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW                 0
+ FB                 0            23
+ S                  0             0            24
+ Y5                 0             0             0            25
+ W                  0             0             0             0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              W
+              ________
+ 1              0.000
+
+
+           LAMBDA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ Y1             1.000         0.000         0.000         0.000         0.000
+ Y2             1.000         0.000         0.000         0.000         0.000
+ Y3             1.000         0.000         0.000         0.000         0.000
+ Y4             1.000         0.000         0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         1.000         0.000
+ W              0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ Y1             1.124
+ Y2             0.000         1.285
+ Y3             0.000         0.000         1.293
+ Y4             0.000         0.000         0.000         1.319
+ Y5             0.000         0.000         0.000         0.000         0.000
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              W
+              ________
+ W              0.000
+
+
+           ALPHA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW             0.000         0.000         0.000         0.000         0.000
+ FB             0.000         0.000         0.000         0.000         0.000
+ S              0.000         0.000         0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         0.000         0.000
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW             0.050
+ FB             0.000         0.000
+ S              0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         1.392
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ 1             -0.151        -0.101        -0.084        -0.116         0.000
+
+
+           NU
+              W
+              ________
+ 1              0.000
+
+
+           LAMBDA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ Y1             0.000         1.000         0.000         0.000         0.000
+ Y2             0.000         1.000         0.000         0.000         0.000
+ Y3             0.000         1.000         0.000         0.000         0.000
+ Y4             0.000         1.000         0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         1.000         0.000
+ W              0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y1            Y2            Y3            Y4            Y5
+              ________      ________      ________      ________      ________
+ Y1             0.000
+ Y2             0.000         0.000
+ Y3             0.000         0.000         0.000
+ Y4             0.000         0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         0.000         0.000
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              W
+              ________
+ W              0.000
+
+
+           ALPHA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000        -0.128         0.000
+
+
+           BETA
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW             0.000         0.000         0.000         0.000         0.000
+ FB             0.000         0.000         0.000         0.000         0.000
+ S              0.000         0.000         0.000         0.000         0.000
+ Y5             0.000         0.000         0.000         0.000         0.000
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              FW            FB            S             Y5            W
+              ________      ________      ________      ________      ________
+ FW             0.000
+ FB             0.000         0.050
+ S              0.000         0.000         1.000
+ Y5             0.000         0.000         0.000         1.392
+ W              0.000         0.000         0.000         0.000         0.524
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.46483821D+04    0.0000000    0.0000000  EM
+              2 -0.42605354D+04  387.8466457    0.0834369  EM
+              3 -0.41474468D+04  113.0885830    0.0265433  EM
+              4 -0.40969572D+04   50.4896512    0.0121737  EM
+              5 -0.40725645D+04   24.3927043    0.0059539  EM
+              6 -0.40603322D+04   12.2322571    0.0030036  EM
+              7 -0.40538313D+04    6.5008972    0.0016011  EM
+              8 -0.40498863D+04    3.9450360    0.0009732  EM
+              9 -0.40471181D+04    2.7681540    0.0006835  EM
+             10 -0.40449462D+04    2.1719321    0.0005367  EM
+             11 -0.40431086D+04    1.8376241    0.0004543  EM
+             12 -0.40414759D+04    1.6326735    0.0004038  EM
+             13 -0.40399798D+04    1.4961390    0.0003702  EM
+             14 -0.40385820D+04    1.3977230    0.0003460  EM
+             15 -0.40372603D+04    1.3217232    0.0003273  EM
+             16 -0.40360005D+04    1.2598610    0.0003121  EM
+             17 -0.40347928D+04    1.2076156    0.0002992  EM
+             18 -0.40336304D+04    1.1624073    0.0002881  EM
+             19 -0.40325078D+04    1.1225991    0.0002783  EM
+             20 -0.40314208D+04    1.0870641    0.0002696  EM
+             21 -0.40303659D+04    1.0549082    0.0002617  EM
+             22 -0.40293405D+04    1.0254100    0.0002544  EM
+             23 -0.40283426D+04    0.9978547    0.0002476  EM
+             24 -0.40273709D+04    0.9716777    0.0002412  EM
+             25 -0.40264246D+04    0.9463542    0.0002350  EM
+             26 -0.40255031D+04    0.9214678    0.0002289  EM
+             27 -0.40246065D+04    0.8966325    0.0002227  EM
+             28 -0.40237349D+04    0.8715417    0.0002166  EM
+             29 -0.40228889D+04    0.8459864    0.0002102  EM
+             30 -0.40220692D+04    0.8197883    0.0002038  EM
+             31 -0.40212763D+04    0.7928333    0.0001971  EM
+             32 -0.40205112D+04    0.7650904    0.0001903  EM
+             33 -0.40197747D+04    0.7365399    0.0001832  EM
+             34 -0.40190675D+04    0.7072365    0.0001759  EM
+             35 -0.40183902D+04    0.6772434    0.0001685  EM
+             36 -0.40177435D+04    0.6466786    0.0001609  EM
+             37 -0.40171279D+04    0.6156710    0.0001532  EM
+             38 -0.40165435D+04    0.5843713    0.0001455  EM
+             39 -0.40159905D+04    0.5529421    0.0001377  EM
+             40 -0.40154690D+04    0.5215590    0.0001299  EM
+             41 -0.40149786D+04    0.4903923    0.0001221  EM
+             42 -0.40145190D+04    0.4596134    0.0001145  EM
+             43 -0.40140896D+04    0.4293889    0.0001070  EM
+             44 -0.40136897D+04    0.3998728    0.0000996  EM
+             45 -0.40133185D+04    0.3712001    0.0000925  EM
+             46 -0.40129750D+04    0.3435070    0.0000856  EM
+             47 -0.40126581D+04    0.3169058    0.0000790  EM
+             48 -0.40123666D+04    0.2914797    0.0000726  EM
+             49 -0.40120993D+04    0.2672963    0.0000666  EM
+             50 -0.40118549D+04    0.2444099    0.0000609  EM
+             51 -0.40116321D+04    0.2228522    0.0000555  EM
+             52 -0.40114294D+04    0.2026461    0.0000505  EM
+             53 -0.40112456D+04    0.1837841    0.0000458  EM
+             54 -0.40110794D+04    0.1662523    0.0000414  EM
+             55 -0.40109294D+04    0.1500251    0.0000374  EM
+             56 -0.40107943D+04    0.1350634    0.0000337  EM
+             57 -0.40106730D+04    0.1213205    0.0000302  EM
+             58 -0.40105642D+04    0.1087403    0.0000271  EM
+             59 -0.40104670D+04    0.0972679    0.0000243  EM
+             60 -0.40103801D+04    0.0868348    0.0000217  EM
+             61 -0.40103028D+04    0.0773790    0.0000193  EM
+             62 -0.40101193D+04    0.1834890    0.0000458  QN
+             63 -0.40099873D+04    0.1319623    0.0000329  EM
+             64 -0.40099453D+04    0.0420035    0.0000105  EM
+             65 -0.40099144D+04    0.0308559    0.0000077  EM
+             66 -0.40098891D+04    0.0253863    0.0000063  EM
+             67 -0.40098674D+04    0.0216270    0.0000054  EM
+             68 -0.40098488D+04    0.0186759    0.0000047  EM
+             69 -0.40098325D+04    0.0162205    0.0000040  EM
+             70 -0.40098184D+04    0.0141242    0.0000035  EM
+             71 -0.40098061D+04    0.0123130    0.0000031  EM
+             72 -0.40097954D+04    0.0107377    0.0000027  EM
+             73 -0.40097860D+04    0.0093641    0.0000023  EM
+             74 -0.40097778D+04    0.0081653    0.0000020  EM
+             75 -0.40097707D+04    0.0071182    0.0000018  EM
+             76 -0.40097507D+04    0.0199967    0.0000050  QN
+             77 -0.40097381D+04    0.0126419    0.0000032  EM
+             78 -0.40097355D+04    0.0025505    0.0000006  EM
+             79 -0.40097337D+04    0.0017893    0.0000004  EM
+             80 -0.40097323D+04    0.0014743    0.0000004  EM
+             81 -0.40097310D+04    0.0012544    0.0000003  EM
+             82 -0.40097299D+04    0.0010771    0.0000003  EM
+             83 -0.40097290D+04    0.0009286    0.0000002  EM
+
+
+     Beginning Time:  11:26:55
+        Ending Time:  11:28:16
+       Elapsed Time:  00:01:21
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2015 Muthen & Muthen

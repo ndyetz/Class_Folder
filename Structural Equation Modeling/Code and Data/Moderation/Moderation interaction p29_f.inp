@@ -1,0 +1,148 @@
+DATA:
+FILE IS triethnic 092216.dat;
+
+
+VARIABLE:
+NAMES ARE 
+    form scandt q1 q2 q3 q54a q54b q54c v4d a755d
+    v4f q54d q54h q4 q5 q6 q7a q7b 
+    q8a q8b q9 v11 v12 q12a q12b q12c q12d q13
+     q14a q14b q14c q14d q14e q14f q14g q14h q14i q14j q14k 
+    q14l v15m id1 q15a q15b q15c q15d q15e q15f 
+    q15g q15h q15i q15j v16k q10 q11 q16a q16b q17 q19 q20 
+    q21 q22 q23 q24 q25 q26 q27a q27b v29c 
+    q28a q28b v30c q29a q29b v31c q30a q30b v32c q35 q38a q38b 
+    q38c q38f q38g q38h q38k q38l q38n v34j 
+    q39a q39b q39c q39f q39g v35f q39i q39j 
+    q39k q39l v35k q40a 
+    q40b q40c q40f q40g v36f q40i q40j q40k 
+    q40l v36k q31 q32 q36 q37 q41a q41b q42 q43 v44a v44b v44c 
+    v44d v44e v44f v44g v44h v44i v44j q45a 
+    q45b q45c q45d q45f q45h q45i q45j q45k q46a q46b q46c q46i 
+    v46e q46h q47a q47b q47c q47d q47e q47f 
+    q47g q47h q47j q47k q47l q47m q48a q48b q48c q48d q48e 
+    a949f a749a a749b a749c a749d a749e a750f
+     q49a q49b q49c q49d q49e q50a q50b q50c q50d q50e q51c 
+    q51f q51g q51h q51i q52a q52b q52c q52d 
+    q52e q52f q52g q52h q52i q52j q52k v53l q53a q53b q53c q53d 
+    q53e q53f q53m q53n v55a v55b v56a v56b 
+    v57a v57b v58a v58b v58c v59a v59b v59c v60a v60b v60c v61a 
+    v61b v61c v62a v62b v62c v63a v63b v63c 
+    v64a v64b v64c v65a v65b v65c v66a v66b v66c v67a v67b v67c 
+    v68a v68b v68c v68d v69a v69b v69c v69d 
+    v70a v70b v70c v70d q55 q56 q57 pps49a pps49b pps49c pps49d 
+    pps50a pps50b pps50c pps50d pps51b 
+    pps51a pps51c pps51d pps52b pps52a 
+    pps52c pps52d pps53c pps53a 
+    pps53b pps53d pps54a pps54b pps54c 
+    pps54d pps4 pps5 pps6 pps7 pps8a 
+    pps8b pps8c pps8d pps9 pps10 
+    pps11 pps12 pps13 v88a v88b v88c 
+    v88d v88e v88f v88g v89a v89b v89c v89d 
+    pps16a v90b pps16b pps16c 
+    pps16d pps16e pps17a v91b pps17b pps17c 
+    pps17d pps17e pps19a pps19b pps19c pps20 pps21 pps22a 
+    pps22b pps22c pps22d pps23a pps23b pps23c 
+    pps23d ppsc223f ppsc223g v96g pps24a ppsc223h pps24c v96k 
+    pps24e pps28 pps29 ppsc244a ppsc244b ppsc244c 
+    pps44g pps44e pps44f pps30a pps30b pps31a pps31b 
+    pps31c pps31d pps32 pps33 pps34 pps35a v103b 
+    pps35b pps35c pps35d pps35e pps36a pps36b pps36d 
+    pps36e pps37a pps37b pps37e pps38a pps38b pps38c 
+    pps38e pps39c pps39d pps40a pps40b pps40c pps40d 
+    pps40e pps41a pps41c pps41e pps42a pps42b pps42d 
+    pps42e pps43a pps43c pps43d year ulocation region 
+    comm_code MJ_rc
+  ;
+
+ 
+    MISSING = ALL (-999);
+
+USEVARIABLES ARE 
+v59b 
+v61b 
+!q22 
+q53b
+mj_rc
+!q3
+q3_r !note defined variables must appear at the end of the use variables list
+!DNc
+!INc
+!HarmC
+q3XDNc
+q3XINc
+!q3XHarmc
+;
+
+useobservations are q53b lt 5 ;
+
+define: 
+q3_r = q3-1; !q3_r is male = 0, female = 1
+!DNc = v59b - 2.826; !mean centering DN
+!INc = v61b - 1.748; !mean centering IN
+!HarmC = q53b - 2.709; !mean centering harm
+
+center v59b (grandmean);
+center v61b (grandmean);
+center q53b (grandmean);
+
+q3XDNc = q3_r*v59b;
+q3XINc = q3_r*v61b;
+!q3XHarmc = q3_r*q53b;
+
+ANALYSIS:
+
+bootstrap = 1000;
+
+MODEL:
+
+mj_rc on v59b (c1); !DN
+mj_rc on v61b (c2); !IN
+mj_rc on q53b (b); !harm from using mj regulary
+mj_rc on q3_r (d);
+
+mj_rc on q3XDNc (m1);
+mj_rc on q3XINc (m2);
+!mj_rc on q3XHarmc (m3);
+
+q53b on v59b (a1);
+q53b on v61b (a2);
+
+v59b with v61b (w);
+
+
+
+
+Model constraint:
+new (
+
+ind1 
+ind2
+
+DNmod1
+DNmod0
+
+INmod1
+INmod0
+
+!Hmod1
+!Hmod0
+);
+
+
+ind1 = a1*b;
+ind2 = a2*b;
+
+DNmod1 = c1 + m1*1;
+DNmod0 = c1 + m1*0;
+
+INmod1 = c2 + m2*1;
+INmod0 = c2 + m2*0;
+
+!Hmod1 = b + m3*1;
+!Hmod0 = b + m3*0;
+
+
+ Output: stdyx sampstat cinterval (bcbootstrap);
+                            
+                            

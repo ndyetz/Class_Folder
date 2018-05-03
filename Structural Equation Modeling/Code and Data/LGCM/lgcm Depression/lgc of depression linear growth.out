@@ -1,0 +1,839 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+02/27/2018  12:54 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS aim3_cbi.dat;
+
+  VARIABLE:
+  NAMES ARE
+  ID_COMB Site TXASSGN CELL ACAMPROS NALTREXO THERAPY GENDER AGE MARRIED RACE
+  EMPLOY EDUC INCOME MINORITY FAMHIS FAMHISNO AEDA32 WAGE
+  AUD_CNSM AUD_DPND AUD_PROB AUD_TTL
+  ADSTOT SCDAE19 SCDAE22 ALCDEPND SMKHIS PACKYR EXSMKYRS EXSMKNO SMKCDAY SMKCYRS
+  AEDA37 AEDA37A AEDA37C AEDA37D COMORBID
+  AEDA8A AEDA10A AEDA19A AEDA19B AEDA22A AEDA23A AEDA19CH
+  MHEA3 TEEA1A TEEA1B TEEA1C TEEA1D TEEA1E TEEA1F THD1 THD2 THD3
+  FRST_DK FRST_DTM TOTL_REL INTX_REL FSTTRTD
+  PSYA1A PSYA1B PSYA1C PSYA1D PSYA2A PSYA2B PSYA3A PSYA3B PSYA4A
+  IPI_SIZE IPI_NODRN IPI_PCTDRN WHOPHYS WHOPSYC WHOSOC WHOENVI
+  TXHIS TEEA2 TEEA3 TEEA4 SUPPORT DRNCBPH DRNCBRE DRNCBIN DRNCBIM DRNCBSR
+  DRNCBTOT CONTROL PRECONT CONTEMP ACTION MAINTEN READINES
+  T0_ABST T1_ABST T2_ABST T3_ABST T4_ABST T26_ABST T52_ABST T68_ABST
+  T0_TDRK T1_TDRK T2_TDRK T3_TDRK T4_TDRK T26_TDRK T52_TDRK T68_TDRK
+  T0_TDHD T1_TDHD T2_TDHD T3_TDHD T4_TDHD T5_TDHD T6_TDHD T26_TDHD
+  T7_TDHD T8_TDHD T9_TDHD T10_TDHD T11_TDHD T12_TDHD T13_TDHD T52_TDHD
+  T14_TDHD T15_TDHD T16_TDHD T17_TDHD T68_TDHD T0_TDHW T1_TDHW T2_TDHW
+  T3_TDHW T4_TDHW T26_TDHW T52_TDHW T68_TDHW
+  T0_DPDD T1_DPDD T2_DPDD T3_DPDD T4_DPDD T26_DPDD T52_DPDD T68_DPDD
+  T0_DPD2 T1_DPD2 T2_DPD2 T3_DPD2 T4_DPD2 T26_DPD2 T52_DPD2 T68_DPD2
+  T0_DPDW T1_DPDW T2_DPDW T3_DPDW T4_DPDW T26_DPDW T52_DPDW T68_DPDW
+  T0_PDA T1_PDA T2_PDA T3_PDA T4_PDA T26_PDA T52_PDA T68_PDA
+  T0_PPDD T1_PPDD T2_PPDD T3_PPDD T4_PPDD T26_PPDD T52_PPDD T68_PPDD
+  T0_PHD T1_PHD  T2_PHD  T3_PHD  T4_PHD  T26_PHD  T52_PHD  T68_PHD
+  MAXDRINK  T1_THD  T2_THD  T3_THD  T4_THD  T26_THD  T52_THD  T68_THD
+  T0_ACPR  T2_ACPR  T4_ACPR  T26_ACPR  T52_ACPR  T68_ACPR  T0_FDRO
+  T1_FDRO  T2_FDRO  T3_FDRO  T4_FDRO  T26_FDRO  T52_FDRO  T68_FDRO
+  RELAPSE1  RELAPSE2  RELAPSE3  DTH1  DTH2  DTH3  DRELPSE1  DRELPSE2  DRELPSE3
+  DLASTR   TDD1  TDD2  TDD3  FULLTIME  FRST_DRK  FRSTDKTM  ABSTI
+  T0_CCO T2_CCO  T4_CCO  T26_CCO  T52_CCO  T68_CCO CAD  TAD
+  PSS0 PSS1 PSS2 PSS4 PSS6 PSS8 PSS10 PSS12 PSS14 PSS16 PSS23 PSS26 PSS52 PSS54 PSS68
+  TENS0 TENS1 TENS2 TENS4 TENS6 TENS8 TENS9 TENS10 TENS12 TENS14 TENS15 TENS16
+  DEPRES0 DEPRES1 DEPRES2 DEPRES4 DEPRES6 DEPRES8 DEPRES9 DEPRES10
+  DEPRES12 DEPRES14 DEPRES15 DEPRES16
+  ANGER0 ANGER1 ANGER2 ANGER4 ANGER6 ANGER8 ANGER9 ANGER10
+  ANGER12 ANGER14 ANGER15 ANGER16
+  VIGOR0 VIGOR1 VIGOR2 VIGOR4 VIGOR6 VIGOR8 VIGOR9 VIGOR10
+  VIGOR12 VIGOR14 VIGOR15 VIGOR16
+  FATIG0 FATIG1 FATIG2 FATIG4 FATIG6 FATIG8 FATIG9 FATIG10
+  FATIG12 FATIG14 FATIG15 FATIG16
+  CONFUS0 CONFUS1 CONFUS2 CONFUS4 CONFUS6 CONFUS8 CONFUS9 CONFUS10
+  CONFUS12 CONFUS14 CONFUS15 CONFUS16
+  ocdtot0 ocdtot1 ocdtot2 ocdtot4 ocdtot6 ocdtot8 ocdtot10 ocdtot12
+  ocdtot14 ocdtot16 ocdtot26 ocdtot52
+  T0_DRO T2_DRO T4_DRO T26_DRO T52_DRO T68_DRO
+  TREAT totrel INTXREL pstxrel
+  t1ddd_u t2ddd_u t3ddd_u t4ddd_u t26ddd_u t52ddd_u t68ddd_u
+  frstdrnk abstain RELAPSE INTXRL POSTL ADHERE numcase moodnum cravnum moodmod cravmod
+  mood_0 mood_1 mood_2 mood_3 mood_4 mood_5 mood_6 mood_7 mood_8 mood_9 mood_10 mood_11
+  mood_12 mood_13 mood_14 mood_15 mood_16
+  crav_0 crav_1 crav_2 crav_3 crav_4 crav_5 crav_6 crav_7 crav_8 crav_9 crav_10 crav_11
+  crav_12 crav_13 crav_14 crav_15 crav_16
+  deppre0 deppre1 deppre2 deppre3 deppre4 deppre5 deppre6 deppre7 deppre8 deppre9
+  deppre10 deppre11 deppo0 deppo1 deppo2 deppo3 deppo4 deppo5 deppo6 deppo7 deppo8
+  deppo9 deppo10 deppo11
+  ;
+
+  MISSING ARE ALL (999);
+
+  USEVARIABLES ARE depres0 depres4 depres8 depres12 depres16;
+
+
+  MODEL:
+  !The | command provides all of the default constraints for a growth model,
+  i s | depres0@0 depres4@1 depres8@2 depres12@3 depres16@4;
+
+
+  OUTPUT:
+  TECH1 TECH4 TECH8 SAMPSTAT STANDARDIZED CINTERVAL MODINDICES;
+
+  PLOT:
+  TYPE IS PLOT3;
+  SERIES IS depres0(0) depres4(4) depres8(8) depres12(12) depres16(16);
+
+
+
+
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: IPI_NODRN
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: IPI_PCTDRN
+*** WARNING in PLOT command
+  Note that only the first 8 characters of variable names are used in plots.
+  If variable names are not unique within the first 8 characters, problems
+  may occur.
+*** WARNING in OUTPUT command
+  TECH8 option is available only with analysis types MIXTURE, RANDOM, or
+  TWOLEVEL with estimators ML, MLF, or MLR or ALGORITHM=INTEGRATION.
+  Request for TECH8 is ignored.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  2
+   5 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         774
+
+Number of dependent variables                                    5
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   DEPRES0     DEPRES4     DEPRES8     DEPRES12    DEPRES16
+
+Continuous latent variables
+   I           S
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  aim3_cbi.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            19
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        0.995
+ DEPRES4        0.850         0.854
+ DEPRES8        0.804         0.762         0.807
+ DEPRES12       0.742         0.699         0.700         0.744
+ DEPRES16       0.815         0.757         0.747         0.716         0.819
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1         4.353         3.662         3.401         3.629         3.293
+
+
+           Covariances
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0       17.238
+ DEPRES4        9.984        16.684
+ DEPRES8        9.256        11.214        16.487
+ DEPRES12       8.539        10.907        12.630        17.846
+ DEPRES16       7.820        10.056        11.723        12.764        16.648
+
+
+           Correlations
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        1.000
+ DEPRES4        0.589         1.000
+ DEPRES8        0.549         0.676         1.000
+ DEPRES12       0.487         0.632         0.736         1.000
+ DEPRES16       0.462         0.603         0.708         0.741         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS   -8385.076
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       10
+
+Loglikelihood
+
+          H0 Value                       -8408.509
+          H1 Value                       -8385.076
+
+Information Criteria
+
+          Akaike (AIC)                   16837.018
+          Bayesian (BIC)                 16883.534
+          Sample-Size Adjusted BIC       16851.779
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             46.865
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.069
+          90 Percent C.I.                    0.050  0.090
+          Probability RMSEA <= .05           0.051
+
+CFI/TLI
+
+          CFI                                0.978
+          TLI                                0.978
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1667.115
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.050
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            1.000      0.000    999.000    999.000
+    DEPRES4            1.000      0.000    999.000    999.000
+    DEPRES8            1.000      0.000    999.000    999.000
+    DEPRES12           1.000      0.000    999.000    999.000
+    DEPRES16           1.000      0.000    999.000    999.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            1.000      0.000    999.000    999.000
+    DEPRES8            2.000      0.000    999.000    999.000
+    DEPRES12           3.000      0.000    999.000    999.000
+    DEPRES16           4.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.438      0.178     -2.462      0.014
+
+ Means
+    I                  4.068      0.140     29.008      0.000
+    S                 -0.204      0.038     -5.288      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+
+ Variances
+    I                 10.631      0.792     13.430      0.000
+    S                  0.442      0.066      6.713      0.000
+
+ Residual Variances
+    DEPRES0            7.951      0.623     12.761      0.000
+    DEPRES4            5.867      0.432     13.597      0.000
+    DEPRES8            4.769      0.351     13.606      0.000
+    DEPRES12           5.074      0.398     12.750      0.000
+    DEPRES16           3.372      0.447      7.538      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            0.756      0.019     39.905      0.000
+    DEPRES4            0.813      0.021     38.617      0.000
+    DEPRES8            0.830      0.025     33.815      0.000
+    DEPRES12           0.789      0.028     28.242      0.000
+    DEPRES16           0.778      0.033     23.670      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.166      0.013     12.830      0.000
+    DEPRES8            0.339      0.026     12.986      0.000
+    DEPRES12           0.483      0.036     13.439      0.000
+    DEPRES16           0.635      0.048     13.135      0.000
+
+ S        WITH
+    I                 -0.202      0.069     -2.938      0.003
+
+ Means
+    I                  1.248      0.063     19.803      0.000
+    S                 -0.306      0.062     -4.935      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    DEPRES0            0.428      0.029     14.923      0.000
+    DEPRES4            0.365      0.024     15.497      0.000
+    DEPRES8            0.309      0.021     14.902      0.000
+    DEPRES12           0.297      0.021     14.063      0.000
+    DEPRES16           0.192      0.025      7.830      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            0.756      0.019     39.905      0.000
+    DEPRES4            0.813      0.021     38.617      0.000
+    DEPRES8            0.830      0.025     33.815      0.000
+    DEPRES12           0.789      0.028     28.242      0.000
+    DEPRES16           0.778      0.033     23.670      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.166      0.013     12.830      0.000
+    DEPRES8            0.339      0.026     12.986      0.000
+    DEPRES12           0.483      0.036     13.439      0.000
+    DEPRES16           0.635      0.048     13.135      0.000
+
+ S        WITH
+    I                 -0.202      0.069     -2.938      0.003
+
+ Means
+    I                  1.248      0.063     19.803      0.000
+    S                 -0.306      0.062     -4.935      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    DEPRES0            0.428      0.029     14.923      0.000
+    DEPRES4            0.365      0.024     15.497      0.000
+    DEPRES8            0.309      0.021     14.902      0.000
+    DEPRES12           0.297      0.021     14.063      0.000
+    DEPRES16           0.192      0.025      7.830      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    DEPRES0            3.261      0.121     26.861      0.000
+    DEPRES4            3.261      0.121     26.861      0.000
+    DEPRES8            3.261      0.121     26.861      0.000
+    DEPRES12           3.261      0.121     26.861      0.000
+    DEPRES16           3.261      0.121     26.861      0.000
+
+ S        |
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.665      0.050     13.427      0.000
+    DEPRES8            1.330      0.099     13.427      0.000
+    DEPRES12           1.996      0.149     13.427      0.000
+    DEPRES16           2.661      0.198     13.427      0.000
+
+ S        WITH
+    I                 -0.202      0.069     -2.938      0.003
+
+ Means
+    I                  1.248      0.063     19.803      0.000
+    S                 -0.306      0.062     -4.935      0.000
+
+ Intercepts
+    DEPRES0            0.000      0.000    999.000    999.000
+    DEPRES4            0.000      0.000    999.000    999.000
+    DEPRES8            0.000      0.000    999.000    999.000
+    DEPRES12           0.000      0.000    999.000    999.000
+    DEPRES16           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    DEPRES0            7.951      0.623     12.761      0.000
+    DEPRES4            5.867      0.432     13.597      0.000
+    DEPRES8            4.769      0.351     13.606      0.000
+    DEPRES12           5.074      0.398     12.750      0.000
+    DEPRES16           3.372      0.447      7.538      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    DEPRES0            0.572      0.029     19.952      0.000
+    DEPRES4            0.635      0.024     26.932      0.000
+    DEPRES8            0.691      0.021     33.273      0.000
+    DEPRES12           0.703      0.021     33.212      0.000
+    DEPRES16           0.808      0.025     32.985      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.133E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES4          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES8          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES12         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES16         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    DEPRES8          2.000       2.000       2.000       2.000       2.000       2.000       2.000
+    DEPRES12         3.000       3.000       3.000       3.000       3.000       3.000       3.000
+    DEPRES16         4.000       4.000       4.000       4.000       4.000       4.000       4.000
+
+ S        WITH
+    I               -0.897      -0.787      -0.731      -0.438      -0.145      -0.089       0.020
+
+ Means
+    I                3.707       3.794       3.838       4.068       4.299       4.343       4.430
+    S               -0.303      -0.279      -0.267      -0.204      -0.140      -0.128      -0.104
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    I                8.592       9.079       9.329      10.631      11.933      12.182      12.670
+    S                0.273       0.313       0.334       0.442       0.551       0.572       0.612
+
+ Residual Variances
+    DEPRES0          6.346       6.730       6.926       7.951       8.976       9.173       9.556
+    DEPRES4          4.756       5.022       5.157       5.867       6.577       6.713       6.979
+    DEPRES8          3.866       4.082       4.192       4.769       5.345       5.456       5.672
+    DEPRES12         4.049       4.294       4.419       5.074       5.729       5.854       6.099
+    DEPRES16         2.220       2.495       2.636       3.372       4.108       4.249       4.524
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          0.708       0.719       0.725       0.756       0.788       0.794       0.805
+    DEPRES4          0.759       0.772       0.779       0.813       0.848       0.855       0.868
+    DEPRES8          0.767       0.782       0.790       0.830       0.871       0.879       0.894
+    DEPRES12         0.717       0.735       0.743       0.789       0.835       0.844       0.861
+    DEPRES16         0.693       0.713       0.724       0.778       0.832       0.842       0.862
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.133       0.141       0.145       0.166       0.187       0.191       0.199
+    DEPRES8          0.272       0.288       0.296       0.339       0.382       0.390       0.406
+    DEPRES12         0.391       0.413       0.424       0.483       0.542       0.554       0.576
+    DEPRES16         0.510       0.540       0.555       0.635       0.714       0.729       0.759
+
+ S        WITH
+    I               -0.379      -0.337      -0.315      -0.202      -0.089      -0.067      -0.025
+
+ Means
+    I                1.085       1.124       1.144       1.248       1.351       1.371       1.410
+    S               -0.466      -0.427      -0.408      -0.306      -0.204      -0.184      -0.146
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    I                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    S                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    DEPRES0          0.354       0.372       0.381       0.428       0.475       0.484       0.502
+    DEPRES4          0.305       0.319       0.326       0.365       0.404       0.411       0.426
+    DEPRES8          0.256       0.269       0.275       0.309       0.343       0.350       0.363
+    DEPRES12         0.243       0.256       0.263       0.297       0.332       0.339       0.352
+    DEPRES16         0.129       0.144       0.152       0.192       0.232       0.240       0.255
+
+
+STDY Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          0.708       0.719       0.725       0.756       0.788       0.794       0.805
+    DEPRES4          0.759       0.772       0.779       0.813       0.848       0.855       0.868
+    DEPRES8          0.767       0.782       0.790       0.830       0.871       0.879       0.894
+    DEPRES12         0.717       0.735       0.743       0.789       0.835       0.844       0.861
+    DEPRES16         0.693       0.713       0.724       0.778       0.832       0.842       0.862
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.133       0.141       0.145       0.166       0.187       0.191       0.199
+    DEPRES8          0.272       0.288       0.296       0.339       0.382       0.390       0.406
+    DEPRES12         0.391       0.413       0.424       0.483       0.542       0.554       0.576
+    DEPRES16         0.510       0.540       0.555       0.635       0.714       0.729       0.759
+
+ S        WITH
+    I               -0.379      -0.337      -0.315      -0.202      -0.089      -0.067      -0.025
+
+ Means
+    I                1.085       1.124       1.144       1.248       1.351       1.371       1.410
+    S               -0.466      -0.427      -0.408      -0.306      -0.204      -0.184      -0.146
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    I                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    S                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    DEPRES0          0.354       0.372       0.381       0.428       0.475       0.484       0.502
+    DEPRES4          0.305       0.319       0.326       0.365       0.404       0.411       0.426
+    DEPRES8          0.256       0.269       0.275       0.309       0.343       0.350       0.363
+    DEPRES12         0.243       0.256       0.263       0.297       0.332       0.339       0.352
+    DEPRES16         0.129       0.144       0.152       0.192       0.232       0.240       0.255
+
+
+STD Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ I        |
+    DEPRES0          2.948       3.023       3.061       3.261       3.460       3.498       3.573
+    DEPRES4          2.948       3.023       3.061       3.261       3.460       3.498       3.573
+    DEPRES8          2.948       3.023       3.061       3.261       3.460       3.498       3.573
+    DEPRES12         2.948       3.023       3.061       3.261       3.460       3.498       3.573
+    DEPRES16         2.948       3.023       3.061       3.261       3.460       3.498       3.573
+
+ S        |
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.538       0.568       0.584       0.665       0.747       0.762       0.793
+    DEPRES8          1.075       1.136       1.167       1.330       1.493       1.525       1.586
+    DEPRES12         1.613       1.704       1.751       1.996       2.240       2.287       2.378
+    DEPRES16         2.150       2.272       2.335       2.661       2.987       3.049       3.171
+
+ S        WITH
+    I               -0.379      -0.337      -0.315      -0.202      -0.089      -0.067      -0.025
+
+ Means
+    I                1.085       1.124       1.144       1.248       1.351       1.371       1.410
+    S               -0.466      -0.427      -0.408      -0.306      -0.204      -0.184      -0.146
+
+ Intercepts
+    DEPRES0          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES4          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES8          0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES12         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+    DEPRES16         0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    I                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    S                1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    DEPRES0          6.346       6.730       6.926       7.951       8.976       9.173       9.556
+    DEPRES4          4.756       5.022       5.157       5.867       6.577       6.713       6.979
+    DEPRES8          3.866       4.082       4.192       4.769       5.345       5.456       5.672
+    DEPRES12         4.049       4.294       4.419       5.074       5.729       5.854       6.099
+    DEPRES16         2.220       2.495       2.636       3.372       4.108       4.249       4.524
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                            M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+BY Statements
+
+S        BY DEPRES0        13.336    -1.536     -1.022       -0.237
+
+Means/Intercepts/Thresholds
+
+[ DEPRES0  ]               17.474     0.637      0.637        0.148
+[ DEPRES8  ]               10.545    -0.325     -0.325       -0.083
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1           0             0             0             0             0
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ DEPRES0            0             0
+ DEPRES4            0             0
+ DEPRES8            0             0
+ DEPRES12           0             0
+ DEPRES16           0             0
+
+
+           THETA
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0            1
+ DEPRES4            0             2
+ DEPRES8            0             0             3
+ DEPRES12           0             0             0             4
+ DEPRES16           0             0             0             0             5
+
+
+           ALPHA
+              I             S
+              ________      ________
+      1           6             7
+
+
+           BETA
+              I             S
+              ________      ________
+ I                  0             0
+ S                  0             0
+
+
+           PSI
+              I             S
+              ________      ________
+ I                  8
+ S                  9            10
+
+
+     STARTING VALUES
+
+
+           NU
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+      1         0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ DEPRES0        1.000         0.000
+ DEPRES4        1.000         1.000
+ DEPRES8        1.000         2.000
+ DEPRES12       1.000         3.000
+ DEPRES16       1.000         4.000
+
+
+           THETA
+              DEPRES0       DEPRES4       DEPRES8       DEPRES12      DEPRES16
+              ________      ________      ________      ________      ________
+ DEPRES0        8.642
+ DEPRES4        0.000         8.043
+ DEPRES8        0.000         0.000         8.177
+ DEPRES12       0.000         0.000         0.000         8.465
+ DEPRES16       0.000         0.000         0.000         0.000         8.118
+
+
+           ALPHA
+              I             S
+              ________      ________
+      1         4.042        -0.186
+
+
+           BETA
+              I             S
+              ________      ________
+ I              0.000         0.000
+ S              0.000         0.000
+
+
+           PSI
+              I             S
+              ________      ________
+ I             14.411
+ S              0.000         2.657
+
+
+TECHNICAL 4 OUTPUT
+
+
+     ESTIMATES DERIVED FROM THE MODEL
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              I             S
+              ________      ________
+      1         4.068        -0.204
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              I             S
+              ________      ________
+ I             10.631
+ S             -0.438         0.442
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              I             S
+              ________      ________
+ I              1.000
+ S             -0.202         1.000
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              I             I_SE          S             S_SE
+              ________      ________      ________      ________
+ 1              4.068         1.527        -0.204         0.510
+
+
+           Covariances
+              I             I_SE          S             S_SE
+              ________      ________      ________      ________
+ I              8.263
+ I_SE           0.019         0.036
+ S              0.048         0.003         0.179
+ S_SE           0.002         0.009         0.000         0.004
+
+
+           Correlations
+              I             I_SE          S             S_SE
+              ________      ________      ________      ________
+ I              1.000
+ I_SE           0.035         1.000
+ S              0.039         0.032         1.000
+ S_SE           0.009         0.770         0.018         1.000
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms of sample values
+  Histograms of estimated values
+  Scatterplots (sample values, estimated factor scores, estimated values)
+  Sample means
+  Estimated means
+  Sample and estimated means
+  Latent variable distribution plots
+  Observed individual values
+  Estimated individual values
+
+     Beginning Time:  12:54:15
+        Ending Time:  12:54:15
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

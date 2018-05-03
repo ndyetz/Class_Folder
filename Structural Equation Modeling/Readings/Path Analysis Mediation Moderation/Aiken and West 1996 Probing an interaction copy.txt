@@ -1,0 +1,22 @@
+Aiken & West 1996 Probing an Interaction
+
+Y = b1X + b2Z + b3XZ + b0
+
+if interaction is significant follow these steps:
+
+1. create 3 new variables ZcvU = Z - CVz1, ZcvM = Z - CVzM, ZcvL = CVz_1; where CVz1 = value of Z at +1 SD, CVzM = mean of Z, CVZ_1 = Value of Z at -1 SD
+
+2. Create XZcvU, XZcvM, XZcvL the new interaction terms
+
+3. y = b1X + b2ZcvU + b3XZcvU + b0, y = b1X + b2ZcvM + b3XZcvM + b0, y = b1X + b2ZcvL + b3XZcvL + b0
+
+Notes: 	
+
+b1 will be the simple slope of Y on X at Z = cvU, cvM, or cvL respectively - test will be if the simple slope differs from 0
+	
+b0 will be the intercept of Y on X at Z = cvU, cvM, or cvL respectively
+
+Test if slopes are different from one another
+t = d/Sd; d = difference in the slopes
+t = ((ZH - ZL)b3)/(sqrt((Zh-Zl)^2)) = b3/sqrt(s33) = 
+***this means that if b3 was significant in the original analysis than the simple slopes differ - no further test is necessary (Aiken & West, 1996, p. 21)***

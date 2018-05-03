@@ -1,0 +1,602 @@
+Mplus VERSION 7.2
+MUTHEN & MUTHEN
+02/12/2018   5:15 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS triethnic 092216.dat;
+
+
+  VARIABLE:
+  NAMES ARE
+      form scandt q1 q2 q3 q54a q54b q54c v4d a755d
+      v4f q54d q54h q4 q5 q6 q7a q7b
+      q8a q8b q9 v11 v12 q12a q12b q12c q12d q13
+       q14a q14b q14c q14d q14e q14f q14g q14h q14i q14j q14k
+      q14l v15m id1 q15a q15b q15c q15d q15e q15f
+      q15g q15h q15i q15j v16k q10 q11 q16a q16b q17 q19 q20
+      q21 q22 q23 q24 q25 q26 q27a q27b v29c
+      q28a q28b v30c q29a q29b v31c q30a q30b v32c q35 q38a q38b
+      q38c q38f q38g q38h q38k q38l q38n v34j
+      q39a q39b q39c q39f q39g v35f q39i q39j
+      q39k q39l v35k q40a
+      q40b q40c q40f q40g v36f q40i q40j q40k
+      q40l v36k q31 q32 q36 q37 q41a q41b q42 q43 v44a v44b v44c
+      v44d v44e v44f v44g v44h v44i v44j q45a
+      q45b q45c q45d q45f q45h q45i q45j q45k q46a q46b q46c q46i
+      v46e q46h q47a q47b q47c q47d q47e q47f
+      q47g q47h q47j q47k q47l q47m q48a q48b q48c q48d q48e
+      a949f a749a a749b a749c a749d a749e a750f
+       q49a q49b q49c q49d q49e q50a q50b q50c q50d q50e q51c
+      q51f q51g q51h q51i q52a q52b q52c q52d
+      q52e q52f q52g q52h q52i q52j q52k v53l q53a q53b q53c q53d
+      q53e q53f q53m q53n v55a v55b v56a v56b
+      v57a v57b v58a v58b v58c v59a v59b v59c v60a v60b v60c v61a
+      v61b v61c v62a v62b v62c v63a v63b v63c
+      v64a v64b v64c v65a v65b v65c v66a v66b v66c v67a v67b v67c
+      v68a v68b v68c v68d v69a v69b v69c v69d
+      v70a v70b v70c v70d q55 q56 q57 pps49a pps49b pps49c pps49d
+      pps50a pps50b pps50c pps50d pps51b
+      pps51a pps51c pps51d pps52b pps52a
+      pps52c pps52d pps53c pps53a
+      pps53b pps53d pps54a pps54b pps54c
+      pps54d pps4 pps5 pps6 pps7 pps8a
+      pps8b pps8c pps8d pps9 pps10
+      pps11 pps12 pps13 v88a v88b v88c
+      v88d v88e v88f v88g v89a v89b v89c v89d
+      pps16a v90b pps16b pps16c
+      pps16d pps16e pps17a v91b pps17b pps17c
+      pps17d pps17e pps19a pps19b pps19c pps20 pps21 pps22a
+      pps22b pps22c pps22d pps23a pps23b pps23c
+      pps23d ppsc223f ppsc223g v96g pps24a ppsc223h pps24c v96k
+      pps24e pps28 pps29 ppsc244a ppsc244b ppsc244c
+      pps44g pps44e pps44f pps30a pps30b pps31a pps31b
+      pps31c pps31d pps32 pps33 pps34 pps35a v103b
+      pps35b pps35c pps35d pps35e pps36a pps36b pps36d
+      pps36e pps37a pps37b pps37e pps38a pps38b pps38c
+      pps38e pps39c pps39d pps40a pps40b pps40c pps40d
+      pps40e pps41a pps41c pps41e pps42a pps42b pps42d
+      pps42e pps43a pps43c pps43d year ulocation region
+      comm_code MJ_rc
+    ;
+
+
+      MISSING = ALL (-999);
+
+  GROUPING is q3 (1 = male 2 = female);
+
+  USEVARIABLES ARE
+  v59b
+  v61b
+  !q22
+  q53b
+  mj_rc
+  ;
+
+  useobservations are q53b lt 5 ;
+
+  ANALYSIS:
+
+  bootstrap = 1000;
+
+
+
+  MODEL:
+
+  mj_rc on v59b (c1); !DN
+  mj_rc on v61b (c2); !IN
+
+
+  mj_rc on q53b (b); !harm from using mj regulary
+  q53b on v59b (a1);
+  q53b on v61b (a2);
+
+  v59b with v61b (w);
+
+  model male:
+  mj_rc on v59b (c1m); !DN
+  mj_rc on v61b (c2m); !IN
+
+
+  mj_rc on q53b (bm); !NOTE: THIS PARAMETER HELD CONSTANT ACROSS GROUPS
+  q53b on v59b (a1m);
+  q53b on v61b (a2m);
+
+  v59b with v61b (w);
+
+  model female:
+  mj_rc on v59b (c1f); !DN
+  mj_rc on v61b (c2f); !IN
+
+
+  mj_rc on q53b (bf); !NOTE: THIS PARAMETER HELD CONSTANT ACROSS GROUPS
+  q53b on v59b (a1f);
+  q53b on v61b (a2f);
+
+  v59b with v61b (w);
+
+
+  Model constraint:
+  new (
+
+  ind1m
+  ind2m
+
+  ind1f
+  ind2f
+  );
+
+
+  ind1m = a1m*bm;
+  ind2m = a2m*bm;
+
+
+  ind1f = a1f*bf;
+  ind2f = a2f*bf;
+
+
+   Output: stdyx sampstat cinterval (bcbootstrap);
+
+
+
+
+
+*** WARNING
+  Data set contains unknown or missing values for GROUPING,
+  PATTERN, COHORT, CLUSTER and/or STRATIFICATION variables.
+  Number of cases with unknown or missing values:  173
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  202
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 2
+Number of observations
+   Group MALE                                                 2366
+   Group FEMALE                                               2310
+   Total sample size                                          4676
+
+Number of dependent variables                                    2
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Q53B        MJ_RC
+
+Observed independent variables
+   V59B        V61B
+
+Variables with special functions
+
+  Grouping variable     Q3
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Number of bootstrap draws
+    Requested                                                 1000
+    Completed                                                 1000
+
+Input data file(s)
+  triethnic 092216.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+   Group MALE
+     Number of missing data patterns            15
+
+   Group FEMALE
+     Number of missing data patterns            14
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR MALE
+
+
+           Covariance Coverage
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           0.959
+ MJ_RC          0.929         0.945
+ V59B           0.937         0.924         0.973
+ V61B           0.940         0.925         0.964         0.975
+
+
+     PROPORTION OF DATA PRESENT FOR FEMALE
+
+
+           Covariance Coverage
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           0.971
+ MJ_RC          0.946         0.958
+ V59B           0.955         0.942         0.981
+ V61B           0.956         0.945         0.973         0.981
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR MALE
+
+
+           Means
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+      1         2.538        13.114         2.639         1.847
+
+
+           Covariances
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           1.414
+ MJ_RC         -0.661        11.811
+ V59B          -0.223         1.005         1.800
+ V61B          -0.436         0.606         0.214         1.463
+
+
+           Correlations
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           1.000
+ MJ_RC         -0.162         1.000
+ V59B          -0.140         0.218         1.000
+ V61B          -0.303         0.146         0.132         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR FEMALE
+
+
+           Means
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+      1         2.869        13.119         2.989         1.655
+
+
+           Covariances
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           1.262
+ MJ_RC         -0.593         8.615
+ V59B          -0.198         0.597         1.581
+ V61B          -0.328         0.368         0.143         1.084
+
+
+           Correlations
+              Q53B          MJ_RC         V59B          V61B
+              ________      ________      ________      ________
+ Q53B           1.000
+ MJ_RC         -0.180         1.000
+ V59B          -0.140         0.162         1.000
+ V61B          -0.280         0.121         0.109         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -32804.123
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       27
+
+Loglikelihood
+
+          H0 Value                      -32805.427
+          H1 Value                      -32804.123
+
+Information Criteria
+
+          Akaike (AIC)                   65664.853
+          Bayesian (BIC)                 65839.008
+          Sample-Size Adjusted BIC       65753.212
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              2.606
+          Degrees of Freedom                     1
+          P-Value                           0.1064
+
+Chi-Square Contribution From Each Group
+
+          MALE                               1.540
+          FEMALE                             1.066
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.026
+          90 Percent C.I.                    0.000  0.067
+          Probability RMSEA <= .05           0.789
+
+CFI/TLI
+
+          CFI                                0.998
+          TLI                                0.978
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            735.899
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.007
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Group MALE
+
+ MJ_RC    ON
+    V59B               0.490      0.062      7.949      0.000
+    V61B               0.249      0.083      2.993      0.003
+    Q53B              -0.314      0.052     -6.029      0.000
+
+ Q53B     ON
+    V59B              -0.090      0.019     -4.719      0.000
+    V61B              -0.285      0.020    -14.117      0.000
+
+ V59B     WITH
+    V61B               0.172      0.025      6.928      0.000
+
+ Means
+    V59B               2.639      0.028     94.320      0.000
+    V61B               1.847      0.025     73.476      0.000
+
+ Intercepts
+    Q53B               3.302      0.062     52.984      0.000
+    MJ_RC             12.158      0.247     49.287      0.000
+
+ Variances
+    V59B               1.790      0.034     52.215      0.000
+    V61B               1.455      0.052     27.746      0.000
+
+ Residual Variances
+    Q53B               1.270      0.025     51.093      0.000
+    MJ_RC             10.962      1.666      6.579      0.000
+
+Group FEMALE
+
+ MJ_RC    ON
+    V59B               0.314      0.056      5.583      0.000
+    V61B               0.186      0.087      2.132      0.033
+    Q53B              -0.372      0.062     -6.051      0.000
+
+ Q53B     ON
+    V59B              -0.099      0.019     -5.077      0.000
+    V61B              -0.289      0.024    -12.078      0.000
+
+ V59B     WITH
+    V61B               0.172      0.025      6.928      0.000
+
+ Means
+    V59B               2.989      0.027    110.683      0.000
+    V61B               1.655      0.022     75.652      0.000
+
+ Intercepts
+    Q53B               3.643      0.067     54.649      0.000
+    MJ_RC             12.941      0.300     43.171      0.000
+
+ Variances
+    V59B               1.590      0.033     48.591      0.000
+    V61B               1.090      0.049     22.175      0.000
+
+ Residual Variances
+    Q53B               1.148      0.025     45.114      0.000
+    MJ_RC              8.138      1.202      6.769      0.000
+
+New/Additional Parameters
+    IND1M              0.028      0.008      3.705      0.000
+    IND2M              0.089      0.016      5.748      0.000
+    IND1F              0.037      0.009      3.890      0.000
+    IND2F              0.108      0.020      5.408      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+                      StdYX
+                    Estimate
+
+Group MALE
+
+ MJ_RC    ON
+    V59B               0.191
+    V61B               0.087
+    Q53B              -0.109
+
+ Q53B     ON
+    V59B              -0.101
+    V61B              -0.289
+
+ V59B     WITH
+    V61B               0.107
+
+ Means
+    V59B               1.973
+    V61B               1.531
+
+ Intercepts
+    Q53B               2.779
+    MJ_RC              3.540
+
+ Variances
+    V59B               1.000
+    V61B               1.000
+
+ Residual Variances
+    Q53B               0.900
+    MJ_RC              0.929
+
+Group FEMALE
+
+ MJ_RC    ON
+    V59B               0.135
+    V61B               0.066
+    Q53B              -0.143
+
+ Q53B     ON
+    V59B              -0.111
+    V61B              -0.269
+
+ V59B     WITH
+    V61B               0.131
+
+ Means
+    V59B               2.371
+    V61B               1.586
+
+ Intercepts
+    Q53B               3.240
+    MJ_RC              4.407
+
+ Variances
+    V59B               1.000
+    V61B               1.000
+
+ Residual Variances
+    Q53B               0.908
+    MJ_RC              0.944
+
+
+R-SQUARE
+
+Group MALE
+
+    Observed
+    Variable        Estimate
+
+    Q53B               0.100
+    MJ_RC              0.071
+
+Group FEMALE
+
+    Observed
+    Variable        Estimate
+
+    Q53B               0.092
+    MJ_RC              0.056
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Group MALE
+
+ MJ_RC    ON
+    V59B             0.334       0.381       0.398       0.490       0.599       0.615       0.650
+    V61B             0.052       0.103       0.125       0.249       0.403       0.426       0.506
+    Q53B            -0.475      -0.428      -0.409      -0.314      -0.238      -0.222      -0.197
+
+ Q53B     ON
+    V59B            -0.138      -0.126      -0.120      -0.090      -0.058      -0.052      -0.042
+    V61B            -0.335      -0.324      -0.318      -0.285      -0.252      -0.246      -0.233
+
+ V59B     WITH
+    V61B             0.102       0.124       0.132       0.172       0.212       0.222       0.237
+
+ Means
+    V59B             2.574       2.584       2.593       2.639       2.686       2.692       2.707
+    V61B             1.779       1.800       1.804       1.847       1.887       1.896       1.912
+
+ Intercepts
+    Q53B             3.109       3.170       3.201       3.302       3.402       3.422       3.452
+    MJ_RC           11.461      11.686      11.768      12.158      12.585      12.662      12.838
+
+ Variances
+    V59B             1.700       1.724       1.735       1.790       1.846       1.860       1.879
+    V61B             1.336       1.362       1.372       1.455       1.546       1.561       1.591
+
+ Residual Variances
+    Q53B             1.213       1.228       1.235       1.270       1.319       1.324       1.338
+    MJ_RC            7.016       7.779       8.293      10.962      13.783      14.301      14.776
+
+Group FEMALE
+
+ MJ_RC    ON
+    V59B             0.155       0.201       0.221       0.314       0.401       0.418       0.466
+    V61B            -0.013       0.032       0.050       0.186       0.335       0.361       0.452
+    Q53B            -0.548      -0.500      -0.478      -0.372      -0.276      -0.252      -0.227
+
+ Q53B     ON
+    V59B            -0.149      -0.136      -0.130      -0.099      -0.068      -0.062      -0.049
+    V61B            -0.352      -0.341      -0.331      -0.289      -0.252      -0.241      -0.228
+
+ V59B     WITH
+    V61B             0.102       0.124       0.132       0.172       0.212       0.222       0.237
+
+ Means
+    V59B             2.917       2.936       2.946       2.989       3.036       3.042       3.059
+    V61B             1.597       1.610       1.617       1.655       1.689       1.698       1.707
+
+ Intercepts
+    Q53B             3.476       3.516       3.536       3.643       3.754       3.779       3.821
+    MJ_RC           12.189      12.380      12.447      12.941      13.455      13.548      13.713
+
+ Variances
+    V59B             1.506       1.527       1.538       1.590       1.646       1.657       1.675
+    V61B             0.952       0.995       1.009       1.090       1.170       1.185       1.202
+
+ Residual Variances
+    Q53B             1.077       1.095       1.103       1.148       1.185       1.193       1.215
+    MJ_RC            5.604       6.200       6.432       8.138      10.560      10.973      11.724
+
+New/Additional Parameters
+    IND1M            0.012       0.016       0.017       0.028       0.042       0.045       0.050
+    IND2M            0.053       0.063       0.067       0.089       0.118       0.125       0.132
+    IND1F            0.017       0.021       0.023       0.037       0.056       0.059       0.067
+    IND2F            0.065       0.074       0.079       0.108       0.146       0.156       0.175
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\kevin\dropbox\sem 2018 shared\code and data\moderation\moderation mg ex_nouse_allfree.d
+
+     Beginning Time:  17:15:42
+        Ending Time:  17:15:45
+       Elapsed Time:  00:00:03
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

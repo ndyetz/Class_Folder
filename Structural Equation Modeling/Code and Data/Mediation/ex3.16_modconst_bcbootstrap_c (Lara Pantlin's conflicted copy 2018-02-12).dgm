@@ -1,0 +1,63 @@
+VERSION 1.0.0
+INPUT
+TITLE:
+ this is an example of a path analysis
+ with continuous dependent variables,
+ bootstrapped standard errors, indirect
+ effects, and confidence intervals
+DATA:
+ FILE IS ex3.11.dat;
+VARIABLE:
+ NAMES ARE y1-y3 x1-x3;
+ANALYSIS:
+ BOOTSTRAP = 1000;
+OUTPUT:
+ CINTERVAL (bcbootstrap);
+MODEL:
+ y1 on x1 (a1);
+ y1 on x2;
+ y1 on x3;
+ y2 ON x1 (a2);
+ y2 on x2;
+ y2 on x3;
+ y3 ON y1 (b1);
+ y3 on y2 (b2);
+ y3 on x2;
+ y3 on x1 (c);
+INPUT_END
+1
+0
+0
+0
+1
+GENERAL
+0
+3
+0
+3
+y1 y2 y3 x1 x2 x3
+3
+1 1 2 0 0 0
+0
+0
+1 1 x1 y1    0.000
+91 1 x1 y1 a1
+1 1 x2 y1    0.000
+1 1 x3 y1    0.000
+1 1 x1 y2    0.000
+91 1 x1 y2 a2
+1 1 x2 y2    0.000
+1 1 x3 y2    0.000
+1 1 y1 y3    0.000
+91 1 y1 y3 b1
+1 1 y2 y3    0.000
+91 1 y2 y3 b2
+1 1 x2 y3    0.000
+1 1 x1 y3    0.000
+91 1 x1 y3 c
+4 1 y1    8.734
+4 1 y2    8.569
+4 1 y3   15.910
+2 1 x1 x2  999.000
+2 1 x1 x3  999.000
+2 1 x2 x3  999.000

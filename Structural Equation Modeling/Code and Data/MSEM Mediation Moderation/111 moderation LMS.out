@@ -1,0 +1,728 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+04/30/2018   9:42 PM
+
+INPUT INSTRUCTIONS
+
+
+  DATA:	
+      FILE IS Pregame PTSD 021615.dat;
+
+
+
+  VARIABLE: NAMES ARE
+     IDNUM CAPS_STATUS_R CAPS_STATUS_combined
+     SEX AGE RACE EDLEVEL TLEQ_SV_Dich
+      LEC_SV_Dich CRITBMSx CRITCMSx CRITDMSx
+      TLEQ_CE TLEQ_CFH PHQ_TOT PHQ_Severity2groups
+      bfi_E bfi_A
+      bfi_C bfi_N bfi_O DERS_TOTAL dmqsoc dmqcop
+      dmqenh dmqcnf DMQ_Total KEXtr KEXsl KEXae
+      KEXpe YAQ_TOT
+      YAQ_soc YAQ_cont YAQ_selfp YAQ_selfc YAQ_risk
+      YAQ_acoc YAQ_dep YAQ_blk drnkdays30 Hvydays Bngdays
+      Prgmdays nopgdays TOTDRK30 TOTPGEDRK TOTDRKPGD
+      TOTDRKNOPG totcons30 Totpgcons Totnopgcons
+      Sexual_Consequence Pregamer Day P_TALUS TALUS ALC
+      DRINKDAY PGDAY pgdALC nopgALC CONSd ycond PGCONS
+      NOPGCONS DDD DPGD DNPGD CDD CPGD CNPGD
+      PTSD1 PTSD2 PTSD3;
+
+      !DUMMY CODE FOR CAPS_STATUS_combined
+      !                       PTSD1   PTSD2 PTSD3
+      !Criteria A Negative    1       0      0
+      !PTSD Negative          0       1      0
+      !PTSD Positive          0       0      1
+
+      !can also use PTSD1 by itself to compare
+      !those with trauma to those without trauma
+
+      MISSING = ALL (-999);
+
+    USEVARIABLES ARE
+        pgday
+        CONSd
+        bfi_c
+        cbfi_c
+        cconsd
+      ;
+
+
+    CLUSTER IS IDNUM;
+    within is pgday bfi_c consd;
+    between is cbfi_c cconsd;
+
+    define:
+    cbfi_c = cluster_mean(bfi_c);
+    cconsd = cluster_mean(consd);
+
+
+  ANALYSIS:
+     TYPE IS TWOLEVEL RANDOM;
+     algorithm=integration;
+
+  MODEL:
+     %WITHIN%
+     PD by pgday@1; pd@.7; pgday@.1;
+     BC by bfi_c@1; bc@.7; bfi_c@.1;
+     ARC by consd@1; arc@.7; consd@.1;
+
+   pdXbc | PD xwith BC ;
+    ARC on PD BC pdXbc;
+
+
+     %BETWEEN%
+     cconsd cbfi_c;
+    cconsd on cbfi_c;
+    [cconsd cbfi_c];
+
+
+    OUTPUT: TECH1 TECH3;
+
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       17986
+
+Number of dependent variables                                    4
+Number of independent variables                                  1
+Number of continuous latent variables                            4
+
+Observed dependent variables
+
+  Continuous
+   CCONSD      PGDAY       CONSD       BFI_C
+
+Observed independent variables
+   CBFI_C
+
+Continuous latent variables
+   PD          BC          ARC         PDXBC
+
+Variables with special functions
+
+  Cluster variable      IDNUM
+
+  Within variables
+   PGDAY       CONSD       BFI_C
+
+  Between variables
+   CBFI_C      CCONSD
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Cholesky                                                       OFF
+
+Input data file(s)
+  Pregame PTSD 021615.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             3
+     Number of clusters                        600
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C         1.000
+ CCONSD         1.000         1.000
+ PGDAY          0.999         0.999         0.999
+ CONSD          1.000         1.000         0.999         1.000
+ BFI_C          1.000         1.000         0.999         1.000         1.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       12
+
+Loglikelihood
+
+          H0 Value                      -58883.816
+          H0 Scaling Correction Factor      8.7242
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  117791.631
+          Bayesian (BIC)                117885.199
+          Sample-Size Adjusted BIC      117847.064
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ PD       BY
+    PGDAY              1.000      0.000    999.000    999.000
+
+ BC       BY
+    BFI_C              1.000      0.000    999.000    999.000
+
+ ARC      BY
+    CONSD              1.000      0.000    999.000    999.000
+
+ ARC        ON
+    PD                 1.270      0.081     15.665      0.000
+    BC                -0.154      0.025     -6.071      0.000
+    PDXBC             -3.140      0.220    -14.254      0.000
+
+ BC       WITH
+    PD                -0.515      0.018    -29.039      0.000
+
+ Intercepts
+    PGDAY              0.059      0.003     19.734      0.000
+    CONSD              0.100      0.017      5.868      0.000
+    BFI_C              3.476      0.027    128.403      0.000
+
+ Variances
+    PD                 0.700      0.000    999.000    999.000
+    BC                 0.700      0.000    999.000    999.000
+
+ Residual Variances
+    PGDAY              0.100      0.000    999.000    999.000
+    CONSD              0.100      0.000    999.000    999.000
+    BFI_C              0.100      0.000    999.000    999.000
+    ARC                0.700      0.000    999.000    999.000
+
+Between Level
+
+ CCONSD     ON
+    CBFI_C            -0.060      0.020     -2.955      0.003
+
+ Means
+    CBFI_C             3.474      0.027    128.242      0.000
+
+ Intercepts
+    CCONSD             0.529      0.077      6.838      0.000
+
+ Variances
+    CBFI_C             0.440      0.024     18.607      0.000
+
+ Residual Variances
+    CCONSD             0.162      0.035      4.694      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.462E-07
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ 1                  0             0             1             2             3
+
+
+           LAMBDA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C             0             0             0             0             0
+ CCONSD             0             0             0             0             0
+ PGDAY              0             0             0             0             0
+ CONSD              0             0             0             0             0
+ BFI_C              0             0             0             0             0
+
+
+           LAMBDA
+              CCONSD
+              ________
+ CBFI_C             0
+ CCONSD             0
+ PGDAY              0
+ CONSD              0
+ BFI_C              0
+
+
+           THETA
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C             0
+ CCONSD             0             0
+ PGDAY              0             0             0
+ CONSD              0             0             0             0
+ BFI_C              0             0             0             0             0
+
+
+           ALPHA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             0
+
+
+           ALPHA
+              CCONSD
+              ________
+ 1                  0
+
+
+           BETA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD                 0             0             0             0             0
+ BC                 0             0             0             0             0
+ ARC                4             5             0             6             0
+ PDXBC              0             0             0             0             0
+ CBFI_C             0             0             0             0             0
+ CCONSD             0             0             0             0             0
+
+
+           BETA
+              CCONSD
+              ________
+ PD                 0
+ BC                 0
+ ARC                0
+ PDXBC              0
+ CBFI_C             0
+ CCONSD             0
+
+
+           PSI
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD                 0
+ BC                 7             0
+ ARC                0             0             0
+ PDXBC              0             0             0             0
+ CBFI_C             0             0             0             0             0
+ CCONSD             0             0             0             0             0
+
+
+           PSI
+              CCONSD
+              ________
+ CCONSD             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             0
+
+
+           LAMBDA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C             0             0             0             0             0
+ CCONSD             0             0             0             0             0
+ PGDAY              0             0             0             0             0
+ CONSD              0             0             0             0             0
+ BFI_C              0             0             0             0             0
+
+
+           LAMBDA
+              CCONSD
+              ________
+ CBFI_C             0
+ CCONSD             0
+ PGDAY              0
+ CONSD              0
+ BFI_C              0
+
+
+           THETA
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C             0
+ CCONSD             0             0
+ PGDAY              0             0             0
+ CONSD              0             0             0             0
+ BFI_C              0             0             0             0             0
+
+
+           ALPHA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             8
+
+
+           ALPHA
+              CCONSD
+              ________
+ 1                  9
+
+
+           BETA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD                 0             0             0             0             0
+ BC                 0             0             0             0             0
+ ARC                0             0             0             0             0
+ PDXBC              0             0             0             0             0
+ CBFI_C             0             0             0             0             0
+ CCONSD             0             0             0             0            10
+
+
+           BETA
+              CCONSD
+              ________
+ PD                 0
+ BC                 0
+ ARC                0
+ PDXBC              0
+ CBFI_C             0
+ CCONSD             0
+
+
+           PSI
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD                 0
+ BC                 0             0
+ ARC                0             0             0
+ PDXBC              0             0             0             0
+ CBFI_C             0             0             0             0            11
+ CCONSD             0             0             0             0             0
+
+
+           PSI
+              CCONSD
+              ________
+ CCONSD            12
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.060         0.318         3.475
+
+
+           LAMBDA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C         0.000         0.000         0.000         0.000         1.000
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+ PGDAY          1.000         0.000         0.000         0.000         0.000
+ CONSD          0.000         0.000         1.000         0.000         0.000
+ BFI_C          0.000         1.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              CCONSD
+              ________
+ CBFI_C         0.000
+ CCONSD         1.000
+ PGDAY          0.000
+ CONSD          0.000
+ BFI_C          0.000
+
+
+           THETA
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C         0.000
+ CCONSD         0.000         0.000
+ PGDAY          0.000         0.000         0.100
+ CONSD          0.000         0.000         0.000         0.100
+ BFI_C          0.000         0.000         0.000         0.000         0.100
+
+
+           ALPHA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              CCONSD
+              ________
+ 1              0.000
+
+
+           BETA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD             0.000         0.000         0.000         0.000         0.000
+ BC             0.000         0.000         0.000         0.000         0.000
+ ARC            0.000         0.000         0.000         0.000         0.000
+ PDXBC          0.000         0.000         0.000         0.000         0.000
+ CBFI_C         0.000         0.000         0.000         0.000         0.000
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              CCONSD
+              ________
+ PD             0.000
+ BC             0.000
+ ARC            0.000
+ PDXBC          0.000
+ CBFI_C         0.000
+ CCONSD         0.000
+
+
+           PSI
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD             0.700
+ BC             0.000         0.700
+ ARC            0.000         0.000         0.700
+ PDXBC          0.000         0.000         0.000         0.000
+ CBFI_C         0.000         0.000         0.000         0.000         0.000
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              CCONSD
+              ________
+ CCONSD         0.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C         0.000         0.000         0.000         0.000         1.000
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+ PGDAY          0.000         0.000         0.000         0.000         0.000
+ CONSD          0.000         0.000         0.000         0.000         0.000
+ BFI_C          0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              CCONSD
+              ________
+ CBFI_C         0.000
+ CCONSD         1.000
+ PGDAY          0.000
+ CONSD          0.000
+ BFI_C          0.000
+
+
+           THETA
+              CBFI_C        CCONSD        PGDAY         CONSD         BFI_C
+              ________      ________      ________      ________      ________
+ CBFI_C         0.000
+ CCONSD         0.000         0.000
+ PGDAY          0.000         0.000         0.000
+ CONSD          0.000         0.000         0.000         0.000
+ BFI_C          0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              CCONSD
+              ________
+ 1              0.318
+
+
+           BETA
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD             0.000         0.000         0.000         0.000         0.000
+ BC             0.000         0.000         0.000         0.000         0.000
+ ARC            0.000         0.000         0.000         0.000         0.000
+ PDXBC          0.000         0.000         0.000         0.000         0.000
+ CBFI_C         0.000         0.000         0.000         0.000         0.000
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              CCONSD
+              ________
+ PD             0.000
+ BC             0.000
+ ARC            0.000
+ PDXBC          0.000
+ CBFI_C         0.000
+ CCONSD         0.000
+
+
+           PSI
+              PD            BC            ARC           PDXBC         CBFI_C
+              ________      ________      ________      ________      ________
+ PD             0.000
+ BC             0.000         0.000
+ ARC            0.000         0.000         0.000
+ PDXBC          0.000         0.000         0.000         0.000
+ CBFI_C         0.000         0.000         0.000         0.000         0.220
+ CCONSD         0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              CCONSD
+              ________
+ CCONSD         0.078
+
+
+TECHNICAL 3 OUTPUT
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                     1             2             3             4             5
+              ________      ________      ________      ________      ________
+        1   0.888198D-05
+        2   0.142246D-04  0.289134D-03
+        3  -0.379794D-05 -0.651634D-04  0.733030D-03
+        4   0.706720D-04  0.103070D-02 -0.346027D-03  0.656758D-02
+        5  -0.201591D-04  0.273002D-04  0.784868D-04 -0.747480D-03  0.640727D-03
+        6  -0.427388D-04  0.172989D-02  0.866685D-04 -0.123059D-02  0.368958D-02
+        7   0.105159D-05  0.248588D-03 -0.506210D-04  0.705852D-03  0.117117D-03
+        8  -0.383609D-05 -0.650251D-04  0.733490D-03 -0.349482D-03  0.805498D-04
+        9   0.303082D-04 -0.178007D-03  0.272207D-03  0.570449D-03 -0.123731D-02
+       10  -0.296857D-05  0.696302D-04 -0.778698D-04  0.599449D-04  0.273061D-03
+       11  -0.336463D-05  0.299046D-03 -0.593922D-04  0.825630D-03  0.143889D-03
+       12   0.190077D-04  0.276702D-04 -0.398424D-04  0.107110D-02 -0.490921D-03
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                     6             7             8             9            10
+              ________      ________      ________      ________      ________
+        6   0.485193D-01
+        7   0.240162D-02  0.315035D-03
+        8   0.106836D-03 -0.503950D-04  0.734028D-03
+        9  -0.693199D-02 -0.257989D-03  0.263759D-03  0.597303D-02
+       10   0.126279D-02  0.659695D-04 -0.759139D-04 -0.153832D-02  0.413070D-03
+       11   0.296105D-02  0.412406D-03 -0.592485D-04 -0.227439D-03  0.558377D-04
+       12  -0.433159D-02 -0.491939D-04 -0.454201D-04  0.144006D-02 -0.295493D-03
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                    11            12
+              ________      ________
+       11   0.560262D-03
+       12  -0.387520D-04  0.119056D-02
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                     1             2             3             4             5
+              ________      ________      ________      ________      ________
+        1       1.000
+        2       0.281         1.000
+        3      -0.047        -0.142         1.000
+        4       0.293         0.748        -0.158         1.000
+        5      -0.267         0.063         0.115        -0.364         1.000
+        6      -0.065         0.462         0.015        -0.069         0.662
+        7       0.020         0.824        -0.105         0.491         0.261
+        8      -0.048        -0.141         1.000        -0.159         0.117
+        9       0.132        -0.135         0.130         0.091        -0.632
+       10      -0.049         0.201        -0.142         0.036         0.531
+       11      -0.048         0.743        -0.093         0.430         0.240
+       12       0.185         0.047        -0.043         0.383        -0.562
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                     6             7             8             9            10
+              ________      ________      ________      ________      ________
+        6       1.000
+        7       0.614         1.000
+        8       0.018        -0.105         1.000
+        9      -0.407        -0.188         0.126         1.000
+       10       0.282         0.183        -0.138        -0.979         1.000
+       11       0.568         0.982        -0.092        -0.124         0.116
+       12      -0.570        -0.080        -0.049         0.540        -0.421
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                    11            12
+              ________      ________
+       11       1.000
+       12      -0.047         1.000
+
+
+     Beginning Time:  21:42:58
+        Ending Time:  21:43:40
+       Elapsed Time:  00:00:42
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

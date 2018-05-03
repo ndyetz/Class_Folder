@@ -1,0 +1,56 @@
+    TITLE:  6.11.10 RREP PDA GMM class 3
+
+    DATA:   FILE is 6.11.10 Core1 Drinking only.dat;
+
+    VARIABLE:   NAMES ARE ID pdafm1 pdafm2 pdafm3
+     pdafm4 pdafm5 pdafm6 pdafm7 pdafm8 pdafm9 pdafm10 
+    pdafm11 pdafm12 dddfm1 dddfm2 dddfm3 dddfm4 dddfm5 
+    dddfm6 dddfm7 dddfm8 dddfm9 dddfm10 dddfm11 
+    dddfm12 dpdfm1 dpdfm2 dpdfm3 dpdfm4 dpdfm5 dpdfm6
+     dpdfm7 dpdfm8 dpdfm9 dpdfm10 dpdfm11 dpdfm12 
+    phvfm1 phvfm2 phvfm3 phvfm4 phvfm5 phvfm6 phvfm7
+     phvfm8 phvfm9 phvfm10 phvfm11 phvfm12 mxdfm1 
+    mxdfm2 mxdfm3 mxdfm4 mxdfm5 mxdfm6 mxdfm7 mxdfm8 
+    mxdfm9 mxdfm10 mxdfm11 mxdfm12 mxbfm1 mxbfm2 
+    mxbfm3 mxbfm4 mxbfm5 mxbfm6 mxbfm7 mxbfm8 mxbfm9 
+    mxbfm10 mxbfm11 mxbfm12 avbfm1 avbfm2 avbfm3 
+    avbfm4 avbfm5 avbfm6 avbfm7 avbfm8 avbfm9 avbfm10 
+    avbfm11 avbfm12 ba1fm1 ba1fm2 ba1fm3 ba1fm4 
+    ba1fm5 ba1fm6 ba1fm7 ba1fm8 ba1fm9 ba1fm10 ba1fm11 
+    ba1fm12 cabfm1 cabfm2 cabfm3 cabfm4 cabfm5 
+    cabfm6 cabfm7 cabfm8 cabfm9 cabfm10 cabfm11 cabfm12;
+
+                MISSING = ALL (-999);
+                
+                USEVARIABLES ARE pdafm1 pdafm2
+                pdafm3 pdafm4 pdafm5 pdafm6
+                pdafm7 pdafm8 pdafm9 pdafm10
+                pdafm11 pdafm12;
+
+                CLASSES = cd (3);
+
+    ANALYSIS:   TYPE = MIXTURE;
+                STARTS = 50 10;
+                
+                
+    MODEL: %OVERALL%
+            i s q | pdafm1@0 pdafm2@1 pdafm3@2 pdafm4@3
+            pdafm5@4 pdafm6@5 pdafm7@6 pdafm8@7 pdafm9@8
+            pdafm10@9 pdafm11@10 pdafm12@11;
+                     
+    
+    PLOT: SERIES = pdafm1 pdafm2
+                pdafm3 pdafm4 pdafm5 pdafm6
+                pdafm7 pdafm8 pdafm9 pdafm10
+                pdafm11 pdafm12 (s);
+            SERIES = pdafm1 pdafm2
+                pdafm3 pdafm4 pdafm5 pdafm6
+                pdafm7 pdafm8 pdafm9 pdafm10
+                pdafm11 pdafm12 (q);
+                TYPE = PLOT3;
+
+    OUTPUT: TECH4 TECH7 TECH14;
+    
+    
+
+    

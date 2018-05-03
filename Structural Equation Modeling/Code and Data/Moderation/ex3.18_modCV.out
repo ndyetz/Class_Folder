@@ -1,0 +1,231 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+02/12/2018   5:31 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	moderation
+  DATA:	FILE = ex3.18.dat;
+  VARIABLE:	NAMES = y m x z;
+  	USEVARIABLES = y m x z xz;
+  DEFINE:	xz = x*z;
+  !ANALYSIS:	bootstrap=1000;
+  		
+  MODEL:	y ON x z xz;
+  	x on m;
+  	
+
+  OUTPUT:	
+  !cinterval(bcbootstrap)
+  sampstat
+  tech3;
+  !http://quantpsy.org/interact/mlr2.htm
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+moderation
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of dependent variables                                    2
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y           X
+
+Observed independent variables
+   M           Z           XZ
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  ex3.18.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              Y             X             M             Z             XZ
+              ________      ________      ________      ________      ________
+      1        -0.162         0.573        -0.223         0.085         0.073
+
+
+           Covariances
+              Y             X             M             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              0.709
+ X             -0.005         0.245
+ M              0.501        -0.079         1.001
+ Z              0.011         0.024        -0.103         0.936
+ XZ             0.051         0.031        -0.105         0.548         0.549
+
+
+           Correlations
+              Y             X             M             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              1.000
+ X             -0.012         1.000
+ M              0.595        -0.160         1.000
+ Z              0.013         0.051        -0.106         1.000
+ XZ             0.082         0.085        -0.142         0.765         1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        8
+
+Loglikelihood
+
+          H0 Value                        -291.320
+          H1 Value                        -254.457
+
+Information Criteria
+
+          Akaike (AIC)                     598.639
+          Bayesian (BIC)                   622.724
+          Sample-Size Adjusted BIC         597.406
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             73.726
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.396
+          90 Percent C.I.                    0.321  0.477
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.026
+          TLI                               -1.274
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                             79.579
+          Degrees of Freedom                     7
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.136
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ Y        ON
+    X                 -0.035      0.139     -0.251      0.802
+    Z                 -0.105      0.110     -0.957      0.339
+    XZ                 0.200      0.143      1.396      0.163
+
+ X        ON
+    M                 -0.079      0.040     -1.980      0.048
+
+ Intercepts
+    Y                 -0.148      0.105     -1.414      0.157
+    X                  0.556      0.041     13.607      0.000
+
+ Residual Variances
+    Y                  0.699      0.081      8.660      0.000
+    X                  0.238      0.028      8.660      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.255E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 3 OUTPUT
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1     0.109363D-01
+      2    -0.153880D-19  0.166819D-02
+      3    -0.109363D-01  0.148741D-19  0.192068D-01
+      4    -0.338104D-03  0.202294D-20  0.338104D-03  0.119912D-01
+      5     0.338104D-03  0.200954D-20 -0.142801D-02 -0.119912D-01  0.205432D-01
+      6    -0.463175D-22  0.353925D-03 -0.225876D-20  0.164229D-19  0.166404D-20
+      7     0.625524D-09 -0.358703D-20  0.354221D-09  0.496596D-08 -0.828168D-08
+      8     0.589963D-19  0.401539D-10 -0.103525D-18 -0.585552D-20  0.117237D-19
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                  6             7             8
+              ________      ________      ________
+      6     0.158747D-02
+      7    -0.160890D-19  0.652056D-02
+      8    -0.449875D-10 -0.312231D-26  0.757749D-03
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         1.000
+      2         0.000         1.000
+      3        -0.755         0.000         1.000
+      4        -0.030         0.000         0.022         1.000
+      5         0.023         0.000        -0.072        -0.764         1.000
+      6         0.000         0.217         0.000         0.000         0.000
+      7         0.000         0.000         0.000         0.000         0.000
+      8         0.000         0.000         0.000         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                  6             7             8
+              ________      ________      ________
+      6         1.000
+      7         0.000         1.000
+      8         0.000         0.000         1.000
+
+
+     Beginning Time:  17:31:24
+        Ending Time:  17:31:24
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

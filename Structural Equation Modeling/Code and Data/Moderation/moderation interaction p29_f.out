@@ -1,0 +1,520 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+02/13/2018  10:39 AM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS triethnic 092216.dat;
+
+
+  VARIABLE:
+  NAMES ARE
+      form scandt q1 q2 q3 q54a q54b q54c v4d a755d
+      v4f q54d q54h q4 q5 q6 q7a q7b
+      q8a q8b q9 v11 v12 q12a q12b q12c q12d q13
+       q14a q14b q14c q14d q14e q14f q14g q14h q14i q14j q14k
+      q14l v15m id1 q15a q15b q15c q15d q15e q15f
+      q15g q15h q15i q15j v16k q10 q11 q16a q16b q17 q19 q20
+      q21 q22 q23 q24 q25 q26 q27a q27b v29c
+      q28a q28b v30c q29a q29b v31c q30a q30b v32c q35 q38a q38b
+      q38c q38f q38g q38h q38k q38l q38n v34j
+      q39a q39b q39c q39f q39g v35f q39i q39j
+      q39k q39l v35k q40a
+      q40b q40c q40f q40g v36f q40i q40j q40k
+      q40l v36k q31 q32 q36 q37 q41a q41b q42 q43 v44a v44b v44c
+      v44d v44e v44f v44g v44h v44i v44j q45a
+      q45b q45c q45d q45f q45h q45i q45j q45k q46a q46b q46c q46i
+      v46e q46h q47a q47b q47c q47d q47e q47f
+      q47g q47h q47j q47k q47l q47m q48a q48b q48c q48d q48e
+      a949f a749a a749b a749c a749d a749e a750f
+       q49a q49b q49c q49d q49e q50a q50b q50c q50d q50e q51c
+      q51f q51g q51h q51i q52a q52b q52c q52d
+      q52e q52f q52g q52h q52i q52j q52k v53l q53a q53b q53c q53d
+      q53e q53f q53m q53n v55a v55b v56a v56b
+      v57a v57b v58a v58b v58c v59a v59b v59c v60a v60b v60c v61a
+      v61b v61c v62a v62b v62c v63a v63b v63c
+      v64a v64b v64c v65a v65b v65c v66a v66b v66c v67a v67b v67c
+      v68a v68b v68c v68d v69a v69b v69c v69d
+      v70a v70b v70c v70d q55 q56 q57 pps49a pps49b pps49c pps49d
+      pps50a pps50b pps50c pps50d pps51b
+      pps51a pps51c pps51d pps52b pps52a
+      pps52c pps52d pps53c pps53a
+      pps53b pps53d pps54a pps54b pps54c
+      pps54d pps4 pps5 pps6 pps7 pps8a
+      pps8b pps8c pps8d pps9 pps10
+      pps11 pps12 pps13 v88a v88b v88c
+      v88d v88e v88f v88g v89a v89b v89c v89d
+      pps16a v90b pps16b pps16c
+      pps16d pps16e pps17a v91b pps17b pps17c
+      pps17d pps17e pps19a pps19b pps19c pps20 pps21 pps22a
+      pps22b pps22c pps22d pps23a pps23b pps23c
+      pps23d ppsc223f ppsc223g v96g pps24a ppsc223h pps24c v96k
+      pps24e pps28 pps29 ppsc244a ppsc244b ppsc244c
+      pps44g pps44e pps44f pps30a pps30b pps31a pps31b
+      pps31c pps31d pps32 pps33 pps34 pps35a v103b
+      pps35b pps35c pps35d pps35e pps36a pps36b pps36d
+      pps36e pps37a pps37b pps37e pps38a pps38b pps38c
+      pps38e pps39c pps39d pps40a pps40b pps40c pps40d
+      pps40e pps41a pps41c pps41e pps42a pps42b pps42d
+      pps42e pps43a pps43c pps43d year ulocation region
+      comm_code MJ_rc
+    ;
+
+
+      MISSING = ALL (-999);
+
+  USEVARIABLES ARE
+  v59b
+  v61b
+  !q22
+  q53b
+  mj_rc
+  !q3
+  q3_r !note defined variables must appear at the end of the use variables list
+  !DNc
+  !INc
+  !HarmC
+  q3XDNc
+  q3XINc
+  !q3XHarmc
+  ;
+
+  useobservations are q53b lt 5 ;
+
+  define:
+  q3_r = q3-1; !q3_r is male = 0, female = 1
+  !DNc = v59b - 2.826; !mean centering DN
+  !INc = v61b - 1.748; !mean centering IN
+  !HarmC = q53b - 2.709; !mean centering harm
+
+  center v59b (grandmean);
+  center v61b (grandmean);
+  center q53b (grandmean);
+
+  q3XDNc = q3_r*v59b;
+  q3XINc = q3_r*v61b;
+  !q3XHarmc = q3_r*q53b;
+
+  ANALYSIS:
+
+  bootstrap = 1000;
+
+  MODEL:
+
+  mj_rc on v59b (c1); !DN
+  mj_rc on v61b (c2); !IN
+  mj_rc on q53b (b); !harm from using mj regulary
+  mj_rc on q3_r (d);
+
+  mj_rc on q3XDNc (m1);
+  mj_rc on q3XINc (m2);
+  !mj_rc on q3XHarmc (m3);
+
+  q53b on v59b (a1);
+  q53b on v61b (a2);
+
+  v59b with v61b (w);
+
+
+
+
+  Model constraint:
+  new (
+
+  ind1
+  ind2
+
+  DNmod1
+  DNmod0
+
+  INmod1
+  INmod0
+
+  !Hmod1
+  !Hmod0
+  );
+
+
+  ind1 = a1*b;
+  ind2 = a2*b;
+
+  DNmod1 = c1 + m1*1;
+  DNmod0 = c1 + m1*0;
+
+  INmod1 = c2 + m2*1;
+  INmod0 = c2 + m2*0;
+
+  !Hmod1 = b + m3*1;
+  !Hmod0 = b + m3*0;
+
+
+   Output: stdyx sampstat cinterval (bcbootstrap);
+
+
+
+
+
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: ULOCATION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: COMM_CODE
+*** WARNING in DEFINE command
+  The CENTER transformation is done after all other DEFINE transformations
+  have been completed.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  12
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  512
+   5 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        4527
+
+Number of dependent variables                                    2
+Number of independent variables                                  5
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Q53B        MJ_RC
+
+Observed independent variables
+   V59B        V61B        Q3_R        Q3XDNC      Q3XINC
+
+Variables with special functions
+
+  Centering (GRANDMEAN)
+   V59B        V61B        Q53B
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Number of bootstrap draws
+    Requested                                                 1000
+    Completed                                                 1000
+
+Input data file(s)
+  triethnic 092216.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             4
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              Q53B          MJ_RC         V59B          V61B          Q3_R
+              ________      ________      ________      ________      ________
+ Q53B           0.971
+ MJ_RC          0.947         0.958
+ V59B           0.971         0.958         1.000
+ V61B           0.971         0.958         1.000         1.000
+ Q3_R           0.971         0.958         1.000         1.000         1.000
+ Q3XDNC         0.971         0.958         1.000         1.000         1.000
+ Q3XINC         0.971         0.958         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              Q3XDNC        Q3XINC
+              ________      ________
+ Q3XDNC         1.000
+ Q3XINC         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              Q53B          MJ_RC         V59B          V61B          Q3_R
+              ________      ________      ________      ________      ________
+      1         0.000        13.116         0.000         0.000         0.496
+
+
+           Means
+              Q3XDNC        Q3XINC
+              ________      ________
+      1         1.482         0.821
+
+
+           Covariances
+              Q53B          MJ_RC         V59B          V61B          Q3_R
+              ________      ________      ________      ________      ________
+ Q53B           1.362
+ MJ_RC         -0.633        10.252
+ V59B          -0.183         0.802         1.719
+ V61B          -0.397         0.489         0.163         1.286
+ Q3_R           0.082        -0.001         0.086        -0.048         0.250
+ Q3XDNC         0.149         0.292         1.039        -0.072         0.747
+ Q3XINC        -0.024         0.180         0.213         0.459         0.413
+
+
+           Covariances
+              Q3XDNC        Q3XINC
+              ________      ________
+ Q3XDNC         3.011
+ Q3XINC         1.305         1.221
+
+
+           Correlations
+              Q53B          MJ_RC         V59B          V61B          Q3_R
+              ________      ________      ________      ________      ________
+ Q53B           1.000
+ MJ_RC         -0.169         1.000
+ V59B          -0.119         0.191         1.000
+ V61B          -0.300         0.135         0.109         1.000
+ Q3_R           0.141        -0.001         0.132        -0.084         1.000
+ Q3XDNC         0.073         0.053         0.457        -0.037         0.860
+ Q3XINC        -0.019         0.051         0.147         0.366         0.748
+
+
+           Correlations
+              Q3XDNC        Q3XINC
+              ________      ________
+ Q3XDNC         1.000
+ Q3XINC         0.681         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS  -43759.586
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       17
+
+Loglikelihood
+
+          H0 Value                      -32369.686
+          H1 Value                      -29615.354
+
+Information Criteria
+
+          Akaike (AIC)                   64773.373
+          Bayesian (BIC)                 64882.476
+          Sample-Size Adjusted BIC       64828.456
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                           5508.665
+          Degrees of Freedom                     9
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.367
+          90 Percent C.I.                    0.359  0.376
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                               -7.258
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            824.998
+          Degrees of Freedom                    11
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.111
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ MJ_RC    ON
+    V59B               0.486      0.066      7.412      0.000
+    V61B               0.241      0.087      2.755      0.006
+    Q53B              -0.347      0.041     -8.433      0.000
+    Q3_R               0.572      0.306      1.873      0.061
+    Q3XDNC            -0.169      0.088     -1.932      0.053
+    Q3XINC            -0.048      0.127     -0.379      0.705
+
+ Q53B     ON
+    V59B              -0.078      0.014     -5.726      0.000
+    V61B              -0.299      0.015    -20.024      0.000
+
+ V59B     WITH
+    V61B               0.163      0.024      6.785      0.000
+
+ Means
+    V59B               0.000      0.020      0.000      1.000
+    V61B               0.000      0.017      0.000      1.000
+
+ Intercepts
+    Q53B               0.000      0.017      0.012      0.991
+    MJ_RC             13.122      0.075    175.171      0.000
+
+ Variances
+    V59B               1.719      0.023     73.342      0.000
+    V61B               1.286      0.036     35.372      0.000
+
+ Residual Variances
+    Q53B               1.230      0.017     70.584      0.000
+    MJ_RC              9.583      1.075      8.915      0.000
+
+ New/Additional Parameters
+    IND1               0.027      0.006      4.774      0.000
+    IND2               0.104      0.013      7.789      0.000
+    DNMOD1             0.317      0.058      5.454      0.000
+    DNMOD0             0.486      0.066      7.412      0.000
+    INMOD1             0.193      0.091      2.120      0.034
+    INMOD0             0.241      0.087      2.755      0.006
+
+
+STANDARDIZED MODEL RESULTS
+
+                      StdYX
+                    Estimate
+
+ MJ_RC    ON
+    V59B               0.198
+    V61B               0.085
+    Q53B              -0.125
+    Q3_R               0.089
+    Q3XDNC            -0.091
+    Q3XINC            -0.016
+
+ Q53B     ON
+    V59B              -0.088
+    V61B              -0.291
+
+ V59B     WITH
+    V61B               0.109
+
+ Means
+    V59B               0.000
+    V61B               0.000
+
+ Intercepts
+    Q53B               0.000
+    MJ_RC              4.065
+
+ Variances
+    V59B               1.000
+    V61B               1.000
+
+ Residual Variances
+    Q53B               0.902
+    MJ_RC              0.920
+
+
+R-SQUARE
+
+    Observed
+    Variable        Estimate
+
+    Q53B               0.098
+    MJ_RC              0.080
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ MJ_RC    ON
+    V59B             0.333       0.360       0.380       0.486       0.597       0.616       0.659
+    V61B             0.035       0.092       0.114       0.241       0.395       0.432       0.486
+    Q53B            -0.464      -0.430      -0.413      -0.347      -0.280      -0.265      -0.236
+    Q3_R            -0.218      -0.026       0.112       0.572       1.092       1.188       1.412
+    Q3XDNC          -0.412      -0.361      -0.324      -0.169      -0.031      -0.013       0.037
+    Q3XINC          -0.384      -0.301      -0.263      -0.048       0.153       0.198       0.299
+
+ Q53B     ON
+    V59B            -0.116      -0.108      -0.102      -0.078      -0.057      -0.054      -0.047
+    V61B            -0.334      -0.325      -0.321      -0.299      -0.272      -0.265      -0.254
+
+ V59B     WITH
+    V61B             0.099       0.118       0.125       0.163       0.206       0.213       0.225
+
+ Means
+    V59B            -0.055      -0.044      -0.034       0.000       0.032       0.039       0.049
+    V61B            -0.044      -0.035      -0.028       0.000       0.030       0.036       0.045
+
+ Intercepts
+    Q53B            -0.048      -0.034      -0.026       0.000       0.028       0.033       0.043
+    MJ_RC           12.926      12.977      12.998      13.122      13.250      13.272      13.318
+
+ Variances
+    V59B             1.656       1.672       1.681       1.719       1.756       1.765       1.778
+    V61B             1.189       1.211       1.223       1.286       1.344       1.359       1.381
+
+ Residual Variances
+    Q53B             1.184       1.196       1.203       1.230       1.261       1.267       1.276
+    MJ_RC            7.214       7.675       7.954       9.583      11.621      11.971      12.529
+
+ New/Additional Parameters
+    IND1             0.015       0.017       0.019       0.027       0.037       0.040       0.044
+    IND2             0.068       0.080       0.083       0.104       0.127       0.130       0.142
+    DNMOD1           0.154       0.210       0.226       0.317       0.412       0.425       0.462
+    DNMOD0           0.333       0.360       0.380       0.486       0.597       0.616       0.659
+    INMOD1          -0.006       0.044       0.062       0.193       0.366       0.391       0.464
+    INMOD0           0.035       0.092       0.114       0.241       0.395       0.432       0.486
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\lara\desktop\sem ta\s2017 [sem]\code and data\3 moderation\moderation interaction p29_f
+
+     Beginning Time:  10:39:26
+        Ending Time:  10:39:29
+       Elapsed Time:  00:00:03
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

@@ -1,0 +1,164 @@
+Mplus VERSION 7.4 (Mac)
+MUTHEN & MUTHEN
+01/25/2017   4:33 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a linear growth
+  	model for a continuous outcome
+  DATA:	FILE IS ex6.2.dat;
+  VARIABLE:	NAMES ARE y11-y14;
+  MODEL:	i s | y11@0 y12@1 y13@2 y14@3;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of a linear growth
+model for a continuous outcome
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         500
+
+Number of dependent variables                                    4
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   Y11         Y12         Y13         Y14
+
+Continuous latent variables
+   I           S
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  ex6.2.dat
+
+Input data format  FREE
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        9
+
+Loglikelihood
+
+          H0 Value                       -2813.340
+          H1 Value                       -2802.065
+
+Information Criteria
+
+          Akaike (AIC)                    5644.679
+          Bayesian (BIC)                  5682.611
+          Sample-Size Adjusted BIC        5654.044
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             22.549
+          Degrees of Freedom                     5
+          P-Value                           0.0004
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.084
+          90 Percent C.I.                    0.051  0.120
+          Probability RMSEA <= .05           0.047
+
+CFI/TLI
+
+          CFI                                0.986
+          TLI                                0.984
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1292.010
+          Degrees of Freedom                     6
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.044
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ I        |
+    Y11                1.000      0.000    999.000    999.000
+    Y12                1.000      0.000    999.000    999.000
+    Y13                1.000      0.000    999.000    999.000
+    Y14                1.000      0.000    999.000    999.000
+
+ S        |
+    Y11                0.000      0.000    999.000    999.000
+    Y12                1.000      0.000    999.000    999.000
+    Y13                2.000      0.000    999.000    999.000
+    Y14                3.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  0.141      0.025      5.616      0.000
+
+ Means
+    I                  0.738      0.038     19.171      0.000
+    S                  0.962      0.025     38.947      0.000
+
+ Intercepts
+    Y11                0.000      0.000    999.000    999.000
+    Y12                0.000      0.000    999.000    999.000
+    Y13                0.000      0.000    999.000    999.000
+    Y14                0.000      0.000    999.000    999.000
+
+ Variances
+    I                  0.504      0.052      9.627      0.000
+    S                  0.226      0.021     10.966      0.000
+
+ Residual Variances
+    Y11                0.279      0.042      6.612      0.000
+    Y12                0.533      0.041     13.162      0.000
+    Y13                0.455      0.046      9.865      0.000
+    Y14                0.466      0.080      5.863      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.398E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  16:33:08
+        Ending Time:  16:33:08
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2015 Muthen & Muthen

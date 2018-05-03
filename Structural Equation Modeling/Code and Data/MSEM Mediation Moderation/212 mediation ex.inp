@@ -1,0 +1,36 @@
+TITLE:	2-1-2 mediation
+DATA: 	FILE IS ex9.10.dat;
+
+VARIABLE:	NAMES ARE x1 m y x2 m2 w clus;
+	!BETWEEN = w;
+	
+usevariables are clus m yb xb;	
+	
+	CLUSTER = clus;
+	
+	BETWEEN ARE xb yb;
+	
+define:
+  xb = cluster_mean(x1);
+  yb = cluster_mean(y);
+
+ANALYSIS:	TYPE = TWOLEVEL RANDOM; 
+	estimator=bayes; !this will provide bayesian credible intervals
+
+MODEL: 
+	%WITHIN%
+	
+	m;
+	
+	%BETWEEN%
+	xb yb;
+	m on xb(a);
+	yb on m(b);
+	yb on xb;
+	
+MODEL CONSTRAINT:
+	NEW (indb);
+	
+	indb = a*b;	
+
+OUTPUT:	sampstat CINTERVAL;

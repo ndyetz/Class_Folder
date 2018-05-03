@@ -1,0 +1,644 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+02/12/2018  12:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of moderated mediation with a plot of the indirect effect
+  DATA:	FILE = ex3.18.dat;
+  VARIABLE:	NAMES = y m x z;
+  	USEVARIABLES = y m x z xz;
+  DEFINE:	xz = x*z;
+  ANALYSIS:	ESTIMATOR = BAYES;
+  	PROCESSORS = 2;
+  	BITERATIONS = (30000);
+  MODEL:	y ON m (b);
+  	m ON x (gamma1)
+  	z
+  	xz (gamma2);
+  MODEL CONSTRAINT:
+  	LOOP(mod,-2,2,0.1);
+  	PLOT(indirect);
+  	indirect = b*(gamma1+gamma2*mod);
+  PLOT:	TYPE = PLOT2;
+  OUTPUT:	TECH8;
+
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+this is an example of moderated mediation with a plot of the indirect effect
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of dependent variables                                    2
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y           M
+
+Observed independent variables
+   X           Z           XZ
+
+
+Estimator                                                    BAYES
+Specifications for Bayesian Estimation
+  Point estimate                                            MEDIAN
+  Number of Markov chain Monte Carlo (MCMC) chains               2
+  Random seed for the first chain                                0
+  Starting value information                           UNPERTURBED
+  Treatment of categorical mediator                         LATENT
+  Algorithm used for Markov chain Monte Carlo           GIBBS(PX1)
+  Convergence criterion                                  0.500D-01
+  Maximum number of iterations                               50000
+  K-th iteration used for thinning                               1
+
+Input data file(s)
+  ex3.18.dat
+Input data format  FREE
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     USE THE FBITERATIONS OPTION TO INCREASE THE NUMBER OF ITERATIONS BY A FACTOR
+     OF AT LEAST TWO TO CHECK CONVERGENCE AND THAT THE PSR VALUE DOES NOT INCREASE.
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                               8
+
+Bayesian Posterior Predictive Checking using Chi-Square
+
+          95% Confidence Interval for the Difference Between
+          the Observed and the Replicated Chi-Square Values
+
+                                 -5.968            18.896
+
+          Posterior Predictive P-Value              0.145
+
+Information Criterion
+
+          Deviance (DIC)                          744.231
+          Estimated Number of Parameters (pD)       7.969
+          Bayesian (BIC)                          768.252
+
+
+
+MODEL RESULTS
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+ Y          ON
+    M                  0.500       0.056      0.000       0.389       0.612      *
+
+ M          ON
+    X                 -0.303       0.168      0.036      -0.631       0.031
+    Z                  0.000       0.132      0.499      -0.261       0.258
+    XZ                -0.174       0.172      0.156      -0.513       0.162
+
+ Intercepts
+    Y                 -0.050       0.058      0.190      -0.164       0.064
+    M                 -0.036       0.127      0.387      -0.288       0.211
+
+ Residual Variances
+    Y                  0.472       0.057      0.000       0.379       0.599      *
+    M                  1.005       0.121      0.000       0.806       1.276      *
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ 1                  0             0             0             0             0
+
+
+           LAMBDA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y                  0             0             0             0             0
+ M                  0             0             0             0             0
+ X                  0             0             0             0             0
+ Z                  0             0             0             0             0
+ XZ                 0             0             0             0             0
+
+
+           THETA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y                  0
+ M                  0             0
+ X                  0             0             0
+ Z                  0             0             0             0
+ XZ                 0             0             0             0             0
+
+
+           ALPHA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ 1                  1             2             0             0             0
+
+
+           BETA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y                  0             3             0             0             0
+ M                  0             0             4             5             6
+ X                  0             0             0             0             0
+ Z                  0             0             0             0             0
+ XZ                 0             0             0             0             0
+
+
+           PSI
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y                  7
+ M                  0             8
+ X                  0             0             0
+ Z                  0             0             0             0
+ XZ                 0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              MOD           INDIRECT
+              ________      ________
+ 1                  9            10
+
+
+     STARTING VALUES
+
+
+           NU
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ 1              0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              1.000         0.000         0.000         0.000         0.000
+ M              0.000         1.000         0.000         0.000         0.000
+ X              0.000         0.000         1.000         0.000         0.000
+ Z              0.000         0.000         0.000         1.000         0.000
+ XZ             0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              0.000
+ M              0.000         0.000
+ X              0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000
+ XZ             0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ 1             -0.162        -0.223         0.000         0.000         0.000
+
+
+           BETA
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              0.000         0.000         0.000         0.000         0.000
+ M              0.000         0.000         0.000         0.000         0.000
+ X              0.000         0.000         0.000         0.000         0.000
+ Z              0.000         0.000         0.000         0.000         0.000
+ XZ             0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              Y             M             X             Z             XZ
+              ________      ________      ________      ________      ________
+ Y              0.354
+ M              0.000         0.501
+ X              0.000         0.000         0.122
+ Z              0.000         0.000         0.000         0.468
+ XZ             0.000         0.000         0.000         0.000         0.275
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              MOD           INDIRECT
+              ________      ________
+ 1              0.000         0.500
+
+
+
+     PRIORS FOR ALL PARAMETERS            PRIOR MEAN      PRIOR VARIANCE     PRIOR STD. DEV.
+
+     Parameter 1~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 2~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 3~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 4~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 5~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 6~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 7~IG(-1.000,0.000)          infinity            infinity            infinity
+     Parameter 8~IG(-1.000,0.000)          infinity            infinity            infinity
+
+
+TECHNICAL 8 OUTPUT
+
+
+
+     Kolmogorov-Smirnov comparing posterior distributions across chains 1 and 2 using 100 draws.
+
+
+
+
+
+     Parameter   KS Statistic P-value
+     Parameter 6    0.2200    0.0131
+     Parameter 5    0.1900    0.0470
+     Parameter 10    0.1900    0.0470
+     Parameter 2    0.0800    0.8938
+     Parameter 4    0.0700    0.9610
+     Parameter 1    0.0700    0.9610
+     Parameter 7    0.0600    0.9921
+     Parameter 8    0.0500    0.9995
+     Parameter 3    0.0400    1.0000
+     Parameter 9    0.0000    1.0000
+
+
+
+     Simulated prior distributions
+
+     Parameter       Prior Mean  Prior Variance  Prior Std. Dev.
+
+
+     Parameter 1 Improper Prior
+     Parameter 2 Improper Prior
+     Parameter 3 Improper Prior
+     Parameter 4 Improper Prior
+     Parameter 5 Improper Prior
+     Parameter 6 Improper Prior
+     Parameter 7 Improper Prior
+     Parameter 8 Improper Prior
+     Parameter 9 Not available
+     Parameter 10 Not available
+
+
+   TECHNICAL 8 OUTPUT FOR BAYES ESTIMATION
+
+     CHAIN    BSEED
+     1        0
+     2        285380
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.009               7
+     200              1.010               7
+     300              1.009               7
+     400              1.018               3
+     500              1.006               4
+     600              1.004               4
+     700              1.002               4
+     800              1.004               1
+     900              1.001               1
+     1000             1.000               1
+     1100             1.001               5
+     1200             1.002               5
+     1300             1.001               5
+     1400             1.002               5
+     1500             1.001               8
+     1600             1.001               1
+     1700             1.000               4
+     1800             1.000               4
+     1900             1.000               1
+     2000             1.000               2
+     2100             1.001               2
+     2200             1.001               2
+     2300             1.002               4
+     2400             1.001               2
+     2500             1.001               2
+     2600             1.001               4
+     2700             1.000               2
+     2800             1.000               1
+     2900             1.000               1
+     3000             1.000               1
+     3100             1.000               8
+     3200             1.000               5
+     3300             1.000               5
+     3400             1.000               5
+     3500             1.001               5
+     3600             1.000               3
+     3700             1.001               3
+     3800             1.001               3
+     3900             1.001               3
+     4000             1.001               3
+     4100             1.001               3
+     4200             1.000               7
+     4300             1.000               7
+     4400             1.001               7
+     4500             1.001               2
+     4600             1.000               7
+     4700             1.001               7
+     4800             1.000               1
+     4900             1.000               7
+     5000             1.000               7
+     5100             1.000               7
+     5200             1.000               2
+     5300             1.000               2
+     5400             1.001               2
+     5500             1.001               2
+     5600             1.001               2
+     5700             1.001               2
+     5800             1.001               2
+     5900             1.000               2
+     6000             1.000               2
+     6100             1.000               2
+     6200             1.000               7
+     6300             1.000               7
+     6400             1.000               7
+     6500             1.000               7
+     6600             1.000               7
+     6700             1.000               2
+     6800             1.000               6
+     6900             1.000               2
+     7000             1.000               2
+     7100             1.000               2
+     7200             1.000               1
+     7300             1.000               8
+     7400             1.000               8
+     7500             1.000               8
+     7600             1.000               1
+     7700             1.000               6
+     7800             1.000               6
+     7900             1.000               1
+     8000             1.000               1
+     8100             1.000               6
+     8200             1.000               6
+     8300             1.000               6
+     8400             1.000               1
+     8500             1.000               1
+     8600             1.000               1
+     8700             1.000               1
+     8800             1.000               1
+     8900             1.000               3
+     9000             1.000               1
+     9100             1.000               1
+     9200             1.000               1
+     9300             1.000               1
+     9400             1.000               1
+     9500             1.000               1
+     9600             1.000               1
+     9700             1.000               7
+     9800             1.000               1
+     9900             1.000               1
+     10000            1.000               1
+     10100            1.000               1
+     10200            1.000               1
+     10300            1.000               1
+     10400            1.000               2
+     10500            1.000               1
+     10600            1.000               1
+     10700            1.000               2
+     10800            1.000               2
+     10900            1.000               2
+     11000            1.000               2
+     11100            1.000               2
+     11200            1.000               2
+     11300            1.000               2
+     11400            1.000               2
+     11500            1.000               2
+     11600            1.000               2
+     11700            1.000               2
+     11800            1.000               2
+     11900            1.000               2
+     12000            1.000               2
+     12100            1.000               2
+     12200            1.000               2
+     12300            1.000               2
+     12400            1.000               2
+     12500            1.000               2
+     12600            1.000               2
+     12700            1.000               2
+     12800            1.000               2
+     12900            1.000               2
+     13000            1.000               2
+     13100            1.000               2
+     13200            1.000               2
+     13300            1.000               2
+     13400            1.000               2
+     13500            1.000               2
+     13600            1.000               2
+     13700            1.000               2
+     13800            1.000               2
+     13900            1.000               2
+     14000            1.000               2
+     14100            1.000               2
+     14200            1.000               2
+     14300            1.000               2
+     14400            1.000               2
+     14500            1.000               2
+     14600            1.000               2
+     14700            1.000               1
+     14800            1.000               2
+     14900            1.000               2
+     15000            1.000               2
+     15100            1.000               1
+     15200            1.000               8
+     15300            1.000               8
+     15400            1.000               2
+     15500            1.000               2
+     15600            1.000               2
+     15700            1.000               2
+     15800            1.000               2
+     15900            1.000               2
+     16000            1.000               2
+     16100            1.000               2
+     16200            1.000               2
+     16300            1.000               2
+     16400            1.000               2
+     16500            1.000               2
+     16600            1.000               2
+     16700            1.000               5
+     16800            1.000               5
+     16900            1.000               5
+     17000            1.000               5
+     17100            1.000               5
+     17200            1.000               5
+     17300            1.000               5
+     17400            1.000               5
+     17500            1.000               5
+     17600            1.000               2
+     17700            1.000               5
+     17800            1.000               5
+     17900            1.000               5
+     18000            1.000               5
+     18100            1.000               5
+     18200            1.000               5
+     18300            1.000               5
+     18400            1.000               5
+     18500            1.000               5
+     18600            1.000               5
+     18700            1.000               5
+     18800            1.000               5
+     18900            1.000               5
+     19000            1.000               5
+     19100            1.000               5
+     19200            1.000               5
+     19300            1.000               2
+     19400            1.000               5
+     19500            1.000               5
+     19600            1.000               5
+     19700            1.000               5
+     19800            1.000               5
+     19900            1.000               5
+     20000            1.000               5
+     20100            1.000               5
+     20200            1.000               2
+     20300            1.000               5
+     20400            1.000               5
+     20500            1.000               2
+     20600            1.000               2
+     20700            1.000               5
+     20800            1.000               2
+     20900            1.000               2
+     21000            1.000               2
+     21100            1.000               2
+     21200            1.000               2
+     21300            1.000               2
+     21400            1.000               2
+     21500            1.000               2
+     21600            1.000               2
+     21700            1.000               2
+     21800            1.000               2
+     21900            1.000               2
+     22000            1.000               2
+     22100            1.000               2
+     22200            1.000               4
+     22300            1.000               3
+     22400            1.000               4
+     22500            1.000               2
+     22600            1.000               2
+     22700            1.000               2
+     22800            1.000               2
+     22900            1.000               2
+     23000            1.000               2
+     23100            1.000               2
+     23200            1.000               3
+     23300            1.000               3
+     23400            1.000               3
+     23500            1.000               3
+     23600            1.000               3
+     23700            1.000               3
+     23800            1.000               3
+     23900            1.000               3
+     24000            1.000               3
+     24100            1.000               3
+     24200            1.000               4
+     24300            1.000               4
+     24400            1.000               3
+     24500            1.000               3
+     24600            1.000               4
+     24700            1.000               4
+     24800            1.000               4
+     24900            1.000               4
+     25000            1.000               4
+     25100            1.000               4
+     25200            1.000               4
+     25300            1.000               1
+     25400            1.000               4
+     25500            1.000               4
+     25600            1.000               4
+     25700            1.000               4
+     25800            1.000               4
+     25900            1.000               4
+     26000            1.000               4
+     26100            1.000               4
+     26200            1.000               4
+     26300            1.000               4
+     26400            1.000               4
+     26500            1.000               4
+     26600            1.000               4
+     26700            1.000               4
+     26800            1.000               4
+     26900            1.000               4
+     27000            1.000               4
+     27100            1.000               4
+     27200            1.000               4
+     27300            1.000               4
+     27400            1.000               4
+     27500            1.000               4
+     27600            1.000               4
+     27700            1.000               4
+     27800            1.000               4
+     27900            1.000               4
+     28000            1.000               4
+     28100            1.000               4
+     28200            1.000               4
+     28300            1.000               4
+     28400            1.000               3
+     28500            1.000               4
+     28600            1.000               4
+     28700            1.000               4
+     28800            1.000               4
+     28900            1.000               4
+     29000            1.000               4
+     29100            1.000               8
+     29200            1.000               8
+     29300            1.000               8
+     29400            1.000               4
+     29500            1.000               8
+     29600            1.000               8
+     29700            1.000               4
+     29800            1.000               4
+     29900            1.000               4
+     30000            1.000               4
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Bayesian posterior parameter distributions
+  Bayesian posterior parameter trace plots
+  Bayesian autocorrelation plots
+  Bayesian prior parameter distributions
+  Bayesian posterior predictive checking scatterplots
+  Bayesian posterior predictive checking distribution plots
+  Loop plots
+
+     Beginning Time:  12:42:28
+        Ending Time:  12:42:30
+       Elapsed Time:  00:00:02
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

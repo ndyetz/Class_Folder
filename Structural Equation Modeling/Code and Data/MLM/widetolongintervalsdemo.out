@@ -1,0 +1,163 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/08/2018   9:20 AM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE IS WidetoLongIntervalDemo.csv;
+
+  DATA WIDETOLONG:
+      WIDE = Baa1-Baa10 | BaaInt1-BaaInt10 | Bab1-Bab10 |
+      BabInt1-BabInt10 | Bba1-Bba10 |
+      BbaInt1-BbaInt10 | Bbb1-Bbb10 | BbbInt1-BbbInt10;
+      LONG = BaaT1 | BaaE1I | BabT2 | BabE2I | BbaT1 | BbaR1I | BbbT2 | BbbR2I;
+      IDVARIABLE = ID;
+      REPETITION = trial;
+      SAVEDATA: FILE IS Demolong.dat;
+
+  VARIABLE:
+  NAMES ARE  ID interven Baa1-Baa10 BaaInt1-BaaInt10 Bab1-Bab10
+  BabInt1-BabInt10 Bba1-Bba10 BbaInt1-BbaInt10 Bbb1-Bbb10
+  BbbInt1-BbbInt10 cz1 fz1 pz1 cz2 fz2 pz2;
+
+  USEVARIABLES ARE  ID interven cz1 fz1 pz1 cz2 fz2 pz2
+  BaaT1 BaaE1I BabT2 BabE2I BbaT1 BbaR1I BbbT2 BbbR2I trial;
+
+  CLUSTER = ID;
+
+  ANALYSIS: TYPE is twolevel basic;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         330
+
+Number of dependent variables                                   16
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   INTERVEN    CZ1         FZ1         PZ1         CZ2         FZ2
+   PZ2         BAAT1       BAAE1I      BABT2       BABE2I      BBAT1
+   BBAR1I      BBBT2       BBBR2I      TRIAL
+
+Variables with special functions
+
+  Cluster variable      ID
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  WidetoLongIntervalDemo.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of clusters                         33
+
+       Size (s)    Cluster ID with Size s
+
+         10        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+                   22 23 24 25 26 27 28 29 30 31 32 33
+
+
+
+
+     A MATRIX COULD NOT BE INVERTED DURING THE H1 MODEL ESTIMATION.
+     THE ESTIMATED WITHIN COVARIANCE MATRIX IS NOT POSITIVE DEFINITE AS IT
+     SHOULD BE.  COMPUTATION COULD NOT BE COMPLETED.
+     THE VARIANCE OF INTERVEN APPROACHES 0.  FIX THIS VARIANCE AND THE
+     CORRESPONDING COVARIANCES TO 0, DECREASE THE MINIMUM VARIANCE, OR
+     SPECIFY THE VARIABLE AS A BETWEEN VARIABLE.
+
+     THE H1 MODEL ESTIMATION DID NOT CONVERGE.  THE SAMPLE STATISTICS COULD NOT
+     BE COMPUTED.
+
+
+
+
+RESULTS FOR BASIC ANALYSIS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    Demolong.dat
+
+  Order and format of variables
+
+    INTERVEN       F10.3
+    CZ1            F10.3
+    FZ1            F10.3
+    PZ1            F10.3
+    CZ2            F10.3
+    FZ2            F10.3
+    PZ2            F10.3
+    BAAT1          F10.3
+    BAAE1I         F10.3
+    BABT2          F10.3
+    BABE2I         F10.3
+    BBAT1          F10.3
+    BBAR1I         F10.3
+    BBBT2          F10.3
+    BBBR2I         F10.3
+    TRIAL          F10.3
+    ID             I3
+
+  Save file format
+    16F10.3 I3
+
+  Save file record length    10000
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  09:20:54
+        Ending Time:  09:20:54
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

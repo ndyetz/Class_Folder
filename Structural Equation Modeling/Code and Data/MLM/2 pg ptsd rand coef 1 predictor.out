@@ -1,0 +1,221 @@
+Mplus VERSION 7.2 (Mac)
+MUTHEN & MUTHEN
+04/30/2018   8:08 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: pregaming and ptsd invited manuscript
+
+  DATA:	
+      FILE IS PregamePTSD021615.txt;
+      !random coefficient model with level-1 predictor
+      !consd = alchohol related consquences
+      !pgday = pregamming that day 0 = no pregame 1 = pregame
+
+
+  VARIABLE: NAMES ARE
+     IDNUM CAPS_STATUS_R CAPS_STATUS_combined
+     SEX AGE RACE EDLEVEL TLEQ_SV_Dich
+      LEC_SV_Dich CRITBMSx CRITCMSx CRITDMSx
+      TLEQ_CE TLEQ_CFH PHQ_TOT PHQ_Severity2groups
+      bfi_E bfi_A
+      bfi_C bfi_N bfi_O DERS_TOTAL dmqsoc dmqcop
+      dmqenh dmqcnf DMQ_Total KEXtr KEXsl KEXae
+      KEXpe YAQ_TOT
+      YAQ_soc YAQ_cont YAQ_selfp YAQ_selfc YAQ_risk
+      YAQ_acoc YAQ_dep YAQ_blk drnkdays30 Hvydays Bngdays
+      Prgmdays nopgdays TOTDRK30 TOTPGEDRK TOTDRKPGD
+      TOTDRKNOPG totcons30 Totpgcons Totnopgcons
+      Sexual_Consequence Pregamer Day P_TALUS TALUS ALC
+      DRINKDAY PGDAY pgdALC nopgALC CONSd ycond PGCONS
+      NOPGCONS DDD DPGD DNPGD CDD CPGD CNPGD
+      PTSD1 PTSD2 PTSD3;
+
+      !DUMMY CODE FOR CAPS_STATUS_combined
+      !                       PTSD1   PTSD2 PTSD3
+      !Criteria A Negative    1       0      0
+      !PTSD Negative          0       1      0
+      !PTSD Positive          0       0      1
+
+      MISSING = ALL (-999);
+
+    USEVARIABLES ARE
+        pgday
+        CONSd
+      ;
+
+     ! count are CONSd (nbh) ;
+     ! categorical are PGDAY;
+
+
+    CLUSTER IS IDNUM;
+    within is pgday;
+  ANALYSIS:
+     TYPE IS TWOLEVEL RANDOM;
+  MODEL:
+     %WITHIN%
+     s | consd on pgday;
+     %BETWEEN%
+     consd;
+     s;
+     consd with s;
+
+
+
+
+
+
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  12
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  1
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+pregaming and ptsd invited manuscript
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       17973
+
+Number of dependent variables                                    1
+Number of independent variables                                  1
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   CONSD
+
+Observed independent variables
+   PGDAY
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variable      IDNUM
+
+  Within variables
+   PGDAY
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  PregamePTSD021615.txt
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        600
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              CONSD         PGDAY
+              ________      ________
+ CONSD          1.000
+ PGDAY          1.000         1.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                      -24600.009
+          H0 Scaling Correction Factor     13.2127
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   49212.018
+          Bayesian (BIC)                 49258.797
+          Sample-Size Adjusted BIC       49239.730
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Residual Variances
+    CONSD              0.832      0.070     11.929      0.000
+
+Between Level
+
+ CONSD    WITH
+    S                  0.153      0.039      3.870      0.000
+
+ Means
+    CONSD              0.184      0.011     16.563      0.000
+    S                  2.239      0.114     19.674      0.000
+
+ Variances
+    CONSD              0.044      0.012      3.525      0.000
+    S                  4.463      0.777      5.747      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.234E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  20:08:18
+        Ending Time:  20:08:19
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2014 Muthen & Muthen

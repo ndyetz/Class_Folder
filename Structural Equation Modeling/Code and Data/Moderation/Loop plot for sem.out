@@ -1,0 +1,296 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+02/01/2018   8:42 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	moderation
+  DATA:	FILE = ex3.18.dat;
+  VARIABLE:	NAMES = y m x z;
+  	USEVARIABLES = y x z xz;
+  DEFINE:	xz = x*z;
+
+  		
+  MODEL:	
+  y ON x (b1);
+  y ON z (b2);
+  y ON xz (b3);
+
+  !x is the predictor, z is the moderator.
+  	
+
+
+  OUTPUT:	
+  sampstat
+  tech3;
+
+  !!!!!!!!!!!!!!!!!!!!!!!
+  ! Code for loop plot: !
+  !!!!!!!!!!!!!!!!!!!!!!!
+
+  Model Constraint:
+   PLOT (lowZ highZ); !These get defined below.
+
+
+   LOOP(x, -.5, .5, 0.1);
+   ! x = predictor variable
+   ! -.5 = lower bound of X-axis
+   ! .5 = upper bound of X-axis
+   ! 0.1 = interval of X-axis
+
+   !The code from: https://www.statmodel.com/download/Latent%20variable%20interaction%20LOOP
+   ! lowf2 = (b1+b3*(-1))*f1+b2*(-1);
+   ! highf2 = (b1+b3*(+1))*f1+b2*(+1);
+
+   ! I like to re-write it to include the intercept and put into familiar y = mx + b form
+   !
+
+   lowZ = -0.148+(b1*x)+(b2*(-1))+(b3*x*(-1));
+   highZ = -0.148+(b1*x)+(b2*(1))+(b3*x*(1));
+   !For some reason, 1 & -1 must be inside parentheses for the code to run
+
+   !Z is standardized in this case (or if it's a latent variable, then variance is fixed @1)
+   !If Z is unstandardized, then multiply by +1/-1 SD (or whatever levels of Z you want to p
+  Plot:
+   type = plot2;
+
+   !To view: Run the model, then click plot > view plot > loop plots > plot all parameters i
+   !It's tedious, but you can edit/clean up the plots in the viewer window for APA style, et
+
+
+
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+   !The code from: https://www.statmodel.com/download/Latent%20variable%20interaction%20LOOP%
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+   !If Z is unstandardized, then multiply by +1/-1 SD (or whatever levels of Z you want to pl
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+   !To view: Run the model, then click plot > view plot > loop plots > plot all parameters in
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+   !It's tedious, but you can edit/clean up the plots in the viewer window for APA style, etc
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+moderation
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y
+
+Observed independent variables
+   X           Z           XZ
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  ex3.18.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              Y             X             Z             XZ
+              ________      ________      ________      ________
+               -0.162         0.573         0.085         0.073
+
+
+           Covariances
+              Y             X             Z             XZ
+              ________      ________      ________      ________
+ Y              0.709
+ X             -0.005         0.245
+ Z              0.011         0.024         0.936
+ XZ             0.051         0.031         0.548         0.549
+
+
+           Correlations
+              Y             X             Z             XZ
+              ________      ________      ________      ________
+ Y              1.000
+ X             -0.012         1.000
+ Z              0.013         0.051         1.000
+ XZ             0.082         0.085         0.765         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     Y                    -0.162      -0.068      -3.054    0.67%      -0.808     -0.354     -0.213
+             150.000       0.709       0.769       2.199    0.67%       0.021      0.508
+     X                     0.573      -0.297       0.000   42.67%       0.000      0.000      1.000
+             150.000       0.245      -1.912       1.000   57.33%       1.000      1.000
+     Z                     0.085       0.139      -2.550    0.67%      -0.698     -0.149      0.042
+             150.000       0.936       0.120       3.033    0.67%       0.290      0.917
+     XZ                    0.073       0.570      -2.550    0.67%      -0.308      0.000      0.000
+             150.000       0.549       3.074       3.033    0.67%       0.000      0.433
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        5
+
+Loglikelihood
+
+          H0 Value                        -186.016
+          H1 Value                        -186.016
+
+Information Criteria
+
+          Akaike (AIC)                     382.033
+          Bayesian (BIC)                   397.086
+          Sample-Size Adjusted BIC         381.262
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              1.984
+          Degrees of Freedom                     3
+          P-Value                           0.5758
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ Y        ON
+    X                 -0.035      0.139     -0.251      0.802
+    Z                 -0.105      0.110     -0.956      0.339
+    XZ                 0.200      0.143      1.394      0.163
+
+ Intercepts
+    Y                 -0.148      0.105     -1.414      0.157
+
+ Residual Variances
+    Y                  0.699      0.081      8.660      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.307E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 3 OUTPUT
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1     0.109363D-01
+      2    -0.109363D-01  0.192067D-01
+      3    -0.338103D-03  0.338103D-03  0.119911D-01
+      4     0.338103D-03 -0.142801D-02 -0.119911D-01  0.205432D-01
+      5    -0.277257D-06  0.672828D-06  0.118790D-05 -0.152611D-05  0.652051D-02
+      6    -0.529909D-02  0.997927D-02 -0.582652D-02  0.100556D-02 -0.884339D-07
+      7    -0.563720D-02  0.922747D-02  0.616462D-02 -0.243357D-02  0.761262D-06
+      8     0.000000D+00  0.000000D+00  0.000000D+00  0.000000D+00  0.000000D+00
+
+
+           ESTIMATED COVARIANCE MATRIX FOR PARAMETER ESTIMATES
+                  6             7             8
+              ________      ________      ________
+      6     0.103134D-01
+      7    -0.334104D-03  0.956157D-02
+      8     0.000000D+00  0.000000D+00  0.666667D-12
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         1.000
+      2        -0.755         1.000
+      3        -0.030         0.022         1.000
+      4         0.023        -0.072        -0.764         1.000
+      5         0.000         0.000         0.000         0.000         1.000
+      6        -0.499         0.709        -0.524         0.069         0.000
+      7        -0.551         0.681         0.576        -0.174         0.000
+      8         0.000         0.000         0.000         0.000         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR PARAMETER ESTIMATES
+                  6             7             8
+              ________      ________      ________
+      6         1.000
+      7        -0.034         1.000
+      8         0.000         0.000         1.000
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Loop plots
+
+     Beginning Time:  08:42:38
+        Ending Time:  08:42:38
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

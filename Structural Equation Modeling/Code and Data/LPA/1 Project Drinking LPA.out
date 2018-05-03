@@ -1,0 +1,587 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/05/2018   3:58 PM
+
+INPUT INSTRUCTIONS
+
+
+   TITLE:  PBS PE Mediation
+  !PBS = protective behavioral strategy
+  !use and percieved effectiveness (PE)
+  !alcohol use and related consequences (ARC)
+  !this is the 1-class model for LPA
+
+
+           DATA:   FILE is Project Drinking PBS PE.dat;
+
+
+      VARIABLE:   NAMES ARE
+     DateStarted DateofLastSubmission
+     TimeElapsed_Seconds ActiveTime_Seconds
+      IPAddress u1 u2 u3 u4 u5 u6 u7 u8 u9
+      u10 u11 u12 u13 u14 u15 u16 u17 u18
+      u19 u20 u21 u22 u23 u24
+      u25 u26 u27 u28 u29 u30 u31 u32 u33
+      u34 u35 u36 u37 u38 u39 u40 u41 u42
+      u43 u44 u45 u46 u47 u48 u49
+      u50 u51 u52 u53 u54 u55 u56 u57 u58
+      u59 ssrq1 ssrq2 ssrq3 ssrq4 ssrq5
+      ssrq6 ssrq7 ssrq8 ssrq9
+      ssrq10 ssrq11 ssrq12 ssrq13 ssrq14
+      ssrq15 ssrq16 ssrq17 ssrq18 ssrq19
+      ssrq20 ssrq21 ssrq22 ssrq23
+      ssrq24 ssrq25 ssrq26 ssrq27 ssrq28
+      ssrq29 ssrq30 ssrq31 cesd1 cesd2
+      cesd3 cesd4 cesd5 cesd6 cesd7
+      cesd8 cesd9 cesd10 cesd11 cesd12
+      cesd13 cesd14 cesd15 cesd16 cesd17
+      cesd18 cesd19 cesd20 bfi1 bfi2
+      bfi3 bfi4 bfi5 bfi6 bfi7 bfi8 bfi9
+      bfi10 bfi11 bfi12 bfi13 bfi14 bfi15
+      bfi16 bfi17 bfi18 bfi19
+      bfi20 bfi21 bfi22 bfi23 bfi24 bfi25
+      bfi26 bfi27 bfi28 bfi29 bfi30 bfi31
+      bfi32 bfi33 bfi34 bfi35
+      bfi36 bfi37 bfi38 bfi39 bfi40 bfi41
+      bfi42 bfi43 bfi44 duke1 duke2 duke3
+      duke4 duke5 duke6 duke7
+      duke8 duke9 duke10 duke11 duke12
+      duke13 duke14 duke15 duke16 duke17
+      pswq1 pswq2 pswq3 pswq4 pswq5
+      pswq6 pswq7 pswq8 pswq9 pswq10 pswq11
+      pswq12 pswq13 pswq14 pswq15 pswq16 rcope1
+      rcope2 rcope3
+      rcope4 rcope5 rcope6 rcope7 rcope8 rcope9
+      rcope10 rcope11 rcope12 rcope13 rcope14
+      alc30 drunk30
+      sick30 agedrink binge30 hvdrink hvhour tdd1
+      tdd2 tdd3 tdd4 tdd5 tdd6 tdd7 hr1 hr2 hr3
+      hr4 hr5 hr6
+      hr7 hdd1 hdd2 hdd3 hdd4 hdd5 hdd6 hdd7 hvhr1
+      hvhr2 hvhr3 hvhr4 hvhr5 hvhr6 hvhr7 by1 by2 by3 by4
+      by5 by6 by7 by8 by9 by10 by11 bynone1 by12
+      by1314 by15 by16 by17 by18 by19 by20 by21 by22 by23 by24
+      bynone2 mdmqr1 mdmqr2 mdmqr3 mdmqr4 mdmqr5
+      mdmqr6 mdmqr7 mdmqr8 mdmqr9 mdmqr10 mdmqr11 mdmqr12
+      mdmqr13 mdmqr14 mdmqr15 mdmqr16 mdmqr17 mdmqr18
+      mdmqr19 mdmqr20 mdmqr21 mdmqr22 mdmqr23 mdmqr24
+      mdmqr25 mdmqr26 mdmqr27 mdmqr28 pbss1 pbss2 pbss3
+      pbss4 pbss5 pbss6 pbss7 pbss8 pbss9 pbss10 pbss11
+      pbss12 pbss13 pbss14 pbss15 pbss16 pbss17 pbss18
+      pbss19 pbss20 pbssdn1 pbssdn2 pbssdn3 pbssdn4
+      pbssdn5 pbssdn6 pbssdn7 pbssdn8 pbssdn9 pbssdn10
+      pbssdn11 pbssdn12 pbssdn13 pbssdn14 pbssdn15
+      pbssdn16 pbssdn17 pbssdn18 pbssdn19 pbssdn20
+      pbssin1 pbssin2 pbssin3 pbssin4 pbssin5 pbssin6
+      pbssin7 pbssin8 pbssin9 pbssin10 pbssin11 pbssin12
+      pbssin13 pbssin14 pbssin15 pbssin16 pbssin17
+      pbssin18 pbssin19 pbssin20 pbssse1 pbssse2 pbssse3
+      pbssse4 pbssse5 pbssse6 pbssse7 pbssse8 pbssse9
+      pbssse10 pbssse11 pbssse12 pbssse13 pbssse14 pbssse15
+      pbssse16 pbssse17 pbssse18 pbssse19 pbssse20
+      pbsspe1 pbsspe2 pbsspe3 pbsspe4 pbsspe5 pbsspe6 pbsspe7
+      pbsspe8 pbsspe9 pbsspe10 pbsspe11 pbsspe12
+      pbsspe13 pbsspe14 pbsspe15 pbsspe16 pbsspe17 pbsspe18
+      pbsspe19 pbsspe20 pbssat1 pbssat2 pbssat3
+      pbssat4 pbssat5 pbssat6 pbssat7 pbssat8 pbssat9 pbssat10
+      pbssat11 pbssat12 pbssat13 pbssat14
+      pbssat15 pbssat16 pbssat17 pbssat18 pbssat19 pbssat20
+      pbssi1 pbssi2 pbssi3 pbssi4 pbssi5 pbssi6
+      pbssi7 pbssi8 pbssi9 pbssi10 pbssi11 pbssi12 pbssi13
+      pbssi14 pbssi15 pbssi16 pbssi17 pbssi18
+      pbssi19 pbssi20 c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11
+      c1213 c14 c15 c16 c17 c18 c19 c20 c21 c22 c23
+      c24 c25 c26 c27 c28 c29 c30 drse1 drse2 drse3 drse4
+      drse5 drse6 drse7 drse8 drse9 drse10 drse11
+      drse12 drse13 drse14 drse15 ssrq1rss drse17 drse18
+      drse19 class1 class2 class3 class4 class5 class6
+      class7 class8 class9 class10 class11 class12 class13
+      class14 class15 age gender marry educ nohisp
+      mexican puerto cuban othhisp amerind asian black hawaii
+      white othrace netid PrimaryFirst u2r u3r
+      u5r u7r u8r u9r u10r u12r u13r u15r u17r u18r u20r u22r
+      u23r u25r u26r u29r u30r u31r u34r u35r
+      u36r u39r u40r u41r u44r u45r u46r u47r u50r u51r u52r
+      u53r u55r u56r u57r u58r u59r Premeditation
+      Premeditation_n Perseverance Perseverance_n Senseek
+      Senseek_n PosUrgency PosUrgency_n NegUrgency
+      NegUrgency_n sadness lossofint appetite sleep thinking
+      guilt tired movement suicide STOPLIMIT
+      STOPLIMIT_n MANNER SERIOUSNC SERIOUSNC_n PBSSTOTAL
+      PBSSTOTAL_n depression byaacq23 byaacq22 social
+      copeanx copedep enhance conform pswq1r pswq3r pswq8r
+      pswq10r pswq11r PSWQ SLD SLD_n MODr MODr_n SHR
+      SHR_n SLDdn SLDdn_n MODdn MODdnn SHRdn SHRdn_n PBSSDNTOTAL
+      PBSSDNTOTAL_n SLDin SLDin_n MODin
+      MODin_n SHRin SHRin_n PBSSINTOTAL PBSSINTOTAL_n SLDse
+      SLDse_n MODse MODse_n SHRse SHRse_n
+      PBSSSETOTAL PBSSSETOTAL_n SLDpe SLDpe_n MODpe MODpe2
+      SHRpe SHRpe_n PBSSPETOTAL PBSSPETOTAL_n SLDat
+      SLDat_n MODat MODat_n SHRat SHRat_n PBSSATTOTAL PBSSATTOTAL_n
+      SLDi SLDi_n MODi MODi_n SHRi SHRi_n
+      PBSSITOTAL PBSSITOTAL_n CLASS CASTsum CASTcat DRSEopp DRSEer
+      DRSEsp DRSEtot RCOPEpos RCOPEneg
+      duke1r duke2r duke3r duke4r duke5r duke6r duke7r duke8r duke9r
+      duke10r duke11r duke12r duke13r
+      duke14r duke15r duke16r duke17r ssrq1r ssrq2r ssrq4r ssrq7r
+      ssrq8r ssrq10r ssrq11r ssrq15r ssrq16r
+      ssrq17r ssrq22r ssrq25r ssrq26r ssrq31r SelfRegulation bfi21r
+      bfi6r bfi31r bfi2r bfi12r bfi27r
+      bfi37r bfi43r bfi8r bfi23r bfi18r bfi34r bfi24r bfi9r bfi35r
+      bfi41r Extraversion Extraversion_n
+      Conscientiousness Conscientiousness_n Neuroticism Neuroticism_n
+      Openness Openness_n Aggreeableness
+      Aggreeableness_n filter ID_pe typquant typquant_r;
+
+              MISSING = all (-999);
+
+
+  USEVARIABLES ARE
+
+  SLD MODr SHR
+  PBSSPETOTAL
+     typquant
+     byaacq23;
+
+      Useobservations = alc30 ge 2;
+
+
+
+  	CLASSES = c (1); !this determines class
+  	
+  ANALYSIS:	TYPE = MIXTURE;
+
+
+  output: tech7 tech11;
+
+
+
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: DATESTARTED
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: DATEOFLASTSUBMISSION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: TIMEELAPSED_SECONDS
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: ACTIVETIME_SECONDS
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: IPADDRESS
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PRIMARYFIRST
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PREMEDITATION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PREMEDITATION_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PERSEVERANCE
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PERSEVERANCE_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SENSEEK_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: POSURGENCY
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: POSURGENCY_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: NEGURGENCY
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: NEGURGENCY_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: LOSSOFINT
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: STOPLIMIT
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: STOPLIMIT_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SERIOUSNC
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SERIOUSNC_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSTOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSTOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: DEPRESSION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSDNTOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSDNTOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSINTOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSINTOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSSETOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSSETOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSPETOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSPETOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSATTOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSATTOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSITOTAL
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: PBSSITOTAL_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: SELFREGULATION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: EXTRAVERSION
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: EXTRAVERSION_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: CONSCIENTIOUSNESS
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: CONSCIENTIOUSNESS_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: NEUROTICISM
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: NEUROTICISM_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: OPENNESS_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: AGGREEABLENESS
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: AGGREEABLENESS_N
+*** WARNING
+  Variable name contains more than 8 characters.
+  Only the first 8 characters will be printed in the output.
+  Variable: TYPQUANT_R
+*** WARNING in MODEL command
+  All variables are uncorrelated with all other variables within class.
+  Check that this is what is intended.
+*** WARNING in OUTPUT command
+  TECH11 option is not available for TYPE=MIXTURE with only one class.
+  Request for TECH11 is ignored.
+  48 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+PBS PE Mediation
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         582
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   SLD         MODR        SHR         PBSSPETOTA  TYPQUANT    BYAACQ23
+
+Categorical latent variables
+   C
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  Project Drinking PBS PE.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             7
+     Number of y missing data patterns           7
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              SLD           MODR          SHR           PBSSPETO      TYPQUANT
+              ________      ________      ________      ________      ________
+ SLD            0.995
+ MODR           0.995         0.995
+ SHR            0.995         0.995         0.995
+ PBSSPETO       0.986         0.986         0.986         0.988
+ TYPQUANT       0.837         0.837         0.837         0.835         0.840
+ BYAACQ23       0.995         0.995         0.995         0.988         0.840
+
+
+           Covariance Coverage
+              BYAACQ23
+              ________
+ BYAACQ23       1.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       12
+
+Loglikelihood
+
+          H0 Value                       -7316.608
+          H0 Scaling Correction Factor      2.8217
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   14657.215
+          Bayesian (BIC)                 14709.613
+          Sample-Size Adjusted BIC       14671.517
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        582.00000          1.00000
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASS PATTERNS
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1        582.00000          1.00000
+
+
+CLASSIFICATION OF INDIVIDUALS BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1              582          1.00000
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1
+
+    1   1.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Means
+    SLD                3.277      0.054     60.660      0.000
+    MODR               3.222      0.055     58.626      0.000
+    SHR                5.012      0.051     97.932      0.000
+    PBSSPETOTA         4.804      0.040    118.703      0.000
+    TYPQUANT           8.200      0.461     17.798      0.000
+    BYAACQ23           6.316      0.217     29.065      0.000
+
+ Variances
+    SLD                1.690      0.082     20.616      0.000
+    MODR               1.749      0.086     20.279      0.000
+    SHR                1.516      0.118     12.877      0.000
+    PBSSPETOTA         0.942      0.072     13.075      0.000
+    TYPQUANT         103.804     31.029      3.345      0.001
+    BYAACQ23          27.484      1.766     15.563      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.526E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 7 OUTPUT
+
+
+     SAMPLE STATISTICS WEIGHTED BY ESTIMATED CLASS PROBABILITIES FOR CLASS 1
+
+
+           Means
+              SLD           MODR          SHR           PBSSPETO      TYPQUANT
+              ________      ________      ________      ________      ________
+ 1              3.277         3.222         5.012         4.804         8.200
+
+
+           Means
+              BYAACQ23
+              ________
+ 1              6.316
+
+
+           Covariances
+              SLD           MODR          SHR           PBSSPETO      TYPQUANT
+              ________      ________      ________      ________      ________
+ SLD            1.690
+ MODR           0.964         1.749
+ SHR            0.599         0.478         1.516
+ PBSSPETO       0.391         0.374         0.507         0.942
+ TYPQUANT      -1.646        -2.832        -1.433        -1.975       103.804
+ BYAACQ23      -1.590        -2.211        -1.409        -1.523        21.473
+
+
+           Covariances
+              BYAACQ23
+              ________
+ BYAACQ23      27.484
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for Mixture analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  15:58:28
+        Ending Time:  15:58:28
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

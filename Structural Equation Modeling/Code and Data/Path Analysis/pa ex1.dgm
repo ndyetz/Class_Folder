@@ -1,0 +1,87 @@
+VERSION 1.0.0
+INPUT
+TITLE:
+ Path Analysis All Continuous Variables
+DATA:
+ FILE IS ex3.11.dat;
+VARIABLE:
+ NAMES ARE depression HoB anxiety
+ Host rumination Sub;
+USEVARIABLES ARE
+depression anxiety HoB
+ host rumination sub;
+OUTPUT:
+ sampstat stdyx cinterval;
+MODEL:
+depression on host;
+depression on rumination;
+depression on sub;
+anxiety on host;
+anxiety on rumination;
+anxiety on sub;
+depression with anxiety;
+anxiety on HoB;
+INPUT_END
+3
+3
+0
+3
+1
+GENERAL
+0
+2
+0
+4
+depression anxiety hob host rumination sub
+2
+1 1 0 0 0 0
+0
+0
+1 1 host depression    0.992    0.043    0.908    1.077
+1 1 rumination depression    2.001    0.045    1.913    2.089
+1 1 sub depression    3.052    0.045    2.964    3.140
+1 1 host anxiety    0.374    0.156    0.067    0.680
+1 1 rumination anxiety    1.984    0.116    1.757    2.211
+1 1 sub anxiety    1.516    0.079    1.361    1.671
+1 1 hob anxiety    0.783    0.049    0.687    0.880
+2 1 depression anxiety    0.527    0.069    0.392    0.662
+4 1 depression    1.061    0.067    0.930    1.193
+4 1 anxiety    1.976    0.125    1.731    2.221
+2 1 hob host  999.000  999.000  999.000  999.000
+2 1 hob rumination  999.000  999.000  999.000  999.000
+2 1 hob sub  999.000  999.000  999.000  999.000
+2 1 host rumination  999.000  999.000  999.000  999.000
+2 1 host sub  999.000  999.000  999.000  999.000
+2 1 rumination sub  999.000  999.000  999.000  999.000
+11 1 host depression    0.254    0.015    0.224    0.284
+11 1 rumination depression    0.495    0.020    0.456    0.534
+11 1 sub depression    0.758    0.020    0.718    0.798
+11 1 host anxiety    0.071    0.030    0.013    0.129
+11 1 rumination anxiety    0.364    0.023    0.318    0.409
+11 1 sub anxiety    0.279    0.018    0.244    0.314
+11 1 hob anxiety    0.575    0.037    0.502    0.647
+12 1 depression anxiety    0.364    0.039    0.288    0.440
+14 1 depression    0.061    0.005    0.051    0.071
+14 1 anxiety    0.062    0.005    0.052    0.073
+12 1 hob host  999.000  999.000  999.000  999.000
+12 1 hob rumination  999.000  999.000  999.000  999.000
+12 1 hob sub  999.000  999.000  999.000  999.000
+12 1 host rumination  999.000  999.000  999.000  999.000
+12 1 host sub  999.000  999.000  999.000  999.000
+12 1 rumination sub  999.000  999.000  999.000  999.000
+31 1 host depression    0.992    0.043    0.908    1.077
+31 1 rumination depression    2.001    0.045    1.913    2.089
+31 1 sub depression    3.052    0.045    2.964    3.140
+31 1 host anxiety    0.374    0.156    0.067    0.680
+31 1 rumination anxiety    1.984    0.116    1.757    2.211
+31 1 sub anxiety    1.516    0.079    1.361    1.671
+31 1 hob anxiety    0.783    0.049    0.687    0.880
+32 1 depression anxiety    0.527    0.069    0.392    0.662
+34 1 depression    1.061    0.067    0.930    1.193
+34 1 anxiety    1.976    0.125    1.731    2.221
+32 1 hob host  999.000  999.000  999.000  999.000
+32 1 hob rumination  999.000  999.000  999.000  999.000
+32 1 hob sub  999.000  999.000  999.000  999.000
+32 1 host rumination  999.000  999.000  999.000  999.000
+32 1 host sub  999.000  999.000  999.000  999.000
+32 1 rumination sub  999.000  999.000  999.000  999.000
