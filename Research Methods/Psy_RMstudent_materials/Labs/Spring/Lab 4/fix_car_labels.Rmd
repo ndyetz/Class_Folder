@@ -1,0 +1,43 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Load libraries
+```{r}
+
+library(car)
+library(tidyverse)
+
+```
+
+
+# Import data
+```{r}
+
+duncan <- read_csv("Duncan.csv")
+
+```
+
+# Set the case id to the row name
+Note that because tibbles (the dataframe type used in tidyverse) do not play well with row.names, row names that you assign will be lost if you subset the dataset.  So, if you're working on a file that will need to be subset before you fit the model, then subset first, set row names second, and then fit the model.  Ugh, hopefully a better solution is on the way.
+```{r}
+
+row.names(duncan) <- duncan$id # set the row.names to id
+
+```
+
+# Fit model
+```{r}
+
+lm1 <- lm(prestige ~ income + education, data=duncan)
+
+```
+
+# Test plot
+```{r}
+
+residualPlots(lm1, ask = FALSE, id.n = 3, id.cex= 1.25, id.col = "blue", layout = c(1,1))
+
+```
+
