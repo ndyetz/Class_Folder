@@ -23,7 +23,7 @@ library(tidyverse)
 
 # Import data
 ```{r}
-data <- read.csv("Class Survey Data.csv", header = TRUE, stringsAsFactors = FALSE)\
+data <- read.csv("Class Survey Data.csv", header = TRUE, stringsAsFactors = FALSE)
 ```
 
 # Subset the data - our scale + convergent + Big 5 + demographics 
@@ -50,15 +50,15 @@ change <- data2 %>%
 describe(data$Age)
 
 # sex frequency + propotion
-table(data$Sex)
+table(data$Sex,exclude=NULL)
 prop.table(table(data$Sex))
 
 # race frequency + propotion
-table(data$Race)
+table(data$Race,exclude=NULL)
 prop.table(table(data$Race))
 
 # hisp frequency + propotion
-table(data$Hispanic)
+table(data$Hispanic, exclude=NULL)
 prop.table(table(data$Hispanic))
 ```
 
@@ -441,5 +441,10 @@ dataSS <- data2 %>%
 ## Correlation table for all variables 
 ```{r}
 cor(dataSS, use = "pairwise.complete.obs")
+```
+
+```{r}
+psych::alpha(change)
+
 ```
 
