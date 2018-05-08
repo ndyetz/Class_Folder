@@ -19,6 +19,7 @@ library(lavaan)
 library(semTools)
 # install.packages("tidyverse")
 library(tidyverse)
+library(apaTables)
 ```
 
 # Import data
@@ -93,6 +94,11 @@ itemtotal <- cor(change2, use = "pairwise.complete.obs")
 itemtotal
 ```
 
+
+```{r}
+apa.cor.table(itemtotal, show.conf.interval = FALSE, filename = "cor.doc")
+```
+
 ## Descriptive stats for scale items and scale scores
 (reran to get descriptives for scale scores too)
 ```{r}
@@ -110,8 +116,10 @@ write.csv(cortable, file = "Cor Table.csv")
 ### CFA - two factor no items removed
 
 ```{r}
-model.2f <- 'f1 =~ change1_1 + change1_2R + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
-            f2 =~ change2_1 + change2_2R + change2_3 + change2_4 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10'
+model.2f <- 'f1 =~ NA*change1_1 + change1_2R + change1_3 + change1_4R + change1_5 + change1_6R + change1_7 + change1_8 + change1_9R
+f1 ~~ 1*f1
+            f2 =~ NA*change2_1 + change2_2R + change2_3 + change2_4 + change2_5R + change2_6 + change2_7R + change2_8 + change2_9R + change2_10
+f2 ~~ 1*f2'
 
 fit.model.2f <- cfa(model.2f, change)
 summary(fit.model.2f, fit.measures = TRUE, standardized = TRUE)
@@ -131,7 +139,7 @@ parallel = fa.parallel(change,
  fm = 'ml',
  fa = 'fa',
  n.iter = 50,
- main = "Scree plot of scale",
+ main = "Scree plot of Belief in change scale: All Items",
  SMC = TRUE)
 ```
 
@@ -256,8 +264,10 @@ reliability(fit.model.2f5)
 
 ### CFA -two factor without items 1_2R, 1_3, 1_7, 2_3, 2_4, 2_6, 2_8, 2_9R
 ```{r}
-model.2f6 <- 'f1 =~ change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R
-            f2 =~ change2_1 + change2_2R + change2_5R + change2_7R + change2_10'
+model.2f6 <- 'f1 =~ NA*change1_1 + change1_4R + change1_5 + change1_6R + change1_8 + change1_9R
+f1 ~~ 1*f1
+            f2 =~ NA*change2_1 + change2_2R + change2_5R + change2_7R + change2_10
+f2 ~~ 1*f2'
 
 fit.model.2f6 <- cfa(model.2f6, change)
 summary(fit.model.2f6, fit.measures = TRUE, standardized = TRUE)
@@ -284,6 +294,18 @@ reliability(fit.model.1f6)
 ```{r}
 changefinal <- change %>%
   select(change1_1, change1_4R, change1_5, change1_6R, change1_8, change1_9R, change2_1, change2_2R, change2_5R, change2_7R, change2_10)
+```
+
+###Scree Plot
+```{r}
+set.seed(123)
+parallel = fa.parallel(changefinal,
+ fm = 'ml',
+ fa = 'fa',
+ n.iter = 50,
+ main = "Scree plot of Belief in change scale: Reduced",
+ SMC = TRUE)
+
 ```
 
 #### EFA - items removed - one factor
@@ -435,13 +457,20 @@ data2$scalepersonal <- rowMeans(data2[ , c("change2_1", "change2_2R", "change2_3
 (to easily correlate all scales)
 ```{r}
 dataSS <- data2 %>%
-  select(scalefull, scalegeneral, scalepersonal, scalePC, scaleLO, scaleLC, scaleagree, scalecons, scaleextra, scaleopen, scaleemot)
+  select(scalefull, scalegeneral, scalepersonal, scalePC, scaleLC)
 ```
 
 ## Correlation table for all variables 
 ```{r}
-cor(dataSS, use = "pairwise.complete.obs")
+conv <- cor(dataSS, use = "pairwise.complete.obs")
+conv
 ```
+
+```{r}
+apa.cor.table(conv, show.conf.interval = FALSE, filename = "convergent.doc")
+```
+
+
 
 ```{r}
 psych::alpha(change)
