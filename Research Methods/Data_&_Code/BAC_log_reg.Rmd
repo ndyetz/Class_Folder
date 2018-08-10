@@ -8,7 +8,7 @@ output: html_notebook
 library(modelr)
 library(tidyverse)
 library(descriptr)
-#install.packages("margins")
+install.packages("margins")
 library(margins)
 install.packages("gmodels")
 library(gmodels)
