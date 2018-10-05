@@ -1,0 +1,181 @@
+File Manifest for ICPSR 36346
+
+Ryff, Carol, David Almeida, John Ayanian, Neil Binkley, Deborah Carr,
+Christoper Coe, Richard Davidson, Joseph Grzywacz, Arun Karlamangla, Robert
+Krueger, Margie Lachman, Gayle Love, Marsha Mailick, Daniel Mroczek, Barry
+Radler, Teresa Seeman, Richard Sloan, Duncan Thomas, Maxine Weinstein, and
+David Williams. Midlife in the United States (MIDUS 3), 2013-2014 .
+ICPSR36346-v5. Ann Arbor, MI: Inter-university Consortium for Political and
+Social Research [distributor], 2017-03-09.
+http://doi.org/10.3886/ICPSR36346.v5
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    36346-descriptioncitation.pdf       -       -         -       2017-08-23  -
+
+    36346-related_literature.txt        -       -         -       daily       -
+
+    36346-manifest.txt                  -       -         -       daily       -
+
+    36346-Documentation-midus_readme.pdf -       -         -       2017-03-09  239f11ad26e5da4c9711e1f436ba0cfc
+
+    36346-Report-field_report.pdf       -       -         -       2016-02-29  3a19840956f76953895b805f285fcf3d
+
+
+DS0001 Aggregate Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    36346-0001-Codebook-aggregate_data.pdf -       -         -       2016-02-29  fee09b6dfc752e4c1c06655a52cdde44
+
+    36346-0001-Codebook-midus_ddi.pdf   -       -         -       2016-02-29  4d9e6d9387af7de0421ed0fdaeaa3311
+
+    36346-0001-Data.dta                 -       3,294     2575    2016-02-29  b11835f1589e3d305a97291adec8cb37
+
+    36346-0001-Data.rda                 -       3,294     2575    2016-02-29  4fdf7ffba6ab8f56a67eb70f5031df4d
+
+    36346-0001-Data.sav                 -       3,294     2575    2016-02-29  d4816a6be531dc55255f1b816c1dc73e
+
+    36346-0001-Data.stc                 -       3,294     2575    2016-02-29  bc30dd7765b91aa95364739a0a5beaa0
+
+    36346-0001-Data.tsv                 -       3,294     2575    2016-02-29  43d7d6d7c37b8b551172420c847644ea
+
+    36346-0001-Data.txt                 6325    3,294     2575    2016-02-29  8c5fa0d24a33ef2b7269e82f7d158b82
+
+    36346-0001-Documentation-constructs.pdf -       -         -       2016-03-07  95324bd1e1eba2b6357ee2c022de3a60
+
+    36346-0001-Documentation-naming_coding.pdf -       -         -       2016-03-07  a65e8f6016b4d470f1407e1c621a814c
+
+    36346-0001-Questionnaire-saq.pdf    -       -         -       2016-03-07  05c443e1143a164fcdd543a927db2598
+
+    36346-0001-Questionnaire-telephone_interview.pdf -       -         -       2016-03-07  02822520e93e4201750e9ab27d0a05af
+
+    36346-0001-Setup.dct                -       -         -       2016-03-07  421a43306f4a27daea38495a646abb5d
+
+    36346-0001-Setup.do                 -       -         -       2016-03-07  c2597170e78559e39485598a788a5884
+
+    36346-0001-Setup.sas                -       -         -       2016-03-07  404d5f2d787981a3da426a18c79b0825
+
+    36346-0001-Setup.sps                -       -         -       2016-03-07  e9373712b58ede9b492f3cb706470467
+
+    36346-0001-Supplemental_syntax.do   -       -         -       2016-03-07  a0c2848c3156da6c9ecb7e1a3cf4d88b
+
+    36346-0001-Supplemental_syntax.sas  -       -         -       2016-03-07  0b472e2b09b07ea0b318dbd67ca37ab1
+
+
+DS0002 Mortality Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    36346-0002-Codebook-mortality_data.pdf -       -         -       2016-03-07  eedaee263ee2c8f0b4d01395f5f09433
+
+    36346-0002-Data.dta                 -       1,299     9       2016-03-07  9453a2a39008c693c7d2d0ee75a6f7f4
+
+    36346-0002-Data.rda                 -       1,299     9       2016-03-07  eeea08cce15258cc5feadea2546c6fb0
+
+    36346-0002-Data.sav                 -       1,299     9       2016-03-07  3f2fb2a9b427534e0f43f3b12210da42
+
+    36346-0002-Data.stc                 -       1,299     9       2016-03-07  9cb6a2dd42cdd6d78911d77499e154c9
+
+    36346-0002-Data.tsv                 -       1,299     9       2016-03-07  c5cfa77dd8b97a207f2c4c52a91f731b
+
+    36346-0002-Data.txt                 25      1,299     9       2016-03-07  15f7d392e68f6a02781efe91bca1571b
+
+    36346-0002-Setup.dct                -       -         -       2016-03-07  49a0d775c0d0c66faf67146be090660b
+
+    36346-0002-Setup.do                 -       -         -       2016-03-07  0466efcc027eedecc6ec3ca21c8d54aa
+
+    36346-0002-Setup.sas                -       -         -       2016-03-07  96be106a2e018eb639de0620b0696efa
+
+    36346-0002-Setup.sps                -       -         -       2016-03-07  3b734896702d40119d4faf33b276a83d
+
+    36346-0002-Supplemental_syntax.do   -       -         -       2016-03-07  86257a4f4d620bb4d036d2a5cb083237
+
+    36346-0002-Supplemental_syntax.sas  -       -         -       2016-03-07  b8b457e87f95f12a16c7eee4dcfe5703
+
+
+DS0003 Disposition Codes
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    36346-0003-Codebook-disposition_codes.pdf -       -         -       2016-03-07  2f85d6417ce7a6954d72053f34cc182d
+
+    36346-0003-Data.dta                 -       7,108     6       2016-03-07  aa9fd198b263ee4b7e44a92b0f15e1c9
+
+    36346-0003-Data.rda                 -       7,108     6       2016-03-07  1fdeeeef5d1a0b4008e760c53170df1d
+
+    36346-0003-Data.sav                 -       7,108     6       2016-03-07  4ec4638703ad68e8e54c54ae126e054c
+
+    36346-0003-Data.stc                 -       7,108     6       2016-03-07  4cc14b3dfae202cceb6ae393990970fb
+
+    36346-0003-Data.tsv                 -       7,108     6       2016-03-07  488e0478d5629902add863d24035491a
+
+    36346-0003-Data.txt                 16      7,108     6       2016-03-07  0dffcf981e50004bfdd1e036b90b4b5f
+
+    36346-0003-Setup.dct                -       -         -       2016-03-07  5ad15d001515bf471d8cfe1e0964e2ab
+
+    36346-0003-Setup.do                 -       -         -       2016-03-07  7d78112918e562b280639f2535b4e877
+
+    36346-0003-Setup.sas                -       -         -       2016-03-07  fbee048d9089add651b83c5bc28d4dbc
+
+    36346-0003-Setup.sps                -       -         -       2016-03-07  e1f1f2d5714de61e5db6b3150106852f
+
+    36346-0003-Supplemental_syntax.do   -       -         -       2016-03-07  9748ea983e38842520fb86e9e5252f57
+
+    36346-0003-Supplemental_syntax.sas  -       -         -       2016-03-07  b37904e5b74453093fb13b4b4a89f26e
+
+
+DS0004 Coded Text Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    36346-0004-Data.dta                 -       3,120     183     2017-03-09  8dc316fdab982a04e90b37e7915a5e66
+
+    36346-0004-Data.rda                 -       3,120     183     2017-03-09  cbac963dc98cc20f07bcc74060c73144
+
+    36346-0004-Data.sav                 -       3,120     183     2017-03-09  998bdacb65b41cbd6590ecd6c56bcc4f
+
+    36346-0004-Data.stc                 -       3,120     183     2017-03-09  45f33b67350da33868e20e0827167103
+
+    36346-0004-Data.tsv                 -       3,120     183     2017-03-09  7d9abb1ccf9351dfbe11c83239f64eec
+
+    36346-0004-Data.txt                 396     3,120     183     2017-03-09  b6855d48f5f1f81045f656c9499e181c
+
+    36346-0004-Documentation-coded_text.pdf -       -         -       2017-03-09  a966eed1251a3bb1189a31d623581d1b
+
+    36346-0004-Frequencies.pdf          -       -         -       2017-03-09  a110ee04ca6db6a2783d8b7af7de9d00
+
+    36346-0004-Setup.dct                -       -         -       2017-03-09  4b46afccd09348c03295fd1ff2f5bfa4
+
+    36346-0004-Setup.do                 -       -         -       2017-03-09  a034ef4e57d1b37fe5fea8805fcd5ee6
+
+    36346-0004-Setup.sas                -       -         -       2017-03-09  b6c6f220ea414370d1a9a7e4c194cd70
+
+    36346-0004-Setup.sps                -       -         -       2017-03-09  555de0199b6c5bb0a00240e635adcd55
+
+    36346-0004-Supplemental_syntax.do   -       -         -       2017-03-09  2b9a58a674763c179cca98c7f8b901eb
+
+    36346-0004-Supplemental_syntax.sas  -       -         -       2017-03-09  1eeb125c008e443b4d8cacb4484fabed
+
+
+Version History
+
+2017-03-09 The coded text data set has been added. Additionally, the MIDUS
+3 Readme documentation has been updated.  2016-03-10 The MIDUS 3 Readme
+documentation has been updated.  2016-03-07 The documents that were
+previously combined to create the User Guide have been filtered into the
+Pyschsocial Constructs and Composite Variables and the Naming and Coding
+Conventions documents. The documents combined to create the questionnaire
+documentation have been separated into the MIDUS 3 Telephone Interview and
+the MIDUS 3 Self-Administered Questionnaire (SAQ).  2016-02-29 The fully-
+processed collection is being released.

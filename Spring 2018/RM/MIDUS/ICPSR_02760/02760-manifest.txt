@@ -1,0 +1,200 @@
+File Manifest for ICPSR 2760
+
+Brim, Orville G., Paul B. Baltes, Larry L. Bumpass, Paul D. Cleary, David
+L. Featherman, William R. Hazzard, Ronald C. Kessler, Margie E. Lachman,
+Hazel Rose Markus, Michael G. Marmot, Alice S. Rossi, Carol D. Ryff, and
+Richard A. Shweder. Midlife in the United States (MIDUS 1), 1995-1996.
+ICPSR02760-v11. Ann Arbor, MI: Inter-university Consortium for Political
+and Social Research [distributor], 2016-03-23.
+http://doi.org/10.3886/ICPSR02760.v11
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    02760-descriptioncitation.pdf       -       -         -       2017-08-23  -
+
+    02760-related_literature.txt        -       -         -       daily       -
+
+    02760-manifest.txt                  -       -         -       daily       -
+
+    02760-Documentation-readme.pdf      -       -         -       2011-02-18  dd12302a683c0a4f37632ba1d746b33e
+
+    02760-Documentation-sampdesc.pdf    -       -         -       2011-02-18  0a99c8012e9b95fa0e9ba8446b3dcd60
+
+
+DS0001 Main, Siblings and Twin Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    02760-0001-Codebook.pdf             -       -         -       2011-10-25  4c3ce8d6215ae9c449f814fdc00b616c
+
+    02760-0001-Data.dta                 -       7,108     2095    2011-02-18  c920b177f1f7bed6a37fc7b153763f32
+
+    02760-0001-Data.sav                 -       7,108     2095    2011-02-18  574f724a3eaf3f2024cc057880c0a1a4
+
+    02760-0001-Data.stc                 -       7,108     2095    2011-02-18  67e3e00947b0ca41147cdee475404106
+
+    02760-0001-Data.tsv                 -       7,108     2095    2011-02-18  f05733c04931721e02de0b0b6d8b39a8
+
+    02760-0001-Data.txt                 5268    7,108     2095    2011-02-18  4921b117ac25085d5ba809728707d647
+
+    02760-0001-Documentation-age.pdf    -       -         -       2011-02-18  688e273e1ba63972c599df82f7009915
+
+    02760-0001-Documentation-convars.pdf -       -         -       2011-02-18  795c2d849f1abadc2436ab6fbd35a560
+
+    02760-0001-Documentation-occup.pdf  -       -         -       2011-02-18  23e70be6d7b12f3550673d26f612f193
+
+    02760-0001-Documentation-scales.pdf -       -         -       2016-03-23  45379eb4708b5ceeba616d64e3569034
+
+    02760-0001-Documentation-techrpt.pdf -       -         -       2016-04-11  0d613414173f58bc63f6ad9e0d36cf93
+
+    02760-0001-Documentation-techrpt_method_MULTI.pdf -       -         -       2016-04-11  d126b0de8c7bd34a7553cd6068f71fcb
+
+    02760-0001-Questionnaire-phone.pdf  -       -         -       2011-02-18  912ba548f63b199dcbb90589a2d3ca42
+
+    02760-0001-Questionnaire-saq.pdf    -       -         -       2011-02-18  5a54a991dc2445bba5278090f95493f1
+
+    02760-0001-Setup.dct                -       -         -       2011-02-18  d68080f67bf884126c730927c11c40fc
+
+    02760-0001-Setup.do                 -       -         -       2011-02-18  3020ee136d7bb07d63bd2ec7cb432faa
+
+    02760-0001-Setup.sas                -       -         -       2011-02-18  97df2604f5020b8b457ee472e550cd73
+
+    02760-0001-Setup.sps                -       -         -       2011-02-18  7f299843254e6e6dc5625bc273ccfcf2
+
+    02760-0001-Supplemental_syntax.do   -       -         -       2011-02-18  05e18c0bbc11fda127dac6fb9e8dd75d
+
+    02760-0001-Supplemental_syntax.sas  -       -         -       2011-02-18  40bd71ce0eeb6fff1fd56c3127e5e487
+
+    02760-0001-Zipped_package-midusxml.zip -       -         -       2011-02-18  620c057e4cb3693a8da2353a56b0b8bf
+
+
+DS0002 Main Sample: Weights for Respondents Completing Both the Telephone
+Survey and Mail Questionnaire
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    02760-0002-Codebook.pdf             -       -         -       2009-10-09  ec22e760e7c760360f745be046011915
+
+    02760-0002-Data.dta                 -       3,032     15      2009-04-16  c26672efb27e4252cea153dcdc1b9c63
+
+    02760-0002-Data.sav                 -       3,032     15      2009-04-16  b26d2020a01ba98b32ff1f1a7205a988
+
+    02760-0002-Data.stc                 -       3,032     15      2009-04-16  a0fef53744ea261b5f2439ac41478520
+
+    02760-0002-Data.tsv                 -       3,032     15      2009-04-16  b4ad4b13ab9b1cbc47bfff125a92a391
+
+    02760-0002-Data.txt                 175     3,032     15      2009-04-16  3a241c6b0f0aec50d31b7ae49f577330
+
+    02760-0002-Documentation-techrpt_method_MULTI.pdf -       -         -       2016-04-11  d126b0de8c7bd34a7553cd6068f71fcb
+
+    02760-0002-Setup.dct                -       -         -       2009-04-16  521c56a07fb0d49a3cd50e46ca58b084
+
+    02760-0002-Setup.do                 -       -         -       2009-04-16  2254e723ee0ce7d6c4af1e7a9c32fceb
+
+    02760-0002-Setup.sas                -       -         -       2009-04-16  5c8e96ce272964537c2041b144082b8e
+
+    02760-0002-Setup.sps                -       -         -       2009-04-16  173153ed4ad2d06bc92092d2c9300dad
+
+
+DS0003 Main Sample: Weights for Respondents Completing at Least the
+Telephone Survey
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    02760-0003-Codebook.pdf             -       -         -       2009-10-09  877c76335e4c060cd4a110e13a6fbc43
+
+    02760-0003-Data.dta                 -       3,485     4       2009-04-16  7a134ad3d5517a38b1ce48b91acaab0e
+
+    02760-0003-Data.sav                 -       3,485     4       2009-04-16  5da75f863341dd48a1cb67ba61570ac4
+
+    02760-0003-Data.stc                 -       3,485     4       2009-04-16  02be8c63c7c48428ef98e4d6b54aee57
+
+    02760-0003-Data.tsv                 -       3,485     4       2009-04-16  44de991b6a4617ecc3cdffbb278fe298
+
+    02760-0003-Data.txt                 39      3,485     4       2009-04-16  c1b913c1e30265e13332b27851a1cd80
+
+    02760-0003-Documentation-techrpt_method_MULTI.pdf -       -         -       2016-04-11  d126b0de8c7bd34a7553cd6068f71fcb
+
+    02760-0003-Setup.dct                -       -         -       2009-04-16  dfb7980b7cfb1063c7ffdc25ea3e6e45
+
+    02760-0003-Setup.do                 -       -         -       2009-04-16  3b2ebcb8a1330c9cd4003f1553720012
+
+    02760-0003-Setup.sas                -       -         -       2009-04-16  eeb26c00947f4e1f6a073c2c98ba2565
+
+    02760-0003-Setup.sps                -       -         -       2009-04-16  f06136f59b4fa6ef818f558bf8948241
+
+
+DS0004 Twin Screener Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    02760-0004-Codebook.pdf             -       -         -       2011-02-18  10f0c0aef22a3fcefc29c8d2e4efe41e
+
+    02760-0004-Data.dta                 -       1,996     91      2011-02-18  c09f0f88945f903b2db58bb145295c41
+
+    02760-0004-Data.sav                 -       1,996     91      2011-02-18  f65500dff8f2b83e633c450c5efde98b
+
+    02760-0004-Data.stc                 -       1,996     91      2011-02-18  6253e80839bf89251a724fcbffd400f4
+
+    02760-0004-Data.tsv                 -       1,996     91      2011-02-18  cc0e92aa5e51ea6ecca6e31df7062c8c
+
+    02760-0004-Data.txt                 826     1,996     91      2011-02-18  354b21675c3eb60e22e0bcc2b79f9aea
+
+    02760-0004-Questionnaire-twinscr.pdf -       -         -       2011-02-18  6323a2c07ce78f43b4c2dc540812af9a
+
+    02760-0004-Setup.dct                -       -         -       2011-02-18  3fd86130b3e4af72a60a7ea2d3e0baba
+
+    02760-0004-Setup.do                 -       -         -       2011-02-18  c7042bbac78f5e3d8d6d4ffe1c418bbc
+
+    02760-0004-Setup.sas                -       -         -       2011-02-18  a92915f5498a3e310940483704c57af3
+
+    02760-0004-Setup.sps                -       -         -       2011-02-18  4684456746d5031a7b91f1cb46f96119
+
+    02760-0004-Supplemental_syntax.do   -       -         -       2011-02-18  794a441c2b992ba2d69d99d492b84842
+
+    02760-0004-Supplemental_syntax.sas  -       -         -       2011-02-18  c8c6adac9a190b170bdc3e9f57c56f58
+
+
+Version History
+
+2016-04-11 The Technical Report and the Technical Report on Methodology
+have been updated to correspond with the appropriate datasets.  2016-03-23
+The Documentation of Scales and Constructed Variables in MIDUS 1 has been
+updated to accurately reflect the appropriate wave of the MIDUS study. The
+version number for this collection has also been updated to correspond with
+the number of updates to this collection.  2011-10-25 The document titled
+DDI codebook has been renamed Codebook.  2011-02-18 The study documentation
+has been updated. The Main, Siblings, and Twin dataset (Dataset 0001) has
+been updated to include updated and new variables that reflect the MIDUS II
+data (ICPSR 4652). Additionally, the Twin Screener data (Dataset 0004) has
+been updated to include missing value assignments. Lastly, a .xml file and
+corresponding .pdf codebook have been added to the collection.  2010-01-06
+Additional documentation, MIDUS Sample Descriptions, has been added.  2009-
+10-09 Minor editing changes were made to the metadata record.  2009-04-16
+Twin Screener Data has been added to this collection as Part 4.  2007-04-16
+The three separate subsample datasets (Main, Sibling, Twin) have been
+joined into one master dataset. The three primary subsamples are identified
+by a variable called SAMPLMAJ. A new ID system (the variable is called
+M2ID) has been added to the data which allow the aggregation of the three
+subsamples. This system also allows longitudinal merging between datasets.
+A variety of deductive disclosure problems have been fixed. There were also
+erroneous and empty variables in the datasets, all of which have been
+fixed. Documentation has been updated to reflect these changes. All MIDUS-
+related data files are linkable via a variable called M2ID.  2006-03-30
+File QU2760.ALL.PDF was removed from any previous datasets and flagged as a
+study-level file, so that it will accompany all downloads.  2003-06-09 The
+SAS transport files for Parts 2-6, have been replaced because the original
+versions contained an illegal file name embedded within them, which
+prevented the files from being properly read by the SAS system.  2000-02-01
+The SAS transport file for Part 1, Main Data, has been replaced because the
+original version contained an incorrect number of cases.

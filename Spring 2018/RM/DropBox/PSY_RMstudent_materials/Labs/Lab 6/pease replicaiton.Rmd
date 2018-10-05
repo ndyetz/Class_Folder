@@ -1,0 +1,72 @@
+---
+title: "R Notebook for Pease Replication 2015 PID"
+output:
+  html_notebook:
+    toc: yes
+---
+
+# Load libraries
+```{r, message=FALSE}
+
+library("tidyverse")
+library("haven")
+
+
+```
+
+# Read in the original datafiles
+```{r}
+# to print this chunk, but not execute it again once the files are imported, add: eval=FALSE
+
+
+# use the haven package to read in the data -- we need the MIDUS II data and the biomarker project data
+midus2 <- read_spss("04652-0001-Data.sav")
+bio <- read_spss("29282-0001-Data.sav")
+
+saveRDS(midus2, "midus2.rds")
+saveRDS(bio, "bio.rds")
+
+```
+
+# Read in the saved datafiles
+```{r}
+
+midus2 <- readRDS("midus2.rds")
+bio <- readRDS("bio.rds")
+
+```
+
+# Subset the datafiles
+```{r}
+
+
+
+
+```
+
+# create dataset for analysis
+```{r}
+
+# note which variables are categorical and numeric and tidy things up
+all.vars <- names(analyze)
+cat.vars <- c("M2ID", "B1PF7A")
+
+analyze <- analyze %>% 
+  mutate_at(vars(all.vars), funs(as.numeric)) %>% 
+  mutate_at(vars(cat.vars), funs(as.factor)) %>% 
+  mutate(GENDER = factor(B1PRSEX, levels = c("1", "2"), labels = c("male", "female"))) %>%
+  mutate(MALE = B1PRSEX - 1) %>%
+  select(-B1PRSEX)
+
+
+# create subset of just variable scale scores and the demographic variables
+analyze <- analyze %>%  
+  select(B1SNEURO, B1SAGREE, B1SEXTRA, B1SOPEN, B1SCONS2,  
+         B4QTA_AG, B4QTA_AT, B4QTA_AR, B4QAE_AI, B4QAE_AO, B4QAE_AC,
+         B1SMPQAG,
+         B1PF7A,
+         B1PAGE_M2, 
+         GENDER, MALE)
+
+
+```

@@ -1,0 +1,82 @@
+---
+title: "MIDUS Group Project"
+subtitle: "Authors: Neil Yetz, Shelby Tuthill & Brian Canning"
+output:
+  html_notebook:
+    theme: cerulean
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+#Introduction
+
+<center>
+![MIDUS](http://cph.georgetown.edu/_/rsrc/1432819558258/research/midus/midus.jpg)
+</center>
+
+
+#Load Packages
+```{r, message = FALSE}
+
+#install.packages("tidyverse")
+
+library(tidyverse)
+library("olsrr")
+library("descriptr")
+library("haven")
+library("GGally")
+library("psych")
+library("knitr")
+library("apaTables")
+library("mosaic")
+
+```
+
+#datasets
+```{r, message = FALSE}
+
+#midus_1 <- read_tsv("02760-0001-Data.tsv")
+#saveRDS(midus_1, "midus1.rds")
+
+
+#midus2<- read_tsv("04652-0001-Data.tsv")
+#saveRDS(midus2, "midus2.rds")
+
+#midus1<- readRDS("midus1.rds")
+midus2<- readRDS("midus2.rds")
+
+
+
+```
+
+#Select variables of interest
+```{r}
+#
+#vars_1 <- midus1 %>% 
+#  select(
+#    M2ID,
+#    A1PBYEAR,
+#    A1PRSEX,
+#    A1PA4,
+#    A1SQ7
+#  )
+  
+VARS_2 <- midus2 %>% 
+  select(
+    M2ID,
+    B1PAGE_M2,
+    B1PRSEX, 
+    B1SM6
+  )
+  
+  
+
+```
+
+```{r}
+
+  describe(VARS_2)
+
+```
+

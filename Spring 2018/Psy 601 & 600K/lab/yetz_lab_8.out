@@ -1,0 +1,392 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/09/2018  10:41 AM
+
+INPUT INSTRUCTIONS
+
+    Title: LAB 8 EXAMPLE EFA;
+    DATA: FILE IS Lab 8 Example Data_M.csv;
+    VARIABLE: NAMES ARE V1-V6;
+    ANALYSIS: TYPE IS EFA (1 2);
+    PLOT: Type IS Plot2;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+LAB 8 EXAMPLE EFA;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   V1          V2          V3          V4          V5          V6
+
+
+Estimator                                                       ML
+Rotation                                                    GEOMIN
+Row standardization                                    CORRELATION
+Type of rotation                                           OBLIQUE
+Epsilon value                                               Varies
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Optimization Specifications for the Exploratory Factor Analysis
+Rotation Algorithm
+  Number of random starts                                       30
+  Maximum number of iterations                               10000
+  Derivative convergence criterion                       0.100D-04
+
+Input data file(s)
+  Lab 8 Example Data_M.csv
+
+Input data format  FREE
+
+
+
+RESULTS FOR EXPLORATORY FACTOR ANALYSIS
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         3.562         1.011         0.515         0.405         0.264
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  6
+              ________
+      1         0.242
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 1 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       18
+
+Loglikelihood
+
+          H0 Value                       -1154.811
+          H1 Value                       -1104.142
+
+Information Criteria
+
+          Akaike (AIC)                    2345.622
+          Bayesian (BIC)                  2399.814
+          Sample-Size Adjusted BIC        2342.847
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            101.339
+          Degrees of Freedom                     9
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.262
+          90 Percent C.I.                    0.217  0.309
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.790
+          TLI                                0.650
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            455.017
+          Degrees of Freedom                    15
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.086
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       3.07027
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1
+              ________
+ V1             0.814*
+ V2             0.654*
+ V3             0.763*
+ V4             0.701*
+ V5             0.704*
+ V6             0.641*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1
+              ________
+      1         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.337         0.572         0.419         0.509         0.505
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.589
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1
+              ________
+ V1             0.044
+ V2             0.062
+ V3             0.050
+ V4             0.059
+ V5             0.050
+ V6             0.062
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1
+              ________
+      1         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.072         0.082         0.076         0.083         0.071
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.079
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1
+              ________
+ V1            18.467
+ V2            10.500
+ V3            15.363
+ V4            11.781
+ V5            13.952
+ V6            10.412
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1
+              ________
+      1         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         4.700         7.009         5.529         6.107         7.118
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         7.451
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 2 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       23
+
+Loglikelihood
+
+          H0 Value                       -1112.246
+          H1 Value                       -1104.142
+
+Information Criteria
+
+          Akaike (AIC)                    2270.493
+          Bayesian (BIC)                  2339.737
+          Sample-Size Adjusted BIC        2266.947
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             16.210
+          Degrees of Freedom                     4
+          P-Value                           0.0028
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.143
+          90 Percent C.I.                    0.075  0.218
+          Probability RMSEA <= .05           0.016
+
+CFI/TLI
+
+          CFI                                0.972
+          TLI                                0.896
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            455.017
+          Degrees of Freedom                    15
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.024
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.28410
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2
+              ________      ________
+ V1             0.842*        0.018
+ V2            -0.004         0.797*
+ V3             0.951*       -0.141
+ V4             0.000         0.864*
+ V5             0.675*        0.063
+ V6             0.111         0.645*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2
+              ________      ________
+      1         1.000
+      2         0.658*        1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.272         0.369         0.253         0.253         0.485
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.476
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2
+              ________      ________
+ V1             0.062         0.042
+ V2             0.077         0.088
+ V3             0.090         0.095
+ V4             0.055         0.075
+ V5             0.101         0.120
+ V6             0.105         0.097
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2
+              ________      ________
+      1         0.000
+      2         0.068         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.068         0.081         0.083         0.084         0.067
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.069
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2
+              ________      ________
+ V1            13.597         0.416
+ V2            -0.048         9.055
+ V3            10.611        -1.483
+ V4             0.000        11.501
+ V5             6.688         0.528
+ V6             1.056         6.680
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2
+              ________      ________
+      1         0.000
+      2         9.645         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         3.997         4.580         3.058         3.016         7.261
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         6.920
+
+
+           FACTOR STRUCTURE
+                  1             2
+              ________      ________
+ V1             0.853         0.572
+ V2             0.521         0.794
+ V3             0.858         0.485
+ V4             0.569         0.864
+ V5             0.716         0.507
+ V6             0.536         0.719
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Eigenvalues for exploratory factor analysis
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for EFA.
+  No diagram output was produced.
+
+
+     Beginning Time:  10:41:47
+        Ending Time:  10:41:47
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

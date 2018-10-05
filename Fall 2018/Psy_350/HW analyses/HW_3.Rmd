@@ -1,0 +1,147 @@
+---
+title: "Psy 350: HW 2"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+#Clear environment
+```{r}
+rm(list=ls())
+```
+
+
+#load libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(psych)
+library(car)
+library(effsize)
+```
+
+
+#Read in data
+```{r, warning = FALSE}
+setwd("C:/Users/Neil/Desktop/Class folder/Fall 2018/Psy_350/Data")
+
+yetz.data <- read.csv("PSY 350 Class Survey.csv", header = TRUE, stringsAsFactors = FALSE)
+names(yetz.data)
+
+```
+
+
+#Q1 
+What is the level of measurement for each of your variables?
+
+
+
+```{r}
+class(yetz.data$coffe)
+class(yetz.data$firstmajor)
+class(yetz.data$swls_1)
+
+
+```
+
+Coffee consumption  - ratio
+
+Psychology as first major  - nominal
+
+Satisfaction with life  - interval
+
+#Q2
+
+For the 'firstmajor' variable, what proportion of students fall in each category? (Give your answer as a decimal, not a percentage)
+
+```{r}
+
+prop.table(table(yetz.data$firstmajor))
+
+
+```
+
+#Q3
+
+What are the mean, standard deviation, and skewness for: 
+
+
+```{r}
+yetz.data$swl<- rowMeans(yetz.data[, 20:24], na.rm = TRUE)
+
+describe(yetz.data$coffee)
+describe(yetz.data$swl)
+
+```
+
+
+Coffee consumption:
+
+Mean:  4.15
+SD:  4.84
+  
+Skew:  1.8
+
+Satisfaction with life (averaged across all 5 items): 
+
+Mean:  4.77
+SD:  1.22
+  
+Skew:  -0.67
+
+#Q4
+
+```{r}
+qqPlot(yetz.data$swl)
+```
+
+```{r}
+t.test(yetz.data$coffee, mu = 11.2)
+```
+
+
+#Q7
+Calculate and report Cohen's d.
+
+```{r}
+(mean(yetz.data$coffee, na.rm = TRUE) - 11.2)/sd(yetz.data$coffee, na.rm = TRUE)
+```
+
+#Q8
+This is a:
+	large effect
+	**small effect**
+	medium effect
+
+
+Do students who chose psychology as their first major report, on average, higher or lower satisfaction with life than students who changed their major to psychology? Test this hypothesis. Use an alpha level of .05.
+
+```{r}
+yetz.data <- yetz.data %>% filter(firstmajor != "")
+
+t.test(yetz.data$swl ~ yetz.data$firstmajor, var.equal = TRUE)
+```
+
+
+
+#Q9
+
+
+Report: 
+
+the value you obtained for your test statistic *0.324*
+degrees of freedom  *87*
+p-value, rounded to 2 decimal places as discussed in the tutorial. .75
+
+#Q10
+Calculate and report Cohen's d.
+```{r}
+effsize::cohen.d(yetz.data$swl, yetz.data$firstmajor, na.rm = TRUE, pooled = TRUE)
+```
+
+#Q11
+This is a: 
+	*very small effect*
+	small effect
+	medium effect
+	large effect

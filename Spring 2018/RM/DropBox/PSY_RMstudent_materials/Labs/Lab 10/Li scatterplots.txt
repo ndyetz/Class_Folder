@@ -1,0 +1,9 @@
+# Scatterplot of key variales
+```{r, fig.height=8, fig.width=8}
+
+library("GGally")
+ggpairs(analyze, columns = c("FWC", "FAMSTRN", "PSS", "B1SF1", "LS", "B1PDEPRE"), 
+          title = "Bivariate Relationship of Key Study Variales")
+
+
+```

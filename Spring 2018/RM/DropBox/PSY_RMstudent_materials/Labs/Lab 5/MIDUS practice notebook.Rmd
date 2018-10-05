@@ -1,0 +1,22 @@
+---
+title: "MIDUS Practice"
+output: html_notebook
+---
+
+
+# Read in the saved datafiles
+```{r, message = FALSE}
+
+library(tidyverse)
+
+#Read data
+MIDUS_short <- read_csv("MIDUS_practice.csv")
+
+#Clean up missing values
+MIDUS_short$A1SEMA[MIDUS_short$A1SEMA==9]<-NA
+MIDUS_short$A1SSATIS[MIDUS_short$A1SSATIS==99]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==997]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==998]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==999]<-NA
+```
+

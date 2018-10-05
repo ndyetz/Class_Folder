@@ -1,0 +1,92 @@
+---
+title: "R Notebook: Lab 10 Neil Yetz & Ashlie Johnson"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: true
+---
+
+#Load Libraries
+```{r, message = FALSE}
+library(tidyverse)
+library(lavaan)
+#install.packages("semTools")
+library(semTools)
+```
+
+#Read in data
+```{r, message = FALSE}
+items <- read_csv("Spring Fever Raw Data.csv")
+
+items <- items %>% 
+  select(-X1)
+```
+
+#set model
+```{r}
+
+model.2f <-'f1 =~ NA*V1 + V2 + V5 + V6 + V8 + V9 + V12
+  f2 =~ NA*V3 + V4 + V7 + V10 + V11
+  f1 ~~ 1*f1
+  f2 ~~ 1*f2'
+```
+
+#Run CFA
+```{r}
+cfa_1 <- cfa(model = model.2f, data = items)
+summary(cfa_1, fit.measures=TRUE, standardized = TRUE)
+```
+
+#Residual correlations
+```{r}
+resid(cfa_1, type = "cor")
+```
+
+#Reliability
+```{r}
+reliability(cfa_1)
+```
+
+#Model without item 12
+##Model
+```{r}
+
+model.2f2 <-'f1 =~ NA*V1 + V2 + V5 + V6 + V8 + V9
+  f2 =~ NA*V3 + V4 + V7 + V10 + V11
+  f1 ~~ 1*f1
+  f2 ~~ 1*f2'
+```
+
+##Run CFA
+```{r}
+cfa_2 <- cfa(model = model.2f2, data = items)
+summary(cfa_2, fit.measures=TRUE, standardized = TRUE)
+```
+
+##Residual correlations
+```{r}
+resid(cfa_2, type = "cor")
+```
+##Reliability
+```{r}
+reliability(cfa_2)
+```
+
+#Lab Exercise Response
+
+
+1.) Looking at the model fit we saw problems with the CFA on this scale. Specifically we say a very chi-square value of 518.934, a high RMSEA of 0.186 90% CI [0.171, 0.200], a CFI of 0.695, & a TLI of 0.627. All of these values inidcate a bad model fit. Next, we looked at the standardized residual correlations between items. From this correlation table we identified that items 3, 4, 7, 10, & 11 had high residual correlations with eachother.  
+
+We looked at items 3, 4, 7, 10, & 11 and and realized that they have a lot in common. These items differed from the other items because they reflect actual effects of "Spring Break Fever" whereas the other items seem to be more indicative of *feelings* associated wit Spring break fever. 
+
+Based on this we decided to conduct a 2 factor CFA model with these items as our 2nd factor. This was shown to be a better model with a chi-square value of 115.295, a CFI of 0.940, a TLI of 0.925, & a RMSEA of 0.069 90% CI [0.051, 0.086]. The omega coefficient reliability was 0.878. Thus indicating a good reliability.
+
+When analyzing the 2nd, improved model, we did still see a high residualized correlation of items 5 & 8. In our discussion, we dicided to keep them because they seem to be tapping into slightly different areas of the construct. Additionally, the overall model fits fit well. 
+
+However, we then noticed that there was a problem with item 12. It had a low factor loading and the item seemed irrelavant to the construct of "Spring Break Fever". Therefore, we re-ran the analysis without item 12. These are the reported numbers: Chi-Square = 105.769, CFI = 0.938, TLI = 0.921, & the RMSEA = 0.076 90% CI = [0.058, 0.095]. Therefore, because the model fit remained good and our new reliabilty was 0.885. All of our statistics appeared unharmed and our factor loadings were better. 
+
+
+
+
+
+

@@ -1,0 +1,416 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/24/2018   6:48 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: 		CFA of Lab 9 Example Data;
+  DATA: 		FILE IS Lab 9 Data_M.csv;
+  VARIABLE: 	NAMES ARE item1-item6;
+              USEVARIABLES ARE item1 item2 item3 item5 item6;
+  MODEL:  	factor1 BY item1* (L1) !Don't use analysis statement in when runnign CFA
+         		item2 item3 item5 item6 (L2 L3 L5 L6); !item1* is saying, fix the first item at t
+          	item1 item2 item3 item5 item6 (U1 U2 U3 U5 U6); !(UI-U6) = label. You can refer t
+         		factor1@1;    !@1 fixes the factor variance at 1. if you want to fix it at the me
+  MODEL CONSTRAINT: !MODEL CONSTRAINT = create equations in R
+   			NEW(OMEGA); !Create new variable
+          			OMEGA = (L1+L2+L3+L5+L6)**2/ !Omega = sum of loadings^2 / sum of loadings plus
+          			((L1+L2+L3+L5+L6)**2+U1+U2+U3+U5+U6); !Equation for new variable.
+
+  OUTPUT:     STANDARDIZED; CINTERVAL; !Standardize factors, give me the confidence interval
+
+  !"BY" indicates a "bidirectional relationship.
+
+
+
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+         		item2 item3 item5 item6 (L2 L3 L5 L6); !item1* is saying, fix the first item at th
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+          	item1 item2 item3 item5 item6 (U1 U2 U3 U5 U6); !(UI-U6) = label. You can refer to
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+         		factor1@1;    !@1 fixes the factor variance at 1. if you want to fix it at the mea
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+          			OMEGA = (L1+L2+L3+L5+L6)**2/ !Omega = sum of loadings^2 / sum of loadings plus s
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+  OUTPUT:     STANDARDIZED; CINTERVAL; !Standardize factors, give me the confidence interval.
+   5 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+CFA of Lab 9 Example Data;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         250
+
+Number of dependent variables                                    5
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   ITEM1       ITEM2       ITEM3       ITEM5       ITEM6
+
+Continuous latent variables
+   FACTOR1
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  Lab 9 Data_M.csv
+
+Input data format  FREE
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       15
+
+Loglikelihood
+
+          H0 Value                       -1628.755
+          H1 Value                       -1613.215
+
+Information Criteria
+
+          Akaike (AIC)                    3287.510
+          Bayesian (BIC)                  3340.332
+          Sample-Size Adjusted BIC        3292.780
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             31.081
+          Degrees of Freedom                     5
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.144
+          90 Percent C.I.                    0.098  0.195
+          Probability RMSEA <= .05           0.001
+
+CFI/TLI
+
+          CFI                                0.948
+          TLI                                0.897
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            514.585
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.037
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ FACTOR1  BY
+    ITEM1              0.687      0.061     11.248      0.000
+    ITEM2              0.850      0.062     13.651      0.000
+    ITEM3              0.826      0.065     12.682      0.000
+    ITEM5              0.801      0.065     12.410      0.000
+    ITEM6              0.792      0.064     12.283      0.000
+
+ Intercepts
+    ITEM1              3.896      0.064     60.486      0.000
+    ITEM2              3.836      0.069     55.714      0.000
+    ITEM3              3.864      0.070     55.097      0.000
+    ITEM5              3.840      0.069     55.461      0.000
+    ITEM6              3.852      0.069     55.642      0.000
+
+ Variances
+    FACTOR1            1.000      0.000    999.000    999.000
+
+ Residual Variances
+    ITEM1              0.565      0.060      9.471      0.000
+    ITEM2              0.463      0.058      7.956      0.000
+    ITEM3              0.547      0.065      8.374      0.000
+    ITEM5              0.557      0.064      8.640      0.000
+    ITEM6              0.571      0.064      8.852      0.000
+
+ New/Additional Parameters
+    OMEGA              0.853      0.015     57.914      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ FACTOR1  BY
+    ITEM1              0.675      0.041     16.382      0.000
+    ITEM2              0.781      0.033     23.551      0.000
+    ITEM3              0.745      0.037     20.261      0.000
+    ITEM5              0.732      0.038     19.488      0.000
+    ITEM6              0.724      0.038     19.169      0.000
+
+ Intercepts
+    ITEM1              3.825      0.182     20.973      0.000
+    ITEM2              3.524      0.170     20.751      0.000
+    ITEM3              3.485      0.168     20.719      0.000
+    ITEM5              3.508      0.169     20.738      0.000
+    ITEM6              3.519      0.170     20.747      0.000
+
+ Variances
+    FACTOR1            1.000      0.000    999.000    999.000
+
+ Residual Variances
+    ITEM1              0.544      0.056      9.788      0.000
+    ITEM2              0.391      0.052      7.549      0.000
+    ITEM3              0.445      0.055      8.128      0.000
+    ITEM5              0.465      0.055      8.463      0.000
+    ITEM6              0.476      0.055      8.724      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ FACTOR1  BY
+    ITEM1              0.675      0.041     16.382      0.000
+    ITEM2              0.781      0.033     23.551      0.000
+    ITEM3              0.745      0.037     20.261      0.000
+    ITEM5              0.732      0.038     19.488      0.000
+    ITEM6              0.724      0.038     19.169      0.000
+
+ Intercepts
+    ITEM1              3.825      0.182     20.973      0.000
+    ITEM2              3.524      0.170     20.751      0.000
+    ITEM3              3.485      0.168     20.719      0.000
+    ITEM5              3.508      0.169     20.738      0.000
+    ITEM6              3.519      0.170     20.747      0.000
+
+ Variances
+    FACTOR1            1.000      0.000    999.000    999.000
+
+ Residual Variances
+    ITEM1              0.544      0.056      9.788      0.000
+    ITEM2              0.391      0.052      7.549      0.000
+    ITEM3              0.445      0.055      8.128      0.000
+    ITEM5              0.465      0.055      8.463      0.000
+    ITEM6              0.476      0.055      8.724      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ FACTOR1  BY
+    ITEM1              0.687      0.061     11.248      0.000
+    ITEM2              0.850      0.062     13.651      0.000
+    ITEM3              0.826      0.065     12.682      0.000
+    ITEM5              0.801      0.065     12.410      0.000
+    ITEM6              0.792      0.064     12.283      0.000
+
+ Intercepts
+    ITEM1              3.896      0.064     60.486      0.000
+    ITEM2              3.836      0.069     55.714      0.000
+    ITEM3              3.864      0.070     55.097      0.000
+    ITEM5              3.840      0.069     55.461      0.000
+    ITEM6              3.852      0.069     55.642      0.000
+
+ Variances
+    FACTOR1            1.000      0.000    999.000    999.000
+
+ Residual Variances
+    ITEM1              0.565      0.060      9.471      0.000
+    ITEM2              0.463      0.058      7.956      0.000
+    ITEM3              0.547      0.065      8.374      0.000
+    ITEM5              0.557      0.064      8.640      0.000
+    ITEM6              0.571      0.064      8.852      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    ITEM1              0.456      0.056      8.191      0.000
+    ITEM2              0.609      0.052     11.775      0.000
+    ITEM3              0.555      0.055     10.130      0.000
+    ITEM5              0.535      0.055      9.744      0.000
+    ITEM6              0.524      0.055      9.584      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.525E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ FACTOR1  BY
+    ITEM1            0.530       0.568       0.587       0.687       0.788       0.807       0.845
+    ITEM2            0.689       0.728       0.747       0.850       0.952       0.972       1.010
+    ITEM3            0.658       0.698       0.719       0.826       0.933       0.954       0.994
+    ITEM5            0.635       0.674       0.695       0.801       0.907       0.927       0.967
+    ITEM6            0.626       0.666       0.686       0.792       0.898       0.918       0.958
+
+ Intercepts
+    ITEM1            3.730       3.770       3.790       3.896       4.002       4.022       4.062
+    ITEM2            3.659       3.701       3.723       3.836       3.949       3.971       4.013
+    ITEM3            3.683       3.727       3.749       3.864       3.979       4.001       4.045
+    ITEM5            3.662       3.704       3.726       3.840       3.954       3.976       4.018
+    ITEM6            3.674       3.716       3.738       3.852       3.966       3.988       4.030
+
+ Variances
+    FACTOR1          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    ITEM1            0.411       0.448       0.467       0.565       0.663       0.682       0.718
+    ITEM2            0.313       0.349       0.367       0.463       0.559       0.577       0.613
+    ITEM3            0.379       0.419       0.440       0.547       0.655       0.675       0.716
+    ITEM5            0.391       0.431       0.451       0.557       0.663       0.683       0.723
+    ITEM6            0.405       0.445       0.465       0.571       0.677       0.697       0.737
+
+ New/Additional Parameters
+    OMEGA            0.815       0.824       0.829       0.853       0.877       0.882       0.891
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ FACTOR1  BY
+    ITEM1            0.569       0.594       0.607       0.675       0.743       0.756       0.781
+    ITEM2            0.695       0.716       0.726       0.781       0.835       0.846       0.866
+    ITEM3            0.650       0.673       0.684       0.745       0.805       0.817       0.840
+    ITEM5            0.635       0.658       0.670       0.732       0.793       0.805       0.828
+    ITEM6            0.626       0.650       0.661       0.724       0.786       0.798       0.821
+
+ Intercepts
+    ITEM1            3.356       3.468       3.525       3.825       4.125       4.183       4.295
+    ITEM2            3.086       3.191       3.244       3.524       3.803       3.856       3.961
+    ITEM3            3.051       3.155       3.208       3.485       3.761       3.814       3.918
+    ITEM5            3.072       3.176       3.229       3.508       3.786       3.839       3.943
+    ITEM6            3.082       3.187       3.240       3.519       3.798       3.852       3.956
+
+ Variances
+    FACTOR1          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    ITEM1            0.401       0.435       0.453       0.544       0.636       0.653       0.688
+    ITEM2            0.257       0.289       0.306       0.391       0.476       0.492       0.524
+    ITEM3            0.304       0.338       0.355       0.445       0.535       0.553       0.586
+    ITEM5            0.323       0.357       0.374       0.465       0.555       0.572       0.606
+    ITEM6            0.336       0.369       0.387       0.476       0.566       0.584       0.617
+
+
+STDY Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ FACTOR1  BY
+    ITEM1            0.569       0.594       0.607       0.675       0.743       0.756       0.781
+    ITEM2            0.695       0.716       0.726       0.781       0.835       0.846       0.866
+    ITEM3            0.650       0.673       0.684       0.745       0.805       0.817       0.840
+    ITEM5            0.635       0.658       0.670       0.732       0.793       0.805       0.828
+    ITEM6            0.626       0.650       0.661       0.724       0.786       0.798       0.821
+
+ Intercepts
+    ITEM1            3.356       3.468       3.525       3.825       4.125       4.183       4.295
+    ITEM2            3.086       3.191       3.244       3.524       3.803       3.856       3.961
+    ITEM3            3.051       3.155       3.208       3.485       3.761       3.814       3.918
+    ITEM5            3.072       3.176       3.229       3.508       3.786       3.839       3.943
+    ITEM6            3.082       3.187       3.240       3.519       3.798       3.852       3.956
+
+ Variances
+    FACTOR1          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    ITEM1            0.401       0.435       0.453       0.544       0.636       0.653       0.688
+    ITEM2            0.257       0.289       0.306       0.391       0.476       0.492       0.524
+    ITEM3            0.304       0.338       0.355       0.445       0.535       0.553       0.586
+    ITEM5            0.323       0.357       0.374       0.465       0.555       0.572       0.606
+    ITEM6            0.336       0.369       0.387       0.476       0.566       0.584       0.617
+
+
+STD Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ FACTOR1  BY
+    ITEM1            0.530       0.568       0.587       0.687       0.788       0.807       0.845
+    ITEM2            0.689       0.728       0.747       0.850       0.952       0.972       1.010
+    ITEM3            0.658       0.698       0.719       0.826       0.933       0.954       0.994
+    ITEM5            0.635       0.674       0.695       0.801       0.907       0.927       0.967
+    ITEM6            0.626       0.666       0.686       0.792       0.898       0.918       0.958
+
+ Intercepts
+    ITEM1            3.730       3.770       3.790       3.896       4.002       4.022       4.062
+    ITEM2            3.659       3.701       3.723       3.836       3.949       3.971       4.013
+    ITEM3            3.683       3.727       3.749       3.864       3.979       4.001       4.045
+    ITEM5            3.662       3.704       3.726       3.840       3.954       3.976       4.018
+    ITEM6            3.674       3.716       3.738       3.852       3.966       3.988       4.030
+
+ Variances
+    FACTOR1          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    ITEM1            0.411       0.448       0.467       0.565       0.663       0.682       0.718
+    ITEM2            0.313       0.349       0.367       0.463       0.559       0.577       0.613
+    ITEM3            0.379       0.419       0.440       0.547       0.655       0.675       0.716
+    ITEM5            0.391       0.431       0.451       0.557       0.663       0.683       0.723
+    ITEM6            0.405       0.445       0.465       0.571       0.677       0.697       0.737
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\users\neil\desktop\class folder\spring 2018\psy 601\lab\yetz_lab_9_no4.dgm
+
+     Beginning Time:  06:48:55
+        Ending Time:  06:48:55
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

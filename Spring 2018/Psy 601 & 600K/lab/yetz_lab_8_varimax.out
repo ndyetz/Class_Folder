@@ -1,0 +1,196 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/09/2018  10:47 AM
+
+INPUT INSTRUCTIONS
+
+    Title: LAB 8 EXAMPLE EFA;
+    DATA: FILE IS Lab 8 Example Data_M.csv;
+    VARIABLE: NAMES ARE V1-V6;
+    ANALYSIS: TYPE IS EFA (1 2);
+    ROTATION = VARIMAX;
+    PLOT: Type IS Plot2;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+LAB 8 EXAMPLE EFA;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         150
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   V1          V2          V3          V4          V5          V6
+
+
+Estimator                                                       ML
+Rotation                                                   VARIMAX
+Row standardization                                    CORRELATION
+Type of rotation                                        ORTHOGONAL
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Optimization Specifications for the Exploratory Factor Analysis
+Rotation Algorithm
+  Number of random starts                                        0
+  Maximum number of iterations                               10000
+  Derivative convergence criterion                       0.100D-04
+
+Input data file(s)
+  Lab 8 Example Data_M.csv
+
+Input data format  FREE
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+RESULTS FOR EXPLORATORY FACTOR ANALYSIS
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         3.562         1.011         0.515         0.405         0.264
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  6
+              ________
+      1         0.242
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 1 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Chi-Square Test of Model Fit
+
+          Value                            101.339
+          Degrees of Freedom                     9
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.262
+          90 Percent C.I.                    0.217  0.309
+          Probability RMSEA <= .05           0.000
+
+Root Mean Square Residual
+
+          Value                              0.116
+
+
+           ESTIMATED FACTOR LOADINGS
+                  1
+              ________
+ V1             0.814
+ V2             0.654
+ V3             0.763
+ V4             0.701
+ V5             0.704
+ V6             0.641
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.337         0.572         0.419         0.509         0.505
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.589
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 2 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Chi-Square Test of Model Fit
+
+          Value                             16.210
+          Degrees of Freedom                     4
+          P-Value                           0.0028
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.143
+          90 Percent C.I.                    0.075  0.218
+          Probability RMSEA <= .05           0.016
+
+Root Mean Square Residual
+
+          Value                              0.033
+
+
+           VARIMAX ROTATED LOADINGS
+                  1             2
+              ________      ________
+ V1             0.784         0.336
+ V2             0.254         0.753
+ V3             0.834         0.227
+ V4             0.279         0.818
+ V5             0.645         0.316
+ V6             0.312         0.653
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V1            V2            V3            V4            V5
+              ________      ________      ________      ________      ________
+      1         0.272         0.369         0.253         0.253         0.485
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              V6
+              ________
+      1         0.476
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Eigenvalues for exploratory factor analysis
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for EFA.
+  No diagram output was produced.
+
+
+     Beginning Time:  10:47:34
+        Ending Time:  10:47:34
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

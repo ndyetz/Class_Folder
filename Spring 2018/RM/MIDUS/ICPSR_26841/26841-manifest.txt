@@ -1,0 +1,64 @@
+File Manifest for ICPSR 26841
+
+Ryff, Carol D., and David M. Almeida. Midlife in the United States (MIDUS
+2): Daily Stress Project, 2004-2009. ICPSR26841-v1. Ann Arbor, MI: Inter-
+university Consortium for Political and Social Research [distributor],
+2010-02-26. http://doi.org/10.3886/ICPSR26841.v1
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    26841-descriptioncitation.pdf       -       -         -       2017-08-23  -
+
+    26841-related_literature.txt        -       -         -       daily       -
+
+    26841-manifest.txt                  -       -         -       daily       -
+
+
+DS0001 Midlife in the United States (MIDUS 2): Daily Stress Project, 2004-
+2009
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    26841-0001-Codebook.pdf             -       -         -       2010-02-26  94f78a62ec16c4a436cb5f1959647718
+
+    26841-0001-Data.dta                 -       16,176    546     2010-02-26  c3b797532244ca96d44831476db30b0c
+
+    26841-0001-Data.sav                 -       16,176    546     2010-02-26  1406ee3fc6fc9834a71614df49596a4f
+
+    26841-0001-Data.stc                 -       16,176    546     2010-02-26  e8bbe124ba7e9721479d4e8120b101f9
+
+    26841-0001-Data.tsv                 -       16,176    546     2010-02-26  bf30a350cd8578c738ca8ab6a50eb3a5
+
+    26841-0001-Data.txt                 774     16,176    546     2010-02-26  6de8b648313b3d3a6d90bcbd0e8dc92d
+
+    26841-0001-Documentation-readme.pdf -       -         -       2010-02-26  bf8ccde3ab7488f7313f4c2a8ee590a5
+
+    26841-0001-Documentation-saliva.pdf -       -         -       2010-02-26  125e8f1e320d8a252b8c02b275583826
+
+    26841-0001-Documentation-scales.pdf -       -         -       2010-02-26  75a5fcfa47e4986bb5c556c6091af9f2
+
+    26841-0001-Documentation-tele_interview.pdf -       -         -       2010-02-26  7ac2ebf6817679432ec09d5d4f6614b0
+
+    26841-0001-Documentation.pdf        -       -         -       2010-02-26  534dd8651e995dd1b5c62b7bd04a711b
+
+    26841-0001-Manual-field_notes.pdf   -       -         -       2010-02-26  1f7e9a9ef044c07b2561a6a1b310bdd0
+
+    26841-0001-Manual-tele_interview.pdf -       -         -       2010-02-26  b48e6efcdc15a5e9fccb4b3d3efb502a
+
+    26841-0001-Setup.dct                -       -         -       2010-02-26  44148830a9458e8484427842ebc53a01
+
+    26841-0001-Setup.do                 -       -         -       2010-02-26  e1875216e58a0e0514534838519ee323
+
+    26841-0001-Setup.sas                -       -         -       2010-02-26  f9674bea9e7bc8c71d820e117ac82586
+
+    26841-0001-Setup.sps                -       -         -       2010-02-26  24ad5ce6631869880f45ae8bf3e1516f
+
+    26841-0001-Supplemental_syntax.do   -       -         -       2010-02-26  f6173bf512fd517c0184a7c6ec2a6031
+
+    26841-0001-Supplemental_syntax.sas  -       -         -       2010-02-26  5e317f38cc00ed2681d9b988e6f60e29
+

@@ -1,0 +1,94 @@
+---
+title: "R Notebook for Replication of Li and colleagues (2014) JOHP"
+output: html_notebook
+---
+
+# Load libraries
+```{r, message=FALSE}
+
+
+library("tidyverse")
+library("olsrr")
+library("descriptr")
+library("haven")
+library("GGally")
+library("psych")
+library("knitr")
+library("apaTables")
+library("mosaic")
+
+```
+
+
+
+
+# Import the original datafiles
+```{r, eval = FALSE}
+
+# use the haven package to read in the data
+midus2 <- read_spss("04652-0001-Data.sav")
+
+saveRDS(midus2, "midus2.rds")
+
+```
+
+# Read in the saved datafiles
+```{r}
+
+midus2 <- readRDS("midus2.rds")
+
+```
+
+# Subset the datafiles
+```{r}
+
+# subset midus to keep only people in the main sample only
+
+midus2.subset <- midus2 %>% 
+  filter ((SAMPLMAJ == 1 | SAMPLMAJ == 4) & # limit to main and metro scample
+            (B1PD1 == 1 & B1PD7 == 1) & # limit to those in caregiver role
+            B1PB3A == 1 & # limit to those with a superviser
+            B1PB3B != 1) %>% # limit to those not self-employed
+  select(M2ID,  
+         B1PRSEX, B1PAGE_M2, # sex and age
+         B1PD10, B1PD11, B1PD12, B1PD13, B1PD14, B1PD15, # caregiver items
+         B1PB12, B1PB12A, # hours worked
+         B1SF27I, B1SF27J, B1SF27K, B1SF27L, # family to work conflict
+         B1SJ2G, B1SJ2H, B1SJ2I, B1SJ2J, # family strain
+         B1SF30C, B1SF30D, B1SF30E, # supervisor support
+         B1SF1, # job satisfaction
+         B1SQ1, B1PG1, B1SE1F, # life satisfaction
+         B1PDEPRE) # depression
+
+# remove cases with missing data
+midus2.subset <- na.omit(midus2.subset)
+
+describe(midus2.subset)
+
+```
+
+# Prepare variables for analysis
+```{r}
+analyze<-midus2.subset
+
+# make all variables numeric for the dataframe we will analyze
+all.vars <- names(analyze)
+analyze <- analyze %>% 
+  mutate_at(vars(all.vars), funs(as.numeric)) # make all of these vars numeric
+
+# rescore variables in preparation for making scale scores
+analyze <- analyze %>% 
+  mutate(LS1 = zscore(B1SQ1), 
+         LS2 = zscore(B1PG1)*-1, #reverse coded
+         LS3 = zscore(B1SE1F)*-1) %>% #reverse coded
+  mutate(CG1 = ifelse(B1PD10 == 2, 0, B1PD10),
+         CG2 = ifelse(B1PD11 == 2, 0, B1PD11),
+         CG3 = ifelse(B1PD12 == 2, 0, B1PD12),
+         CG4 = ifelse(B1PD13 == 2, 0, B1PD13))
+
+#authors standardized LS items beofre combining into life satisfaction scale
+
+```
+
+
+# Examine reliability of scales

@@ -1,0 +1,165 @@
+---
+title: "Yetz R Notebook for Lab 11_HW"
+output: 
+  html_notebook:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+---
+
+#Clear environment
+```{r}
+rm(list=ls())
+```
+
+
+#Load Libraries
+```{r}
+library(tidyverse)
+library(psych)
+library(readxl)
+```
+
+#Load Data
+```{r}
+
+data  <- read_excel("Lab 11 Data.xlsx", col_names = FALSE)
+#data <- read_csv("Lab 11 Data.csv")
+
+
+```
+
+#Get descriptives
+
+##Dichotomous Data
+```{r}
+describe(data)
+descriptives <- describe(data) 
+```
+
+#Sum totals
+```{r}
+totals<- apply(data, 1, sum) #the "1" indicates give rowmeans.
+
+```
+
+#Correlations
+```{r}
+	cor(data, totals)
+```
+
+
+###Biserial correlation
+```{r}
+biserial( totals, data)
+```
+
+```{r}
+alpha(data)
+```
+
+#For loop
+##Create blank matrix
+```{r}
+nitems <- 10
+remainder.corrs <- matrix(rep(0, nitems*2), ncol=2)
+
+```
+
+##Get sum totals
+```{r}
+totals <- apply(data, 1, sum)
+```
+
+##Initiate loop
+```{r, message = FALSE}
+nitems <- 10
+for (i in 1:nitems) { #i = value that changes for every loop. it will repeat until 1- number in "nitems(1:6)"
+  remainder.corrs[i,1] <- cor((totals-data[,i]), data[,i])
+  remainder.corrs[i,2] <- biserial((totals-data[,i]), data[,i])
+  }
+
+```
+
+##View dataset
+```{r}
+remainder.corrs
+```
+
+#Item Answers
+##1. Calculate and report your item difficulty parameters. Which items are easiest? Which are most difficult?
+  
+  
+The items means are reported below
+```{r, echo = FALSE}
+mean <- as.matrix(describe(data)$mean)
+mean
+```
+  
+  As we can see, items 1, 6, & 9 are the most difficult items. From our sample, the least amount of people seem to be able to answer that item "right". The rest of the items vary pretty well. The easier items include otes, 7 8 & 10. 
+  
+  
+  
+##2 & 3.Use R to calculate point-biserial and biserial correlations between each item and: 
+
+### a.	The total score including the item (& Reported for item 3)
+
+**Point-Biserial**
+```{r}
+	cor(data, totals)
+```
+
+
+**Biserial**
+
+```{r}
+biserial( totals, data)
+```
+
+
+###b.	The remainder score (& Reported for item 3)
+```{r}
+nitems <- 10
+remainder.corrs <- matrix(rep(0, nitems*2), ncol=2)
+
+```
+
+```{r}
+totals <- apply(data, 1, sum)
+```
+
+```{r}
+nitems <- 10
+for (i in 1:nitems) { #i = value that changes for every loop. it will repeat until 1- number in "nitems(1:6)"
+  remainder.corrs[i,1] <- cor((totals-data[,i]), data[,i])
+  remainder.corrs[i,2] <- biserial((totals-data[,i]), data[,i])
+}
+
+remainder.corrs
+
+```
+
+
+##4.	For this data, which set of item discrimination parameters is most appropriate? Why? 
+
+I would argue that the remainder score biserial correlations are the most important because they are correcting forthe fact that these are dichotomous items and that we should not allow for the items to correlate with themselves. Therefore, looking at this, I think that it gives us the best idea of item discriminability. Although it lowers the discriminiability when compared to the regular biserial correlations, this makes sense because the items should not be correlating with themselves in the total score. 
+
+
+###a.	Do any of the calculations seem problematic to you? Explain.
+
+Yes, both the normal  point biserial and biserial correlations seem the most problematic to me. In reality, it doesn't make sense to include the items that is being correlated with in the total. This only inflates the correlation. 
+
+##5. Imagine that you have been asked to reduce this test from 10 items to 5, but still measure across a broad range of the construct. Which 5 items do you keep and why?
+
+###a.	Support your answer based on the data above. Be specific and explain your rationale for each item.
+
+
+
+I decided to keep items *1,2,3,8,9*. The reason I did this is because they seem to cover a wide range of difficulty and are all of high discriminability. Look at these items we can see that the mean difficulties are respectively `r mean[1:3]`, `r mean[8:9] `. Additionally they all have great discirminibility. There discrimiabilities are respectively `r remainder.corrs[,2][1:3]`,`r remainder.corrs[,2][8:9]`   Therefore. I think that they serve as the best items to keep because they serve as both discriminable and measure a wide range of the construct.
+
+
+
+
+
+
+

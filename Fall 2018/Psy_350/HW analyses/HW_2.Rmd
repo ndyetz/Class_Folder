@@ -1,0 +1,133 @@
+---
+title: "Psy 350: HW 2"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+#Clear environment
+```{r}
+rm(list=ls())
+```
+
+
+#load libraries
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(yarrr)
+library(psych)
+```
+
+
+#Read in data
+```{r, warning = FALSE}
+setwd("C:/Users/Neil/Desktop/Class folder/Fall 2018/Psy_350/Data")
+
+yetz.data <- read.csv("PSY 350 Class Survey.csv", header = TRUE, stringsAsFactors = FALSE)
+#names(yetz.data)
+
+```
+
+#Q1
+Create a crosstab including gender and interest. In which area of psychology did more men than women express interest?
+```{r}
+table(yetz.data$interest, yetz.data$gender)
+yetz.data <- yetz.data %>% mutate(
+  year.f = ifelse(year == "sophomore", 1, NA),
+  year.f = ifelse(year == "junior", 2, year.f),
+  year.f = ifelse(year == "senior", 3, year.f),
+  year.f = ifelse(year == "Other (e.g., non-degree student)",4, year.f),
+  year.f = factor(year.f, levels = c(1,2,3,4), labels = c("sophomore", "junior", "senior", "other"))
+)
+
+table(yetz.data$year.f)
+
+```
+
+
+#Q2
+What is the mean number of countries visited by students in each year (sophomore, junior, senior)? Report the numbers here (rounding to two decimals).
+
+```{r}
+aggregate(x = list(avg_country = yetz.data$travel), by = list(year = yetz.data$year), FUN = mean)
+```
+
+#Q3
+Create a pirate plot to represent the data in your answer above. Attach your plot here.
+```{r, fig.width = 9, fig.height= 9}
+
+pirateplot(formula = travel ~ year, data = yetz.data, xlab = "year", ylab = "travel", main = "pirate plots yarrrrrr!" )
+```
+
+
+
+#Q4
+What information do you learn from the pirate plot that you didn't get just from the means? Be specific and talk about this data in particular, not just pirate plots in general.
+
+- The range, breadth of students in each range. The number of students
+
+#Q5
+Does number of countries visited appear to be associated with GPA? Create a scatterplot and attach it here.
+
+
+```{r}
+plot(yetz.data$gpa, yetz.data$travel)
+plot(yetz.data$travel, yetz.data$gpa)
+cor(yetz.data$travel, yetz.data$gpa, use = "pairwise.complete.obs")
+
+```
+- Little correlation
+
+
+#Q7
+
+
+Did you need to account for missing data in order to calculate this correlation? If so, what did you do?
+
+- Yes, use = pairwise.complete.obs
+
+#Q8
+
+What is the internal consistency reliability of the conscientiousness scale?
+
+```{r}
+psych::alpha(yetz.data[, 25:34])
+
+
+yetz.data$cons <- rowMeans(yetz.data [ , c("cons_1","cons_2", "cons_3", "cons_4","cons_5","cons_6","cons_7","cons_8","cons_9","cons_50") ]) 
+
+```
+
+- internal consisteny (alpha) = 0.80
+
+
+#Q9
+Is this an acceptable level of reliability? How do you know?
+
+- Yes, above 0.7 threshold
+
+
+#Q10
+Find the correlations among the overall conscientiousness score, the item about childhood neatness, and GPA. Report the values of all of those correlations here. 
+
+```{r}
+
+cor(yetz.data[ , c("cons", "neatness", "gpa")], use = "pairwise.complete.obs")
+```
+
+
+#Q11
+Find scatterplots of those correlations and upload them here (remember that you should be able to get all of the correlations from one line of script - no need to plot each correlation separately).
+```{r}
+plot(yetz.data[ , c("cons", "neatness", "gpa")])
+```
+
+
+```{r}
+yetz.data %>% 
+  select(cons, neatness, gpa) %>% 
+  describe()
+```
+
+

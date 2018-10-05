@@ -1,0 +1,189 @@
+File Manifest for ICPSR 4652
+
+Ryff, Carol, David M. Almeida, John Ayanian, Deborah S. Carr, Paul D.
+Cleary, Christopher Coe, Richard Davidson, Robert F. Krueger, Marge E.
+Lachman, Nadine F. Marks, Daniel K. Mroczek, Teresa Seeman, Marsha Mailick
+Seltzer, Burton H. Singer, Richard P. Sloan, Patricia A. Tun, Maxine
+Weinstein, and David Williams. Midlife in the United States (MIDUS 2),
+2004-2006. ICPSR04652-v6. Ann Arbor, MI: Inter-university Consortium for
+Political and Social Research [distributor], 2012-04-18.
+http://doi.org/10.3886/ICPSR04652.v6
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    04652-descriptioncitation.pdf       -       -         -       2017-08-23  -
+
+    04652-related_literature.txt        -       -         -       daily       -
+
+    04652-manifest.txt                  -       -         -       daily       -
+
+    04652-Documentation-MIDUS_items_index.pdf -       -         -       2011-04-22  9b5413c5b0a22441eefca8e8b822c68b
+
+    04652-Documentation-field_report.pdf -       -         -       2011-04-22  d9b7eabbeeb9ba55532ae3c72662b08c
+
+    04652-Documentation-naming.pdf      -       -         -       2012-04-18  ee7603032da12135c59684a7d55a578a
+
+    04652-Documentation-readme.pdf      -       -         -       2011-04-22  d577610a44ce0614993b48057ffb44f9
+
+    04652-Documentation-sampdesc.pdf    -       -         -       2011-04-22  7869db0f03905611ec5fc4c381842d28
+
+
+DS0001 M2_P1_Aggregate Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    04652-0001-Codebook.pdf             -       -         -       2011-10-25  094e00047899b5d49112c5371b69e137
+
+    04652-0001-Data.dta                 -       4,963     2279    2011-04-22  fd882300b8502983e1d7aed7c2c8810f
+
+    04652-0001-Data.sav                 -       4,963     2279    2011-04-22  c6a44a7bca5cab1da99cf89f36edeee7
+
+    04652-0001-Data.stc                 -       4,963     2279    2011-04-22  48cbdf2b9275ba3ed9d27d8dd6de3775
+
+    04652-0001-Data.tsv                 -       4,963     2279    2011-04-22  764818988add19b6e4de029db93cc968
+
+    04652-0001-Data.txt                 4335    4,963     2279    2011-04-22  44be43e4e75e81fdde35cfdaec2c8d18
+
+    04652-0001-Documentation-age.pdf    -       -         -       2011-04-22  81428432791e43634313bd74bbe2dd7e
+
+    04652-0001-Documentation-occ_ind_coding.pdf -       -         -       2011-04-22  c34309c6be7c1da0bb2f96d7d999a15f
+
+    04652-0001-Documentation-scales.pdf -       -         -       2011-04-22  5d495c03382baba1d5830b7eb2924b47
+
+    04652-0001-Questionnaire-phone.pdf  -       -         -       2011-04-22  c4ce97a7d6cd91106f191fadecf8be68
+
+    04652-0001-Questionnaire-saq.pdf    -       -         -       2011-04-22  21795bff76c07e7789d4c28e0b08d62e
+
+    04652-0001-Setup.dct                -       -         -       2011-04-22  a7bdad98b80c0ab5fa1dc8b93f852e4d
+
+    04652-0001-Setup.do                 -       -         -       2011-04-22  5eb423dfe574fc0cf26749dbf34d0e3b
+
+    04652-0001-Setup.sas                -       -         -       2011-04-22  7a7d449e01d7dfdfb6e2b15505051c47
+
+    04652-0001-Setup.sps                -       -         -       2011-04-22  fdd1dcc59a99e01930abc6d88108898b
+
+    04652-0001-Supplemental_syntax.do   -       -         -       2011-04-22  ceb1364ac098b3d467661dfcbe8fd33b
+
+    04652-0001-Supplemental_syntax.sas  -       -         -       2011-04-22  5443339f4bd86078bca29c665a6026c1
+
+    04652-0001-Zipped_package-midusxml.zip -       -         -       2011-04-22  ffdc4ef65eb4197a2c958c7b80e39d98
+
+
+DS0002 M2_P1_Disposition Codes
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    04652-0002-Codebook.pdf             -       -         -       2011-04-22  e4f5d9938915ed68716976cd487f5eb8
+
+    04652-0002-Data.dta                 -       7,108     12      2011-04-22  fff1e75a1843363c978329665d6e55bb
+
+    04652-0002-Data.sav                 -       7,108     12      2011-04-22  f2a9fadcb167f81832929d02182e0ce0
+
+    04652-0002-Data.stc                 -       7,108     12      2011-04-22  4fd0ee02058de797a7858b95663f81ce
+
+    04652-0002-Data.tsv                 -       7,108     12      2011-04-22  abafa7d16578c4c7f1e5f8fe1ea5e937
+
+    04652-0002-Data.txt                 82      7,108     12      2011-04-22  17bacb99fcf2357f9fa5dd18597c1097
+
+    04652-0002-Documentation-disp_mort_codes.pdf -       -         -       2011-04-22  295fb5833be19822f9b06c7f6274e55b
+
+    04652-0002-Setup.dct                -       -         -       2011-04-22  51e65709e1a18150a0deeae56b94689b
+
+    04652-0002-Setup.do                 -       -         -       2011-04-22  43f65fec9f03e63ef517064b020af699
+
+    04652-0002-Setup.sas                -       -         -       2011-04-22  b331abf6ddfb390b893099b3eb36bf4a
+
+    04652-0002-Setup.sps                -       -         -       2011-04-22  1d29ebea274b054b5ec122ada5d76203
+
+    04652-0002-Supplemental_syntax.do   -       -         -       2011-04-22  1e74f30015757add2e765cde551129a6
+
+    04652-0002-Supplemental_syntax.sas  -       -         -       2011-04-22  7f2b08661b09e0d99be8cb6c51c53a5d
+
+
+DS0003 M2_P1_Main Weights Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    04652-0003-Codebook.pdf             -       -         -       2011-04-22  1241222439c365d4254f41110f1b3586
+
+    04652-0003-Data.dta                 -       2,257     11      2011-04-22  baf68c3d248a583fd4a512ed7386b1cd
+
+    04652-0003-Data.sav                 -       2,257     11      2011-04-22  7eb265d456baf992e3c71ec57e10297b
+
+    04652-0003-Data.stc                 -       2,257     11      2011-04-22  17f1284aada180ef537cd42bd8bfe32f
+
+    04652-0003-Data.tsv                 -       2,257     11      2011-04-22  65d8981a44b82fda2c0f5b3367815af2
+
+    04652-0003-Data.txt                 52      2,257     11      2011-04-22  b5e25b34603a73ed5fd07e59f8b0cd89
+
+    04652-0003-Documentation-weights.pdf -       -         -       2011-04-22  5a4b653ac15f3f470d5c3fe459a399b0
+
+    04652-0003-Setup.dct                -       -         -       2011-04-22  a1eac2782681d98b9d7fe19da55e141b
+
+    04652-0003-Setup.do                 -       -         -       2011-04-22  3faa8e72a27d46a797f57579297591b0
+
+    04652-0003-Setup.sas                -       -         -       2011-04-22  4eb7031dde79eaa85e04bbe1532b2406
+
+    04652-0003-Setup.sps                -       -         -       2011-04-22  2514703920da7476d32bb12b25045f75
+
+
+DS0004 M2_P1_Coded Text Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    04652-0004-Codebook.pdf             -       -         -       2011-04-22  819ba20ea26507591645496611e4c007
+
+    04652-0004-Data.dta                 -       4,963     142     2011-04-22  d1d90b1afbbef273a72235859218f1b8
+
+    04652-0004-Data.sav                 -       4,963     142     2011-04-22  3e3dab64561ca72c57404af8a248aab5
+
+    04652-0004-Data.stc                 -       4,963     142     2011-04-22  3557d1726faa3e673af14b889d3506f6
+
+    04652-0004-Data.tsv                 -       4,963     142     2011-04-22  1330a0cc718eec7347b721bac56eb3f2
+
+    04652-0004-Data.txt                 579     4,963     142     2011-04-22  bae05aed396cbea898e4738426113fa9
+
+    04652-0004-Documentation-coded_text.pdf -       -         -       2011-04-22  4d79b2afa3b65200cd798a20cc2a2727
+
+    04652-0004-Setup.dct                -       -         -       2011-04-22  3da073456e9d7d68f1bc3016bddb633b
+
+    04652-0004-Setup.do                 -       -         -       2011-04-22  1f4ea92bf1c46d3e6e1b5774153a6b04
+
+    04652-0004-Setup.sas                -       -         -       2011-04-22  5cdbc269465354125fa9193a0e6329cb
+
+    04652-0004-Setup.sps                -       -         -       2011-04-22  79b0c2e3091a449983c92e772ce9011a
+
+    04652-0004-Supplemental_syntax.do   -       -         -       2011-04-22  cae24e76a6b80adb45c90da134711233
+
+    04652-0004-Supplemental_syntax.sas  -       -         -       2011-04-22  ebb4ce2a279191ea6c039bd8822f6684
+
+
+Version History
+
+2012-04-18 A document pertaining to the naming conventions for this study
+has been added to the collection.  2011-10-25 The document titled DDI
+codebook has been renamed Codebook.  2011-10-10 Documentation has been
+updated.  2011-07-29 The study codebook has been updated to include
+detailed question text.  2011-04-22 The study documentation has been
+updated. The Aggregate dataset (DS1) has been updated. The Disposition
+Codes dataset (DS2) has been updated The Disposition Codes dataset is a
+combination of current mortality status and final disposition codes
+detailing the reasons for nonrepsonse to the telephone interview at MIDUS
+II. This combined file is a replacement of the original mortality dataset.
+The Coded Text dataset (DS4) is an addition to the data collection. This
+dataset contains qualitative text and open-ended response data.
+Additionally, a. xml file and corresponding .pdf codebook have been added
+to the collection. Lastly, further information regarding changes to the
+data collection and documentation can be found in the README document
+available for download from the ICPSR and NACDA Web sites.  2007-03-22
+Editorial refinements were made to the metadata.

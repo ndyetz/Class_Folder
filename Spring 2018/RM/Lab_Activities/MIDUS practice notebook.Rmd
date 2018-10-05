@@ -1,0 +1,190 @@
+---
+title: "MIDUS Practice"
+output: html_notebook
+---
+
+
+# Read in the saved datafiles
+```{r, message = FALSE}
+
+#install.packages(tidyverse)
+#install.packages(descriptr)
+#install.packages(mosaic)
+
+library(tidyverse)
+library(descriptr)
+library(mosaic)
+
+#Read data
+MIDUS_short <- read_csv("MIDUS_practice.csv")
+
+#Clean up missing values
+MIDUS_short$A1SEMA[MIDUS_short$A1SEMA==9]<-NA
+MIDUS_short$A1SSATIS[MIDUS_short$A1SSATIS==99]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==997]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==998]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==999]<-NA
+
+MIDUS_short
+
+```
+
+#Variable desciptions
+
+```
+A1SNEGAF
+BADMOOD - NEGATIVE AFFECT
+Range of valid values: 1 - 5
+```
+
+
+```
+**Scale**
+A1SSATIS
+LIFE SATISFACTION (5-ITEMS)
+Range of valid values: 0 - 10
+```
+
+```
+OUTCOME VARIABLE
+A1PA44
+AVE # CIGS PER DAY_CUR SMOKER
+Question:
+On average, about how many cigarettes did you smoke per day during the one year in your life
+when you smoked most heavily?
+```
+
+```
+A1SEMA
+MATERNAL AFFECTION
+Range of valid values: 1 - 4
+```
+
+#Create new maternal affection grouping variable
+5.	Create a new grouping variable that indicates whether participants report high or low levels of maternal affection.  (Don't overwrite the original maternal affection variable!)
+  + a.	Participants with maternal affection scores at least one standard deviation below the mean should receive a score of 1 on the grouping variable. 
+  + b.	 Participants with maternal affection scores at least one standard deviation above the mean should receive a score of 2 on the grouping variable.
+  + c.	Participants with maternal affection scores within one standard deviation of the mean should be labelled as missing (NA) on the grouping variable.
+  + d.	Hint: if your data contains missing values, you may need to include the argument na.rm=TRUE when the functions mean() or sd().
+6.	Convert the grouping variable into a factor with the levels "Low Maternal Affection" and "High Maternal Affection"
+
+```{r}
+
+MIDUS_short <- MIDUS_short %>% 
+  mutate(matAff = ifelse(zscore(MIDUS_short$A1SEMA, na.rm=TRUE) >=1, 2, NA)) %>% #High maternal Affection
+   mutate(matAff = ifelse(zscore(MIDUS_short$A1SEMA, na.rm=TRUE) <  -1, 1, matAff), #Low maternal affection
+  matAff.f = factor(matAff, levels = c(1,2),
+                    labels = c("Low Maternal Affection", "High Maternal Affection")))
+
+
+MIDUS_short
+
+
+```
+
+
+#Filter the dataset to 1 above and 1 below SD on matAff
+
+7.	Filter any participants from your data who have missing values for the grouping variable you just created. (Hint: you may want to use the function is.na(), but there is more than 1 way to accomplish this step)
+```{r}
+
+MIDUS_filter1 <- MIDUS_short %>% 
+  filter(matAff != is.na(FALSE))
+
+
+MIDUS_filter1
+count(MIDUS_filter1)
+
+```
+
+
+#Create grouping variable where high or low satisfaction
+8.	Create a new grouping variable that indicates whether participants report high or low levels of life satisfaction.  (Don't overwrite the original life satisfaction variable!)
+  + a.	Participants with life satisfaction scores at least one standard deviation below the mean should receive a score of 1 on the grouping variable. 
+  + b.	 Participants with life satisfaction scores at least one standard deviation above the mean should receive a score of 2 on the grouping variable.
+  + c.	Participants with life satisfaction scores within one standard deviation of the mean should be labelled as missing (NA) on the grouping variable.
+9.	Convert the grouping variable into a factor with the levels "Low Life Satisfaction" and "High Life Satisfaction"
+
+```{r}
+
+MIDUS_filter1 <- MIDUS_filter1 %>% 
+  mutate(lifeSat = ifelse(zscore(MIDUS_filter1$A1SSATIS, na.rm=TRUE) >=1, 2, NA)) %>% #High life satisfaction
+   mutate(lifeSat = ifelse(zscore(MIDUS_filter1$A1SSATIS, na.rm=TRUE) <  -1, 1, lifeSat), #Low maternal affection
+  lifeSat.f = factor(lifeSat, levels = c(1,2),
+                    labels = c("Low Life Satisfaction" , "High Life Satisfaction")))
+
+
+MIDUS_filter1
+
+
+
+```
+
+
+
+#Filter the dataset to 1 above and 1 below SD on lifeSat
+
+10.	Filter any participants from your data who have missing values for the grouping variable you just created. 
+```{r}
+
+MIDUS_filter2 <- MIDUS_filter1 %>% 
+  filter(lifeSat != is.na(FALSE))
+
+MIDUS_filter2
+count(MIDUS_filter2)
+
+```
+
+
+#subset dataset
+Subset your data so that it only contains maternal affection, your maternal affection grouping variable, life satisfaction, your life satisfaction grouping variable, and number of cigarettes smoked.
+
+```{r}
+
+MIDUS_select<- select(MIDUS_filter2, A1SSATIS:matAff.f, lifeSat, lifeSat.f)
+
+
+MIDUS_select
+
+```
+
+
+#Filter by cigarette data
+12.	Filter any participants from your data who have missing values for number of cigarettes smoked per day.
+```{r}
+
+MIDUS_FINAL<- MIDUS_select %>% 
+  filter(A1PA44 != is.na(FALSE))
+
+MIDUS_FINAL
+count(MIDUS_FINAL)
+
+```
+
+
+#Box plots grouped by maternal affection
+13.	Create a boxplot with maternal affection group on the x-axis and cigarettes on the y-axis.  
+  + a.	Add an appropriate title and axis labels
+
+```{r}
+
+ggplot(MIDUS_FINAL, aes(x = matAff.f, y= A1PA44, group = matAff.f)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(title= "Does cigarettes smoke differ by maternal affection?", x = "Maternal Affection", y = "# of cigarettes smoked")
+
+```
+
+
+#Box plots grouped by Life satsfication
+13.	Create a boxplot with maternal affection group on the x-axis and cigarettes on the y-axis.  
+  + a.	Add an appropriate title and axis labels
+
+```{r}
+
+ggplot(MIDUS_FINAL, aes(x = lifeSat.f, y= A1PA44, group = lifeSat.f)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(title= "Does cigarettes smoke differ by Life satisfaction?", x = "Life Satisfaction", y = "# of cigarettes smoked")
+
+```
+
+

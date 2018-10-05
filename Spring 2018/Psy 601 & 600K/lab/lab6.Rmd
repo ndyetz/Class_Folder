@@ -1,0 +1,67 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+#Library/Data
+```{r}
+library(tidyverse)
+library(psych)
+#install.packages("GPArotation")
+library(GPArotation)
+
+lab6 <- read_csv("lab 6 Example.csv")
+```
+
+#Format data(tidy & non-tidy)
+```{r}
+lab6 <- lab6 %>% 
+  mutate(time_1 = t1_item1 + t1_item2 + t1_item3,
+         time_2 = t2_item1 + t2_item2 + t2_item3) %>% 
+  rowwise() %>% #JK, we want to do get the means of the items
+  mutate(time_1 = mean(t1_item1 , t1_item2 , t1_item3),
+         time_2 = mean(t2_item1 , t2_item2 , t2_item3)) %>% 
+  ungroup()
+
+#Non-tidyverse way.
+lab6$time_1 <- rowMeans(lab6[, c("t1_item1", "t1_item2", "t1_item3")])
+lab6$time_2 <- rowMeans(lab6[, c("t2_item1", "t2_item2", "t2_item3")])
+
+```
+
+#Correlation
+```{r}
+cor(lab6$time_1,lab6$time_2, use = "pairwise.complete.obs")
+```
+#covariance Matrix
+```{r}
+items <- lab6[,c("t1_item1", "t1_item2", "t1_item3")] 
+cov(items)
+```
+
+#Get Alpha
+```{r}
+vars <- diag(cov(items))
+num <- sum(vars)
+denom <-  sum(cov(items))
+alpha <- (3/(3-1))*(1 - (num/denom))
+alpha
+
+```
+#Easy way to get alpha library(psych)
+```{r}
+#cor(items)
+round(cor(items), 2)
+item.corrs <- cor(items)
+write.csv(item.corrs, "item.corrs.csv")
+alpha(items)
+```
+Omega via libray(psych)
+```{r}
+omega(items, 1)
+```
+
+
+
+

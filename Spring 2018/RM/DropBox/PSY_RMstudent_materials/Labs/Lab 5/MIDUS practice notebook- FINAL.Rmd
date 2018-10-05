@@ -1,0 +1,50 @@
+---
+title: "MIDUS Practice"
+output: html_notebook
+---
+
+# Read in the saved datafiles
+```{r, message = FALSE}
+library(tidyverse)
+#Read data
+MIDUS_short <- read_csv("MIDUS_practice.csv")
+#Clean up missing values
+MIDUS_short$A1SEMA[MIDUS_short$A1SEMA==9]<-NA
+MIDUS_short$A1SSATIS[MIDUS_short$A1SSATIS==99]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==997]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==998]<-NA
+MIDUS_short$A1PA44[MIDUS_short$A1PA44==999]<-NA
+```
+
+
+```{r}
+#Create grouping variable
+MIDUS_short<-MIDUS_short%>%
+  mutate(MA_group = ifelse(A1SEMA >= (mean(A1SEMA, na.rm = TRUE) + sd(A1SEMA, na.rm = TRUE)), 2, NA)) %>% 
+  mutate(MA_group = ifelse(A1SEMA <= (mean(A1SEMA, na.rm = TRUE) - sd(A1SEMA, na.rm = TRUE)),1,MA_group)) %>%
+  mutate(MA_group=factor(MA_group, levels=c(1,2), labels=c("Low Maternal Afection", "High Maternal Affection"))) %>%
+  filter(!is.na(MA_group))  #Filter out NA's
+  
+
+```
+
+```{r}
+#Create grouping variable
+MIDUS_short<-MIDUS_short%>%
+  mutate(SAT_group = ifelse(A1SSATIS >= (mean(A1SSATIS, na.rm = TRUE) + sd(A1SSATIS, na.rm = TRUE)), 2, NA)) %>% 
+  mutate(SAT_group = ifelse(A1SSATIS <= (mean(A1SSATIS, na.rm = TRUE) - sd(A1SSATIS, na.rm = TRUE)),1,SAT_group)) %>%
+  mutate(SAT_group=factor(SAT_group, levels=c(1,2), labels=c("Low Life Satisfaction", "High Life Satisfaction"))) %>%
+  filter(!is.na(SAT_group))  #Filter out NA's
+```
+
+```{r}
+MIDUS_short<-MIDUS_short%>%select(A1SEMA, MA_group, A1SSATIS, SAT_group, A1PA44)%>%
+  filter(!is.na(A1PA44))
+```
+
+#MA Group plots
+```{r}
+ggplot(MIDUS_short, aes(x=MA_group, y=A1PA44)) + geom_boxplot()
+ggplot(MIDUS_short, aes(x=SAT_group, y=A1PA44)) + geom_boxplot()
+```
+

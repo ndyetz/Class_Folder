@@ -1,0 +1,616 @@
+Bibliography
+Midlife in the United States (MIDUS 2): Biomarker Project, 2004-2009
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 29282. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. 
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu 
+
+
+1.  Eisenlohr-Moul, T.; Segerstrom, S. , "Autonomy, positive relationships,
+and IL-6: Evidence for gender-specific effects." British Journal of Health
+Psychology. 2013, 18, (2), 420 - 438. DOI: 10.1111/j.2044-8287.2012.02085.x
+
+2.  Friedman, E.M.; Karlamangla, A.S.; Gruenewald, T.L.; Koretz, B.;
+Seeman, T.E., "Early life adversity and adult biological risk profiles."
+Psychosomatic Medicine. in press 2015,. DOI: 10.1097/PSY.0000000000000147
+
+3.  Lemola, S.; Ledermann, T.; Friedman, E.M., "Variability of sleep
+duration is related to subjective sleep quality and subjective well-being:
+An actigraphy study.." PLOS ONE. 2013, 8, (8), e71292. DOI:
+10.1371/journal.pone.0071292
+
+4.  Schrepf, A.; Markon, K.; Lutgendorf, S.K., "From childhood trauma to
+elevated C-reactive protein in adulthood: The role of anxiety and emotional
+eating." Psychosomatic Medicine. 2014, 76, (5), 327 - 336. DOI:
+10.1097/psy.0000000000000072
+
+5. Almeida, D.; McGonagle, K.; King, H., "Assessing daily stress processes
+in social surveys by combining stressor exposure and salivary cortisol."
+Biodemography and Social Biology. 2009, 55, (2), 219 - 237. DOI:
+10.1080/19485560903382338
+
+6. Almeida, David M.; Charles, Susan Turk; Neupert, Shevaun D., "Assessing
+health behaviors across individuals, situations, and time." In Schaie,
+K.W.; Abeles, R.P., Social Structures and Aging Individuals: Continuing
+Challenges. New York, NY: Springer,2008.
+
+7. Almeida, David M.; Piazza, Jennifer R.; Stawski, Robert S.,
+"Interindividual differences and intraindividual variability in the
+cortisol awakening response: An examination of age and gender." Psychology
+and Aging. 2009, 24, (4), 819 - 827. DOI: 10.1037/a0017910
+
+8. Amaral, W.Z.; Krueger, R.F.; Ryff, C.D.; Coe, C. L., "Genetic and
+environmental determinants of population variation in interleukin-6, its
+soluble receptor and C-reactive protein: Insights from identical and
+fraternal twins." Brain, Behavior, and Immunity. in press 2015,. DOI:
+10.1016/j.bbi.2015.05.010
+
+9. Boehm, J.K.; Chen, Y.; Williams, D.R.; Ryff, C.D.; Kubzansky, L.D.,
+"Subjective well-being and cardiometabolic health: An 8-11 year study of
+midlife adults." Journal of Psychosomatic Research. 2016, 85, 1 - 8. DOI:
+10.1016/j.jpsychores.2016.03.018
+
+10. Boehm, J.K.; Williams, D.R.; Rimm, E.B.; Ryff, C.; Kubzansky, L.D.,
+"Relation between optimism and lipids in midlife." American Journal of
+Cardiology. 2013, 111, (10), 1425. DOI: 10.1016/j.amjcard.2013.01.292
+
+11. Boylan, J.; Lewis, T.; Coe, C.; Ryff, C., "Educational status, anger,
+and inflammation in the MIDUS national sample: Does race matter?." Annals
+of Behavioral Medicine. in press 2015,. DOI: 10.1007/s12160-015-9687-2
+
+12. Boylan, J.M., Ryff, C.D., "High anger expression exacerbates the
+relationship between age and metabolic syndrome." Journals of Gerontology,
+Series B: Psychological Sciences and Social Sciences. in press 2013,. DOI:
+10.1093/geronb/gbt092
+
+13. Boylan, J.M.; Ryff, C.D., "Psychological well-being and metabolic
+syndrome: Findings from the Midlife in the United States national sample."
+Psychosomatic Medicine. in press 2015,. DOI: 10.1097/psy.0000000000000192
+
+14. Boylan, J.M.; Ryff, C.D., "Varieties of anger and the inverse link
+between education and inflammation: Toward an integrative framework."
+Psychosomatic Medicine. 2013, 75, (6), 566 - 574. DOI:
+10.1097/PSY.0b013e31829683bd
+
+15. Brooks, K.P.; Gruenewald, T.; Karlamangla, A.; Hu, P.; Koretz, B.;
+Seeman, T.E., "Social relationships and allostatic load in the MIDUS
+study." Health Psychology. in press 2014,. DOI: 10.1037/a0034528
+
+16. Chen, D.G.; Lin, F.; Chen, X.J.; Tang, W.; Kitzman, H., "Cusp
+catastrophe model: A nonlinear model for health outcomes in nursing
+research." Nursing Research. 2014, 63, (3), 211 - 220. DOI:
+10.1097/nnr.0000000000000034
+
+17. Chen, E.; Miller, G.E.; Lachman, M.E.; Gruenewald, T.L.; Seeman, T.E.,
+"Protective factors for adults from low-childhood socioeconomic
+circumstances: The benefits of shift-and-persist for allostatic load."
+Psychosomatic Medicine. 2012, 74, (2), 178 - 186. DOI:
+10.1097/PSY.0b013e31824206fd
+
+18. Childhood socioeconomic status and adult femoral neck bone strength:
+Findings from the Midlife in the United States Study, "Karlamangla, A.S.;
+Mori, T.; Merkin, S.S.; Seeman, T.E.; Greendale, G.A.; Binkley, N.;
+Crandall, C.J.." in press 2013,. DOI: 10.1016/j.bone.2013.06.021
+
+19. Coe, Christopher L.; Love, Gayle D.; Karasawa, Mayumi; Kawakami,
+Norito; Kitayama, Shinobu; Markus, Hazel R.; Tracy, Russell P.; Ryff, Carol
+D., "Population differences in proinflammatory biology: Japanese have
+healthier profiles than Americans." Brain, Behavior, and Immunity. 2011,
+25, (3), 494 - 502. DOI: 10.1016/j.bbi.2010.11.013
+
+20. Cohen, M.; Granger, S.; Fuller-Thomson, E., "The association between
+bereavement and biomarkers of inflammation." Behavioral Medicine. in press
+2013,. DOI: 10.1080/08964289.2013.866539
+
+21. Cooper, T.M.; McKinley, P.S.; Seeman, T.E.; Choo, T.; Lee, S.; Sloan,
+R.P., "Heart rate variability predicts levels of inflammatory markers:
+Evidence for the vagal anti-inflammatory pathway." Brain, Behavior, and
+Immunity. in press 2015,. DOI: 10.1016/j.bbi.2014.12.017
+
+22. Cornman, J.C.; Glei, D.A.; Goldman, N.; Ryff, C.D.; Weinstein, M.,
+"Socioeconomic status and biological markers of health: An examination of
+adults in the United States and Taiwan." Journal of Aging and Health. 2015,
+27, (1), 75 - 102. DOI: 10.1177/0898264314538661
+
+23. Costello-White, Reagan; Ryff, Carol D.; Coe, Christopher L., "Aging and
+low-grade inflammation reduce renal function in middle-aged and older
+adults in Japan and the USA." AGE. Aug 2015, 37, (4), Art. 75. DOI:
+10.1007/s11357-015-9808-7
+
+24. Crandall, C.J.; Karlamangla, A.S.; Merkin, S.S.; Binkley, N.; Carr, D.;
+Greendale, G.A.; Seeman, T.E., "Adult bone strength of children from
+single-parent families: The Midlife in the U.S. Study." Osteoporosis
+International. in press 2015,. DOI: 10.1007/s00198-014-2990-0
+
+25. Crandall, C.J.; Merkin, S.S.; Seeman, T.E.; Greendale, G.A.; Binkley,
+N.; Karlamangla, A.S., "Socioeconomic status over the life-course and adult
+bone mineral density: The Midlife in the U.S. Study." Bone. 2012, 51, (1),
+107 - 113. DOI: 10.1016/j.bone.2012.04.009
+
+26. Crandall, C.J.; Miller-Martinez, D.; Greendale, G.A.; Binkley, N.;
+Seeman, T.E.; Karlamangla, A.S., "Socioeconomic status, race, and bone
+turnover in the Midlife in the US Study." Osteoporosis International. May
+2012, 23, (5), 1503 - 1512. DOI: 10.1007/s00198-011-1736-5
+
+27. Crowley, O.V.; McKinley, P.S.; Burg, M.M.; Schwartz, J.E.; Ryff, C.D.;
+Weinstein, M.; Sloan, R.P., "The interactive effect of change in perceived
+stress and trait anxiety on vagal recovery from cognitive challenge."
+International Journal of Psychophysiology. 2011, 82, (3), 223 - 232. DOI:
+10.1016/j.ijpsycho.2011.09.002
+
+28. Crowley, Olga V.; Kimhy, David; McKinley, Paula S.; Burg, Matthew M.;
+Schwartz, Joseph E.; Lachman, Margie E.; Tun, Patricia A.; Ryff, Carol D.;
+Seeman, Teresa E.; Sloan, Richard P., "Vagal recovery from cognitive
+challenge moderates age-related deficits in executive functioning."
+Research on Aging. in press 2015,. DOI: 10.1177/0164027515593345
+
+29. Cukic, I.; Bates, T.C., "Openness to experience and aesthetic chills:
+Links to heart rate sympathetic activity." Personality and Individual
+Differences. 2014, 64, 152 - 156. DOI: 10.1016/j.paid.2014.02.012
+
+30. Cukic, Iva; Bates, Timothy C., " The association between neuroticism
+and heart rate variability is not fully explained by cardiovascular disease
+and depression." PLOS ONE. 2015, 10, (5), e0125882. DOI:
+10.1371/journal.pone.0125882
+
+31. Curtis, David S.; Fuller-Rowell, Thomas E.; El-Sheikh, Mona; Carnethon,
+Mercedes R.; Ryff, Carol D., "Habitual sleep as a contributor to racial
+differences in cardiometabolic risk." Proceedings of the National Academy
+of Sciences of the United States of America. Aug 15, 2017, 14, (33), 8889 -
+8894. DOI: 10.1073/pnas.1618167114
+
+32. Devine, Jaime K.; Wolf, Jutta M., "Integrating nap and night-time sleep
+into sleep patterns reveals differential links to health-relevant
+outcomes." Journal of Sleep Research. in press 2016,. DOI:
+10.1111/jsr.12369
+
+33. Donoho, C.J.; Seeman, T.E.; Sloan, R.P.; Crimmins, E.M., "Marital
+status, marital quality, and heart rate variability in the MIDUS cohort."
+Journal of Family Psychology. 2015, 29, (2), 290 - 295. DOI:
+10.1037/fam0000068
+
+34. Doyle, D. M.; Molix, L., "Perceived discrimination as a stressor for
+close relationships: Identifying psychological and physiological pathways."
+Journal of Behavioral Medicine. 2014, 1 - 11. DOI: 10.1007/s10865-014-9563-
+8
+
+35. Elliot, Ari J.; Heffner, Kathi L.; Mooney, Christopher J.; Moynihan,
+Jan A.; Chapman, Benjamin P., "Social relationships and inflammatory
+markers in the MIDUS cohort." Journal of Aging and Health. in press 2017,.
+DOI: 10.1177/0898264317698551
+
+36. Eyre, H.A.; Baune, B.T., "Assessing for unique immunomodulatory and
+neuroplastic profiles of physical activity subtypes: A focus on psychiatric
+disorders." Brain, Behavior, and Immunity. in press 2014,. DOI:
+10.1016/j.bbi.2013.10.026
+
+37. Ford, Michael T., "Perceived unfairness at work, social and personal
+resources, and resting blood pressure." Stress and Health. 2013,. DOI:
+10.1002/smi.2491
+
+38. Friedman, E.M., "Sleep quality, social well-being, gender, and
+inflammation: An integrative analysis in a national sample." Annals of the
+New York Academy of Sciences. 2011, 1231, (1), 23 - 34. DOI:
+10.1111/j.1749-6632.2011.06040.x
+
+39. Friedman, E.M.; Williams, D.R.; Singer, B.H.; Ryff, C.D., "Chronic
+discrimination predicts higher circulating levels of E-selectin in a
+national sample: The MIDUS Study." Brain Behavior and Immunity. Jul 2009,
+23, (5), 684 - 92. DOI: 10.1016/j.bbi.2009.01.002
+
+40. Friedman, Elliot M.; Christ, Sharon L.; Mroczek, Daniel K.,
+"Inflammation partially mediates the association of multimorbidity and
+functional limitations in a national sample of middle-aged and older
+adults: The MIDUS Study." Journal of Aging and Health. in press 2015,. DOI:
+10.1177/0898264315569453
+
+41. Friedman, Elliot M.; Herd, Pamela, "Income, education, and
+inflammation: Differential associations in a national probability sample
+(the MIDUS study).." Psychosomatic Medicine. 2010, 72, 290 - 300. DOI:
+10.1097/PSY.0b013e3181cfe4c2
+
+42. Friedman, Elliot M.; Ryff, Carol D., "Living well with medical
+comorbidities: A biopsychosocial perspective." Journals of Gerontology,
+Series B: Psychological Sciences and Social Sciences. 2012, 67, (5), 535 -
+544. DOI: 10.1093/geronb/gbr152
+
+43. Galen Buckwalter, J.; Castellani, Brian; Mcewen, Bruce; Karlamangla,
+Arun S.; Rizzo, Albert A.; John, Bruce; O'donnell, Kyle; Seeman, Teresa,
+"Allostatic load as a complex clinical construct: A case-based
+computational modeling approach." Complexity. in press 2016,. DOI:
+10.1002/cplx.21743
+
+44. Gathuru, I. M., Odukoya, O. K., & Thorpe, J. M., "Under treatment of
+depression among midlife and older adults in the United States." Social
+Pharmacy Journal. 2015, 1, (1), e2343. DOI: 10.17795/spj-2343
+
+45. Gruenewald, T.L.; Karlamangla, A.S.; Hu, P.; Stein-Merkin, S.;
+Crandall, C.; Koretz, B.; Seeman, T.E., "History of socioeconomic
+disadvantage and allostatic load in later life." Social Science and
+Medicine. Jan 2012, 74, (1), 75 - 83. DOI: 10.1016/j.socscimed.2011.09.037
+
+46. Hamdi, N.R.; South, S.C.; Krueger, R.F., "Does education lower
+allostatic load? A co-twin control study." Brain, Behavior, and Immunity.
+in press 2016,. DOI: 10.1016/j.bbi.2016.01.014
+
+47. Heller, A.S.; van Reekum, C.M.; Schaefer, S.M.; Lapate, R.C.; Radler,
+B.T.; Ryff, C.D.; Davidson, R.J., "Sustained ventral striatal activity
+predicts eudaimonic well-being and cortisol output." Psychological Science.
+in press 2013,.
+
+48. Hostinar, C.E., Lachman, M.E.; Mroczek, D.K.; Seeman, T. E.; Miller,
+G.E., "Additive contributions of childhood adversity and recent stressors
+to inflammation at midlife: Findings from the MIDUS study." Developmental
+Psychology. in press 2015,. DOI: 10.1037/dev0000049
+
+49. Human, L.J.; Biesanz, J.C., Miller; G.E.; Chen, E.; Lachman, M.E.;
+Seeman, T.E., "Is change bad? Personality change is associated with poorer
+psychological health and greater metabolic syndrome in midlife." Journal of
+Personality. Jun 2013, 81, (3), 249 - 260. DOI: 10.1111/jopy.12002
+
+50. Jokela, M.; Hamer, M.; Singh-Manoux, A.; Batty, G.D.; Kivimaki, M.,
+"Association of metabolically healthy obesity with depressive symptoms:
+Pooled analysis of eight studies." Molecular Psychiatry. Aug 2014, 19, (8),
+910. DOI: 10.1038/mp.2013.162
+
+51. Karlamangla, A.S.; Miller-Martinez, D.; Lachman, M.E.; Tun, P.A.;
+Koretz, B.K.; Seeman, T.E., "Biological correlates of adult cognition:
+Midlife in the United States (MIDUS)." Neurobiology of Aging. in press
+2013,. DOI: 10.1016/j.neurobiolaging.2013.07.028
+
+52. Kimhy, D.; Crowley, O.V.; McKinley, P.S.; Burg, M.; M.; Lachman, M.E.;
+Tun, P.A.; Ryff, C.D.; Seeman T.E.; Sloan, R.P., "The association of
+cardiac vagal control and executive functioning--Findings from the MIDUS
+study." Journal of Psychiatric Research. in press 2013,. DOI:
+10.1016/j.jpsychires.2013.01.018
+
+53. Kitayama, S.; Park, J.; Boylan, J.; M., Miyamoto, Y.; Levine, C.S.;
+Markus, H.R.; Karasawa, Mayumi; Coe, Christopher L.; Kawakami, Norito;
+Love, Gayle D.;                     Ryff, C.D., "Expression of anger and
+ill health in two cultures: An examination of inflammation and
+cardiovascular risk.." Psychological Science. Feb 2015, 26, (2), 211 - 220.
+DOI: 10.1177/0956797614561268
+
+54. Lee, C.; Tsenkova, V.; Carr, D., "Childhood trauma and metabolic
+syndrome in men and women." Social Science and Medicine. Mar 2014, 105, 122
+- 130. DOI: 10.1016/j.socscimed.2014.01.017
+
+55. Lee, Pai-Lin, "Control beliefs level and change as predictors of
+subjective memory complaints." Aging and Mental Health. in press 2015,.
+DOI: 10.1080/13607863.2015.1008991
+
+56. Lin, F.; Friedman, E.; Quinn, J.; Chen, D.-G.; Mapstone, M., "Effect of
+leisure activities on inflammation and cognitive function in an aging
+sample." Archives of Gerontology and Geriatrics. May-Jun 2012, 54, (3), e-
+398 - e-404. DOI: 10.1016/j.archger.2012.02.002
+
+57. Lin, F.; Heffner, K.; Mapstone, M.; Chen, D.G.; Porsteisson, A.,
+"Frequency of mentally stimulating activities modifies the relationship
+between cardiovascular reactivity and executive function in old age."
+American Journal of Geriatric Psychiatry. in press 2013,. DOI:
+10.1016/j.jagp.2013.04.002
+
+58. Lin, Feng; Roiland, Rachel; Chen, Ding-Geng (Din); Qiu, Christina,
+"Linking cognition and frailty in middle and old age:
+Metabolic syndrome matters." International Journal of Geriatric Psychiatry.
+Jan 2015, 30, (1), 64 - 71. DOI: 10.1002/gps.4115
+
+59. Love, Gayle Dienberg; Seeman, Teresa E.; Weinstein, Maxine; Ryff, Carol
+D., "Bioindicators in the MIDUS National Study: Protocol, Measures, Sample,
+and Comparative Context." Journal of Aging and Health. 2010, 22, (8), 1059
+- 1080. DOI: 10.1177/0898264310374355
+
+60. Mann, Sarah L.; Selby, Edward A.; Bates, Marsha E.; Contrada, Richard
+J., "Integrating affective and cognitive correlates of heart rate
+variability: A structural equation modeling approach." International
+Journal of Psychophysiology. in press 2015,. DOI:
+10.1016/j.ijpsycho.2015.07.003
+
+61. Meyer, J.; Cifuentes, M.M.; Warren, N., "Association of self-rated
+physical health and incident hypertension with O*NET Factors: Validation
+using a representative national survey." Journal of Occupational and
+Environmental Medicine. 2011, 53, (2), 139. DOI:
+10.1097/JOM.0b013e318203f220
+
+62. Mezick, E.J.; Wing, R.R.; McCaffery, J.M., "Associations of self-
+reported and actigraphy-assessed sleep characteristics with body mass index
+and waist circumference in adults: Moderation by gender." Sleep Medicine.
+in press 2013,. DOI: 10.1016/j.sleep.2013.08.784
+
+63. Miller, G.E.; Lachman, M.E.; Chen, E.; Gruenewald, T.L.; Karlamangla,
+A.S.; Seeman, T.E., "Pathways to resilience: Maternal nurturance as a
+buffer against the effects of childhood poverty on metabolic syndrome at
+midlife." Psychological Science. 2011, 22, (12), 1591 - 1599. DOI:
+10.1177/0956797611419170
+
+64. Miller, Robert; Stalder, Tobias; Jarczok, Marc; Almeida, David M.;
+Badrick, Ellena; Bartels, Meike; Boomsma, Dorret I.; Coe, Christopher L.;
+Dekker, Marieke C.J.; Donzella, Bonny; Fischer, Joachim E.; Gunnar, Megan
+R.; Kumari, Meena; Lederbogen, Florian; Power, Christine; Ryff, Carol D.;
+Subramanian, S.V.; Tiemeier, Henning; Watamura, Sarah E.; Kirschbaum,
+Clemens, "The CIRCORT database: Reference ranges and seasonal changes in
+diurnal salivary cortisol derived from a meta-dataset comprised of 15 field
+studies." Psychoneuroendocrinology. Nov 2016, 73, 16 - 23. DOI:
+10.1016/j.psyneuen.2016.07.201
+
+65. Miller-Martinez, D.; Seeman, T.; Karlamangla, A. S.; Greendale, G.A.,
+Binkley, N.; Crandall, C.J., "Marital histories, marital support, and bone
+density: Findings from the Midlife in the United States study."
+Osteoporosis International. in press 2014,. DOI: 10.1007/s00198-013-2602-4
+
+66. Miyamoto, Y.; Boylan, J.M.; Coe, C.L.; Curhan, K.B.; Levine, C.S.;
+Markus, H.R.; Park, J.; Kitayama, S.; Kawakami, N.; Karasawa, M.; Love,
+G.D.; Ryff, C.D., "Negative emotions predict elevated interleukin-6 in the
+United States but not in Japan." Brain, Behavior, and Immunity. in press
+2013,. DOI: 10.1016/j.bbi.2013.07.173
+
+67. Mori, T.; Karlamangla, A.S.; Merkin, S.S.; Crandall, C.J.; Binkley, N.;
+Greendale, G.A.; Seeman, T.E., "Multi-system dysregulation and bone
+strength: Findings from the study of midlife in the United States." Journal
+of Clinical Endocrinology and Metabolism. in press 2014,. DOI:
+10.1210/jc.2013-3908
+
+68. Morozink, Jennifer A.; Friedman, Elliot M.; Coe, Christopher L.; Ryff,
+Carol D., "Socioeconomic and psychosocial predictors of Interleukin-6 in
+the MIDUS national sample." Health Psychology. Nov 2010, 29, (6), 626 -
+635. DOI: 10.1037/a0021360
+
+69. Ong, A.D.; Exner-Cortens, D.; Riffin, C.; Steptoe, A.; Zautra, A.;
+Almeida, D., "Linking stable and dynamic features of positive affect to
+sleep." Annals of Behavioral Medicine. 2013, 46, (1), 52 - 61. DOI:
+10.1007/s12160-013-9484-8
+
+70. Parker, Elizabeth Oshrin; Maier, Candice; Wojciak, Armeda, "Childhood
+abuse and family obligation in middle adulthood: Fndings from the MIDUS II
+National Survey." Journal of Family Therapy. in press 2016,. DOI:
+10.1111/1467-6427.12114
+
+71. Petersen, Inge; Pedersen, Nancy L.; Rantanen, Taina; Kremen, William
+S.; Johnson, Wendy; Panizzon, Matthew S.; Christiansen, Lene; Franz, Carol
+E.; McGue, Matt; Christensen, Kaare; Hamdi, Nayla R.; Krueger, Robert F.;
+Reynolds, Chandra, "G x E interaction influences Trajectories of Hand Grip
+Strength." Behavior Genetics. in press 2015,. DOI: 10.1007/s10519-015-9736-
+4
+
+72. Piazza, Jennifer R.; Almeida, David M.; Dmitrieva, Natalia O.; Klein,
+Laura C., "Frontiers in the use of biomarkers of health in research on
+stress and aging." Journals of Gerontology, Series B: Psychological
+Sciences and Social Sciences. Sep 1, 2010, 65B, (5), 513 - 525. DOI:
+10.1093/geronb/gbq049
+
+73. Priest, Jacob B.; Woods, Sarah B.; Maier, Candice A.; Parker, Elizabeth
+Oshrin; Benoit, Jenna A.; Roush, Tara R., "The Biobehavioral Family Model:
+Close relationships and allostatic load." Social Science and Medicine. Oct
+2015, 142, 232 - 240. DOI: 10.1016/j.socscimed.2015.08.026
+
+74. Reading, Stephanie Rummans, "Relationship between Psychosocial Stress
+and Allostatic Load: Findings from the MIDUS study." Dissertation,
+University of California, Los Angeles, 2015.
+
+75. Rendina, Danielle N.; Ryff, Carol D.; Coe, Christopher L., "Precipitous
+dehydroepiandrosterone declines reflect decreased physical vitality and
+function." Journals of Gerontology, Series A: Biological Sciences and
+Medical Sciences. in press 2016,. DOI: 10.1093/gerona/glw135
+
+76. Rumble, Meredith E.; Rose, Stephen L.; White, Kaitlin Hanley; Moore, A.
+Holliston; Gehrman, Philip; Benca, Ruth M.; Costanzo, Erin S., "Circadian
+actigraphic restactivity rhythms following surgery for endometrial cancer:
+A prospective, longitudinal study." Gynecologic Oncology. in press 2015,.
+DOI: 10.1016/j.ygyno.2015.04.001
+
+77. Ryff, C.D., "Psychological well-being revisited: Advances in the
+science and practice of eudaimonia." Psychotherapy and Psychosomatics.
+2014, 83, (1), 10 - 28. DOI: 10.1159/000353263
+
+78. Ryff, C.D., "Varieties of resilience and their biological
+underpinnings." European Health Psychologist. Sep 2012, 14, (3), 70 - 75.
+
+79. Ryff, C.D.; Friedman, E.M.; Morozink, J.A.; Tsenkova, V., "Chapter 4:
+Psychological resilience in adulthood and later life: Implications for
+health." In Bert, J. Hayslip; Smith, G., Annual Review of Gerontology and
+Geriatrics:  Emerging Perspectives on Resilience in Adulthood and Later
+Life. 73 - 92, New York, NY: Springer,2012. DOI: 10.1891/0198-8794.32.73
+
+80. Ryff, C.D.; Miyamoto, Y.; Boylan, J.M.; Coe, C.L.; Karasawa, M.;
+Kawakami, N.; Kan, C.; Love, G.D.; Levine, C.; Markus, H.R.; Park, J.;
+Kitayama, S., "Culture, inequality, and health:  Evidence from the MIDUS
+and MIDJA comparison." Culture and Brain. in press 2015,. DOI:
+10.1007/s40167-015-0025-0
+
+81. Schwartz, J.A.; Rowland, M.W.; Beaver, K.M., "A genetically informed
+test of cholesterol levels and self-control, depressive symptoms,
+antisocial behavior, and neuroticism." Journal of Affective Disorders.
+2014, 164, 139 - 147. DOI: 10.1016/j.jad.2014.04.015
+
+82. Seeman, M.; Stein Merkin, S.; Karlamangla, A.; Koretz, B.; Seeman, T.,
+"Social status and biological dysregulation: The 'status syndrome' and
+allostatic load." Social Science and Medicine. 2014, 118, 143 - 151. DOI:
+10.1016/j.socscimed.2014.08.002
+
+83. Seltzer, M.; Almeida, D.; Greenberg, J.; Savla, J.; Stawski, R.; Hong,
+J.; Taylor, J., "Psychosocial and biological markers of daily lives of
+midlife parents of children with disabilities." Journal of Health and
+Social Behavior. 2009, 50, (1),. DOI: 10.1177/002214650905000101
+
+84. Seltzer, M.M.; Abbeduto, L.; Greenberg, J.S.; Almeida, D.M.; Witt, W.,
+"Chapter 7: Biomarkers in the study of families of children with
+developmental disabilities." In Glidden, L.M.; Seltzer, M.M., International
+Review of Research in Mental Retardation. 213 - 249, New York: Academic
+Press,2009. DOI: 10.1016/S0074-7750(09)37007-X
+
+85. Sen, Celia K. Naivar; Kumkale, G. Tarcan, "Who does not get screened? A
+simple model of the complex relationships in mammogram non-attendance."
+Journal of Health Psychology. Jun 2015,. DOI: 10.1177/1359105315587138
+
+86. Shah, Krupa N.; Lin, Feng V.; Yu, Fang; McMahon, James M., "Activity
+engagement and physical function in old age sample." Archives of
+Gerontology and Geriatrics. Mar-Apr 2017, 69, 55 - 60. DOI:
+10.1016/j.archger.2016.11.007
+
+87. Shcheslavskaya, Olga V.; Burg, Matthew M.; McKinley, Paula S.;
+Schwartz, Joseph E.; Gerin, William; Ryff, Carol D.; Weinstein, Maxine;
+Seeman, Teresa E.; Sloan, Richard P., "Heart rate recovery after cognitive
+challenge is preserved with age." Psychosomatic Medicine. Feb-Mar 2010, 72,
+(2), 128 - 133. DOI: 10.1097/​PSY.0b013e3181c94ca0
+a0
+
+88. Shrestha, Nipun; Pedisic, Zeljko; Neil-Sztramko, Sarah; Kukkonen-
+Harjula, Katriina T.; Hermans, Veerle, "The impact of obesity in the
+workplace: A review of contributing factors,  onsequences and potential
+solutions." Current Obesity Reports. Sep 2016, 5, (3), 344 - 360. DOI:
+10.1007/s13679-016-0227-6
+
+89. Siglinsky, E.; Krueger, D.; Ward, R.E.; Caserotti, P.; Strotmeyer,
+E.S.; Harris, T.B.; Binkley, N.; Buehring, B., "Effect of age and sex on
+jumping mechanography and other measures of muscle mass and function."
+Journal of Musculoskeletal and Neuronal Interactions. 2015, 15, (4), 301 -
+308.
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+90. Sin, N.L.; Graham-Engeland, J.E.; Almeida, D.M., "Daily positive events
+and inflammation: Findings from the National Study of Daily Experiences."
+Brain, Behavior, and Immunity. in press 2014,. DOI:
+10.1016/j.bbi.2014.07.015
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+91. Sin, N.L.; Graham-Engeland, J.E.; Ong, A.D.; Almeida, D.M., "Affective
+reactivity to daily stressors is associated with elevated inflammation."
+Health Psychology. in press 2015,. DOI: 10.1037/hea0000240
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+92. Slopen, Natalie; Chen, Ying; Priest, Naomi; Albert, Michelle A.;
+Williams, David R., "Emotional and instrumental support during childhood
+and biological dysregulation in midlife." Preventive Medicine. in press
+2016,. DOI: 10.1016/j.ypmed.2015.12.003
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+93. Slopen, Natalie; Lewis, Tene T.; Gruenewald, Tara L.; Mujahid, Mahasin
+S.; Ryff, Carol D.; Albert, Michelle A.; Williams, David R., "Early life
+adversity and inflammation in African Americans and Whites in the midlife
+in the United States survey." Psychosomatic Medicine. 2010, 42, (7), 694 -
+701. DOI: 10.1097/PSY.0b013e3181e9c16f
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+94. Song, J.; Seltzer, M.M.; Ryff, C.; Coe, C.L.; Greenberg, J.; Hong, J.,
+"Allostatic load in parents of children with developmental disorders:
+Moderating influence of positive affect.." Journal of Health Psychology. in
+press 2013,. DOI: 10.1177/1359105312468193
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+95. Srikanthan, P.; Crandall, C.J.; Miller-Martinez, D.; Seeman, T.E.;
+Greendale, G.A.; Binkley, N.; Karlamangla, A.S., "Insulin resistance and
+bone strength. Findings from the study of Midlife in the United States."
+Journal of Bone and Mineral Research. in press 2013,. DOI:
+10.1002/jbmr.2083
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+96. Strohacker, K.; Wing, R.R.; McCaffery, J.M., "Contributions of body
+mass index and exercise habits on inflammatory markers: A cohort study of
+middle-aged adults living in the USA." BMJ Open. 2013, 3, (5), e002623.
+DOI: 10.1136/bmjopen-2013-002623
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+97. Swann, Jonathan R.; Spagou, Konstantina; Lewis, Matthew; Nicholson,
+Jeremy K.; Glei, Dana A.; Seeman, Teresa E.; Coe, Christopher L.; Goldman,
+Noreen; Ryff, Carol D.; Weinstein, Maxine; Holmes, Elaine, "Microbial-
+mammalian co-metabolites dominate the age-associated urinary metabolic
+phenotype in Taiwanese and American populations." Journal of Proteome
+Research. 2013, 12, (7), 3166 - 3180. DOI: 10.1021/pr4000152
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+98. Tsenkova, V.; Boylan, J.M.; Ryff, C., "Stress eating and health:
+Findings from MIDUS, a national study of U.S. adults." Appetite. in press
+2013,. DOI: 10.1016/j.appet.2013.05.020
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+99. Tsenkova, V.; Pudrovska, T.; Karlamangla, A., "Childhood socioeconomic
+disadvantage and prediabetes and diabetes in later life: A study of
+biopsychosocial pathways." Psychosomatic Medicine. 2014, 76, (8), 622 -
+628. DOI: 10.1097/psy.0000000000000106
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+100. Tsenkova, V.K.; Albert, M.A.; Georgiades, A.; Ryff, C.D., "Trait
+anxiety and glucose metabolism in people without diabetes: Vulnerabilities
+among Black women." Diabetic Medicine. Jun 2012, 29, (6), 803 - 806. DOI:
+10.1111/j.1464-5491.2011.03534.x
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+101. Tsenkova, V.K.; Carr, D.; Coe, C.L.; Ryff, C.D., "Anger, adiposity,
+and glucose control in nondiabetic adults: Findings from MIDUS II." Journal
+of Behavioral Medicine. in press 2012,. DOI: 10.1007/s10865-012-9460-y
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+102. Tsenkova, V.K.; Carr, D.; Coe, C.L.; Ryff, C.D., "Synergistic effect
+of neuroticism and body mass index on glucose metabolism in nondiabetic
+adults." Psychotherapy and Psychosomatics. 2012, 81, (5), 327 - 328. DOI:
+10.1159/000337413
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+103. Tsenkova, V.K.; Carr, D.; Schoeller, D.A.; Ryff, C.D., "Perceived
+weight discrimination amplifies the link between central adiposity and
+nondiabetic glycemic control (HbA(1c))." Annals of Behavioral Medicine.
+2010, 41, (2), 243 - 251. DOI: 10.1007/s12160-010-9238-9
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+104. Tsenkova, Vera K.; Karlamangla, Arun, "Depression amplifies the
+influence of central obesity on 10-year incidence of diabetes: Findings
+from MIDUS." PLOS ONE. Oct 2016, 11, (10), e0164802. DOI:
+10.1371/journal.pone.0164802
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+105. Turiano, N.A.; Mroczek, D.K.; Moynihan, J.; Chapman, B.P., "Big 5
+personality traits and interleukin-6: Evidence for 'healthy neuroticism' in
+a U.S. Population sample." Brain, Behavior, and Immunity. in press 2012,.
+DOI: 10.1016/j.bbi.2012.10.020
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+106. Whillans, Ashley V.; Dunn, Elizabeth W.; Sandstrom, Gillian M.;
+Dickerson, Sally S.; Madden, Kenneth M., "Is spending money on others good
+for your heart?." Health Psychology. in press 2016,. DOI:
+10.1037/hea0000332
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+107. Whisman, Mark A.; Johnson, Daniel P.; Rhee, Soo Hyun, "A behavior
+genetic analysis of pleasant events, depressive symptoms, and their
+covariation." Clinical Psychological Science. Sep 2014, 2, (5), 535 - 544.
+DOI: 10.1177/216770261351279
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+108. Whisman, Mark A.; Judd, Charles M., "A cross-national analysis of
+measurement invariance of the satisfaction with life scale." Psychological
+Assessment. in press 2015,. DOI: 10.1037/pas0000181
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+109. Whisman, Mark A.; Sbarra, David A., "Marital adjustment and
+interleukin-6 (IL-6)." Journal of Family Psychology. 2012, 26, (2), 290 -
+295. DOI: 10.1037/a0026902
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+110. White, Kaitlin Hanley; Rumble, Meredith E.; Benca, Ruth M., "Sex
+differences in the relationship between depressive symptoms and actigraphic
+assessments of sleep and rest-activity rhythms in a population-based
+sample." Psychosomatic Medicine. May 2017, 79, (4), 479 - 484. DOI:
+10.1097/psy.0000000000000434
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+111. Wiley, J.F.; Gruenewald, T.L.; Karlamangla, A.S.; Seeman, T.E.,
+"Modeling multisystem physiological dysregulation." Psychosomatic Medicine.
+in press 2016,. DOI: 10.1097/psy.0000000000000288
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+112. Yang, Y.C.; Schorpp, K.; Harris, K.M., "Social support, social strain
+and inflammation: Evidence from a national longitudinal study of U.S.
+adults." Social Science and Medicine. 2014, 107, 124 - 135. DOI:
+10.1016/j.socscimed.2014.02.013
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf
+
+113. Zilioli, Samuele; Slatcher, Richard B.; Ong, Anthony D.; Gruenewald,
+Tara, "Purpose in life predicts allostatic load ten years later." Journal
+of Psychosomatic Research. in press 2015,. DOI:
+10.1016/j.jpsychores.2015.09.013
+Full text PDF: http://www.ismni.org/jmni/pdf/62/V15I4_01SIGLINSKY.pdf

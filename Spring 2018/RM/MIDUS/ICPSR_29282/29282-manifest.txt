@@ -1,0 +1,109 @@
+File Manifest for ICPSR 29282
+
+Ryff, Carol D., Teresa Seeman, and Maxine Weinstein. Midlife in the United
+States (MIDUS 2): Biomarker Project, 2004-2009. ICPSR29282-v6. Ann Arbor,
+MI: Inter-university Consortium for Political and Social Research
+[distributor], 2013-12-20. http://doi.org/10.3886/ICPSR29282.v6
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    29282-descriptioncitation.pdf       -       -         -       2017-08-23  -
+
+    29282-related_literature.txt        -       -         -       daily       -
+
+    29282-manifest.txt                  -       -         -       daily       -
+
+
+DS0001 Midlife in the United States (MIDUS 2): Biomarker Project, 2004-2009
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    29282-0001-Codebook-DDI.pdf         -       -         -       2013-01-11  7511b72153598f0ed96f9fff8c617b06
+
+    29282-0001-Data.dta                 -       1,255     2589    2013-12-20  e2356582f5af49e7b907f00302f0dd78
+
+    29282-0001-Data.rda                 -       1,255     2589    2013-12-20  c583f16995cd2f19e6cff4ccdece4b35
+
+    29282-0001-Data.sav                 -       1,255     2589    2013-12-20  093001f5ebc0227b1c44ed64347dc19b
+
+    29282-0001-Data.stc                 -       1,255     2589    2013-12-20  5fd7c52716af8ed8cca39edeac45cfea
+
+    29282-0001-Data.tsv                 -       1,255     2589    2013-12-20  3ac815a9d7cb9c719e5266a0b9586c88
+
+    29282-0001-Data.txt                 8544    1,255     2589    2013-12-20  c395cf434d382d4c3ea11051ef25e00d
+
+    29282-0001-Documentation-Blood_Urine.pdf -       -         -       2013-01-11  2b7959e31c1c1a9c52b80accd14f74a4
+
+    29282-0001-Documentation-IRB.pdf    -       -         -       2013-05-02  a8c63138fcd2529b8b383d4bdfd6027b
+
+    29282-0001-Documentation-MIDUS_Acknowledgment.pdf -       -         -       2013-05-02  096b2a8d8b8fa132839c0bdd273ebf3f
+
+    29282-0001-Documentation-Medication.pdf -       -         -       2013-01-11  de4061b07c04c4403558b0da8b2cbc18
+
+    29282-0001-Documentation-README.pdf -       -         -       2013-04-23  bd71b89fe579e090b3f1c22d305e7b1f
+
+    29282-0001-Documentation-bone_review.pdf -       -         -       2013-01-11  bc37fb94b68a92dc4fe3c36feff55fce
+
+    29282-0001-Documentation-datafile_notes.pdf -       -         -       2013-01-11  1560bd2d36a55fa0f558db4b5b21ef54
+
+    29282-0001-Documentation-medicalhistory.pdf -       -         -       2010-09-24  23c3b01fc3cf410edd869c8ab024db1b
+
+    29282-0001-Documentation-p4summary.pdf -       -         -       2013-04-23  e04fea646cb6224a61630bfcd73e6249
+
+    29282-0001-Documentation-physical_exam.pdf -       -         -       2013-01-11  b7ac0fa6e940810b9626afe43b2958c6
+
+    29282-0001-Documentation-processingnote.pdf -       -         -       2010-09-24  756e5a86588a748422436818ed67f82c
+
+    29282-0001-Documentation-psychophysio.pdf -       -         -       2013-01-11  665ea8998d09447d46025332a8cff4c3
+
+    29282-0001-Documentation-saq.pdf    -       -         -       2010-09-24  1c37c04c709c6d59629f569b424bc94a
+
+    29282-0001-Documentation-scales.pdf -       -         -       2013-04-23  ca55429e14ff22dc628f52456f7f7dde
+
+    29282-0001-Documentation-sleep.pdf  -       -         -       2010-09-24  5c949b612e77e3102f3d8502ca285ae3
+
+    29282-0001-Setup.dct                -       -         -       2013-12-20  afc64cde93af26adcce2146b1842db4f
+
+    29282-0001-Setup.do                 -       -         -       2013-12-20  094afc7ee1a4b4fe6fabdca883cf64da
+
+    29282-0001-Setup.sas                -       -         -       2013-12-20  8c091164a3c2d16c8dd3d3d1efbe0854
+
+    29282-0001-Setup.sps                -       -         -       2013-12-20  28db4144a72edc3c5c15743fd8b7f946
+
+    29282-0001-Supplemental_syntax.do   -       -         -       2013-12-20  c53e94066097c6a372bf7f2f21e24cd1
+
+    29282-0001-Supplemental_syntax.sas  -       -         -       2013-12-20  50cb81408d5b41ac1b54310658fd4eaf
+
+
+Version History
+
+2013-12-20 Variable formats were edited per P.I. request; the data files
+have been updated.  2013-05-02 The Acknowledgement for MIDUS II Biomarker
+Project (P4) Publications and the M2_P4 Biomarker IRB Approval and
+Certificate of Confidentiality were added to the collection  2013-04-23
+Technical corrections were made to data formats.  2013-01-11 The study
+documentation has been updated, in particular, details about new variables
+have been added to: (1) the Blood, Urine, and Saliva documentation; (2) the
+Documentation of Scales and Constructed Variables; (3) the Psychophysiology
+Protocol Documentation; and (4) the DataFile Notes. New variables have been
+added to the data file including: (1) new biomarkers Insulin, Glucose, and
+Insulin-like Growth Factor 1 (IGF-1) along with an indicator of insulin
+resistance (HOMAIR); (2) a set of filter variables for the Psychophysiology
+data; (3) a new administrative Bone Scan variable; and (4) newly coded
+additional prescription, over-the-counter, and alternative medication data.
+Further details about the new variables and changes to documentation can be
+found in the README document available for download from the ICPSR and
+NACDA Web sites. The data and documentation files that have been uploaded
+are intended to replace the existing versions at ICPSR. Extant files that
+are not being replaced should remain available.  2011-10-25 The document
+titled DDI codebook has been renamed Codebook. Question text has been
+incorporated with this study and is included in the updated SDA for this
+study. Lastly, a number of undocumented missing values codes have been
+updated and included within this data release.

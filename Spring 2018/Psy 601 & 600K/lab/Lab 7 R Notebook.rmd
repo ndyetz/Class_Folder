@@ -1,0 +1,30 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(psych)
+```
+
+```{r}
+
+data <- read.csv("Lab 7 Example Data for MPlus.csv", header = FALSE)
+colnames(data)<- c("ID", "item1", "item2", "item3", "item4", "item5", "item6")
+```
+
+```{r}
+items <- data[ , -1]
+```
+
+```{r}
+fa(data)
+```
+
+```{r}
+fa(data)$e.values
+```
+
+```{r}
+fa(items, nfactors = 2)
+```
+

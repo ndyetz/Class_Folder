@@ -1,0 +1,43 @@
+---
+title: "Simple Linear Regression"
+author: "Neil Yetz"
+date: "`r format(Sys.time(), '%B %d,  %Y')`"
+output:
+  ioslides_presentation: default
+  beamer_presentation:
+    theme: metropolis
+  slidy_presentation:
+    fontsize: 10pt
+    subtitle: Lecture 11.6  Psy350  Colorado State University
+    theme: yeti
+subtitle: Lecture 11.6/Psy350/Colorado State University
+fontsize: 10pt
+---
+
+```{r setup, include=FALSE}
+options(width = 500)
+```
+
+## What is Regression?
+
+Regression is this that blah ___blah___ **test** 
+
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+

@@ -1,0 +1,100 @@
+---
+title: "R Notebook for Lab 11"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+#Clear environment
+```{r}
+rm(list=ls())
+```
+
+
+#Load Libraries
+```{r}
+library(tidyverse)
+library(psych)
+library(readxl)
+```
+
+#Load Data
+```{r}
+
+data.con <- read_excel("Lab 11 Example 1.xlsx", range = cell_cols("B:G"))
+data.bi  <- read_excel("Lab 11 Example 2.xlsx", range = cell_cols("B:G"))
+#data <- read_csv("Lab 11 Data.csv")
+
+
+```
+
+#Get descriptives
+##Continuous Data
+```{r}
+
+describe(data.con)
+
+```
+##Dichotomous Data
+```{r}
+describe(data.bi)
+```
+
+#Sum totals
+```{r}
+totals.con <- apply(data.con, 1, sum) #the "1" indicates give rowmeans.
+totals.bi  <- apply(data.bi,  1, sum)
+
+```
+
+#Correlations
+##Continuous
+```{r}
+	cor(data.con, totals.con)
+```
+
+##Dichotomous
+```{r}
+	cor(data.bi, totals.bi)
+```
+
+###Biserial correlation
+```{r}
+biserial(totals.bi, data.bi)
+```
+
+```{r}
+alpha(data.con)
+```
+
+```{r}
+alpha(data.con)
+```
+#For loop
+##Create blank matrix
+```{r}
+nitems <- 6
+remainder.corrs <- matrix(rep(0, nitems*2), ncol=2)
+
+```
+
+##Get sum totals
+```{r}
+totals <- apply(data.bi, 1, sum)
+```
+
+##Initiate loop
+```{r}
+for (i in 1:nitems) { #i = value that changes for every loop. it will repeat until 1- number in "nitems(1:6)"
+  remainder.corrs[i,1] <- cor((totals-data.bi[,i]), data.bi[,i])
+  remainder.corrs[i,2] <- biserial((totals-data.bi[,i]), data.bi[,i])
+  }
+
+```
+
+##View dataset
+```{r}
+remainder.corrs
+```
+

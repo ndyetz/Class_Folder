@@ -1,0 +1,17 @@
+Bibliography
+Midlife in the United States (MIDUS 3), 2013-2014
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 36346. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. 
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu 
+
+
+1. Robinette, Jennifer W.; Charles, Susan T.; Gruenewald, Tara L.,
+"Vigilance at home: Longitudinal analyses of neighborhood safety
+perceptions and health." SSM - Population Health. Dec 2016, 2, 525 - 530.
+DOI: 10.1016/j.ssmph.2016.06.004

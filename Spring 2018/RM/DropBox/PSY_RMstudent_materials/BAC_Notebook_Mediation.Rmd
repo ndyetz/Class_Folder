@@ -1,0 +1,294 @@
+---
+title: "R Notebook for BAC data with Mediation"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Load libraries
+```{r}
+
+library(olsrr)
+library(modelr)
+library(boot)
+library(RMediation)
+library(tidyverse)
+
+```
+
+# Import data
+```{r}
+
+obs <- read_csv("bac_obs.csv")
+
+```
+
+# Test a simple mediation model
+## Model 1: regress y on x
+```{r}
+
+model.xy <- lm(alc_gm ~ typ_drks, data = obs)
+ols_regress(model.xy)
+
+```
+
+## Model 2: regress m on x
+```{r}
+
+model.xm <- lm(alcexp ~ typ_drks, data = obs)
+ols_regress(model.xm)
+
+```
+
+## Model 3: regress y on x and m
+```{r}
+
+model.xmy <- lm(alc_gm ~ typ_drks + alcexp, data = obs)
+ols_regress(model.xmy)
+
+```
+
+## Calculate the indirect effect
+```{r}
+
+# Pull out coefficients and standard errors for a and b paths
+coefficients(model.xm)
+coefficients(model.xmy)
+vcov(model.xm)
+vcov(model.xmy)
+
+path.a <- coefficients(model.xm)["typ_drks"]
+path.b <- coefficients(model.xmy)["alcexp"]
+se.path.a<-sqrt(vcov(model.xm)["typ_drks","typ_drks"])
+se.path.b<-sqrt(vcov(model.xmy)["alcexp","alcexp"])
+
+path.a
+path.b
+se.path.a
+se.path.b
+
+
+# Calculate indirect effect
+ab <- path.a*path.b
+ab
+
+```
+
+## Use RMediation to calculate CI for indirect effect
+```{r}
+
+medci(path.a, path.b, se.path.a, se.path.b, alpha = 0.05, plot=TRUE, plotCI=TRUE)
+
+```
+
+## Use boot package to bootstrap confidence interval
+```{r}
+
+boot.med <- function(data, indices){
+	data <-data[indices,]	
+
+	model.xm <- lm(alcexp ~ typ_drks, data=data)
+	model.xmy <- lm(alc_gm ~ typ_drks + alcexp, data=data)
+
+	path.a <- coefficients(model.xm)["typ_drks"]	
+	path.b <- coefficients(model.xmy)["alcexp"]	
+	ab <- path.a*path.b	
+	return(ab)
+}
+
+medboot<-boot(data=obs, statistic = boot.med, R = 15000)	
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+
+plot(medboot)
+
+```
+
+## Calculate the proportion mediated
+```{r}
+
+path.c <- coefficients(model.xy)["typ_drks"]
+
+prop_med <- ab/path.c
+prop_med
+
+```
+
+
+# Test an advanced mediation model 
+## Evaluate which effects are moderated
+### Determine if pmood moderates the effects of typ_drks on alc_gm
+```{r}
+
+moder1 <- lm(alc_gm ~ typ_drks + pmood + typ_drks*pmood, data = obs)
+ols_regress(moder1)
+
+
+cont1.jn <- lm(data=obs, alc_gm ~ typ_drks + pmood + typ_drks*pmood)
+
+probe_interaction(cont1.jn, pred = typ_drks, modx = pmood, 
+                  jnplot = TRUE,
+                  x.label = "Typical Drinks",
+                  y.label = "Alcohol Grams", 
+                  main.title = "Differential effect of typcial drinks on alcohol consumed by partying mood", 
+                  legend.main = "Level of Anxiety") 
+
+
+
+
+
+
+```
+
+### Determine if pmood moderates the effects of alcexp on alc_gm
+```{r}
+
+moder2 <- lm(alc_gm ~ alcexp + pmood + alcexp*pmood, data = obs)
+ols_regress(moder2)
+
+```
+
+## Create centered versions of pmood - choose values of 4, 6, and 8
+```{r}
+
+obs <- obs %>% 
+  mutate(pmood_4 = pmood - 4,
+         pmood_6 = pmood - 6,
+         pmood_8 = pmood - 8)
+         
+```
+
+## Explore Model 1
+### Model 1 Lo: regress y on x, z, and x*z - center z at low value
+```{r}
+
+model.xy_lo <- lm(alc_gm ~ typ_drks + pmood_4 + typ_drks*pmood_4, data = obs)
+ols_regress(model.xy_lo)
+
+```
+
+### Model 1 Mid: regress y on x, z, and x*z - center z at middle value
+```{r}
+
+model.xy_mid <- lm(alc_gm ~ typ_drks + pmood_6 + typ_drks*pmood_6, data = obs)
+ols_regress(model.xy_mid)
+
+```
+
+### Model 1 Hi: regress y on x, z, and x*z - center z at high value
+```{r}
+
+model.xy_hi <- lm(alc_gm ~ typ_drks + pmood_8 + typ_drks*pmood_8, data = obs)
+ols_regress(model.xy_hi)
+
+```
+
+## Model 2
+```{r}
+
+model.xm <- lm(alcexp ~ typ_drks, data = obs)
+ols_regress(model.xm)
+
+```
+
+## Explore Model 3
+### Model 3 Lo: regress y on x, m, z, x*z, and m*z - center z at low value
+```{r}
+
+model.xmy_lo <- lm(alc_gm ~ typ_drks + alcexp + pmood_4 + typ_drks*pmood_4 + alcexp*pmood_4, data = obs)
+ols_regress(model.xmy_lo)
+
+```
+
+### Model 3 Mid: regress y on x, z, and x*z - center z at middle value
+```{r}
+
+model.xmy_mid <- lm(alc_gm ~ typ_drks + alcexp + pmood_6 + typ_drks*pmood_6 + alcexp*pmood_6, data = obs)
+ols_regress(model.xmy_mid)
+
+```
+
+### Model 3 Hi: regress y on x, z, and x*z - center z at high value
+```{r}
+
+model.xmy_hi <- lm(alc_gm ~ typ_drks + alcexp + pmood_8 + typ_drks*pmood_8 + alcexp*pmood_8, data = obs)
+ols_regress(model.xmy_hi)
+
+```
+
+## Calculate the indirect effects at each level of pmood
+```{r}
+
+# Pull out coefficients and standard errors for a and all b paths
+path.a <- coefficients(model.xm)["typ_drks"]
+se.path.a<-sqrt(vcov(model.xm)["typ_drks","typ_drks"])
+
+path.b_lo <- coefficients(model.xmy_lo)["alcexp"]
+se.path.b_lo<-sqrt(vcov(model.xmy_lo)["alcexp","alcexp"])
+
+path.b_mid <- coefficients(model.xmy_mid)["alcexp"]
+se.path.b_mid<-sqrt(vcov(model.xmy_mid)["alcexp","alcexp"])
+
+path.b_hi <- coefficients(model.xmy_hi)["alcexp"]
+se.path.b_hi<-sqrt(vcov(model.xmy_hi)["alcexp","alcexp"])
+
+path.a
+path.b_lo
+path.b_mid
+path.b_hi
+
+# Calculate indirect effects
+ab_lo <- path.a*path.b_lo
+ab_lo
+
+ab_mid <- path.a*path.b_mid
+ab_mid
+
+ab_hi <- path.a*path.b_hi
+ab_hi
+
+```
+
+## Use RMediation to calculate CI for indirect effects
+```{r}
+
+medci(path.a, path.b_lo, se.path.a, se.path.b_lo, alpha = 0.05, plot=TRUE, plotCI=TRUE)
+medci(path.a, path.b_mid, se.path.a, se.path.b_mid, alpha = 0.05, plot=TRUE, plotCI=TRUE)
+medci(path.a, path.b_hi, se.path.a, se.path.b_hi, alpha = 0.05, plot=TRUE, plotCI=TRUE)
+
+```
+
+## Use boot package to bootstrap confidence intervals
+```{r}
+
+boot.med <- function(data, indices){
+	data <-data[indices,]	
+
+	model.xm <- lm(alcexp ~ typ_drks, data=data)
+	model.xmy_lo <- lm(alc_gm ~ typ_drks + alcexp + pmood_4 + typ_drks*pmood_4 + alcexp*pmood_4, data = data)
+	model.xmy_mid <- lm(alc_gm ~ typ_drks + alcexp + pmood_6 + typ_drks*pmood_6 + alcexp*pmood_6, data = data)
+	model.xmy_hi <- lm(alc_gm ~ typ_drks + alcexp + pmood_8 + typ_drks*pmood_8 + alcexp*pmood_8, data = data)
+
+	path.a <- coefficients(model.xm)["typ_drks"]	
+	
+	path.b_lo <- coefficients(model.xmy_lo)["alcexp"]
+  path.b_mid <- coefficients(model.xmy_mid)["alcexp"]
+  path.b_hi <- coefficients(model.xmy_hi)["alcexp"]
+
+	ab_lo <- path.a*path.b_lo
+  ab_mid <- path.a*path.b_mid
+  ab_hi <- path.a*path.b_hi
+
+	return(c(ab_lo, ab_mid, ab_hi))
+}
+
+medboot<-boot(data=obs, statistic = boot.med, R = 15000)	
+medconfint1 <- boot.ci(medboot, index=1, conf=(.95), type=c("bca"))
+medconfint2 <- boot.ci(medboot, index=2, conf=(.95), type=c("bca"))
+medconfint3 <- boot.ci(medboot, index=3, conf=(.95), type=c("bca"))
+print(medconfint1)
+print(medconfint2)
+print(medconfint3)
+
+```
+

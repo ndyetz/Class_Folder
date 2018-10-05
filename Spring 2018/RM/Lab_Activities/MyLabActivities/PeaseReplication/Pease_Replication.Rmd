@@ -1,0 +1,522 @@
+---
+title: "R Notebook for Pease Replication 2015 PID"
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+---
+
+# Load libraries
+```{r}
+
+#install.packages("haven")
+#install.packages("olsrr")
+#install.packages("descriptr")
+#install.packages("modelr")
+#install.packages("tidyverse")
+#install.packages("mosaic")
+#install.packages("GGally")
+#install.packages("psych")
+#install.packages("apaTables")
+
+
+
+library("tidyverse")
+library("haven")
+library(olsrr)
+library(descriptr)
+library(modelr)
+library(tidyverse)
+library(mosaic)
+library(GGally)
+library(psych)
+library(apaTables)
+
+```
+
+# Read in the original datafiles
+```{r}
+# to print this chunk, but not execute it again once the files are imported, add: eval=FALSE
+
+
+# use the haven package to read in the data -- we need the MIDUS II data and the biomarker project data
+#midus2 <- read_spss("04652-0001-Data.sav")
+#bio <- read_spss("29282-0001-Data.sav")
+
+#saveRDS(midus2, "midus2.rds")
+#saveRDS(bio, "bio.rds")
+
+
+
+
+```
+
+# Read in the saved datafiles
+```{r}
+
+midus2 <- readRDS("midus2.rds")
+bio <- readRDS("bio.rds")
+
+```
+
+# Subset and filer the datafiles using pipes
+```{r}
+
+#CREATE AND FILTER MIDUS2 DATASET
+
+midus2.subset <- midus2 %>% 
+  filter(SAMPLMAJ == 1) %>% 
+  select(M2ID,
+         B1PRSEX,
+         B1PF7A,
+         contains("B1SE6"),
+         B1PAGE_M2,
+         B1SE7I,
+         B1SE7T,
+         B1SE7BB,
+         B1SE7EE,
+         B1SNEURO,
+         B1SEXTRA,
+         B1SOPEN,
+         B1SCONS2,
+         B1SAGREE,
+         B1SMPQAG,
+         B1SMPQAG) %>% 
+  filter(complete.cases(B1SNEURO,
+                        B1SEXTRA,
+                        B1SOPEN,
+                        B1SCONS2,
+                        B1SAGREE,
+                        B1SMPQAG,
+                        B1PRSEX,
+                        B1PAGE_M2,
+                        B1PF7A,
+                        B1SMPQAG)) %>% 
+  mutate(IN_MIDUS2 = 1)
+
+#CREATE AND FILTER BIO SUBSET
+
+bio.subset <- bio %>% 
+  select(M2ID,
+         contains("B4Q4"),
+         contains("B4Q5"),
+         contains("B4Q6"),
+         B4QTA_AG,
+         B4QTA_AT,
+         B4QTA_AR,
+         B4QAE_AI,
+         B4QAE_AO,
+         B4QAE_AC,
+         B4QAE_AA) %>% 
+  filter(complete.cases(B4QTA_AG,
+                        B4QTA_AT,
+                        B4QTA_AR,
+                        B4QAE_AI,
+                        B4QAE_AO,
+                        B4QAE_AC,
+                        B4QAE_AA)) %>% 
+  mutate(IN_BIO = 1)
+
+combine <- left_join(midus2.subset, bio.subset, by = "M2ID") %>% 
+  select(M2ID,
+         B1PF7A,
+         B1SNEURO,
+         B1SAGREE,
+         B1SEXTRA,
+         B1SOPEN,
+         B1SCONS2,
+         B4QTA_AG,
+         B4QTA_AT,
+         B4QTA_AR,
+         B4QAE_AI,
+         B4QAE_AO,
+         B4QAE_AC,
+         B4QAE_AA,
+         B1SMPQAG,
+         B1PF7A,
+         B1PAGE_M2,
+         B1PRSEX,
+         everything())
+
+combine
+
+```
+
+# Create dataset for analysis
+```{r}
+
+# note which variables are categorical and numeric and tidy things up
+
+analyze <- combine
+
+all.vars <- names(analyze)
+cat.vars <- c("M2ID", "B1PF7A")
+
+
+##Note this needs o be done because we originally read in data from spss files, r doesn't like the spss files.
+
+analyze <- analyze %>% 
+  mutate_at(vars(all.vars), funs(as.numeric)) %>% 
+  mutate_at(vars(cat.vars), funs(as.factor)) %>% 
+  mutate(GENDER = factor(B1PRSEX, levels = c("1", "2"), labels = c("male", "female"))) %>%
+  mutate(FEMALE = B1PRSEX - 1) %>%
+  select(-B1PRSEX)
+
+
+# create subset of just variable scale scores and the demographic variables
+analyze <- analyze %>%  
+  select(B1SNEURO, B1SAGREE, B1SEXTRA, B1SOPEN, B1SCONS2,  
+         B4QTA_AG, B4QTA_AT, B4QTA_AR, B4QAE_AI, B4QAE_AO, B4QAE_AC,
+         B1SMPQAG,
+         B1PF7A,
+         B1PAGE_M2, B4QAE_AA, B1SMPQAG,
+         GENDER, FEMALE) %>% 
+  filter(complete.cases(B1SNEURO, B1SAGREE, B1SEXTRA, B1SOPEN, B1SCONS2,  
+         B4QAE_AA))
+
+
+
+analyze
+
+```
+
+
+
+
+
+
+#Explore simple linear regression and correlation
+##Anger Expression Adjustment scale description
+
+
+
+
+##Create a correlation matrix of Anger Expression Adjustment and the big 5 personality scales
+
+```{r}
+scatterplot <- ggpairs(analyze, 
+                       columns = c("B4QAE_AA", "B1SNEURO", "B1SEXTRA", "B1SOPEN", "B1SCONS2", "B1SAGREE"),
+                       upper = list(continuous = wrap("cor", size=3)),
+        title = "Bivariate Relationship of Trait Anger and Personality Variables")
+print(scatterplot, progress=FALSE )
+```
+####apa tables version
+
+
+
+We selected to look into Openess and its relationship with anger Expression adjustment based off of our its correlateion of -0.123 and our interest in how the two would relate.
+
+Here are the descriptives fro opennesss from the *MIDUSII* codebook:
+
+
+
+
+##Descriptive Statistics of predictor and outcome variables
+###Anger Expression Adjustment (outcome)
+
+```{r}
+myvars <- analyze %>% 
+  select(B4QAE_AA, B1SOPEN) %>% 
+  na.omit()
+
+
+summary_stats(myvars$B4QAE_AA)
+
+
+```
+###Openness (Predictor)
+```{r}
+summary_stats(myvars$B1SOPEN)
+```
+
+##Set hypotheses
+
+I am interested in assessing the relationship between Openness and ANGER EXPRESSION - ADJUSTMENT. In this case, I am not particularly interested in a significance test for the intercept, it’s the slope that is of interest. I will state a null and alternative hypothesis for the slope.
+
+Ho: B1 = 0
+Ha: B1 ne 0 
+
+##Set alpha and obtain the critical value of t
+
+```{r}
+qt(c(.025, .975), df=625)
+```
+
+##Center Openness at the mean and then fit the SLR
+```{r}
+#Centering opennes vatiable
+myvars <- myvars %>% 
+  mutate(B1SOPEN_m = B1SOPEN - mean(B1SOPEN))
+
+my_model <- lm(B4QAE_AA ~ B1SOPEN_m, data = myvars) 
+  
+ols_regress(my_model)
+```
+
+###Interpretation
+
+
+The intercept is 2.101, this is the predicted Anger Expression Adjustment score for individuals with an average level of openness. The slope is -0.160, this is the expected change in Anger Expression Adjustment for a one unit increase in Openness.
+
+The estimate of the slope divided by the associated standard error gives t-star, that is t-star = -0.160/.052 =-3.100. This means that our estimate of the slope is -3.100 standard errors away from the asserted null hypothesis (0). If the null hypothesis were true, we would expect about 95% of the random samples to produce an estimate of the slope that is within 1.96 standard errors of 0. Therefore it is highly unlikely that the null hypothesis is true given this estimate of the slope. In fact, the p-value is .002, which provides the probability that we would obtain a t-star of this magnitude or larger if the null hypothesis were true. Therefore, we reject the null hypothesis.
+
+
+The 95% CI is -0.261 to -0.59. Based on the sampling distribution, we expect that 95% of the 95% CI’s that we would construct across many, many random samples would contain the population slope. We can think of the 95% CI as giving us a range of plausible values for the parameter estimate and showing us the precision of our estimate. The fact that 0 is not inside the 95% CI corresponds with our t-test, that is, 0 is not likely to be a plausile value for the slope.
+
+In sum, it appears that Openness is significantly associated with Anger Expression Adjustment, lower scores on Openness are associated with higher scores on Anger Expression Adjustment. Openess predicts 1.5% of the variance in Anger Expression Adjustment  (see R-squared). In a SLR, the standardized beta is equal to the correlation, so the correlation between Openess and Anger Expression Adjustment is .123.
+
+
+
+
+###Create scatterplot of Openness and Anger Expression Adjustment with fitted model
+```{r}
+temp_var <- predict(my_model, myvars, interval="prediction")
+myvars_new <- cbind(temp_var, myvars)
+
+
+ggplot(myvars_new, aes(x = B1SOPEN_m, y =B4QAE_AA)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_line(aes(y=lwr), color = "red", linetype = "dashed") +
+  geom_line(aes(y=upr), color = "red", linetype = "dashed") +
+  labs(title = "Scatterplot of Openness and Aggression expression adjustments with Best Fit Line",
+       subtitle = "Confidence Interval in Gray Shaded Area, Prediction Interval in Red", 
+       x = "openness (centered at the mean)", y = "Aggression expression  adjustment")
+```
+
+###Residuals plot
+```{r}
+myvars <- myvars %>% 
+  add_residuals(my_model) 
+  
+ggplot(myvars, aes(x = resid)) + geom_histogram(binwidth = .5)
+```
+
+Our residual plot is relatively normally distributed.
+
+##Use describe from the "psych" package
+```{r}
+describe(analyze)
+```
+
+##apaTables package
+```{r}
+
+corr <- analyze %>% 
+  mutate(Neuroticism = B1SNEURO, 
+         Agreeableness= B1SAGREE, 
+         Extraversion= B1SEXTRA, 
+         Openness= B1SOPEN, 
+         Conscientiousness= B1SCONS2, 
+         Ang_Trait= B4QTA_AG, 
+         Ang_Temp = B4QTA_AT, 
+         Ang_Reaction= B4QTA_AR, 
+         Ang_Expression_In = B4QAE_AI, 
+         Ang_Expression_Out= B4QAE_AO, 
+         Ang_Expression_Control= B4QAE_AC,
+         Agression= B4QAE_AA,
+         Age= B1PAGE_M2, 
+         Gender= FEMALE) %>% 
+  select(Neuroticism,         
+        Agreeableness,
+        Extraversion,
+        Openness,
+        Conscientiousness, 
+        Ang_Trait,
+        Ang_Temp,
+        Ang_Reaction,
+        Ang_Expression_In,
+        Ang_Expression_Control,
+        Agression,
+        Age,
+        Gender)
+    
+    
+    
+
+
+apa.cor.table(corr, filename= "correlation Matrix.doc",
+              table.number = 1)
+
+
+```
+#Center the variables
+```{r}
+
+describe(analyze)
+
+analyze <- analyze %>% 
+  mutate(B1SNEURO.C = B1SNEURO - mean(analyze$B1SNEURO),
+         B1SAGREE.C = B1SAGREE - mean(analyze$B1SAGREE),
+         B1SEXTRA.C = B1SEXTRA - mean(analyze$B1SEXTRA),
+         B1SOPEN.C  = B1SOPEN - mean(analyze$B1SOPEN), 
+         B1SCONS2.C  = B1SCONS2 - mean(analyze$B1SCONS2), 
+         B1PAGE_M2.C  = B1PAGE_M2 - mean(analyze$B1PAGE_M2))
+
+```
+
+
+
+
+```{r}
+
+#summary(analyze$B1SNEURO.C)
+#summary(analyze$B1SAGREE.C )
+#summary(analyze$B1SEXTRA.C )
+#summary(analyze$B1SOPEN.C  )
+#summary(analyze$B1SCONS2.C )
+#summary(analyze$B1PAGE_M2.C)
+
+
+```
+
+
+##Describe, make sure cont var are centered
+```{r}
+describe(analyze)
+```
+
+
+#Estimate regresson models
+
+##Trait Anger
+
+```{r}
+m1 <-  lm(B4QTA_AG ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m1)
+```
+
+
+
+##Trait Anger: Angry Temperament
+
+```{r}
+m2 <-  lm(B4QTA_AT ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C +  FEMALE, data = analyze)
+
+ols_regress(m2)
+```
+
+##Trait Anger: Angry Reaction
+
+```{r}
+m3 <-  lm(B4QTA_AR ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m3)
+```
+
+
+##Anger Expression: Anger In
+
+```{r}
+m4 <-  lm(B4QAE_AI ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m4)
+```
+
+
+
+##Anger Expression: Anger Out
+
+```{r}
+m5 <-  lm(B4QAE_AO ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m5)
+```
+
+
+##Anger Expression: Anger control
+
+```{r}
+m6 <-  lm(B4QAE_AC ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m6)
+```
+
+
+##Agression
+
+```{r}
+m7 <-  lm( B1SMPQAG ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C + B1PAGE_M2.C + FEMALE, data = analyze)
+
+ols_regress(m7)
+```
+
+#Checking Assumptions
+
+DV = Trait ANger
+
+IV's = B1SNeuro.C, B1SAGREE.C, B1SEXTRA.C, B1SOPEN.C, B1CONSC2.C 
+  
+```{r}
+
+library(car)
+library(broom)
+library(boot)
+
+ass_mod1 <-  lm(B4QTA_AG ~  B1SNEURO.C + B1SAGREE.C  + B1SEXTRA.C + B1SOPEN.C  + B1SCONS2.C , data = analyze)
+
+ols_regress(ass_mod1)
+
+
+fit_ass_mod1 <- augment(ass_mod1, data=analyze)
+
+
+```
+
+
+#Checking residuals
+```{r}
+residualPlots(ass_mod1, ask = FALSE, id.n = 3, id.cex= 1.25, id.col = "blue", layout = c(1,1))
+```
+
+```{r}
+ncvTest(ass_mod1)
+```
+#Cr Plots
+```{r}
+crPlots(ass_mod1, ask = FALSE, span = 1, terms = "B1SNEURO.C")
+crPlots(ass_mod1, ask = FALSE, span = 1, terms = "B1SAGREE.C")
+crPlots(ass_mod1, ask = FALSE, span = 1, terms = "B1SEXTRA.C")
+crPlots(ass_mod1, ask = FALSE, span = 1, terms = "B1SOPEN.C")
+crPlots(ass_mod1, ask = FALSE, span = 1, terms = "B1SCONS2.C")
+
+```
+#Tests for linearity
+```{r}
+
+library(lmtest)
+
+ass_mod1_hccm <- hccm(ass_mod1)
+coeftest(ass_mod1, vcov=ass_mod1_hccm)
+```
+
+```{r}
+ggplot(data = fit_ass_mod1, aes(x = .std.resid)) +
+geom_density() +
+stat_function(fun = dnorm,
+lwd = 2,
+col = "red") +
+labs (title = "Density plot of standardized residuals against standard normal distribution (red)")
+```
+
+```{r}
+qqPlot(ass_mod1, ask = FALSE, id.n = 3, labels.id = names(id), id.cex= 1.25, id.col = "blue")
+```
+```{r}
+shapiro.test(fit_ass_mod1$.resid)
+```
+
+#Question 3
+First we ploted the residuals against each predictor and y-hat.  The tukey test was significant for conscienciousness, suggesting that the linear model was a poor fit for this predictor.  Next we ran a cr plot for each predictor, where conscienciousness appeared to still have problems suggesting that that data needed to be transformed using a square root or log of x.  Next we ran a non-constant error varience test which was highly significant, meaning that our model violates the assumption of homscedasticity.   Plotting standardized residuals against a normal distribution, it is clear that the residuals are not normally distributed and are positively skewed.  A qq plot confirms the observations from the last plot.  A Shapiro-Wilk is highly significant, confirming that our residuals are not normally distributed.
+
+
+#Question #4
+
+Based on the consistant issues noted with conscienciousness, we purpose a log transformation of that variable in order to condend with the issue of heteroskedasticity.  The original researchers proposed building new models with interaction terms to get at relationships not accounted for with the simple MLR model.
+
+
+
+
+

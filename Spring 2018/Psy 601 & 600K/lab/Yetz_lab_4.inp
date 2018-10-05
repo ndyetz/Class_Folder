@@ -1,0 +1,11 @@
+Title:  Lab 4 Activity;
+
+Data:  FILE IS Lab 4 Exercise Data.csv;
+
+Variable: NAMES ARE gender female	item1-item6; 
+                !female = recoded gender: 0 = male, 1 =female
+           USEVARIABLES ARE female item1-item6;
+           CATEGORICAL ARE female;
+            MISSING ARE .;
+
+Analysis: TYPE IS BASIC;

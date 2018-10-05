@@ -1,0 +1,78 @@
+---
+title: "Yetz Lab 6"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+---
+
+#Library/Data
+```{r}
+library(tidyverse)
+library(psych)
+#install.packages("GPArotation")
+library(GPArotation)
+
+lab6 <- read_csv("lab 6 Data.csv")
+```
+
+#create scores
+```{r}
+lab6$time_1 <- rowMeans(lab6[, c("t1_item1", "t1_item2", "t1_item3", "t1_item4", "t1_item5", "t1_item6", "t1_item7", "t1_item8", "t1_item9", "t1_item10")])
+lab6$time_2 <- rowMeans(lab6[, c("t2_item1", "t2_item2", "t2_item3", "t2_item4", "t2_item5", "t2_item6", "t2_item7", "t2_item8", "t2_item9", "t2_item10")])
+```
+
+```{r}
+cor(lab6$time_1,lab6$time_2, use = "pairwise.complete.obs")
+```
+#Check items
+```{r}
+items <- lab6[,c("t1_item1", "t1_item2", "t1_item3", "t1_item4", "t1_item5", "t1_item6", "t1_item7", "t1_item8", "t1_item9", "t1_item10")] 
+cor(items, use = "pairwise.complete.obs")
+
+lab6 <- lab6 %>% 
+  mutate(t1_item5R = 8 -t1_item5,
+         t1_item7R = 8 - t1_item7)
+
+items_new <- lab6[,c("t1_item1", "t1_item2", "t1_item3", "t1_item4", "t1_item6", "t1_item7R", "t1_item8", "t1_item9", "t1_item10")] #Reverse coded item 7. removed item 5
+cor(items_new)
+
+
+```
+#Obtain alpha
+```{r}
+alpha(items_new)
+```
+#Change items for time 2 & test-retest reliability
+```{r}
+
+
+lab6 <- lab6 %>% 
+  mutate(t2_item5R = 8 -t2_item5,
+         t2_item7R = 8 - t2_item7)
+
+lab6$time_1_new <- rowMeans(lab6[, c("t1_item1", "t1_item2", "t1_item3", "t1_item4",  "t1_item6", "t1_item7R", "t1_item8", "t1_item9", "t1_item10")])
+lab6$time_2_new <- rowMeans(lab6[, c("t2_item1", "t2_item2", "t2_item3", "t2_item4", "t2_item6", "t2_item7R", "t2_item8", "t2_item9", "t2_item10")])
+
+cor(lab6$time_1_new,lab6$time_2_new, use = "pairwise.complete.obs")
+
+```
+
+#Question 1 Answer
+1. Explain how and why you resolved any negative interitem correlations.
+
+When I first ran the correlation matrix I got negative correlations with Item 5 and Item 7. My next step was to reverse these items by taking 8 minus the score. Even after this, Item 5 was still giving me a negative correlation. Item 7 was fine. Therefore, because of this, I decided to completely remove item 5. Once I re-ran the correlation, the items correlated fine.
+
+#Question 2 Answer
+2. Report your reliability coefficients (test-retest and alpha) and interpret them. Is this a reliable test? Reliable in what way(s)? What can you conclude about the test from these coefficients? 
+
+
+Reliability Coefficient = **0.86**  
+Test-retest reliability = **0.73**
+
+Using the standard 0.70 reliability coefficient as a cutoff point, yes, this is a reliable test. It is reliable by having high inter-item correlation and high test retest reliability. Therefore, the items are all related and measuring one thing (well, we can slightly infer this at least). Next, it is relatively consistent across 2 timepoints. Overall, I can conclude that this test is pretty good. Assuming I could read the items and actually agree that it is measuring the construct I am interested in. I would trust it in a research study. However, I would need better results for a clinical setting.
+
+# Question 3 Answer
+3. Compare your test-retest correlation and alpha values. Is there a discrepancy? If so, how should you interpret it? 
+
+Yes, there is a discrepancy between the two. I have a much higher Cronbach Alpha, but my test retest reliability is much lower. Therefore, it can be said, although our test is highly reliable at 1 timepoint - any Interpretations she bmade with more skepticism if they are made across 2 timepoints. However, it is not horrible. Again, I do trust this test assuming it is measuring the construct I am interested in.

@@ -1,0 +1,167 @@
+---
+title: "Psy 350: HW 1"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+#Cleare environments
+```{r}
+rm(list=ls())
+```
+
+#load libraries
+```{r}
+library(psych)
+```
+
+#Read in data
+```{r, warning = FALSE}
+setwd("C:/Users/Neil/Desktop/Class folder/Fall 2018/Psy_350/Data")
+
+Yetz.data <- read.csv("PSY 350 Class Survey.csv", header = TRUE, stringsAsFactors = FALSE)
+
+```
+
+
+
+
+#1
+
+##a.	
+
+What proportion of the class identifies as male, and what proportion identifies as female? What proportion did not identify as either male or female?  Note that I am asking for proportions here – decimal values – not percentages or numbers of students.
+
+```{r}
+
+prop.table(table(Yetz.data$gender))
+
+```
+
+Male = 16%
+Female = 81%
+
+#2
+
+```{r}
+table(Yetz.data$interest)
+```
+
+##a
+
+How many students in the class are primarily interested in counseling psychology?  Here, I am asking you for a number
+
+Counseling = 27
+
+##b.	
+What are the three most popular areas of interest in psychology among the class? 
+
+Top = Counseling, forensic, industrial
+
+
+##c.
+
+What percentage of the class is still undecided about their primary interest area (that is, selected “unsure”)? 
+
+unsure = 
+```{r}
+prop.table(table(Yetz.data$interest))
+```
+
+unsure = 7%
+
+##d.	
+
+What R function did you use to calculate the previous answer?
+
+prop.table()
+
+
+#3
+
+##a.	
+
+Create a figure that represents the interest areas of the class. Take a screen shot and upload it.
+
+```{r, fig.height= 12, fig.width = 12}
+
+bar <- table(Yetz.data$interest)
+
+barplot(bar)
+
+```
+
+
+##b.	
+
+Is it more appropriate here to use a bar chart or a histogram? 
+
+barchart
+
+##c.	
+
+Why?
+
+Nominal Variables
+
+
+#4
+
+##a.	
+
+What is the mean number of cups of coffee consumed by members of the class? 
+
+
+```{r}
+describe(Yetz.data$coffee)
+```
+
+Mean = 4.15
+
+
+##b.
+
+What is the median? 
+
+Median = 3
+
+##c.
+
+What is the standard deviation for this variable? 
+
+SD = 4.84
+
+
+#5
+
+##a.	
+
+Create an appropriate figure to represent the number of cups of coffee consumed by members of the class. Take a screen shot and upload it. 
+
+```{r}
+hist(Yetz.data$coffee)
+```
+
+
+
+##b.	
+
+Is it more appropriate here to use a bar chart or a histogram? 
+
+Histogram
+
+
+#6.
+
+##a.	
+
+Is the distribution of coffee consumption symmetric or skewed, based on the statistics and decision rules discussed in lecture and your text? 
+
+Symmetric: 
+
+##b.	
+
+Explain how you know (report the numbers that support your conclusion). (1 point)
+
+
+skew = 1.8 less than agreed 2+ for too much skew

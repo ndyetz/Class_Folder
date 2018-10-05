@@ -1,0 +1,351 @@
+---
+title: "R Notebook for Replication of Li and colleagues (2014) JOHP"
+output:
+  html_notebook:
+    toc: yes
+  html_document:
+    toc: yes
+---
+
+# Load libraries
+```{r, message=FALSE}
+
+
+library("tidyverse")
+library("olsrr")
+library("descriptr")
+library("haven")
+library("GGally")
+library("psych")
+library("knitr")
+library("apaTables")
+library("mosaic")
+
+library(modelr)
+library(huxtable)
+library(GGally)
+library(car)
+library(RMediation)
+library(boot)
+
+```
+
+
+
+
+# Import the original datafiles
+```{r, eval = FALSE}
+
+# use the haven package to read in the data
+#midus2 <- read_spss("04652-0001-Data.sav")
+
+#saveRDS(midus2, "midus2.rds")
+
+```
+
+# Read in the saved datafiles
+```{r}
+
+midus2 <- readRDS("midus2.rds")
+
+```
+
+# Subset the datafiles
+```{r}
+
+# subset midus to keep only people in the main sample only
+
+midus2.subset <- midus2 %>% 
+  filter ((SAMPLMAJ == 1 | SAMPLMAJ == 4) & # limit to main and metro scample
+            (B1PD1 == 1 & B1PD7 == 1) & # limit to those in caregiver role
+            B1PB3A == 1 & # limit to those with a superviser
+            B1PB3B != 1) %>% # limit to those not self-employed
+  select(M2ID,  
+         B1PRSEX, B1PAGE_M2, # sex and age
+         B1PD10, B1PD11, B1PD12, B1PD13, B1PD14, B1PD15, # caregiver items
+         B1PB12, B1PB12A, # hours worked
+         B1SF27I, B1SF27J, B1SF27K, B1SF27L, # family to work conflict
+         B1SJ2G, B1SJ2H, B1SJ2I, B1SJ2J, # family strain
+         B1SF30C, B1SF30D, B1SF30E, # supervisor support
+         B1SF1, # job satisfaction
+         B1SQ1, B1PG1, B1SE1F, # life satisfaction
+         B1PDEPRE) # depression
+
+# remove cases with missing data
+midus2.subset <- na.omit(midus2.subset)
+
+describe(midus2.subset)
+
+```
+
+# Prepare variables for analysis
+```{r}
+analyze<-midus2.subset
+
+# make all variables numeric for the dataframe we will analyze
+all.vars <- names(analyze)
+analyze <- analyze %>% 
+  mutate_at(vars(all.vars), funs(as.numeric)) # make all of these vars numeric
+
+# rescore variables in preparation for making scale scores
+analyze <- analyze %>% 
+  mutate(LS1 = zscore(B1SQ1), 
+         LS2 = zscore(B1PG1)*-1, #reverse coded
+         LS3 = zscore(B1SE1F)*-1) %>% #reverse coded
+  mutate(CG1 = ifelse(B1PD10 == 2, 0, B1PD10),
+         CG2 = ifelse(B1PD11 == 2, 0, B1PD11),
+         CG3 = ifelse(B1PD12 == 2, 0, B1PD12),
+         CG4 = ifelse(B1PD13 == 2, 0, B1PD13))
+
+#authors standardized LS items beofre combining into life satisfaction scale
+
+analyze
+```
+
+
+# Examine reliability of scales
+##Family/Work Conflict
+```{r}
+
+fwc_scale <- analyze %>% 
+  select(B1SF27I, B1SF27J, B1SF27K, B1SF27L) %>% 
+  alpha()
+fwc_scale
+
+
+
+
+```
+
+
+Our FWC as a good internal consistency because of the high chronbachs alpha of 0.73. Removing any of the items would decrease the internal relibaility of the scale and all items correlate well with one another.
+
+##Family Strain
+```{r}
+
+fs_scale <- analyze %>% 
+  select(B1SJ2G, B1SJ2H, B1SJ2I, B1SJ2J) %>% 
+  alpha()
+fs_scale
+
+
+
+
+```
+Our FC as a good internal consistency because of the high chronbachs alpha of 0.77. Removing any of the items would decrease the internal relibaility of the scale and all items correlate well with one another.
+
+
+
+##Perceived Supervisor Support
+
+```{r}
+
+pss_scale <- analyze %>% 
+  select(B1SF30C, B1SF30D, B1SF30E) %>% 
+  alpha()
+pss_scale
+
+
+
+
+```
+
+
+Our FC as a good internal consistency because of the high chronbachs alpha of 0.95. However, removing B1SF30E would icrease the reliability. However, we need to weighout the pros and cons, because it won't raise by much. 
+
+
+##Life Satisfaction
+```{r}
+#
+#ls_scale <- analyze %>% 
+#  select(B1SQ1, B1PG1, B1SE1F) %>% 
+#  alpha(check.keys =TRUE)
+
+ls2_scale <- analyze %>% 
+  select(LS1, LS2, LS3) %>% 
+  alpha(check.keys =TRUE)
+
+
+
+#ls_scale
+
+ls2_scale
+
+
+
+
+```
+Our LS as a good internal consistency because of the high chronbachs alpha of 0.73. Removing any of the items would decrease the internal relibaility of the scale and all items correlate well with one another.
+
+
+
+#Create Scale scale scores and final dataset for analysis
+
+```{r}
+
+analyze <- analyze %>% 
+  rowwise() %>% 
+  mutate(CGIV = sum(CG1, CG2, CG3, CG4)) %>% 
+  mutate(HRSWRK = ifelse(is.na(B1PB12), B1PB12, B1PB12 + B1PB12A)) %>%   mutate(FWC = 6 - mean(B1SF27I, B1SF27J, B1SF27K, B1SF27L, na.omit = TRUE)) %>% 
+  mutate(FAMSTRN = 5 - mean(B1SJ2G, B1SJ2H, B1SJ2I, B1SJ2J, na.omit = TRUE)) %>% 
+  mutate(PSS = 6 - mean(B1SF30C, B1SF30D, B1SF30E, na.omit = TRUE)) %>%
+  mutate(LS = mean(LS1,LS2,LS3, na.omit = TRUE))
+  
+analyze
+
+
+```
+
+
+#Subset analyze dataframe so that it includes only the variables
+```{r}
+
+
+analyze <- analyze %>%
+  select(B1PAGE_M2,
+         B1PRSEX,
+         HRSWRK,
+         B1PD15,
+         CGIV,
+         FWC,
+         FAMSTRN,
+         PSS,
+         B1SF1,
+         LS,
+         B1PDEPRE
+  )
+
+
+
+  
+
+```
+##Descriptive statistics for analyze dataframe
+```{r}
+describe(analyze)
+```
+
+
+#8.	Use the apa.cor.table() function in the apaTables package to create a correlation matrix for all of the variables in the analyze dataframe. 
+```{r}
+apa.cor.table(analyze, filename= "Licorr.doc",
+              table.number = 1, show.conf.interval = FALSE)
+```
+
+# Scatterplot of key variables 
+```{r, message = FALSE}
+library("GGally")
+ggpairs(analyze, columns = c("FWC", "FAMSTRN", "PSS", "B1SF1", "LS", "B1PDEPRE"), 
+          title = "Bivariate Relationship of Key Study Variales")
+```
+
+#	Create mean-centered variables:
+```{r}
+analyze <- analyze %>% 
+  mutate(B1PAGE_M2.C = B1PAGE_M2 - mean(analyze$B1PAGE_M2),
+         B1PRSEX.C = B1PRSEX - mean(analyze$B1PRSEX),
+         HRSWRK.C = HRSWRK - mean(analyze$HRSWRK),
+         B1PD15.C  = B1PD15 - mean(analyze$B1PD15), 
+         CGIV.C  = CGIV - mean(analyze$CGIV), 
+         FWC.C  = FWC - mean(analyze$FWC), 
+         FAMSTRN.C  = FAMSTRN - mean(analyze$FAMSTRN), 
+         PSS.C  = PSS - mean(analyze$PSS), 
+         B1SF1.C  = B1SF1 - mean(analyze$B1SF1), 
+         LS.C  = LS - mean(analyze$LS), 
+         B1PDEPRE.C  = B1PDEPRE - mean(analyze$B1PDEPRE))
+
+describe(analyze)
+         
+```
+
+#Mediation Analyses
+
+##Introduction
+
+**Hypothesis**: FWC will mediate the relationship between caregiving demands & Life satisfaction only when strain from family is high & PSS is low after controlling for age and sex.
+
+**outcome variable** = Life satisfaction
+**Predictor** = Caregiving Demands
+**Mediator** = FWC
+
+
+
+
+##Methods
+We will test all of the paths associated with this hypothsis. This means, testing 1.) Life satsifaction on Carigiving demans (C), 2.) FWC on CareGiving Demands (A) 3.) Life satisfaction on Caregiving Demands (B) and 4.) Life satisfaction on Caregiving demands after controlling for FWC (C').
+
+##Results
+
+```{r}
+analyze <- analyze %>% 
+  filter(PSS.C < 0 & FAMSTRN.C > 0)
+```
+
+
+###Model.xy
+
+```{r}
+model.xy <- lm(LS ~ CGIV.C + B1PAGE_M2 + B1PRSEX, data=analyze)
+ols_regress(model.xy)
+```
+Here we are testing the overall effect of our predictor on our outcome. (C-path). The overall effect of Caregiving on life satisfaction is 0.012 while controlling for age and sex. 
+
+###model.xm
+
+```{r}
+model.xm <- lm(CGIV.C ~ FWC.C + B1PAGE_M2 + B1PRSEX, data=analyze)
+ols_regress(model.xm)
+```
+Then we are 
+testing the A path, which is the path from our predictor to our mediator variable. which our estimate is 0.194 while controlling for Age and sex.
+
+###model.xmy
+```{r}
+model.xmy <- lm(LS ~ CGIV.C +FWC.C + B1PAGE_M2 + B1PRSEX, data=analyze)
+ols_regress(model.xmy)
+```
+Lastly, our b path is -0.120 while controlling for Age and Sex.
+
+```{r}
+path.a <- coefficients(model.xm)["FWC.C"]
+path.b <- coefficients(model.xmy)["CGIV.C"]
+se.path.a<-sqrt(vcov(model.xm)["FWC.C","FWC.C"])
+se.path.b<-sqrt(vcov(model.xmy)["CGIV.C","CGIV.C"])
+
+path.b
+se.path.b # this is equivalant to the parameter standerd erro for sleep in model.xmy. in other words... path b
+```
+
+```{r}
+
+ab <- path.a*path.b
+ab
+```
+
+The a*b is our c' path. It is the combined effect of path a and path b. this is the indirect effect, that is being mediated from FWC to Life Satisfaction through Caregiving demands.
+
+```{r}
+
+boot.med <- function(data, indices){
+data <-data[indices,]
+model.xm <- lm(CGIV.C ~ FWC.C + B1PAGE_M2 + B1PRSEX, data=data)
+model.xmy <- lm(LS ~ CGIV.C +FWC.C + B1PAGE_M2 + B1PRSEX, data=data)
+
+path.a <- coefficients(model.xm)["FWC.C"] #the a-path coefficient
+path.b <- coefficients(model.xmy)["CGIV.C"] #the b-path coefficient
+ab <- path.a*path.b #returns the product of a*b
+return(ab)
+}
+
+medboot<-boot(data=analyze, statistic = boot.med, R = 10000)
+medconfint <- boot.ci(medboot, index=1, conf = (.95), type = "bca")
+print (medconfint)
+plot(medboot)
+
+```
+This bootsrap analysis gives us the actual confidence intervals for our c' path. This is done because we cannot assume that the c' confidence intervals will be normally distributed.
+
+##Discussion
+Based on the results, we cannot support our hypothesis. There are no significant effects on any of the paths, thus suggesting that there is no significant relationship between FWC & Life Satisfaction. Furthermore, there is no mediation effect going from FWC to Life satisfaction through Caregiving demands. Thus we cannot support our original hypothesis. 
+
+

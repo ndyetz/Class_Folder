@@ -1,0 +1,16 @@
+# extra credit lab assignment
+
+```{r}
+fandango2 <- fandango %>% 
+  mutate(di_star = ifelse(fandango_stars > 4, 1, 0)) %>% 
+  mutate(winsor_rotten = ifelse(rottentomatoes >= 89, 89, rottentomatoes)) %>%
+  arrange(desc(di_star), desc(winsor_rotten))
+```
+
+##extra credit lab assignment histogram
+
+```{r}
+ggplot(fandango2, aes(x = winsor_rotten, fill = "red")) +
+  geom_histogram(show.legend = FALSE, binwidth=10) +
+  labs(title = "wins or rotten scores plotted", x = "wins or rotten score")
+```
