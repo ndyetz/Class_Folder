@@ -24,7 +24,7 @@ rm(list=ls(all=TRUE))
 #install.packages("psych")
 #install.packages("modelr")
 #install.packages("tidyverse")
-install.packages("crayon")
+#install.packages("crayon")
 
 
 
@@ -158,12 +158,12 @@ ols_regress(m2)
 
 obs <- obs %>%
 mutate(alcexp_m = alcexp - mean(alcexp), #Centering alcexp
-typ_drks_m = typ_drks - mean(typ_drks))  #Centering typ_drinks
+typ_drks_m = typ_drks - mean(typ_drks)) %>%  #Centering typ_drinks %>% 
+select(cigarettes = "alc_gm", `peer smokers` = "alcexp", SES = "typ_drks")
 
-
-m3 <- lm(data = obs, alc_gm ~ typ_drks_m + alcexp_m)
-ols_regress(m3)
-
+#Do the # of peers that smoke predict the number of cigarettes smoked by the individual? 
+model <- lm(data = obs, cigarettes ~ `peer smokers` + SES)
+summary(model)
 
 ```
 

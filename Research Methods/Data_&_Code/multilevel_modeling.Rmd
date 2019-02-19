@@ -1,9 +1,13 @@
 ---
-title: "R Notebook: Multilevel Modeling"
-output: 
+title: 'R Notebook: Multilevel Modeling'
+output:
   html_notebook:
     toc: yes
-    toc_float: true
+    toc_float: yes
+    df_print: tibble
+  html_document:
+    df_print: tibble
+    toc: yes
 ---
 
 #Load libraries
@@ -14,6 +18,7 @@ library(tidyverse)
 library(broom)
 library(modelr)
 library(lme4)
+library(lmerTest)
 #install.packages("lmerTest")
 
 
