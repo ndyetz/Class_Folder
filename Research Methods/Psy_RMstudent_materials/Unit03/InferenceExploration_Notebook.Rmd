@@ -11,7 +11,6 @@ output: html_notebook
 library(tidyverse)
 library(descriptr)
 library(mosaic)
-
 ```
 
 # Import data
@@ -19,7 +18,7 @@ library(mosaic)
 
 wtloss <- read_csv(file = "wtloss.csv")
 
-screener(wtloss)
+#screener(wtloss)
 
 ```
 
@@ -28,7 +27,7 @@ screener(wtloss)
 ## Get descriptive statistics for lbslost (pounds lost)
 ```{r}
 
-summary_stats(wtloss$lbslost)
+#summary_stats(wtloss$lbslost)
 
 ```
 
