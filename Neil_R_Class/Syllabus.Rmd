@@ -1,8 +1,7 @@
 ---
-title: "R Notebook"
+title: ""
 output:
   html_document:
-    df_print: paged
     toc: yes
     toc_float: true
     theme: yeti
@@ -17,23 +16,34 @@ output:
 **R Seminar** <br>
 **Syllabus & Course Schedule** <br>
 **Semester**<br>
+</center>
+```{r, echo = FALSE}
+rm(list=ls())
+```                                                                                               
 
 
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(data.table)
+library(knitr     )
+library(kableExtra)
+library(tidyverse )
+```
 
+
+# Contact information
 ```{r, echo = FALSE, message = FALSE}
 
-library(data.table)
-library(knitr)
-library(kableExtra)
-library(tidyverse)
 
-infor <- data.table::transpose(infor <- data.frame(`Room:` = c("Room #"),
-           `Time:`   = c("Time"), 
-           `Instructor:` = c("Neil Yetz, M.P.H."),
-           `Office:` = c("Behavioral Sciences Building Office 344"),
-           `Office Hours` = c("Time1 - Time2"),
-           `Contact` = c("Neil.Yetz@colostate.edu")
-           ))
+infor <- data.table::transpose(
+  data.frame(
+           `Room:`        = c("Room #"                                 ),
+           `Time:`        = c("Time"                                   ), 
+           `Instructor:`  = c("Neil Yetz, M.P.H."                      ),
+           `Office:`      = c("Behavioral Sciences Building Office 344"),
+           `Office Hours` = c("Time1 - Time2"                          ),
+           `Contact`      = c("Neil.Yetz@colostate.edu"                )
+           )
+  )
 
 base::rownames(infor) <- c("**Room:**", "**Time:**", "**Instructor:**", "**Office:**", "**Office Hours:**", "**Contact:**")
 
@@ -42,7 +52,7 @@ knitr::kable(infor, col.names = "", format = "html") %>%
 
 
 ```
-</center>
+
 
 
 
@@ -51,33 +61,43 @@ knitr::kable(infor, col.names = "", format = "html") %>%
 
 The purpose of this course is to provide you with an in depth understanding of R, R-studio, & R-notebooks. This course assumes the student has *NO PRIOR KNOWLEDGE* with R prior to the course.
 
+# Prerequisites
+None 
+
 
 # Course Schedule
-
 ```{r, echo = FALSE}
-a <- data.frame(date = c("Date 1",
-                         "Date 2",
-                         "Date 3", 
-                         "Date 4",
-                         "Date 5",
-                         "Date 6"),
-                level = c(
-                          rep("Basic", 2),
-                          rep("Intermediate", 2),
-                          rep("Advanced", 2)
+a <- data.frame(
+                date    = c(
+                              "Date 1",
+                              "Date 2",
+                              "Date 3", 
+                              "Date 4",
+                              "Date 5",
+                              "Date 6"
+                              ),
+                level   = c(
+                              rep("Basic"       , 2),
+                              rep("Intermediate", 2),
+                              rep("Advanced"    , 2)
                           ),
-                content = c("R Preliminaries",
-                            "Using the tidyverse",
-                            "Visualization & Graphics",
-                            "",
-                            "",
-                            ""), 
-                due = c("Quiz (W)", 
-                        "Quiz (M), HW #1 (W)",
-                        "Quiz (M)", 
-                        "", 
-                        "",
-                        ""))
+                content = c(  
+                              "R Preliminaries & the tidyverse"                ,
+                              "Utilizing and identifying object class types"   ,
+                              "Visualization & Graphics"                       ,
+                              "Object oriented programming & reproducible code",
+                              "Loops & functions"                              ,
+                              "Error identification & error debugging & Project presentations"
+                            ), 
+                due     = c(   
+                               ""           , 
+                               "Quiz #1, HW #1",
+                               "Quiz #2, HW #2"           , 
+                               "Quiz #3, HW #3"                   , 
+                               "Quiz #4, HW# 4"                   ,
+                               "Final Projects"
+                               )
+                )
 
 
 knitr::kable(a, col.names = c("Dates", "Level", "Lecture content", "Graded items"))%>% 
@@ -85,9 +105,53 @@ knitr::kable(a, col.names = c("Dates", "Level", "Lecture content", "Graded items
 ```
 
 
+# Course Grading
+```{r echo = FALSE}
+a <- data.frame(a = c("Final project",
+                      "Weekly in-class quizzes, weeks 2-5" ,
+                      "Homework"                           ,
+                      "Attendance and class participation" ,
+                      "Weekly exercises"  ),
+                
+                b = c(20, 
+                      25, 
+                      25, 
+                      30, 
+                      10)
+                )
+
+
+knitr::kable(a, col.names = c("Assessment component", 
+                              "Percent of grade")
+             ) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
 
 
 
+# Homework, Quiz & Final Project Descriptions
+## Homework
+IDEAS: 
+
+- **HW#1:** Format a messy dataset using tidyverse functions
+- **HW#2:** Provide a dataset with multiple class types. Have students identify the class types and manipulate them into ones that are most applicable for analyses. Explain what each class type means and the advantages/disadvatages of each. 
+- **HW#3:** Have students create a series of graphs and visuals (Potentially in R shiny). These will be a mix of simple to complex and some of which may be interactive.
+- **HW#4:**
+- **HW#5:** Provide students a task that will require loops and functions. Provide freedom and flexibility to see how well they produce the code. 
+- **HW#6:** Provide a messy code structure riddled with errors. I will have students identify the error, explain what the message means. And their process to solving the error. 
+
+## Quizzes
+
+
+## Final Project
+
+IDEAS: 
+
+- **Teach a package:** Have students find a pa.ckage from the CRAN database that they feel is relavant to them. Students will be required to provide a lesson utilizing that package. They will be required to provide the class with a dataset and have the students work along with them. If it is an analytical package, they will be required to explain all calculations that the package is required. We will need the CRAN vignette with the most useful functions highlighted.
+
+- **Format a dataset:** I will provide the class with an extremely messy dataset and, using only R, they will be required to format it using functions taught in the course. The end product will be an R-notebook in which there are detailed notes of tge process they took to clean the dataset.
+
+- **Create an "R-manual":** Students will be required to create a manual for themselves that has certain sections in which they can reference later on how to perform certain R-tasks. They will be required to have every component of the course in one R-notebook document and I will be able to understand and use it for myself. 
 
 
 
